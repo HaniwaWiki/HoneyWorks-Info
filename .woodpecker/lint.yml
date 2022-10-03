@@ -1,0 +1,8 @@
+pipeline:
+  lint:
+    image: 'node:14-alpine'
+    pull: true
+    group: lint
+    commands:
+      - yarn install --frozen-lockfile
+      - yarn lint
