@@ -1,0 +1,3 @@
+[submodule "src/types/HWPL"]
+	path = src/types/HWPL
+	url = https://github.com/HaniwaWiki/HWPL_api_types
