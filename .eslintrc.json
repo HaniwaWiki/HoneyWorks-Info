@@ -34,20 +34,6 @@
         "ts": "never"
       }
     ],
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        "argsIgnorePattern": "_"
-      }
-    ],
-    "max-len": [
-      "error",
-      {
-        "code": 120,
-        "ignoreStrings": true,
-        "ignorePattern": "class=\"[^\"]*\""
-      }
-    ],
     "import/prefer-default-export": "off",
     "@typescript-eslint/explicit-member-accessibility": 0,
     "@typescript-eslint/explicit-function-return-type": 0,
@@ -55,6 +41,7 @@
     "@typescript-eslint/interface-name-prefix": 0,
     "@typescript-eslint/explicit-module-boundary-types": 0,
     "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/no-var-requires": "off",

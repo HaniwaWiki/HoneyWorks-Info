@@ -10,7 +10,9 @@ export async function getCollection<Name extends keyof APITypeName>(
   const response = await axios.get(`/api/${version}/${collectionName}.json`);
   const collection = response.data as APITypeName[Name][];
   if (filter) {
-    return collection.filter((c) => Object.keys(filter).every((k) => filter[k] === c[k]));
+    return collection.filter((c) =>
+      Object.keys(filter).every((k) => filter[k] === c[k])
+    );
   }
   return collection;
 }

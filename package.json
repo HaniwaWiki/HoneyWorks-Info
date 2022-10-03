@@ -1,7 +1,6 @@
 {
   "name": "HWPL_api_frontend",
   "version": "0.0.0",
-  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -12,14 +11,22 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@mdi/font": "5.9.55",
     "axios": "^0.27.2",
-    "vue": "^3.2.37"
+    "lodash": "^4.17.21",
+    "roboto-fontface": "*",
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.5",
+    "vuetify": "^3.0.0-beta.0",
+    "webfontloader": "^1.0.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.3",
+    "@types/lodash": "^4.14.186",
+    "@types/webfontloader": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "@typescript-eslint/parser": "^5.27.1",
-    "@vitejs/plugin-vue": "^3.0.1",
+    "@vitejs/plugin-vue": "^3.0.3",
     "@volar/vue-language-service": "^0.38.9",
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/eslint-config-typescript": "^11.0.0",
@@ -41,9 +48,12 @@
     "tailwind-loves-sass": "^1.1.3",
     "tailwindcss": "^3.1.2",
     "typescript": "^4.7.3",
-    "vite": "^3.0.2",
+    "vite": "^3.0.8",
+    "vite-plugin-vuetify": "^1.0.0-alpha.12",
+    "vue-cli-plugin-vuetify": "~2.5.8",
     "vue-tsc": "^0.38.9"
   },
+  "license": "MIT",
   "lint-staged": {
     "*.{js,ts,vue}": [
       "eslint --fix",
