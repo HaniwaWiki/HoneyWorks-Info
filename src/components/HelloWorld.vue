@@ -1,9 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { Character } from '../types/HWPL/Character';
+import { getCollection } from '../api/common';
 
 defineProps<{ msg: string }>();
 
 const count = ref(0);
+const firstCharacter = ref<Character>({} as Character);
+
+async function fetchFirstCharacter() {
+  const characters = await getCollection('Characters');
+  firstCharacter.value = characters[0];
+}
 </script>
 
 <template>
@@ -34,6 +42,13 @@ const count = ref(0);
     @click="count++"
   >
     count is: {{ count }}
+  </button>
+  <button
+    class="mb-2 rounded border border-gray-400 bg-white px-2 text-gray-800 shadow hover:bg-gray-100"
+    type="button"
+    @click="fetchFirstCharacter"
+  >
+    first Character is: {{ firstCharacter }}
   </button>
   <p>
     Edit

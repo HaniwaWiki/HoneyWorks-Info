@@ -23,11 +23,7 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": [
-    "vue",
-    "@typescript-eslint",
-    "prettier"
-  ],
+  "plugins": ["vue", "@typescript-eslint", "prettier"],
   "rules": {
     "prettier/prettier": "error",
     "import/extensions": [
@@ -44,16 +40,6 @@
         "argsIgnorePattern": "_"
       }
     ],
-    "@typescript-eslint/explicit-function-return-type": [
-      "error",
-      {
-        "allowExpressions": true,
-        "allowTypedFunctionExpressions": true,
-        "allowHigherOrderFunctions": true,
-        "allowDirectConstAssertionInArrowFunctions": true,
-        "allowConciseArrowFunctionExpressionsStartingWithVoid": false
-      }
-    ],
     "max-len": [
       "error",
       {
@@ -62,15 +48,16 @@
         "ignorePattern": "class=\"[^\"]*\""
       }
     ],
-    "sort-imports": [
-      "error",
-      {
-        "ignoreCase": true,
-        "ignoreDeclarationSort": false,
-        "ignoreMemberSort": false,
-        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
-        "allowSeparatedGroups": true
-      }
-    ]
+    "import/prefer-default-export": "off",
+    "@typescript-eslint/explicit-member-accessibility": 0,
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/no-parameter-properties": 0,
+    "@typescript-eslint/interface-name-prefix": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "prefer-destructuring": "off"
   }
 }
