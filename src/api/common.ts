@@ -1,7 +1,7 @@
 import { APITypeName } from '../types/HWPL';
 import axios from '../utils/request';
 
-// fetch data collecton from backend, with optional filter
+// fetch data collection from backend, with optional filter
 export async function getCollection<Name extends keyof APITypeName>(
   collectionName: Name,
   filter?: Partial<APITypeName[Name]>,
