@@ -6,7 +6,8 @@ import { getCollection } from '../api/common';
 import logo from '../assets/logo.svg';
 import sleep from '../utils/sleep';
 
-defineProps<{ msg: string }>();
+// defineProps<{ msg: string }>();
+const msg = 'Hello Vue 3 + TypeScript + Vite';
 
 const { ecosystem, importantLinks, whatsNext } = {
   ecosystem: [
