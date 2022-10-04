@@ -1,8 +1,9 @@
 {
-  "name": "HWPL_api_frontend",
+  "name": "honeyworks-info",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
+    "tsc": "vue-tsc --noEmit",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "lint": "eslint src --ext .ts,.js,.vue",
