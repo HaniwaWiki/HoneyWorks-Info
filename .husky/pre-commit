@@ -4,6 +4,6 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 # check eslint errors
-npm run lint-staged
+pnpm run lint-staged
 # check typescript errors
-npm run tsc
+pnpm run tsc
