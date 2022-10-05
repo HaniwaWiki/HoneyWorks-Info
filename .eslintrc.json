@@ -45,6 +45,12 @@
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/no-var-requires": "off",
-    "prefer-destructuring": "off"
+    "prefer-destructuring": "off",
+    "vue/component-tags-order": [
+      "error",
+      {
+        "order": ["template", "script", "style"]
+      }
+    ]
   }
 }

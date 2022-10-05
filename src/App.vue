@@ -1,16 +1,7 @@
-<script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './views/HelloWorld.vue';
-import AppSnackbar from './components/AppSnackbar.vue';
-import AppFooter from './components/AppFooter.vue';
-import AppNavigationBar from './components/AppNavigationBar.vue';
-</script>
-
 <template>
   <v-app>
+    <AppNavigationBar />
     <v-main>
-      <AppNavigationBar />
       <div>
         <router-view v-slot="{ Component }">
           <v-fade-transition :duration="100" mode="out-in">
@@ -26,3 +17,12 @@ import AppNavigationBar from './components/AppNavigationBar.vue';
     <AppSnackbar />
   </v-app>
 </template>
+
+<script setup lang="ts">
+// This starter template is using Vue 3 <script setup> SFCs
+// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
+import HelloWorld from './views/HelloWorld.vue';
+import AppSnackbar from './components/AppSnackbar.vue';
+import AppFooter from './components/AppFooter.vue';
+import AppNavigationBar from './components/AppNavigationBar/AppNavigationBar.vue';
+</script>

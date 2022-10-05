@@ -1,72 +1,3 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-import _ from 'lodash';
-import { Character } from '../types/HWPL/Character';
-import { getCollection } from '../api/common';
-import logo from '../assets/logo.svg';
-import sleep from '../utils/sleep';
-
-// defineProps<{ msg: string }>();
-const msg = 'Hello Vue 3 + TypeScript + Vite';
-
-const { ecosystem, importantLinks, whatsNext } = {
-  ecosystem: [
-    {
-      text: 'vuetify-loader',
-      href: 'https://github.com/vuetifyjs/vuetify-loader/tree/next',
-    },
-    {
-      text: 'github',
-      href: 'https://github.com/vuetifyjs/vuetify/tree/next',
-    },
-    {
-      text: 'awesome-vuetify',
-      href: 'https://github.com/vuetifyjs/awesome-vuetify',
-    },
-  ],
-  importantLinks: [
-    {
-      text: 'Chat',
-      href: 'https://community.vuetifyjs.com',
-    },
-    {
-      text: 'Made with Vuetify',
-      href: 'https://madewithvuejs.com/vuetify',
-    },
-    {
-      text: 'Twitter',
-      href: 'https://twitter.com/vuetifyjs',
-    },
-    {
-      text: 'Articles',
-      href: 'https://medium.com/vuetify',
-    },
-  ],
-  whatsNext: [
-    {
-      text: 'Explore components',
-      href: 'https://vuetifyjs.com',
-    },
-    {
-      text: 'Roadmap',
-      href: 'https://vuetifyjs.com/en/introduction/roadmap/',
-    },
-    {
-      text: 'Frequently Asked Questions',
-      href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
-    },
-  ],
-};
-const dialog = ref(false);
-const firstCharacter = ref<Character | null>(null);
-
-async function fetchFirstCharacter() {
-  firstCharacter.value = null;
-  const characters = await getCollection('Characters');
-  firstCharacter.value = characters[0];
-}
-</script>
-
 <template>
   <v-container>
     <v-row class="text-center">
@@ -172,3 +103,72 @@ async function fetchFirstCharacter() {
     </v-row>
   </v-container>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import _ from 'lodash';
+import { Character } from '../types/HWPL/Character';
+import { getCollection } from '../api/common';
+import logo from '../assets/logo.svg';
+import sleep from '../utils/sleep';
+
+// defineProps<{ msg: string }>();
+const msg = 'Hello Vue 3 + TypeScript + Vite';
+
+const { ecosystem, importantLinks, whatsNext } = {
+  ecosystem: [
+    {
+      text: 'vuetify-loader',
+      href: 'https://github.com/vuetifyjs/vuetify-loader/tree/next',
+    },
+    {
+      text: 'github',
+      href: 'https://github.com/vuetifyjs/vuetify/tree/next',
+    },
+    {
+      text: 'awesome-vuetify',
+      href: 'https://github.com/vuetifyjs/awesome-vuetify',
+    },
+  ],
+  importantLinks: [
+    {
+      text: 'Chat',
+      href: 'https://community.vuetifyjs.com',
+    },
+    {
+      text: 'Made with Vuetify',
+      href: 'https://madewithvuejs.com/vuetify',
+    },
+    {
+      text: 'Twitter',
+      href: 'https://twitter.com/vuetifyjs',
+    },
+    {
+      text: 'Articles',
+      href: 'https://medium.com/vuetify',
+    },
+  ],
+  whatsNext: [
+    {
+      text: 'Explore components',
+      href: 'https://vuetifyjs.com',
+    },
+    {
+      text: 'Roadmap',
+      href: 'https://vuetifyjs.com/en/introduction/roadmap/',
+    },
+    {
+      text: 'Frequently Asked Questions',
+      href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
+    },
+  ],
+};
+const dialog = ref(false);
+const firstCharacter = ref<Character | null>(null);
+
+async function fetchFirstCharacter() {
+  firstCharacter.value = null;
+  const characters = await getCollection('Characters');
+  firstCharacter.value = characters[0];
+}
+</script>

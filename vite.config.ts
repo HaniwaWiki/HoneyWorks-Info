@@ -11,7 +11,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://tsugubot.com',
+        target: 'https://honeyworks.info',
         changeOrigin: true,
       },
     },
