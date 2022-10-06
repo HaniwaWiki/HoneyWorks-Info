@@ -107,8 +107,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import _ from 'lodash';
-import { Character } from '../types/HWPL/Character';
-import { getCollection } from '../api/common';
+import { Character } from '@/types/HWPL/Character';
+import { getCollection } from '@/api/common';
 import logo from '../assets/logo.svg';
 import sleep from '../utils/sleep';
 

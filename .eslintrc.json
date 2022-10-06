@@ -49,7 +49,7 @@
     "vue/component-tags-order": [
       "error",
       {
-        "order": ["template", "script", "style"]
+        "order": ["template",  "script[setup]","script:not([setup])", "style"]
       }
     ]
   }

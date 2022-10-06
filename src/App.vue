@@ -2,15 +2,13 @@
   <v-app>
     <AppNavigationBar />
     <v-main>
-      <div>
-        <router-view v-slot="{ Component }">
-          <v-fade-transition :duration="100" mode="out-in">
-            <keep-alive>
-              <component :is="Component" />
-            </keep-alive>
-          </v-fade-transition>
-        </router-view>
-      </div>
+      <router-view v-slot="{ Component }">
+        <v-fade-transition :duration="100" mode="out-in">
+          <keep-alive>
+            <component :is="Component" />
+          </keep-alive>
+        </v-fade-transition>
+      </router-view>
       <!--      <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />-->
     </v-main>
     <AppFooter />
