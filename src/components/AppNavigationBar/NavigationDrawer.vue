@@ -4,12 +4,20 @@
     @update:model-value="(val) => $emit('update:drawer', val)"
   >
     <v-list dense nav density="compact">
-      <CascadeListItem v-for="item in items" :key="item.title" :item="item" />
+      <!--
+        fixme: since vuetify docs is not complete, the following bugs of VItemGroup won't be fixed right now:
+          1. refreshing the page will de-active the active item
+          2. click the active item will de-active it (`mandatory` is not  working)
+       -->
+      <v-item-group mandatory :value="pathname">
+        <CascadeListItem v-for="item in items" :key="item.title" :item="item" />
+      </v-item-group>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { CascadeListItemProp } from '../CascadeListItem/types';
 import CascadeListItem from '../CascadeListItem/CascadeListItem.vue';
 
@@ -17,6 +25,7 @@ defineProps<{ drawer: boolean }>();
 
 defineEmits(['update:drawer']);
 
+const pathname = computed(() => window.location.pathname);
 const items: CascadeListItemProp[] = [
   {
     title: 'HoneyWorks Official Links',
@@ -37,7 +46,7 @@ const items: CascadeListItemProp[] = [
   {
     title: 'Tools',
     icon: 'mdi-hammer',
-    subItems: [{ title: 'HoneyWorks Calendar', href: '/tools/calendar' }],
+    subItems: [{ title: 'HWPL Calendar', href: '/tools/calendar' }],
   },
   { title: 'About Us', icon: 'mdi-account', href: '/about' },
 ];

@@ -16,16 +16,24 @@
     :to="linkProp.to"
     :href="linkProp.href"
     :target="linkProp.target"
+    :value="item.href"
     ripple
-    active-class="grey lighten-3"
+    active-color="primary"
   />
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, PropType, computed } from 'vue';
+import { computed, defineProps, ref } from 'vue';
 import { CascadeListItemProp } from './types';
 
 const props = defineProps<{ item: CascadeListItemProp }>();
+// const active = ref(true);
+// const active = computed(
+//   () =>
+//     window.location.pathname !== '/' &&
+//     props.item.href &&
+//     window.location.pathname.startsWith(props.item.href)
+// );
 
 type LinkProp = {
   to?: string;

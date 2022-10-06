@@ -9,7 +9,7 @@
     "lint": "eslint src --ext .ts,.js,.vue",
     "lint:fix": "eslint src --ext .ts,.js,.vue --fix",
     "lint-staged": "lint-staged",
-    "prepare": "husky install"
+    "prepare": "git submodule init && git submodule update && husky install"
   },
   "dependencies": {
     "@mdi/font": "5.9.55",

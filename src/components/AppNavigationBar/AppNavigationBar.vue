@@ -5,10 +5,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useDisplay } from 'vuetify';
 import AppBar from './AppBar.vue';
 import NavigationDrawer from './NavigationDrawer.vue';
 
-const drawer = ref(false);
+const { mobile } = useDisplay();
+const drawer = ref(!mobile.value);
 </script>
 
 <style scoped></style>
