@@ -1,12 +1,10 @@
 import { RouteRecordRaw } from 'vue-router';
-import OfficialWebsites from '../../views/OfficialWebsites.vue';
-import HelloWorld from '../../views/HelloWorld.vue';
 
 const toolsRoutes: RouteRecordRaw[] = [
   {
     name: 'HWPL Calendar',
     path: '/tools/calendar',
-    component: OfficialWebsites,
+    component: () => import('@/views/tools/calendar/Calendar.vue'),
   },
 ];
 

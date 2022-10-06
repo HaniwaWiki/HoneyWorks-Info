@@ -28,7 +28,7 @@ defineProps<{
   margin: 4px;
 
   //align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   text-decoration: none;
   text-transform: none;
   white-space: nowrap;

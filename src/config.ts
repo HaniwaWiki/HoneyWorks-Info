@@ -3,5 +3,5 @@ export function getAppName(): string {
   return 'HoneyWorks Info';
 }
 
-export const apiBaseUrl = import.meta.env.VITE_API_URL;
-export const assetBaseUrl = import.meta.env.VITE_ASSET_URL;
+export const apiBaseUrl = `${window.location.origin}/api`;
+export const assetBaseUrl = `${window.location.origin}/assets`;

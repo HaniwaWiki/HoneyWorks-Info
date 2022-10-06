@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, ref } from 'vue';
+import { computed } from 'vue';
 import { CascadeListItemProp } from './types';
 
 const props = defineProps<{ item: CascadeListItemProp }>();

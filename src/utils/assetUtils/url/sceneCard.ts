@@ -1,5 +1,5 @@
-import { getCollection } from '../../../api/common';
-import { assetBaseUrl } from '../../../config';
+import { getCollection } from '@/api/common';
+import { assetBaseUrl } from '@/config';
 
 function getSceneCardStaticImageUrl(Id: number) {
   return `${assetBaseUrl}/assets/Assets/SceneCards/${Id}.png`;

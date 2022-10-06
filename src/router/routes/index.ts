@@ -1,6 +1,4 @@
 import { RouteRecordRaw } from 'vue-router';
-import OfficialWebsites from '../../views/OfficialWebsites.vue';
-import HelloWorld from '../../views/HelloWorld.vue';
 import infoRoutes from './info';
 import toolsRoutes from './tools';
 
@@ -9,13 +7,25 @@ const routes: RouteRecordRaw[] = [
   {
     name: 'HoneyWorks Official Links',
     path: '/official-websites',
-    component: OfficialWebsites,
+    component: () => import('@/views/OfficialWebsites.vue'),
   },
   ...infoRoutes,
   ...toolsRoutes,
-  { name: 'About us', path: '/about', component: OfficialWebsites },
-  { name: 'Hello World', path: '/hello-world', component: OfficialWebsites },
-  { name: '404', path: '/:pathMatch(.*)*', component: OfficialWebsites },
+  {
+    name: 'About us',
+    path: '/about',
+    component: () => import('@/views/OfficialWebsites.vue'),
+  },
+  {
+    name: 'Hello World',
+    path: '/hello-world',
+    component: () => import('@/views/HelloWorld.vue'),
+  },
+  {
+    name: '404',
+    path: '/:pathMatch(.*)*',
+    component: () => import('@/views/NotFound.vue'),
+  },
 ];
 
 export default routes;

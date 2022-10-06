@@ -17,7 +17,11 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://honeyworks.info',
+        target: 'https://honeyworks.info/',
+        changeOrigin: true,
+      },
+      '/assets': {
+        target: 'https://honeyworks.info/',
         changeOrigin: true,
       },
     },

@@ -1,56 +1,57 @@
 import { RouteRecordRaw } from 'vue-router';
-import OfficialWebsites from '@/views/OfficialWebsites.vue';
 
 const infoRoutes: RouteRecordRaw[] = [
   {
     name: 'Character List',
     path: '/info/characters',
-    component: OfficialWebsites,
+    component: () => import('@/views/info/characters/CharacterList.vue'),
   },
   {
     name: 'Character Detail',
     path: '/info/characters/:id',
-    component: OfficialWebsites,
+    component: () => import('@/views/info/characters/CharacterDetail.vue'),
   },
   {
     name: 'Character Card List',
     path: '/info/character-cards',
-    component: OfficialWebsites,
+    component: () =>
+      import('@/views/info/character-cards/CharacterCardList.vue'),
   },
   {
     name: 'Character Card Detail',
     path: '/info/character-cards/:id',
-    component: OfficialWebsites,
+    component: () =>
+      import('@/views/info/character-cards/CharacterCardDetail.vue'),
   },
   {
     name: 'Music Part List',
     path: '/info/music-parts',
-    component: OfficialWebsites,
+    component: () => import('@/views/info/music-parts/MusicPartList.vue'),
   },
   {
     name: 'Music Part Detail',
     path: '/info/music-parts/:id',
-    component: OfficialWebsites,
+    component: () => import('@/views/info/music-parts/MusicPartDetail.vue'),
   },
   {
     name: 'Scene Card List',
     path: '/info/scene-cards',
-    component: OfficialWebsites,
+    component: () => import('@/views/info/scene-cards/SceneCardList.vue'),
   },
   {
     name: 'Scene Card Detail',
     path: '/info/scene-cards/:id',
-    component: OfficialWebsites,
+    component: () => import('@/views/info/scene-cards/SceneCardDetail.vue'),
   },
   {
     name: 'Event List',
     path: '/info/events',
-    component: OfficialWebsites,
+    component: () => import('@/views/info/events/EventList.vue'),
   },
   {
     name: 'Event Detail',
     path: '/info/events/:id',
-    component: OfficialWebsites,
+    component: () => import('@/views/info/events/EventDetail.vue'),
   },
 ];
 
