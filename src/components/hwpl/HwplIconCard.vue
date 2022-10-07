@@ -1,6 +1,9 @@
 <template>
   <v-card ripple class="hwpl-icon">
-    <v-img :src="imgSrc" :alt="title" class="ma-auto" :aspect-ratio="1" />
+    <HwplImageRarityWrapper :rarity="rarity" :evolved="evolved">
+      <v-img :src="imgSrc" :alt="title" class="ma-auto" :aspect-ratio="1" />
+    </HwplImageRarityWrapper>
+
     <v-card-text
       v-if="title || subtitle"
       class="icon-card-textarea"
@@ -15,6 +18,8 @@
 </template>
 
 <script setup lang="ts">
+import HwplImageRarityWrapper from '@/components/hwpl/HwplImageRarityWrapper.vue';
+
 defineProps({
   imgSrc: {
     type: String,
