@@ -41,7 +41,7 @@
             :rarity="card.Rarity"
             :evolved="showEvolved"
             height="64px"
-            @click="goto('Character Card Detail', { Id: card.Id })"
+            @click="goto('Character Card Detail', { id: card.Id })"
           >
           </HwplIconCard>
         </v-col>
@@ -57,7 +57,7 @@
             :rarity="card.Rarity"
             :evolved="showEvolved"
             height="96px"
-            @click="goto('Character Card Detail', { Id: card.Id })"
+            @click="goto('Character Card Detail', { id: card.Id })"
           >
           </HwplCharacterCard>
         </v-col>

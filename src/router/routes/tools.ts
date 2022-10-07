@@ -4,7 +4,7 @@ const toolsRoutes: RouteRecordRaw[] = [
   {
     name: 'HWPL Calendar',
     path: '/tools/calendar',
-    component: () => import('@/views/tools/calendar/Calendar.vue'),
+    component: () => import('@/views/tools/calendar/HwplCalendar.vue'),
   },
 ];
 

@@ -7,7 +7,7 @@
             getCharacterCardImageUrl(character.DefaultCharacterCardId, 1)
           "
           :title="character.Name"
-          @click="goto('Character Detail', { Id: character.Id })"
+          @click="goto('Character Detail', { id: character.Id })"
         />
       </v-col>
     </v-row>
