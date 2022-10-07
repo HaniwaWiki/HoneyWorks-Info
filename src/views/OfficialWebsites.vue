@@ -43,8 +43,8 @@ const officialWebsites = [
     url: 'https://www.chicoxxx.com/',
   },
   {
-    text: 'KumaPan of HoneyWorks Dairy ver. – LINE stickers | LINE STORE',
-    url: 'https://store.line.me/stickershop/product/1258062',
+    text: 'HoneyWorks - LINE',
+    url: 'https://line.me/R/ti/p/@honeyworks',
   },
   {
     text: '【ハニプレ】HoneyWorks公式リズムゲーム｜好評配信中┗|∵|┓',
@@ -52,23 +52,27 @@ const officialWebsites = [
   },
 ];
 const officialTwitterIds = [
-  'HoneyWorks_Game',
+  // HoneyWorks Official
   'HoneyWorks_828',
+  'HoneyWorks_Game',
   'HoneyWorksMovie',
-  'mona_4_24',
-  'CHiCOxxx_tweet',
-  'yamako2626',
-  'shito_stereo',
-  'HaKoniwalily',
-  'maedakun_sr',
-  'FT4_official',
+  // creator
   '_Gom_',
-  'LIP_LIP_222',
-  'vjpofficial',
-  'mogelatte',
-  'hiina_ntn',
+  'shito_stereo',
+  'yamako2626',
+  // singer
+  'CHiCOxxx_tweet',
   'Hanon_moco',
   'Kotoha_ktnh',
+  'HaKoniwalily',
+  'hiina_ntn',
+  'mogelatte',
+  // characters
+  'mona_4_24',
+  'FT4_official',
+  'LIP_LIP_222',
+  'maedakun_sr',
+  'vjpofficial',
   'dolce5_official',
 ];
 const officialYoutubeChannels = [
