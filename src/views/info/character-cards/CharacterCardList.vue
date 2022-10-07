@@ -18,8 +18,11 @@
             class="ma-auto"
             :aspect-ratio="1 / 1.5"
           />
-          <v-card-text class="text-center text-pre-wrap">
-            {{ card.Name }}
+          <v-card-text class="character-card-title">
+            <div>{{ card.cardName }}</div>
+            <div class="text-grey character-card-subtitle">
+              {{ card.characterName }}
+            </div>
           </v-card-text>
         </v-card>
       </v-col>
@@ -27,7 +30,7 @@
   </AppScaffold>
 </template>
 <script setup lang="ts">
-import AppScaffold from '@/components/AppScaffold/AppScaffold.vue';
+import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 import { onMounted, ref } from 'vue';
 import { getCollection } from '@/api/common';
 import { getCharacterCardImageUrl } from '@/utils/assetUtils/url/characterCard';
@@ -35,16 +38,41 @@ import { goto } from '@/router';
 import { Character } from '@/types/HWPL/Character';
 import { CharacterCard } from '@/types/HWPL/CharacterCard';
 
-const characterCards = ref<CharacterCard[]>([]);
+const characterCards = ref<
+  (CharacterCard & {
+    cardName: string;
+    characterName: string;
+  })[]
+>([]);
 const showEvolved = ref(false);
 
 onMounted(async () => {
-  console.log('CharacterCardList.vue: onMounted');
-  characterCards.value = (await getCollection('CharacterCards')).map(
-    (card) => ({
+  characterCards.value = (await getCollection('CharacterCards')).map((card) => {
+    const [, cardName, characterName] = /【(.*)】(.*)/.exec(card.Name) ?? [];
+    return {
       ...card,
-      Name: card.Name.replace('】', '】\n'),
-    })
-  );
+      cardName,
+      characterName,
+    };
+  });
 });
 </script>
+
+<style lang="scss" scoped>
+.character-card-title {
+  // ensure the height is enough to place 3 lines of name
+  height: 60 + 32px;
+
+  // horizontal align title and subtitle
+  text-align: center;
+  white-space: pre-wrap;
+
+  // vertical align title and subtitle
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.character-card-subtitle {
+  font-size: 0.5rem;
+}
+</style>

@@ -13,8 +13,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { CascadeListItemProp } from '../base/CascadeListItem/types';
-import CascadeListItem from '../base/CascadeListItem/CascadeListItem.vue';
+import { CascadeListItemProp } from '../../base/CascadeListItem/types';
+import CascadeListItem from '../../base/CascadeListItem/CascadeListItem.vue';
 
 defineProps<{ drawer: boolean }>();
 

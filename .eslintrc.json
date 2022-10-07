@@ -52,6 +52,7 @@
       {
         "order": ["template",  "script[setup]","script:not([setup])", "style"]
       }
-    ]
+    ],
+    "vue/no-template-shadow": "off"
   }
 }

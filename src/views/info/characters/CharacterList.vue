@@ -18,8 +18,8 @@
   </AppScaffold>
 </template>
 <script setup lang="ts">
-import AppScaffold from '@/components/AppScaffold/AppScaffold.vue';
-import { callWithErrorHandling, onMounted, ref } from 'vue';
+import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
+import { onMounted, ref } from 'vue';
 import { getCollection } from '@/api/common';
 import { getCharacterCardImageUrl } from '@/utils/assetUtils/url/characterCard';
 import { goto } from '@/router';
@@ -27,6 +27,7 @@ import { Character } from '@/types/HWPL/Character';
 
 const characters = ref<Character[]>([]);
 
+console.log('CharacterList.vue: setup');
 onMounted(async () => {
   console.log('CharacterList.vue: onMounted');
   characters.value = await getCollection('Characters');
