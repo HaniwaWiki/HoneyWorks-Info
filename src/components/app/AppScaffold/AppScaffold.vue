@@ -3,7 +3,11 @@
   <v-container>
     <v-row class="justify-center">
       <v-col :cols="cols" :md="md">
-        <PageTitle :title="title" class="mb-2" />
+        <v-row>
+          <v-col>
+            <PageTitle :title="title" class="mb-2" />
+          </v-col>
+        </v-row>
         <slot />
       </v-col>
     </v-row>

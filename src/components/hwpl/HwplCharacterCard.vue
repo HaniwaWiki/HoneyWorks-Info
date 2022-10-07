@@ -1,13 +1,13 @@
 <template>
-  <v-card ripple class="hwpl-icon">
-    <v-img :src="imgSrc" :alt="title" class="ma-auto" :aspect-ratio="1" />
+  <v-card ripple>
+    <v-img :src="imgSrc" :alt="title" class="ma-auto" :aspect-ratio="1 / 1.5" />
     <v-card-text
       v-if="title || subtitle"
-      class="icon-card-textarea"
+      class="character-card-textarea"
       :style="{ height }"
     >
-      <div class="icon-card-title">{{ title }}</div>
-      <div class="text-grey icon-card-subtitle">
+      <div>{{ title }}</div>
+      <div class="text-grey character-card-subtitle">
         {{ subtitle }}
       </div>
     </v-card-text>
@@ -38,7 +38,7 @@ defineProps({
     type: Boolean,
     default: false,
   },
-  // if you want to align all cards, you can set all cards' height to the max possible one
+  // if you want to align all cards, you may need to set all cards' height to the max possible one
   height: {
     type: String,
     default: undefined,
@@ -47,7 +47,7 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-.icon-card {
+.character-card {
   &-textarea {
     // horizontal align title and subtitle
     text-align: center;
@@ -57,10 +57,6 @@ defineProps({
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
-
-  &-title {
-    font-size: 0.75rem;
   }
 
   &-subtitle {
