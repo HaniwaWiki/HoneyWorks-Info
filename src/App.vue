@@ -2,13 +2,14 @@
   <v-app>
     <AppNavigationBar />
     <v-main>
-      <v-fade-transition :duration="100" mode="out-in">
-        <router-view v-slot="{ Component }">
-          <!--          <keep-alive>-->
-          <component :is="Component" />
-          <!--          </keep-alive>-->
-        </router-view>
-      </v-fade-transition>
+      <router-view v-slot="{ Component }">
+        <!--    fixme: bring transition back    -->
+        <!--        <transition name="fade" :duration="100" mode="out-in">-->
+        <!--          <keep-alive>-->
+        <component :is="Component" />
+        <!--          </keep-alive>-->
+        <!--        </transition>-->
+      </router-view>
     </v-main>
     <AppFooter />
     <AppSnackbar />
