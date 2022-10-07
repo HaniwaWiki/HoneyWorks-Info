@@ -8,7 +8,7 @@ const infoRoutes: RouteRecordRaw[] = [
   },
   {
     name: 'Character Detail',
-    path: '/info/characters/:id',
+    path: '/info/characters/:Id',
     component: () => import('@/views/info/characters/CharacterDetail.vue'),
   },
   {
@@ -19,7 +19,7 @@ const infoRoutes: RouteRecordRaw[] = [
   },
   {
     name: 'Character Card Detail',
-    path: '/info/character-cards/:id',
+    path: '/info/character-cards/:Id',
     component: () =>
       import('@/views/info/character-cards/CharacterCardDetail.vue'),
   },
@@ -30,7 +30,7 @@ const infoRoutes: RouteRecordRaw[] = [
   },
   {
     name: 'Music Part Detail',
-    path: '/info/music-parts/:id',
+    path: '/info/music-parts/:Id',
     component: () => import('@/views/info/music-parts/MusicPartDetail.vue'),
   },
   {
@@ -40,7 +40,7 @@ const infoRoutes: RouteRecordRaw[] = [
   },
   {
     name: 'Scene Card Detail',
-    path: '/info/scene-cards/:id',
+    path: '/info/scene-cards/:Id',
     component: () => import('@/views/info/scene-cards/SceneCardDetail.vue'),
   },
   {
@@ -50,7 +50,7 @@ const infoRoutes: RouteRecordRaw[] = [
   },
   {
     name: 'Event Detail',
-    path: '/info/events/:id',
+    path: '/info/events/:Id',
     component: () => import('@/views/info/events/EventDetail.vue'),
   },
 ];

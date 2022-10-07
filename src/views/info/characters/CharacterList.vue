@@ -2,7 +2,7 @@
   <AppScaffold>
     <v-row>
       <v-col v-for="character in characters" :key="character.Id" cols="3">
-        <v-card ripple @click="goto('Character Detail', { id: character.Id })">
+        <v-card ripple @click="goto('Character Detail', { Id: character.Id })">
           <v-img
             :src="getCharacterCardImageUrl(character.DefaultCharacterCardId, 1)"
             :alt="character.Name"
@@ -27,9 +27,7 @@ import { Character } from '@/types/HWPL/Character';
 
 const characters = ref<Character[]>([]);
 
-console.log('CharacterList.vue: setup');
 onMounted(async () => {
-  console.log('CharacterList.vue: onMounted');
   characters.value = await getCollection('Characters');
 });
 </script>

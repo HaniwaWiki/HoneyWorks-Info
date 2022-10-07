@@ -12,7 +12,7 @@ const routes: RouteRecordRaw[] = [
   ...infoRoutes,
   ...toolsRoutes,
   {
-    name: 'About us',
+    name: 'About Us',
     path: '/about',
     component: () => import('@/views/OfficialWebsites.vue'),
   },

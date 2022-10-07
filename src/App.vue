@@ -4,9 +4,9 @@
     <v-main>
       <v-fade-transition :duration="100" mode="out-in">
         <router-view v-slot="{ Component }">
-          <keep-alive>
-            <component :is="Component" />
-          </keep-alive>
+          <!--          <keep-alive>-->
+          <component :is="Component" />
+          <!--          </keep-alive>-->
         </router-view>
       </v-fade-transition>
     </v-main>
