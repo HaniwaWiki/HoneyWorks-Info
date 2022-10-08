@@ -3,11 +3,6 @@
   <v-container>
     <v-row class="justify-center">
       <v-col v-bind="$props">
-        <v-row>
-          <v-col>
-            <PageTitle :title="title" class="mb-2" />
-          </v-col>
-        </v-row>
         <slot />
       </v-col>
     </v-row>
@@ -15,7 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import PageTitle from '@/components/base/PageTitle.vue';
 import { vuetifyColProps } from '@/types/vuetify/col';
 
 defineProps({
