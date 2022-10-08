@@ -2,7 +2,7 @@
   <!-- container, row and col can limit card's position -->
   <v-container>
     <v-row class="justify-center">
-      <v-col :cols="cols" :md="md">
+      <v-col v-bind="$props">
         <v-row>
           <v-col>
             <PageTitle :title="title" class="mb-2" />
@@ -16,19 +16,10 @@
 
 <script setup lang="ts">
 import PageTitle from '@/components/base/PageTitle.vue';
-import { defaultCols, defaultMdCols } from './config';
+import { vuetifyColProps } from '@/types/vuetify/col';
 
 defineProps({
-  // columns on mobile
-  cols: {
-    type: [Number, String],
-    default: defaultCols,
-  },
-  // columns on desktop
-  md: {
-    type: [Number, String],
-    default: defaultMdCols,
-  },
+  ...vuetifyColProps,
   title: {
     type: String,
     default: undefined,

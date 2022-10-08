@@ -84,7 +84,7 @@
   </AppScaffold>
 </template>
 <script setup lang="ts">
-import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
+import AppScaffold from '@/components/app/AppScaffold.vue';
 import { computed, ref } from 'vue';
 import { getCharacterCardImageUrl } from '@/utils/assetUtils/url/characterCard';
 import { goto } from '@/router';

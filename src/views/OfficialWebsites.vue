@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
+import AppScaffold from '@/components/app/AppScaffold.vue';
 import ButtonLink from '../components/base/ButtonLink.vue';
 import PageTitle from '../components/base/PageTitle.vue';
 
