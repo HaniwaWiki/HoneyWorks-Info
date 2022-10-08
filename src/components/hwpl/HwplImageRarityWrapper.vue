@@ -1,3 +1,4 @@
+<!-- wrapper of character cards image, and add rarity star onto the image  -->
 <template>
   <div style="position: relative">
     <slot />

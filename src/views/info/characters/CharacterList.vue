@@ -1,6 +1,9 @@
 <template>
   <AppScaffold>
     <v-row>
+      <v-col v-if="loading" class="text-center">
+        <v-progress-circular indeterminate color="primary" />
+      </v-col>
       <v-col v-for="character in characters" :key="character.Id" cols="3">
         <HwplCharacterCard
           :img-src="getCharacterImage(character)"
@@ -19,7 +22,7 @@ import HwplCharacterCard from '@/components/hwpl/HwplCharacterCard.vue';
 import { useCollection } from '@/composables/useCollection';
 import { Character } from '@/types/HWPL/Character';
 
-const { collection: characters } = useCollection('Characters');
+const { loading, collection: characters } = useCollection('Characters');
 
 function getCharacterImage(character: Character) {
   return getCharacterCardImageUrl({

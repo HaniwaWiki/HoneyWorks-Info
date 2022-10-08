@@ -26,10 +26,18 @@
         />
       </v-col>
     </v-row>
+    <v-col v-if="loading" class="text-center">
+      <v-progress-circular indeterminate color="primary" />
+    </v-col>
     <v-row>
       <!--   show character card as icon   -->
       <template v-if="!showImage">
-        <v-col v-for="card in paginatedData" :key="card.Id" :cols="4" md="2">
+        <v-col
+          v-for="card in paginatedCharacterCards"
+          :key="card.Id"
+          :cols="4"
+          md="2"
+        >
           <HwplIconCard
             v-if="!showImage"
             ripple
@@ -40,13 +48,17 @@
             :evolved="showEvolved"
             height="64px"
             @click="goto('Character Card Detail', { id: card.Id })"
-          >
-          </HwplIconCard>
+          />
         </v-col>
       </template>
       <!--   show character card as image   -->
       <template v-else>
-        <v-col v-for="card in paginatedData" :key="card.Id" cols="6" md="3">
+        <v-col
+          v-for="card in paginatedCharacterCards"
+          :key="card.Id"
+          cols="6"
+          md="3"
+        >
           <HwplCharacterCard
             ripple
             :img-src="getCardImage(card)"
@@ -56,8 +68,7 @@
             :evolved="showEvolved"
             height="96px"
             @click="goto('Character Card Detail', { id: card.Id })"
-          >
-          </HwplCharacterCard>
+          />
         </v-col>
       </template>
     </v-row>
@@ -74,8 +85,7 @@
 </template>
 <script setup lang="ts">
 import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
-import { computed, onMounted, ref, watch } from 'vue';
-import { getCollection } from '@/api/common';
+import { computed, ref } from 'vue';
 import { getCharacterCardImageUrl } from '@/utils/assetUtils/url/characterCard';
 import { goto } from '@/router';
 import { CharacterCard } from '@/types/HWPL/CharacterCard';
@@ -83,24 +93,31 @@ import { usePagination } from '@/composables/usePagination';
 import { useFilter } from '@/composables/useFilter';
 import HwplCharacterCard from '@/components/hwpl/HwplCharacterCard.vue';
 import HwplIconCard from '@/components/hwpl/HwplIconCard.vue';
+import { useCollection } from '@/composables/useCollection';
 
-const characterCards = ref<
-  (CharacterCard & {
-    cardName: string;
-    characterName: string;
-  })[]
->([]);
+const { loading, collection } = useCollection('CharacterCards');
+const characterCards = computed(() =>
+  collection.value.map((card) => {
+    const [, cardName, characterName] = /【(.*)】(.*)/.exec(card.Name) ?? [];
+    return {
+      ...card,
+      cardName,
+      characterName,
+    };
+  })
+);
 const keyword = ref('');
 const showImage = ref(false);
 const showEvolved = ref(false);
 
 // filter and pagination
-const filteredData = useFilter(characterCards, keyword);
+const filteredCharacterCards = useFilter(characterCards, keyword);
 const pageSize = computed(() => (showImage.value ? 20 : 24));
-const { pageCount, page, paginatedData } = usePagination(
-  filteredData,
-  pageSize
-);
+const {
+  pageCount,
+  page,
+  paginatedData: paginatedCharacterCards,
+} = usePagination(filteredCharacterCards, pageSize);
 
 function getCardImage(characterCard: CharacterCard) {
   return getCharacterCardImageUrl({
@@ -109,16 +126,4 @@ function getCardImage(characterCard: CharacterCard) {
     icon: !showImage.value,
   });
 }
-
-// fetch character cards on mount
-onMounted(async () => {
-  characterCards.value = (await getCollection('CharacterCards')).map((card) => {
-    const [, cardName, characterName] = /【(.*)】(.*)/.exec(card.Name) ?? [];
-    return {
-      ...card,
-      cardName,
-      characterName,
-    };
-  });
-});
 </script>
