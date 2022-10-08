@@ -24,7 +24,7 @@ const routes: RouteRecordRaw[] = [
   {
     name: '404',
     path: '/:pathMatch(.*)*',
-    component: () => import('@/views/NotFound.vue'),
+    component: () => import('@/views/NotFound/NotFound.vue'),
   },
 ];
 

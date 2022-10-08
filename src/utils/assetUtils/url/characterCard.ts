@@ -1,11 +1,19 @@
 import { assetBaseUrl } from '@/config';
 
-export function getCharacterCardImageUrl(
-  Id: number,
-  Rank: 1 | 2 = 1,
-  icon = false
-) {
+export type GetCharacterCardImageUrlParam = {
+  Id: number;
+  evolved?: boolean;
+  icon?: boolean;
+  thumb?: boolean;
+};
+
+export function getCharacterCardImageUrl({
+  Id,
+  evolved = false,
+  icon = false,
+}: GetCharacterCardImageUrlParam) {
+  const rank = evolved ? '2' : '1';
   const type = icon ? 'icon' : 'sd';
   // HWPL_Data/assets/Assets/Character/1001001/1001001_1_icon.png
-  return `${assetBaseUrl}/Assets/Character/${Id}/${Id}_${Rank}_${type}.png`;
+  return `${assetBaseUrl}/Assets/Character/${Id}/${Id}_${rank}_${type}.png`;
 }

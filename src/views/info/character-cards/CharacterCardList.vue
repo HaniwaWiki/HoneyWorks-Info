@@ -33,9 +33,7 @@
           <HwplIconCard
             v-if="!showImage"
             ripple
-            :img-src="
-              getCharacterCardImageUrl(card.Id, showEvolved ? 2 : 1, true)
-            "
+            :img-src="getCardImage(card)"
             :title="card.cardName"
             :subtitle="card.characterName"
             :rarity="card.Rarity"
@@ -51,7 +49,7 @@
         <v-col v-for="card in paginatedData" :key="card.Id" cols="6" md="3">
           <HwplCharacterCard
             ripple
-            :img-src="getCharacterCardImageUrl(card.Id, showEvolved ? 2 : 1)"
+            :img-src="getCardImage(card)"
             :title="card.cardName"
             :subtitle="card.characterName"
             :rarity="card.Rarity"
@@ -104,6 +102,14 @@ const { pageCount, page, paginatedData } = usePagination(
   pageSize
 );
 
+function getCardImage(characterCard: CharacterCard) {
+  return getCharacterCardImageUrl({
+    Id: characterCard.Id,
+    evolved: showEvolved.value,
+    icon: !showImage.value,
+  });
+}
+
 // fetch character cards on mount
 onMounted(async () => {
   characterCards.value = (await getCollection('CharacterCards')).map((card) => {
@@ -116,23 +122,3 @@ onMounted(async () => {
   });
 });
 </script>
-
-<style lang="scss" scoped>
-.character-card-textarea {
-  // ensure the height is enough to place 3 lines of name
-  height: 60 + 32px;
-
-  // horizontal align title and subtitle
-  text-align: center;
-  white-space: pre-wrap;
-
-  // vertical align title and subtitle
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.character-card-subtitle {
-  font-size: 0.5rem;
-}
-</style>

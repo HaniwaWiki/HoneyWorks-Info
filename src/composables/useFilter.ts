@@ -1,10 +1,11 @@
-import { Ref, ref, watch } from 'vue';
+import { computed, unref } from 'vue';
+import { MaybeRef } from '@/types/ref';
 
 // filter data by keyword
 // letter case is ignored
-async function filter<T>(items: Ref<T[]>, keyword: Ref<string>): Promise<T[]> {
-  return items.value.filter((item, i) =>
-    keyword.value
+function filter<T>(items: MaybeRef<T[]>, keyword: MaybeRef<string>): T[] {
+  return unref(items).filter((item, i) =>
+    unref(keyword)
       .split(' ')
       .every((word) =>
         JSON.stringify(item).toLowerCase().includes(word.toLowerCase())
@@ -12,13 +13,6 @@ async function filter<T>(items: Ref<T[]>, keyword: Ref<string>): Promise<T[]> {
   );
 }
 
-export function useFilter<T>(items: Ref<T[]>, keyword: Ref<string>) {
-  const filteredData = ref(items.value) as Ref<T[]>;
-
-  // after items or keyword changes, filter data
-  watch([items, keyword], async () => {
-    filteredData.value = await filter(items, keyword);
-  });
-
-  return filteredData;
+export function useFilter<T>(items: MaybeRef<T[]>, keyword: MaybeRef<string>) {
+  return computed(() => filter(items, keyword));
 }

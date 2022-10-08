@@ -5,13 +5,11 @@
 <script setup lang="ts">
 import { computed, watchEffect } from 'vue';
 import { getAppName } from '@/config';
-import router from '../../router';
+import { useRoute } from 'vue-router';
 
 const props = defineProps<{ title?: string }>();
 
-const title = computed(
-  () => props.title || String(router.currentRoute.value.name) || ''
-);
+const title = computed(() => props.title || String(useRoute().name) || '');
 
 const pageTitle = computed(() => `${title.value} | ${getAppName()}`);
 

@@ -1,16 +1,9 @@
 <template>
   <AppScaffold>
     <v-row>
-      <v-col
-        v-for="character in characters"
-        :key="character.Id"
-        cols="6"
-        md="3"
-      >
+      <v-col v-for="character in characters" :key="character.Id" cols="3">
         <HwplCharacterCard
-          :img-src="
-            getCharacterCardImageUrl(character.DefaultCharacterCardId, 1)
-          "
+          :img-src="getCharacterImage(character)"
           :title="character.Name"
           @click="goto('Character Detail', { id: character.Id })"
         />
@@ -20,16 +13,18 @@
 </template>
 <script setup lang="ts">
 import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
-import { onMounted, ref } from 'vue';
-import { getCollection } from '@/api/common';
 import { getCharacterCardImageUrl } from '@/utils/assetUtils/url/characterCard';
 import { goto } from '@/router';
-import { Character } from '@/types/HWPL/Character';
 import HwplCharacterCard from '@/components/hwpl/HwplCharacterCard.vue';
+import { useCollection } from '@/composables/useCollection';
+import { Character } from '@/types/HWPL/Character';
 
-const characters = ref<Character[]>([]);
+const { collection: characters } = useCollection('Characters');
 
-onMounted(async () => {
-  characters.value = await getCollection('Characters');
-});
+function getCharacterImage(character: Character) {
+  return getCharacterCardImageUrl({
+    Id: character.DefaultCharacterCardId,
+    evolved: false,
+  });
+}
 </script>

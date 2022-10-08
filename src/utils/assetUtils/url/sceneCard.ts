@@ -1,15 +1,22 @@
 import { getCollection } from '@/api/common';
 import { assetBaseUrl } from '@/config';
 
+// generate static image url
 function getSceneCardStaticImageUrl(Id: number) {
   return `${assetBaseUrl}/assets/Assets/SceneCards/${Id}.png`;
 }
 
-function getSceneCardDynamicImageUrl(Id: number) {
-  return `${assetBaseUrl}/assets/CriwareCpks/SceneCard/${Id}/${Id}.cpk_unpacked/${Id}.usm.m2v`;
+// generate static thumb image url
+function getSceneCardStaticThumbImageUrl(Id: number) {
+  return `${assetBaseUrl}/assets/Assets/SceneCards_thumb/${Id}_thumb.png`;
 }
 
-// 5-Rarity Character Cards have dynamic Scene Card images when cards are rank up
+// generate dynamic image url
+function getSceneCardDynamicImageUrl(Id: number) {
+  return `${assetBaseUrl}/assets/CriwareCpks/SceneCard/${Id}/${Id}.mp4`;
+}
+
+// only 5-Rarity Character Cards have dynamic Scene Card images when cards are rank up
 let sceneCardWithDynamicImageIds: Set<number> | null = null;
 async function getSceneCardWithDynamicImageIds(): Promise<Set<number>> {
   if (sceneCardWithDynamicImageIds !== null) {
@@ -22,10 +29,16 @@ async function getSceneCardWithDynamicImageIds(): Promise<Set<number>> {
   return sceneCardWithDynamicImageIds;
 }
 
+async function hasDynamicImage(Id: number): Promise<boolean> {
+  return (await getSceneCardWithDynamicImageIds()).has(Id);
+}
+
 export async function getSceneCardImageUrl(Id: number) {
-  const hasDynamicImage = (await getSceneCardWithDynamicImageIds()).has(Id);
   return {
     static: getSceneCardStaticImageUrl(Id),
-    dynamic: hasDynamicImage ? getSceneCardDynamicImageUrl(Id) : null,
+    static_thumb: getSceneCardStaticThumbImageUrl(Id),
+    dynamic: (await hasDynamicImage(Id))
+      ? getSceneCardDynamicImageUrl(Id)
+      : null,
   };
 }
