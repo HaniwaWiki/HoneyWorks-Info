@@ -29,7 +29,7 @@
     <v-row>
       <!--   show character card as icon   -->
       <template v-if="!showImage">
-        <v-col v-for="card in paginatedData" :key="card.Id" :cols="3" md="2">
+        <v-col v-for="card in paginatedData" :key="card.Id" :cols="4" md="2">
           <HwplIconCard
             v-if="!showImage"
             ripple

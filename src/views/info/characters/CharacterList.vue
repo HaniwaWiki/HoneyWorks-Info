@@ -1,7 +1,12 @@
 <template>
   <AppScaffold>
     <v-row>
-      <v-col v-for="character in characters" :key="character.Id" cols="3">
+      <v-col
+        v-for="character in characters"
+        :key="character.Id"
+        cols="6"
+        md="3"
+      >
         <HwplCharacterCard
           :img-src="
             getCharacterCardImageUrl(character.DefaultCharacterCardId, 1)
