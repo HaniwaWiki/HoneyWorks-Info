@@ -8,9 +8,9 @@ import { getAppName } from '@/config';
 import { useRoute } from 'vue-router';
 
 const props = defineProps<{ title?: string }>();
+const route = useRoute();
 
-const title = computed(() => props.title || String(useRoute().name) || '');
-
+const title = computed(() => props.title || String(route.name) || '');
 const pageTitle = computed(() => `${title.value} | ${getAppName()}`);
 
 watchEffect(() => {
