@@ -27,5 +27,5 @@ jobs:
         run: echo "::set-output name=TARGET_FOLDER::C:\project\HoneyWorks-Info-dev"
       - name: Deploy 🚀 To Server
         run: |
-          ssh -p 5000 Administrator@cdn-src.honeyworks.info "cd ${{ steps.set-target-folder-main.TARGET_FOLDER }} ${{ steps.set-target-folder-dev.TARGET_FOLDER }} && git pull && pnpm i && pnpm run lint && pnpm run build"
+          ssh -p 5000 Administrator@cdn-src.honeyworks.info "cd ${{ steps.set-target-folder-main.outputs.TARGET_FOLDER }} ${{ steps.set-target-folder-dev.outputs.TARGET_FOLDER }} && git pull && pnpm i && pnpm run lint && pnpm run build"
     
