@@ -18,12 +18,14 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -p 5000 cdn-src.honeyworks.info >> ~/.ssh/known_hosts
       - name: Set Target Folder (main)
+        id: set-target-folder-main
         if: github.ref == 'refs/heads/main'
-        run: TARGET_FOLDER="C:\project\HoneyWorks-Info"
+        run: echo "::set-output name=TARGET_FOLDER::C:\project\HoneyWorks-Info"
       - name: Set Target Folder (dev)
+        id: set-target-folder-dev
         if: github.ref == 'refs/heads/dev'
-        run: TARGET_FOLDER="C:\project\HoneyWorks-Info-dev"
+        run: echo "::set-output name=TARGET_FOLDER::C:\project\HoneyWorks-Info-dev"
       - name: Deploy 🚀 To Server
         run: |
-          ssh -p 5000 Administrator@cdn-src.honeyworks.info "cd $TARGET_FOLDER && git pull && pnpm i && pnpm run lint && pnpm run build"
+          ssh -p 5000 Administrator@cdn-src.honeyworks.info "cd ${{ steps.set-target-folder-main.TARGET_FOLDER }} ${{ steps.set-target-folder-dev.TARGET_FOLDER }} && git pull && pnpm i && pnpm run lint && pnpm run build"
     
