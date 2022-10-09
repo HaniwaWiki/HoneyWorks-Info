@@ -17,7 +17,13 @@ jobs:
           echo "$ACTION_DEPLOY_KEY" | tr -d '\r' > ~/.ssh/id_rsa # config private key
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -p 5000 cdn-src.honeyworks.info >> ~/.ssh/known_hosts
+      - name: Set Target Folder (main)
+        if: github.ref == 'refs/heads/main'
+        run: TARGET_FOLDER="C:\project\HoneyWorks-Info"
+      - name: Set Target Folder (dev)
+        if: github.ref == 'refs/heads/dev'
+        run: TARGET_FOLDER="C:\project\HoneyWorks-Info-dev"
       - name: Deploy 🚀 To Server
         run: |
-          ssh -p 5000 Administrator@cdn-src.honeyworks.info "cd C:\Project\HoneyWorks-Info && git pull && pnpm i && pnpm run lint && pnpm run build"
+          ssh -p 5000 Administrator@cdn-src.honeyworks.info "cd $TARGET_FOLDER && git pull && pnpm i && pnpm run lint && pnpm run build"
     
