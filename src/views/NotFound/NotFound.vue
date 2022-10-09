@@ -17,7 +17,7 @@
 import {
   getCharacterCardImageUrl,
   GetCharacterCardImageUrlParam,
-} from '@/utils/assetUtils/url/characterCard';
+} from '@/utils/hwpl/assetUtils/url/characterCard';
 import { onMounted, ref } from 'vue';
 import { useDisplay } from 'vuetify';
 import NotFoundText from '@/views/NotFound/components/NotFoundText.vue';

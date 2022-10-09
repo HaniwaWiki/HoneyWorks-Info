@@ -1,28 +1,28 @@
 <template>
-  <AppScaffold>
+  <AppScaffold placeholder-height="0">
     <v-row justify="center">
       <v-col cols="12">
         <v-text-field
           v-model="keyword"
-          class="no-detail"
+          hide-details
           prepend-icon="mdi-magnify"
           required
         />
       </v-col>
-      <v-col cols="6" class="d-flex flex-column align-center">
+      <v-col cols="12" :class="`switch-group-mobile-${mobile}`">
         <v-switch
           v-model="showImage"
-          class="no-detail"
+          hide-details
           label="Show Character Image"
           color="primary"
+          :class="`switch-mobile-${mobile}`"
         />
-      </v-col>
-      <v-col cols="6" class="d-flex flex-column align-center">
         <v-switch
           v-model="showEvolved"
-          class="no-detail"
+          hide-details
           label="Show Evolved"
           color="primary"
+          :class="`switch-mobile-${mobile}`"
         />
       </v-col>
     </v-row>
@@ -38,15 +38,15 @@
           :cols="4"
           md="2"
         >
-          <HwplIconCard
+          <HwplIconImageCard
             v-if="!showImage"
             ripple
             :img-src="getCardImage(card)"
-            :title="card.cardName"
-            :subtitle="card.characterName"
+            :title="parseCharacterCardName(card)[0]"
+            :subtitle="parseCharacterCardName(card)[1]"
             :rarity="card.Rarity"
             :evolved="showEvolved"
-            height="64px"
+            text-height="72px"
             @click="goto('Character Card Detail', { id: card.Id })"
           />
         </v-col>
@@ -59,14 +59,14 @@
           cols="6"
           md="3"
         >
-          <HwplCharacterCard
+          <HwplCharacterImageCard
             ripple
             :img-src="getCardImage(card)"
-            :title="card.cardName"
-            :subtitle="card.characterName"
+            :title="parseCharacterCardName(card)[0]"
+            :subtitle="parseCharacterCardName(card)[1]"
             :rarity="card.Rarity"
             :evolved="showEvolved"
-            height="96px"
+            text-height="96px"
             @click="goto('Character Card Detail', { id: card.Id })"
           />
         </v-col>
@@ -86,31 +86,27 @@
 <script setup lang="ts">
 import AppScaffold from '@/components/app/AppScaffold.vue';
 import { computed, ref } from 'vue';
-import { getCharacterCardImageUrl } from '@/utils/assetUtils/url/characterCard';
+import { getCharacterCardImageUrl } from '@/utils/hwpl/assetUtils/url/characterCard';
 import { goto } from '@/router';
 import { CharacterCard } from '@/types/HWPL/CharacterCard';
 import { usePagination } from '@/composables/usePagination';
 import { useFilter } from '@/composables/useFilter';
-import HwplCharacterCard from '@/components/hwpl/HwplCharacterCard.vue';
-import HwplIconCard from '@/components/hwpl/HwplIconCard.vue';
+import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
+import HwplIconImageCard from '@/components/hwpl/HwplIconImageCard.vue';
 import { useCollection } from '@/composables/useCollection';
+import { parseCharacterCardName } from '@/utils/hwpl/characterCard';
+import { useDisplay } from 'vuetify';
 
-const { loading, collection } = useCollection('CharacterCards');
-const characterCards = computed(() =>
-  collection.value.map((card) => {
-    const [, cardName, characterName] = /【(.*)】(.*)/.exec(card.Name) ?? [];
-    return {
-      ...card,
-      cardName,
-      characterName,
-    };
-  })
-);
+// page options
+const { mobile } = useDisplay();
+
+// options from user
 const keyword = ref('');
 const showImage = ref(false);
 const showEvolved = ref(false);
 
-// filter and pagination
+// fetch, filter and paginate data
+const { loading, collection: characterCards } = useCollection('CharacterCards');
 const filteredCharacterCards = useFilter(characterCards, keyword);
 const pageSize = computed(() => (showImage.value ? 20 : 24));
 const {
@@ -119,6 +115,7 @@ const {
   paginatedData: paginatedCharacterCards,
 } = usePagination(filteredCharacterCards, pageSize);
 
+// utility functions for rendering
 function getCardImage(characterCard: CharacterCard) {
   return getCharacterCardImageUrl({
     Id: characterCard.Id,
@@ -127,3 +124,22 @@ function getCardImage(characterCard: CharacterCard) {
   });
 }
 </script>
+
+<style lang="scss" scoped>
+.switch-group {
+  &-mobile-false {
+    display: flex;
+  }
+}
+
+.switch {
+  &-mobile-true {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+  &-mobile-false {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}
+</style>

@@ -1,9 +1,10 @@
+<!-- v-list-item used in navigation-drawer -->
 <template>
   <v-list-group v-if="item.subItems">
     <template #activator="{ props }">
-      <CascadeListItem v-bind="props" :item="{ ...item, subItems: null }" />
+      <NavigationListItem v-bind="props" :item="{ ...item, subItems: null }" />
     </template>
-    <CascadeListItem
+    <NavigationListItem
       v-for="subItem in item.subItems"
       :key="subItem.title"
       :item="subItem"
@@ -24,9 +25,9 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { CascadeListItemProp } from './types';
+import type { NavigationListItemProp } from './types';
 
-const props = defineProps<{ item: CascadeListItemProp }>();
+const props = defineProps<{ item: NavigationListItemProp }>();
 // const active = ref(true);
 // const active = computed(
 //   () =>

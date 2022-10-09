@@ -1,15 +1,12 @@
-.no-detail {
-  &.v-input {
-    .v-input__details {
-      height: 0;
-      min-height: 0;
-      padding: 0;
-    }
-  }
-}
-
 .hwpl-icon {
   // icons of HWPL have 12px radius
-  // we can use the same radius in icon wrapper, or something like that
+  // we can use the same radius on wrapper of hwpl-icon
   border-radius: 12px !important;
+}
+
+// add color for icon inside component
+.icon-primary {
+  & .v-icon {
+    color: rgb(var(--v-theme-primary)) !important
+  }
 }

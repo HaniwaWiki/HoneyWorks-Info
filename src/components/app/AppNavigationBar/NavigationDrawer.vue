@@ -5,7 +5,11 @@
   >
     <v-list dense nav density="compact">
       <v-item-group mandatory :value="pathname">
-        <CascadeListItem v-for="item in items" :key="item.title" :item="item" />
+        <NavigationListItem
+          v-for="item in items"
+          :key="item.title"
+          :item="item"
+        />
       </v-item-group>
     </v-list>
   </v-navigation-drawer>
@@ -13,15 +17,15 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { CascadeListItemProp } from '../../base/CascadeListItem/types';
-import CascadeListItem from '../../base/CascadeListItem/CascadeListItem.vue';
+import type { NavigationListItemProp } from '../../base/NavigationListItem/types';
+import NavigationListItem from '../../base/NavigationListItem/NavigationListItem.vue';
 
 defineProps<{ drawer: boolean }>();
 
 defineEmits(['update:drawer']);
 
 const pathname = computed(() => window.location.pathname);
-const items: CascadeListItemProp[] = [
+const items: NavigationListItemProp[] = [
   {
     title: 'HoneyWorks Official Links',
     icon: 'mdi-link',

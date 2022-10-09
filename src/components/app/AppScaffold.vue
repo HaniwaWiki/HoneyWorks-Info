@@ -7,6 +7,7 @@
       </v-col>
     </v-row>
   </v-container>
+  <div :style="{ height: placeholderHeight }" />
 </template>
 
 <script setup lang="ts">
@@ -17,6 +18,10 @@ defineProps({
   title: {
     type: String,
     default: undefined,
+  },
+  placeholderHeight: {
+    type: String,
+    default: '100px',
   },
 });
 </script>

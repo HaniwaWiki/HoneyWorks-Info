@@ -1,5 +1,5 @@
 <template>
-  <v-card ripple>
+  <v-card ripple :width="width">
     <HwplImageRarityWrapper :rarity="rarity" :evolved="evolved">
       <v-img
         :src="imgSrc"
@@ -12,7 +12,7 @@
     <v-card-text
       v-if="title || subtitle"
       class="character-card-textarea"
-      :style="{ height }"
+      :style="{ height: textHeight }"
     >
       <div>{{ title }}</div>
       <div class="text-grey character-card-subtitle">
@@ -43,13 +43,18 @@ defineProps({
     type: Number,
     default: 0,
   },
-  // stars of evolved cards are colorful
+  // evolved cards' stars are colorful
   evolved: {
     type: Boolean,
     default: false,
   },
+  // since aspect-ratio of images are constant , textHeight === width * 1.5
+  width: {
+    type: String,
+    default: undefined,
+  },
   // if you want to align all cards, you may need to set all cards' height to the max possible one
-  height: {
+  textHeight: {
     type: String,
     default: undefined,
   },

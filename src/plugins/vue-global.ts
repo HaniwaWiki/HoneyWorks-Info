@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import Vue from 'vue';
-import { getCharacterCardImageUrl } from '@/utils/assetUtils/url/characterCard';
-import { getSceneCardImageUrl } from '@/utils/assetUtils/url/sceneCard';
+import { getCharacterCardImageUrl } from '@/utils/hwpl/assetUtils/url/characterCard';
+import { getSceneCardImageUrl } from '@/utils/hwpl/assetUtils/url/sceneCard';
 
 // fixme: bindGlobal does work in Vue.js, but JetBrains IDEs cannot recognize it.
 declare module 'vue' {

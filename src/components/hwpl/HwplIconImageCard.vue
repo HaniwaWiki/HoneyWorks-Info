@@ -1,5 +1,5 @@
 <template>
-  <v-card ripple class="hwpl-icon">
+  <v-card ripple class="hwpl-icon" :width="width">
     <HwplImageRarityWrapper :rarity="rarity" :evolved="evolved">
       <v-img :src="imgSrc" :alt="title" class="ma-auto" :aspect-ratio="1" />
     </HwplImageRarityWrapper>
@@ -7,7 +7,7 @@
     <v-card-text
       v-if="title || subtitle"
       class="icon-card-textarea"
-      :style="{ height }"
+      :style="{ height: textHeight }"
     >
       <div class="icon-card-title">{{ title }}</div>
       <div class="text-grey icon-card-subtitle">
@@ -43,8 +43,13 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  // since icon are always 1:1, iconHeight === width
+  width: {
+    type: String,
+    default: '100px',
+  },
   // if you want to align all cards, you can set all cards' height to the max possible one
-  height: {
+  textHeight: {
     type: String,
     default: undefined,
   },
@@ -66,6 +71,7 @@ defineProps({
 
   &-title {
     font-size: 0.75rem;
+    line-height: 18px;
   }
 
   &-subtitle {

@@ -13,6 +13,7 @@ type ListItem = {
 type SubHeaderItem = {
   type: 'subheader';
   title: string | number;
+  inset?: boolean;
 };
 
 type DividerItem = {
