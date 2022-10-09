@@ -21,5 +21,8 @@ export type VuetifyColsProps = {
 
 export const vuetifyColsDefault = {
   cols: defaultCols,
+  sm: undefined,
   md: defaultMdCols,
+  lg: undefined,
+  xl: undefined,
 };
