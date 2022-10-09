@@ -5,5 +5,5 @@
 
 # check eslint errors
 pnpm run lint-staged
-# check typescript errors
-pnpm run tsc
+# check typescript errors (no longer needed in local, since we have CI)
+# pnpm run tsc
