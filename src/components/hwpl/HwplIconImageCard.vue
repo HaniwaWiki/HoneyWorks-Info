@@ -20,39 +20,27 @@
 <script setup lang="ts">
 import HwplImageRarityWrapper from '@/components/hwpl/HwplImageRarityWrapper.vue';
 
-defineProps({
-  imgSrc: {
-    type: String,
-    required: true,
-  },
-  title: {
-    type: String,
-    default: '',
-  },
-  subtitle: {
-    type: String,
-    default: '',
-  },
+type Props = {
+  imgSrc: string;
+  title?: string;
+  subtitle?: string;
   // set rarity to 0 to hide rarity stars
-  rarity: {
-    type: Number,
-    default: 0,
-  },
+  rarity?: number;
   // stars of evolved cards are colorful
-  evolved: {
-    type: Boolean,
-    default: false,
-  },
+  evolved?: boolean;
   // since icon are always 1:1, iconHeight === width
-  width: {
-    type: String,
-    default: '100px',
-  },
+  width?: string;
   // if you want to align all cards, you can set all cards' height to the max possible one
-  textHeight: {
-    type: String,
-    default: undefined,
-  },
+  textHeight?: string;
+};
+
+withDefaults(defineProps<Props>(), {
+  title: '',
+  subtitle: '',
+  rarity: 0,
+  evolved: false,
+  width: '100px',
+  textHeight: undefined,
 });
 </script>
 

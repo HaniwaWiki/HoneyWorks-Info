@@ -22,15 +22,11 @@ import star from '@/assets/rarity_star_1.png';
 import starEvolved from '@/assets/rarity_star_2.png';
 import { computed } from 'vue';
 
-const props = defineProps({
-  rarity: {
-    type: Number,
-    default: 0,
-  },
-  evolved: {
-    type: Boolean,
-    default: false,
-  },
+type Props = { rarity?: number; evolved?: boolean };
+
+const props = withDefaults(defineProps<Props>(), {
+  rarity: 0,
+  evolved: false,
 });
 
 const leftArray = computed(() =>

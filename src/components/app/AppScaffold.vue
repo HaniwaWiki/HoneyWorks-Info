@@ -11,17 +11,16 @@
 </template>
 
 <script setup lang="ts">
-import { vuetifyColProps } from '@/types/vuetify/col';
+import { vuetifyColsDefault, VuetifyColsProps } from '@/types/vuetify/col';
 
-defineProps({
-  ...vuetifyColProps,
-  title: {
-    type: String,
-    default: undefined,
-  },
-  placeholderHeight: {
-    type: String,
-    default: '100px',
-  },
+type Props = VuetifyColsProps & {
+  title?: string;
+  placeholderHeight?: string;
+};
+
+withDefaults(defineProps<Props>(), {
+  ...vuetifyColsDefault,
+  title: '',
+  placeholderHeight: '100px',
 });
 </script>

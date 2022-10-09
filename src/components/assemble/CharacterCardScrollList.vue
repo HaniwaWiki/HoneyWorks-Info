@@ -64,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref } from 'vue';
+import { ref } from 'vue';
 import { CharacterCard } from '@/types/HWPL/CharacterCard';
 import ScrollableSheet from '@/components/base/ScrollableSheet/ScrollableSheet.vue';
 import ScrollableSheetItem from '@/components/base/ScrollableSheet/ScrollableSheetItem.vue';
@@ -75,11 +75,11 @@ import { goto } from '@/router';
 import { parseCharacterCardName } from '@/utils/hwpl/characterCard';
 import { useDisplay } from 'vuetify';
 
-defineProps({
-  characterCards: {
-    type: Array as PropType<CharacterCard[]>,
-    default: () => [],
-  },
+type Props = {
+  characterCards: CharacterCard[];
+};
+withDefaults(defineProps<Props>(), {
+  characterCards: () => [],
 });
 
 // page options
