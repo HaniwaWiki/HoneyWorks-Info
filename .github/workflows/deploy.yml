@@ -19,5 +19,5 @@ jobs:
           ssh-keyscan -p 5000 cdn-src.honeyworks.info >> ~/.ssh/known_hosts
       - name: Deploy 🚀 To Server
         run: |
-          ssh -p 222 Administrator@cdn-src.honeyworks.info "cd C:\Project\HoneyWorks-Info && git pull && pnpm i && pnpm run lint && pnpm run build"
+          ssh -p 5000 Administrator@cdn-src.honeyworks.info "cd C:\Project\HoneyWorks-Info && git pull && pnpm i && pnpm run lint && pnpm run build"
     
