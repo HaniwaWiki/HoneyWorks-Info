@@ -12,7 +12,7 @@
     "prepare": "git submodule init && git submodule update && husky install"
   },
   "dependencies": {
-    "@mdi/font": "5.9.55",
+    "@mdi/font": "7.0.96",
     "axios": "^0.27.2",
     "lodash": "^4.17.21",
     "roboto-fontface": "*",
