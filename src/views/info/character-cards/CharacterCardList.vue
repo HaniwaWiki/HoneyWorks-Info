@@ -9,20 +9,20 @@
           required
         />
       </v-col>
-      <v-col cols="12" :class="`switch-group-mobile-${mobile}`">
+      <v-col cols="12" class="switch-group">
         <v-switch
           v-model="showImage"
           hide-details
           label="Show Character Image"
           color="primary"
-          :class="`switch-mobile-${mobile}`"
+          density="comfortable"
         />
         <v-switch
           v-model="showEvolved"
           hide-details
           label="Show Evolved"
           color="primary"
-          :class="`switch-mobile-${mobile}`"
+          density="comfortable"
         />
       </v-col>
     </v-row>
@@ -46,6 +46,7 @@
             :subtitle="parseCharacterCardName(card)[1]"
             :rarity="card.Rarity"
             :evolved="showEvolved"
+            width="auto"
             text-height="72px"
             @click="goto('Character Card Detail', { id: card.Id })"
           />
@@ -115,7 +116,7 @@ const {
   paginatedData: paginatedCharacterCards,
 } = usePagination(filteredCharacterCards, pageSize);
 
-// utility functions for rendering
+// parse function and parsed data
 function getCardImage(characterCard: CharacterCard) {
   return getCharacterCardImageUrl({
     Id: characterCard.Id,
@@ -124,22 +125,3 @@ function getCardImage(characterCard: CharacterCard) {
   });
 }
 </script>
-
-<style lang="scss" scoped>
-.switch-group {
-  &-mobile-false {
-    display: flex;
-  }
-}
-
-.switch {
-  &-mobile-true {
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-  &-mobile-false {
-    padding-left: 80px;
-    padding-right: 80px;
-  }
-}
-</style>

@@ -24,10 +24,13 @@ import { useCollection } from '@/composables/useCollection';
 import { Character } from '@/types/HWPL/Character';
 import { useDisplay } from 'vuetify';
 
+// page options
 const { mobile } = useDisplay();
 
+// fetch data
 const { loading, collection: characters } = useCollection('Characters');
 
+// parse function and parsed data
 function getCharacterImage(character: Character) {
   return getCharacterCardImageUrl({
     Id: character.DefaultCharacterCardId,

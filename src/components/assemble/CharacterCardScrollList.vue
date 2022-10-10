@@ -1,21 +1,17 @@
 <template>
   <div>
-    <div :class="`switch-group-mobile-${mobile}`">
+    <div class="switch-group">
       <v-switch
         v-model="showImage"
         hide-details
         label="Show Character Image"
         color="primary"
-        density="compact"
-        :class="`switch-mobile-${mobile}`"
       />
       <v-switch
         v-model="showEvolved"
         hide-details
         label="Show Evolved"
         color="primary"
-        density="compact"
-        :class="`switch-mobile-${mobile}`"
       />
     </div>
     <ScrollableSheet :class="showImage ? '' : 'hwpl-icon'">
@@ -92,24 +88,7 @@ function getCardImage(characterCard: CharacterCard) {
 </script>
 
 <style lang="scss" scoped>
-.switch-group {
-  &-mobile-false {
-    display: flex;
-  }
-}
-
-.switch {
-  &-mobile-true {
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-  &-mobile-false {
-    padding-left: 80px;
-    padding-right: 80px;
-  }
-}
-
-.scrollable-sheet {
+:deep(.scrollable-container) {
   padding-left: 20px;
   padding-right: 20px;
 }

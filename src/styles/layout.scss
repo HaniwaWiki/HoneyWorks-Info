@@ -1,3 +1,39 @@
+// usage:
+// @media (min-width: $md) {
+//   .container {
+//     styles when >= md
+//   }
+// }
+// @media not (min-width: $md) {
+//   .container {
+//     style when < md
+//   }
+// }
+$md: 960px;
+
+// make v-switch group displays as flex & wrap on desktop,
+// while displays as multiline on mobile
+.switch-group {
+  // on desktop
+  @media (min-width: $md) {
+    display: flex;
+    flex-flow: wrap;
+
+    & .v-switch {
+      justify-items: center;
+    }
+  }
+
+  // on mobile
+  @media not (min-width: $md) {
+    & .v-switch {
+      display: block;
+      margin-left: 32px;
+    }
+  }
+}
+
+// wrapper of hwpl-icon
 .hwpl-icon {
   // icons of HWPL have 12px radius
   // we can use the same radius on wrapper of hwpl-icon

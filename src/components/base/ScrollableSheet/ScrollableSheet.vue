@@ -4,7 +4,7 @@
 -->
 <template>
   <div class="scrollable-container">
-    <div class="scrollable-sheet class1">
+    <div class="scrollable-sheet">
       <slot />
     </div>
   </div>

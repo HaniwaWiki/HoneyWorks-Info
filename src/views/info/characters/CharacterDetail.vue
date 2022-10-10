@@ -20,6 +20,7 @@
               <div class="text-pre-wrap" v-text="title" />
             </template>
           </v-list>
+          <v-divider />
           <v-list>
             <v-list-subheader
               :title="`Character Cards (${characterCards.length} in total)`"
@@ -46,6 +47,7 @@ import { MdiIcons } from '@/types/mdi';
 import { parseCharacterBirthday } from '@/utils/hwpl/character';
 import CharacterCardScrollList from '@/components/assemble/CharacterCardScrollList.vue';
 
+// page options
 const characterId = Number(useRoute().params.id);
 
 // fetch data
@@ -94,9 +96,7 @@ const listItems = computed<VuetifyListItem[]>(() => [
   {
     prependIcon: 'mdi-cake-variant',
     // todo use date-fns to parse date
-    title: character.value
-      ? parseCharacterBirthday(character.value).join('/')
-      : '',
+    title: parseCharacterBirthday(character.value).join('/'),
     subtitle: 'Birthday',
   },
   {
@@ -115,6 +115,5 @@ const listItems = computed<VuetifyListItem[]>(() => [
     title: character.value?.Description.replaceAll('<br>', '\n'),
     subtitle: 'Description',
   },
-  { type: 'divider', inset: true },
 ]);
 </script>

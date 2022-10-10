@@ -1,7 +1,7 @@
 <template>
   <!-- container, row and col can limit card's position -->
   <v-container>
-    <v-row class="justify-center">
+    <v-row justify="center">
       <v-col v-bind="$props">
         <slot />
       </v-col>
