@@ -2,7 +2,7 @@
   <!-- container, row and col can limit card's position -->
   <v-container>
     <v-row justify="center">
-      <v-col v-bind="$props">
+      <v-col v-bind="$props" class="app-scaffold">
         <slot />
       </v-col>
     </v-row>
@@ -28,13 +28,23 @@ type Props = {
   lg?: number | string;
   xl?: number | string;
 
-  title?: string;
+  // height of white space at page bottom
+  // so that user scroll bottom content of the page to near center of the screen
   placeholderHeight?: string;
 };
 
 withDefaults(defineProps<Props>(), {
   ...vuetifyColsDefault,
-  title: '',
   placeholderHeight: '100px',
 });
 </script>
+
+<style lang="scss" scoped>
+// cards in app scaffold will have a 40px margin on y axis ("my-8")
+.app-scaffold {
+  & > :deep(.v-card) {
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+}
+</style>

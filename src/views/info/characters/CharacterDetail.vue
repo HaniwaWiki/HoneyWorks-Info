@@ -1,35 +1,25 @@
 <template>
   <AppScaffold>
-    <v-row>
-      <v-col>
-        <div class="text-h3">{{ character?.Name }}</div>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <v-card>
-          <v-img :src="characterImageUrl" width="150px" class="ma-auto" />
-          <v-list
-            class="icon-primary"
-            :items="listItems"
-            color="primary"
-            item-props
-            lines="two"
-          >
-            <template #title="{ title }">
-              <div class="text-pre-wrap" v-text="title" />
-            </template>
-          </v-list>
-          <v-divider />
-          <v-list>
-            <v-list-subheader
-              :title="`Character Cards (${characterCards.length} in total)`"
-            />
-            <CharacterCardScrollList :character-cards="characterCards" />
-          </v-list>
-        </v-card>
-      </v-col>
-    </v-row>
+    <div class="text-h3">{{ character?.Name }}</div>
+    <v-img :src="characterImageUrl" width="150px" class="ma-auto" />
+    <v-card title="General">
+      <v-list
+        class="icon-primary"
+        :items="listItems"
+        color="primary"
+        item-props
+        lines="two"
+      >
+        <template #title="{ title }">
+          <div class="text-pre-wrap" v-text="title" />
+        </template>
+      </v-list>
+    </v-card>
+    <v-card :title="`Character Cards (${characterCards.length} in total)`">
+      <v-list>
+        <CharacterCardScrollList :character-cards="characterCards" />
+      </v-list>
+    </v-card>
   </AppScaffold>
 </template>
 
@@ -67,7 +57,6 @@ const characterImageUrl = computed(() =>
 );
 
 const listItems = computed<VuetifyListItem[]>(() => [
-  { type: 'subheader', title: 'General' },
   {
     prependIcon: 'mdi-music-accidental-sharp',
     title: character.value?.Id,
