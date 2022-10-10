@@ -35,7 +35,7 @@
         <v-col
           v-for="card in paginatedCharacterCards"
           :key="card.Id"
-          :cols="4"
+          cols="4"
           md="2"
         >
           <HwplIconImageCard
@@ -108,7 +108,7 @@ const showEvolved = ref(false);
 // fetch, filter and paginate data
 const { loading, collection: characterCards } = useCollection('CharacterCards');
 const filteredCharacterCards = useFilter(characterCards, keyword);
-const pageSize = computed(() => (showImage.value ? 20 : 24));
+const pageSize = 24;
 const {
   pageCount,
   page,

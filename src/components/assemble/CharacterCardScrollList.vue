@@ -18,47 +18,39 @@
         :class="`switch-mobile-${mobile}`"
       />
     </div>
-    <ScrollableSheet class="scrollable-sheet hwpl-icon">
-      <!--   show character card as icon   -->
-      <template v-if="!showImage">
-        <ScrollableSheetItem
-          v-for="card in characterCards"
-          :key="card.Id"
-          class="mx-2"
-        >
-          <HwplIconImageCard
-            ripple
-            :img-src="getCardImage(card)"
-            :title="parseCharacterCardName(card)[0]"
-            :subtitle="parseCharacterCardName(card)[1]"
-            :rarity="card.Rarity"
-            :evolved="showEvolved"
-            width="100px"
-            text-height="72px"
-            @click="goto('Character Card Detail', { id: card.Id })"
-          />
-        </ScrollableSheetItem>
-      </template>
-      <!--   show character card as image   -->
-      <template v-else>
-        <ScrollableSheetItem
-          v-for="card in characterCards"
-          :key="card.Id"
-          class="mx-2"
-        >
-          <HwplCharacterImageCard
-            ripple
-            :img-src="getCardImage(card)"
-            :title="parseCharacterCardName(card)[0]"
-            :subtitle="parseCharacterCardName(card)[1]"
-            :rarity="card.Rarity"
-            :evolved="showEvolved"
-            width="160px"
-            text-height="64px"
-            @click="goto('Character Card Detail', { id: card.Id })"
-          />
-        </ScrollableSheetItem>
-      </template>
+    <ScrollableSheet :class="showImage ? '' : 'hwpl-icon'">
+      <ScrollableSheetItem
+        v-for="card in characterCards"
+        :key="card.Id"
+        class="mx-2"
+      >
+        <!--   show character card as icon   -->
+        <HwplIconImageCard
+          v-if="!showImage"
+          ripple
+          :img-src="getCardImage(card)"
+          :title="parseCharacterCardName(card)[0]"
+          :subtitle="parseCharacterCardName(card)[1]"
+          :rarity="card.Rarity"
+          :evolved="showEvolved"
+          width="100px"
+          text-height="72px"
+          @click="goto('Character Card Detail', { id: card.Id })"
+        />
+        <!--   show character card as image   -->
+        <HwplCharacterImageCard
+          v-else
+          ripple
+          :img-src="getCardImage(card)"
+          :title="parseCharacterCardName(card)[0]"
+          :subtitle="parseCharacterCardName(card)[1]"
+          :rarity="card.Rarity"
+          :evolved="showEvolved"
+          width="160px"
+          text-height="64px"
+          @click="goto('Character Card Detail', { id: card.Id })"
+        />
+      </ScrollableSheetItem>
     </ScrollableSheet>
   </div>
 </template>

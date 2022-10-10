@@ -1,15 +1,19 @@
-import { computed, Ref, ref, watch } from 'vue';
+import { computed, Ref, ref, unref, watch } from 'vue';
+import { MaybeRef } from '@/types/ref';
 
 // paginate all data
-export function usePagination<T>(data: Ref<T[]>, pageSize: Ref<number>) {
+export function usePagination<T>(
+  data: MaybeRef<T[]>,
+  pageSize: MaybeRef<number>
+) {
   const pageCount = computed(() =>
-    Math.ceil(data.value.length / pageSize.value)
+    Math.ceil(unref(data).length / unref(pageSize))
   );
   const page = ref(1);
   const paginatedData = computed(() => {
-    const start = (page.value - 1) * pageSize.value;
-    const end = start + pageSize.value;
-    return data.value.slice(start, end);
+    const start = (page.value - 1) * unref(pageSize);
+    const end = start + unref(pageSize);
+    return unref(data).slice(start, end);
   });
 
   // after data changes, reset page to 1
