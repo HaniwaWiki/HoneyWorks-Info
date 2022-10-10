@@ -87,7 +87,7 @@
 <script setup lang="ts">
 import AppScaffold from '@/components/app/AppScaffold.vue';
 import { computed, ref } from 'vue';
-import { getCharacterCardImageUrl } from '@/utils/hwpl/assetUtils/url/characterCard';
+import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 import { goto } from '@/router';
 import { CharacterCard } from '@/types/HWPL/CharacterCard';
 import { usePagination } from '@/composables/usePagination';
@@ -95,7 +95,7 @@ import { useFilter } from '@/composables/useFilter';
 import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
 import HwplIconImageCard from '@/components/hwpl/HwplIconImageCard.vue';
 import { useCollection } from '@/composables/useCollection';
-import { parseCharacterCardName } from '@/utils/hwpl/characterCard';
+import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
 import { useDisplay } from 'vuetify';
 
 // page options

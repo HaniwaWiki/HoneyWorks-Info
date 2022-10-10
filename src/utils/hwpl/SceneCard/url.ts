@@ -1,13 +1,14 @@
 import { getCollection } from '@/api/common';
 import { assetBaseUrl } from '@/config';
+import { Resource } from '@/components/base/ResourceTabs/types';
 
 // generate static image url
-function getSceneCardStaticImageUrl(Id: number) {
+export function getSceneCardStaticImageUrl(Id: number) {
   return `${assetBaseUrl}/assets/Assets/SceneCards/${Id}.png`;
 }
 
 // generate static thumb image url
-function getSceneCardStaticThumbImageUrl(Id: number) {
+export function getSceneCardStaticThumbImageUrl(Id: number) {
   return `${assetBaseUrl}/assets/Assets/SceneCards_thumb/${Id}_thumb.png`;
 }
 
@@ -24,7 +25,9 @@ async function getSceneCardWithDynamicImageIds(): Promise<Set<number>> {
   }
   sceneCardWithDynamicImageIds = new Set<number>([1, 2, 3]);
   const characterCards = await getCollection('CharacterCards', { Rarity: 5 });
-  const sceneCardIds = characterCards.map((c) => c.RankUpSceneCardId);
+  const sceneCardIds = characterCards
+    .map((c) => c.RankUpSceneCardId)
+    .filter((c) => c) as number[];
   sceneCardWithDynamicImageIds = new Set<number>(sceneCardIds);
   return sceneCardWithDynamicImageIds;
 }

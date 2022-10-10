@@ -3,7 +3,7 @@
   <div style="position: relative">
     <slot />
     <img
-      v-for="left in leftArray"
+      v-for="left in leftPositionArray"
       :key="left"
       :src="evolved ? starEvolved : star"
       alt="star"
@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<Props>(), {
   evolved: false,
 });
 
-const leftArray = computed(() =>
+const leftPositionArray = computed(() =>
   Array(props.rarity)
     .fill(0)
     .map((_, i) => 15 * i + 5)

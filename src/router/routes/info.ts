@@ -21,7 +21,9 @@ const infoRoutes: RouteRecordRaw[] = [
     name: 'Character Card Detail',
     path: '/info/character-cards/:id',
     component: () =>
-      import('@/views/info/character-cards/CharacterCardDetail.vue'),
+      import(
+        '@/views/info/character-cards/CharacterCardDetail/CharacterCardDetail.vue'
+      ),
   },
   {
     name: 'Music Part List',

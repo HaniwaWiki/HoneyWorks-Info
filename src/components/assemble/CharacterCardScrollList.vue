@@ -58,11 +58,12 @@ import ScrollableSheet from '@/components/base/ScrollableSheet/ScrollableSheet.v
 import ScrollableSheetItem from '@/components/base/ScrollableSheet/ScrollableSheetItem.vue';
 import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
 import HwplIconImageCard from '@/components/hwpl/HwplIconImageCard.vue';
-import { getCharacterCardImageUrl } from '@/utils/hwpl/assetUtils/url/characterCard';
+import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 import { goto } from '@/router';
-import { parseCharacterCardName } from '@/utils/hwpl/characterCard';
+import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
 import { useDisplay } from 'vuetify';
 
+// props definition
 type Props = {
   characterCards: CharacterCard[];
 };

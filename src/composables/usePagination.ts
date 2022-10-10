@@ -1,5 +1,5 @@
 import { computed, Ref, ref, unref, watch } from 'vue';
-import { MaybeRef } from '@/types/ref';
+import { MaybeRef } from '@/types/vue/ref';
 
 // paginate all data
 export function usePagination<T>(

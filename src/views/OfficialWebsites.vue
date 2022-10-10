@@ -9,7 +9,7 @@
       <v-col>
         <v-card :title="name">
           <v-card-text>
-            <ButtonLink
+            <ButtonExternalLink
               v-for="{ text, url } in links"
               :key="text"
               :inline="name !== 'Website'"
@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import AppScaffold from '@/components/app/AppScaffold.vue';
-import ButtonLink from '../components/base/ButtonLink.vue';
+import ButtonExternalLink from '../components/base/ButtonExternalLink.vue';
 
 const officialWebsites = [
   {

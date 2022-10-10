@@ -2,7 +2,7 @@
 import { getCollection } from '@/api/common';
 import { APITypeName } from '@/types/HWPL';
 import { Ref, ref, unref, watchEffect } from 'vue';
-import { MaybeRef } from '@/types/ref';
+import { MaybeRef } from '@/types/vue/ref';
 
 export function useCollection<Name extends keyof APITypeName>(
   collectionName: MaybeRef<Name>,

@@ -1,4 +1,6 @@
 import { assetBaseUrl } from '@/config';
+import { Resource } from '@/components/base/ResourceTabs/types';
+import { RouteLocationRaw } from 'vue-router';
 
 export type GetCharacterCardImageUrlParam = {
   Id: number;

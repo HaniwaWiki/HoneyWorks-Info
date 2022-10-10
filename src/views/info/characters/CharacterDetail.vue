@@ -1,7 +1,13 @@
 <template>
   <AppScaffold>
     <div class="text-h3">{{ character?.Name }}</div>
-    <v-img :src="characterImageUrl" width="150px" class="ma-auto" />
+
+    <v-card>
+      <ResourceTabs
+        :resources="[{ name: 'Default Card Image', url: characterImageUrl }]"
+      />
+    </v-card>
+
     <v-card title="General">
       <v-list
         class="icon-primary"
@@ -15,6 +21,7 @@
         </template>
       </v-list>
     </v-card>
+
     <v-card :title="`Character Cards (${characterCards.length} in total)`">
       <v-list>
         <CharacterCardScrollList :character-cards="characterCards" />
@@ -26,7 +33,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import AppScaffold from '@/components/app/AppScaffold.vue';
-import { getCharacterCardImageUrl } from '@/utils/hwpl/assetUtils/url/characterCard';
+import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 import { useRoute } from 'vue-router';
 import {
   useCollection,
@@ -34,8 +41,9 @@ import {
 } from '@/composables/useCollection';
 import type { VuetifyListItem } from '@/types/vuetify/listItem';
 import { MdiIcons } from '@/types/mdi';
-import { parseCharacterBirthday } from '@/utils/hwpl/character';
+import { parseCharacterBirthday } from '@/utils/hwpl/Character/common';
 import CharacterCardScrollList from '@/components/assemble/CharacterCardScrollList.vue';
+import ResourceTabs from '@/components/base/ResourceTabs/ResourceTabs.vue';
 
 // page options
 const characterId = Number(useRoute().params.id);

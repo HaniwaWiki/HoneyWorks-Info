@@ -17,7 +17,7 @@
 </template>
 <script setup lang="ts">
 import AppScaffold from '@/components/app/AppScaffold.vue';
-import { getCharacterCardImageUrl } from '@/utils/hwpl/assetUtils/url/characterCard';
+import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 import { goto } from '@/router';
 import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
 import { useCollection } from '@/composables/useCollection';

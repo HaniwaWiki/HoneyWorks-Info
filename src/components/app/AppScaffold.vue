@@ -43,8 +43,8 @@ withDefaults(defineProps<Props>(), {
 // cards in app scaffold will have a 40px margin on y axis ("my-8")
 .app-scaffold {
   & > :deep(.v-card) {
-    margin-top: 32px;
-    margin-bottom: 32px;
+    margin-top: 64px;
+    margin-bottom: 64px;
   }
 }
 </style>
