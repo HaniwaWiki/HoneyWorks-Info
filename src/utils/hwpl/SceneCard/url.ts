@@ -54,8 +54,7 @@ export async function getSceneCardImageUrl(Id: number) {
     static_thumb: getSceneCardStaticThumbImageUrl(imageId),
     // now only provide one dynamic scene card for test purposes
     dynamic: (await hasDynamicImage(Id))
-      ? // getSceneCardDynamicImageUrl(imageId)
-        getSceneCardDynamicImageUrl('101238')
+      ? getSceneCardDynamicImageUrl(imageId)
       : null,
   };
 }

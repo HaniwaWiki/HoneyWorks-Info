@@ -22,6 +22,7 @@ defineProps<{
 
 <style lang="scss" scoped>
 video {
+  display: block;
   width: 100%;
   max-height: 100%;
 }

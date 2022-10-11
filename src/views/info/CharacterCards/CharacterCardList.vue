@@ -1,13 +1,20 @@
 <template>
   <AppScaffold placeholder-height="0">
     <v-row justify="center">
-      <v-col cols="12">
+      <v-col cols="10">
         <v-text-field
           v-model="keyword"
           hide-details
           prepend-icon="mdi-magnify"
           required
         />
+      </v-col>
+      <v-col cols="2" class="d-flex flex-column justify-center">
+        <v-btn
+          prepend-icon="mdi-filter-variant"
+          @click="keyword += ' &quot;Rarity&quot;:5'"
+          >Rarity Filter</v-btn
+        >
       </v-col>
       <v-col cols="12" class="switch-group">
         <v-switch
@@ -86,7 +93,7 @@
 </template>
 <script setup lang="ts">
 import AppScaffold from '@/components/app/AppScaffold.vue';
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 import { goto } from '@/router';
 import { CharacterCard } from '@/types/HWPL/CharacterCard';
@@ -96,10 +103,6 @@ import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue
 import HwplIconImageCard from '@/components/hwpl/HwplIconImageCard.vue';
 import { useCollection } from '@/composables/useCollection';
 import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
-import { useDisplay } from 'vuetify';
-
-// page options
-const { mobile } = useDisplay();
 
 // options from user
 const keyword = ref('');

@@ -4,7 +4,12 @@
       <v-tab v-for="{ name, to } in resources" :key="name" :value="name">
         {{ name }}
         <!--  only link of active tab is enable, preventing user from mis-touch -->
-        <ButtonIconLink v-if="to" :to="to" :disabled="tab !== name" />
+        <ButtonIconLink
+          v-if="to"
+          class="mr-n3"
+          :to="to"
+          :disabled="tab !== name"
+        />
       </v-tab>
     </v-tabs>
 
@@ -27,6 +32,7 @@
           v-else-if="isVideo(url)"
           class="resource-window"
           :url="url"
+          :controls="options?.controls"
           :muted="options?.muted"
           :loop="options?.loop"
           :autoplay="options?.autoplay"
