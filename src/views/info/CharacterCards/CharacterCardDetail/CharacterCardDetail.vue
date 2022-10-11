@@ -19,8 +19,9 @@
         </v-list-item>
         <v-list-item prepend-icon="mdi-account" subtitle="Character">
           <template #title>{{ characterName }} </template>
-          <template v-if="characterCard" #append>
+          <template #append>
             <ButtonIconLink
+              v-if="characterCard"
               size="small"
               :to="{
                 name: 'Character Detail',
@@ -30,19 +31,24 @@
           </template>
         </v-list-item>
         <v-list-item prepend-icon="mdi-star" subtitle="Rarity">
-          <template v-if="characterCard" #title>
-            <v-img
-              v-for="i in Array(characterCard.Rarity)"
-              :key="i"
-              class="d-inline-block"
-              :src="star"
-              width="20px"
-            ></v-img>
+          <template #title>
+            <template v-if="characterCard">
+              <v-img
+                v-for="i in Array(characterCard.Rarity)"
+                :key="i"
+                class="d-inline-block"
+                :src="star"
+                width="20px"
+              ></v-img>
+            </template>
           </template>
         </v-list-item>
         <v-list-item prepend-icon="mdi-tag" subtitle="Tags">
-          <template v-if="characterCard" #title>
-            <HwplTagGroup :tag-ids="characterCard.TagIdBits" />
+          <template #title>
+            <HwplTagGroup
+              v-if="characterCard"
+              :tag-ids="characterCard.TagIdBits"
+            />
           </template>
         </v-list-item>
       </v-list>

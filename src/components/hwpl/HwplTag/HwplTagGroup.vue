@@ -1,6 +1,6 @@
 <template>
   <div class="hwpl-tag-group">
-    <HwplTag v-for="tagId in tagIds" :key="tagId" :tag-id="tagId" />
+    <HwplTag v-for="tagId in tagNumbers" :key="tagId" :tag-id="tagId" />
   </div>
 </template>
 <script setup lang="ts">
@@ -13,7 +13,7 @@ type Props = {
 
 const props = defineProps<Props>();
 
-const tagIds = computed(() =>
+const tagNumbers = computed(() =>
   Array.isArray(props.tagIds)
     ? props.tagIds
     : props.tagIds.split(',').map(Number)
@@ -22,7 +22,7 @@ const tagIds = computed(() =>
 
 <style class="scss" scoped>
 .hwpl-tag-group {
-  /*display: flex;*/
-  /*flex-flow: wrap;*/
+  display: flex;
+  flex-flow: wrap;
 }
 </style>

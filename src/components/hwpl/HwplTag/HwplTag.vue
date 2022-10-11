@@ -1,12 +1,9 @@
 <template>
-  <v-chip size="x-small" class="mx-1" text :color="color">{{ text }}</v-chip>
+  <v-chip size="x-small" class="mr-2 mb-2" :color="color">{{ text }}</v-chip>
 </template>
 
 <script setup lang="ts">
-import {
-  useCollection,
-  useFirstOfCollection,
-} from '@/composables/useCollection';
+import { useFirstOfCollection } from '@/composables/useCollection';
 import { computed } from 'vue';
 
 const props = defineProps<{
@@ -19,11 +16,13 @@ const colorMap = {
   3: '#FFC107',
   4: '#E91E63',
   5: '#6200ee',
-} as { [level: number]: string };
+};
 
 const { item: tag } = useFirstOfCollection('Tags', { Id: props.tagId });
 
-const color = computed(() => colorMap[tag.value?.IconLevel] || '');
+const color = computed(
+  () => colorMap[tag.value?.IconLevel as keyof typeof colorMap] || ''
+);
 const text = computed(() =>
   tag.value ? `${tag.value.Name}(${tag.value.IconLevel})` : ''
 );
