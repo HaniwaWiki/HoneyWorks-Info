@@ -21,7 +21,11 @@ export function useCharacterCardRelatedResources(
       characterCard.value;
     const resources: Resource[] = [];
 
-    async function pushSceneCardResources(Id: number) {
+    async function pushSceneCardResources(
+      Id: number,
+      cardName: string,
+      dynamicCardName: string
+    ) {
       const sceneCardUrl = await getSceneCardImageUrl(Id);
       const to: RouteLocationRaw = {
         name: 'Scene Card Detail',
@@ -29,14 +33,14 @@ export function useCharacterCardRelatedResources(
       };
       if (sceneCardUrl.dynamic !== null) {
         resources.push({
-          name: 'Scene Card (Dynamic)',
+          name: dynamicCardName,
           url: sceneCardUrl.dynamic,
           to,
           options: dynamicSceneCardResourceOption,
         });
       } else {
         resources.push({
-          name: 'Scene Card',
+          name: cardName,
           url: sceneCardUrl.static,
           to,
         });
@@ -44,11 +48,19 @@ export function useCharacterCardRelatedResources(
     }
 
     if (FirstSceneCardId !== null) {
-      await pushSceneCardResources(FirstSceneCardId);
+      await pushSceneCardResources(
+        FirstSceneCardId,
+        'Scene Card',
+        'Scene Card (Dynamic)'
+      );
     }
 
     if (RankUpSceneCardId !== null) {
-      await pushSceneCardResources(RankUpSceneCardId);
+      await pushSceneCardResources(
+        RankUpSceneCardId,
+        'Scene Card (Evolved)',
+        'Scene Card (Evolved, Dynamic)'
+      );
     }
 
     if (MusicPartId !== null) {
