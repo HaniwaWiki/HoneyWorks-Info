@@ -1,13 +1,13 @@
 <template>
-  <video
+  <audio
     v-if="url"
     :autoplay="autoplay"
     :loop="loop"
     :muted="muted"
     :controls="controls"
   >
-    <source :src="url" type="video/mp4" />
-  </video>
+    <source :src="url" />
+  </audio>
 </template>
 
 <script setup lang="ts">
@@ -21,8 +21,10 @@ defineProps<{
 </script>
 
 <style lang="scss" scoped>
-video {
-  width: 100%;
+audio {
+  display: block;
+  margin: 5vh auto;
+  width: 80%;
   max-height: 100%;
 }
 </style>

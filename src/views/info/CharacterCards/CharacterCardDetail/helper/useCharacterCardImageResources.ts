@@ -23,10 +23,18 @@ export function useCharacterCardImageResources(
       {
         name: 'Icon',
         url: getCharacterCardImageUrl({ Id, evolved: false, icon: true }),
+        options: {
+          width: '20vh',
+          height: '20vh',
+        },
       },
       {
         name: 'Icon (Evolved)',
         url: getCharacterCardImageUrl({ Id, evolved: true, icon: true }),
+        options: {
+          width: '20vh',
+          height: '20vh',
+        },
       },
     ];
   });

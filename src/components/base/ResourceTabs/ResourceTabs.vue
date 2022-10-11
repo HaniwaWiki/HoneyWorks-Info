@@ -19,7 +19,7 @@
         :key="name"
         :value="name"
       >
-        <!-- todo: support optional router link -->
+        <!-- todo: support width option -->
         <!-- todo: gallery viewer -->
         <!-- todo: support other file types (audio, video) -->
         <v-img
@@ -37,13 +37,17 @@
           :loop="options?.loop"
           :autoplay="options?.autoplay"
         />
-        <AudioPlayer v-else-if="isAudio(url)" :url="url" />
+        <AudioPlayer v-else-if="isAudio(url)" :url="url" controls />
         <div v-else>Unsupported Media type: {{ getExtension(url) }}</div>
       </v-window-item>
     </v-window>
   </div>
   <div v-else class="pa-5 d-flex align-center justify-center">
-    <img :src="getCharacterCardImageUrl({ Id: 1997003 })" width="48" />
+    <img
+      :src="getCharacterCardImageUrl({ Id: 1997003 })"
+      alt="puppet"
+      width="48"
+    />
     <div>No Resource Available</div>
   </div>
 </template>

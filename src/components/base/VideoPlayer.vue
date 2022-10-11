@@ -5,8 +5,10 @@
     :loop="loop"
     :muted="muted"
     :controls="controls"
+    :width="width"
+    :height="height"
   >
-    <source :src="url" type="video/mp4" />
+    <source :src="url" />
   </video>
 </template>
 
@@ -17,6 +19,8 @@ defineProps<{
   loop?: boolean;
   muted?: boolean;
   controls?: boolean;
+  width?: string;
+  height?: string;
 }>();
 </script>
 

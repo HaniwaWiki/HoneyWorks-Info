@@ -7,7 +7,7 @@ import {
 import { Ref } from 'vue';
 import asyncComputed from '@/utils/asyncComputed';
 import { getSceneCardImageUrl } from '@/utils/hwpl/SceneCard/url';
-import { getMusicPartMVUrl } from '@/utils/hwpl/MusicPart/url';
+import { getMusicPartMVUrl, getMusicPartUrl } from '@/utils/hwpl/MusicPart/url';
 import { RouteLocationRaw } from 'vue-router';
 
 export function useCharacterCardRelatedResources(

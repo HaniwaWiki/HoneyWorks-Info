@@ -6,6 +6,9 @@ export type Resource = {
   // link to the resource page
   to?: RouteLocationRaw;
   options?: {
+    width?: string;
+    height?: string;
+    // video options
     controls?: boolean;
     muted?: boolean;
     loop?: boolean;

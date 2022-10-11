@@ -1,20 +1,20 @@
 <template>
   <AppScaffold placeholder-height="0">
     <v-row justify="center">
-      <v-col cols="10">
+      <v-col cols="12" class="d-flex align-center">
         <v-text-field
           v-model="keyword"
+          class="mr-4"
           hide-details
           prepend-icon="mdi-magnify"
           required
         />
-      </v-col>
-      <v-col cols="2" class="d-flex flex-column justify-center">
         <v-btn
           prepend-icon="mdi-filter-variant"
           @click="keyword += ' &quot;Rarity&quot;:5'"
-          >Rarity Filter</v-btn
         >
+          Rarity
+        </v-btn>
       </v-col>
       <v-col cols="12" class="switch-group">
         <v-switch
