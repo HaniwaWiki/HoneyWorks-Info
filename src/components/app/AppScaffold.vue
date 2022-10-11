@@ -35,7 +35,7 @@ type Props = {
 
 withDefaults(defineProps<Props>(), {
   ...vuetifyColsDefault,
-  placeholderHeight: '100px',
+  placeholderHeight: '10vh',
 });
 </script>
 

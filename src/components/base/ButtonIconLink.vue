@@ -1,5 +1,5 @@
 <template>
-  <v-btn v-bind="$props" flat />
+  <v-btn v-bind="$props" variant="text" />
 </template>
 
 <script setup lang="ts">

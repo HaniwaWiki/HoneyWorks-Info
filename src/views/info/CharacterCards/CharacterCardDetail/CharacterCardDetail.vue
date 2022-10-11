@@ -68,8 +68,8 @@ import ResourceTabs from '@/components/base/ResourceTabs/ResourceTabs.vue';
 import ButtonIconLink from '@/components/base/ButtonIconLink.vue';
 import star from '@/assets/rarity_star_1.png';
 import HwplTagGroup from '@/components/hwpl/HwplTag/HwplTagGroup.vue';
-import { useCharacterCardImageResources } from '@/views/info/character-cards/CharacterCardDetail/helper/useCharacterCardImageResources';
-import { useCharacterCardRelatedResources } from '@/views/info/character-cards/CharacterCardDetail/helper/useCharacterCardRelatedResources';
+import { useCharacterCardImageResources } from '@/views/info/CharacterCards/CharacterCardDetail/helper/useCharacterCardImageResources';
+import { useCharacterCardRelatedResources } from '@/views/info/CharacterCards/CharacterCardDetail/helper/useCharacterCardRelatedResources';
 
 // page options
 const characterCardId = Number(useRoute().params.id);

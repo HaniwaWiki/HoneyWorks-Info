@@ -1,5 +1,5 @@
 import { assetBaseUrl } from '@/config';
-import { Resource } from '@/components/base/ResourceTabs/types';
+import { Resource } from '@/components/base/ResourceTabs/Resource';
 import { RouteLocationRaw } from 'vue-router';
 
 export type GetCharacterCardImageUrlParam = {
