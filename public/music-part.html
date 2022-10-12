@@ -25,13 +25,13 @@
               :items-per-page="15"
               multi-sort
             >
-              <template v-slot:item.rank="{ item }">
+              <template v-slot:item.rank_text="{ item }">
                 <v-chip
                   small
-                  :color="levelColor[item.Rank]"
+                  :color="rankColor[item.Rank]"
                   text-color="white"
                 >
-                  {{ item.rank }}
+                  {{ item.rank_text }}
                 </v-chip>
               </template>
             </v-data-table>
@@ -57,25 +57,33 @@
     data() {
       return {
         headers: [
-          { text: '片段 ID', value: 'MusicPartId' },
+          { text: '片段 ID', value: 'MusicPartId', width: '10vw' },
           {
             text: '歌名',
             align: 'start',
             value: 'MusicName',
             width: '20vw'
           },
-          { text: '片段名', value: 'MusicPartName' },
-          { text: '难度', value: 'rank' },
-          { text: '等级', value: 'PlayLevel' },
-          { text: '歌曲时间（秒）', value: 'MusicTime' }
+          { text: '片段名', value: 'MusicPartName', width: '10vw' },
+          { text: '难度', value: 'rank_text', width: '10vw', sort: (a, b) => {
+            const textRankMap = {
+              EASY: 1,
+              NORMAL: 2,
+              HARD: 3,
+              EXPERT: 4,
+            }
+            return textRankMap[a] - textRankMap[b];
+            } },
+          { text: '等级', value: 'PlayLevel', width: '10vw' },
+          { text: '歌曲时间（秒）', value: 'MusicTime', width: '10vw' }
         ],
-        levelColor: {
+        rankColor: {
           1: '#6ac9d9',
           2: '#65cb59',
           3: '#f7ca76',
           4: '#ee5387'
         },
-        levelText: {
+        rankTextMap: {
           1: 'EASY',
           2: 'NORMAL',
           3: 'HARD',
@@ -90,11 +98,8 @@
       const musicParts = (await axios.get('/api/latest/MusicParts.json')).data;
       const musicalScores = (await axios.get('/api/latest/musicalScores.json')).data;
       musicalScores.forEach(s => {
-        delete s['EncodedNotes'];
-        delete s['EncodedBonusTimes'];
-        delete s['EncodedBonusTimeNoteConfigurations'];
-        // slot name of v-data-table only supports camel case
-        s.rank = this.levelText[s.Rank];
+        // slot name of v-data-table only supports snake case
+        s.rank_text = this.rankTextMap[s.Rank];
         s.MusicName = songs.find(song => song.Id === Math.floor(s.MusicPartId / 1000)).Name;
         s.MusicPartName = musicParts.find(p => p.Id === s.MusicPartId).Name;
       });
