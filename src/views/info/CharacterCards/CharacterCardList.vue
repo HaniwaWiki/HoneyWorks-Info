@@ -47,7 +47,6 @@
         >
           <HwplIconImageCard
             v-if="!showImage"
-            ripple
             :img-src="getCardImage(card)"
             :title="parseCharacterCardName(card)[0]"
             :subtitle="parseCharacterCardName(card)[1]"
@@ -55,7 +54,7 @@
             :evolved="showEvolved"
             width="auto"
             text-height="72px"
-            @click="goto('Character Card Detail', { id: card.Id })"
+            :to="{ name: 'Character Card Detail', params: { id: card.Id } }"
           />
         </v-col>
       </template>
@@ -68,14 +67,13 @@
           md="3"
         >
           <HwplCharacterImageCard
-            ripple
             :img-src="getCardImage(card)"
             :title="parseCharacterCardName(card)[0]"
             :subtitle="parseCharacterCardName(card)[1]"
             :rarity="card.Rarity"
             :evolved="showEvolved"
             text-height="96px"
-            @click="goto('Character Card Detail', { id: card.Id })"
+            :to="{ name: 'Character Card Detail', params: { id: card.Id } }"
           />
         </v-col>
       </template>

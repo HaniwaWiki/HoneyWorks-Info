@@ -9,7 +9,7 @@
           :img-src="getCharacterImage(character)"
           :title="character.Name"
           :text-height="mobile ? '60px' : '20px'"
-          @click="goto('Character Detail', { id: character.Id })"
+          :to="{ name: 'Character Detail', params: { id: character.Id } }"
         />
       </v-col>
     </v-row>

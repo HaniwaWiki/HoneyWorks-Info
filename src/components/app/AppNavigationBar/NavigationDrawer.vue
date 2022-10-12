@@ -4,7 +4,7 @@
     @update:model-value="(val) => $emit('update:drawer', val)"
   >
     <v-list dense nav density="compact">
-      <v-item-group mandatory :value="pathname">
+      <v-item-group mandatory>
         <NavigationListItem
           v-for="item in items"
           :key="item.title"
@@ -24,7 +24,6 @@ defineProps<{ drawer: boolean }>();
 
 defineEmits(['update:drawer']);
 
-const pathname = computed(() => window.location.pathname);
 const items: NavigationListItemProp[] = [
   {
     title: 'HoneyWorks Official Links',
@@ -38,6 +37,10 @@ const items: NavigationListItemProp[] = [
       { title: 'Characters', href: '/info/characters' },
       { title: 'Character Cards', href: '/info/character-cards' },
       { title: 'Music Parts', href: '/info/music-parts' },
+      {
+        title: 'Music Parts Data',
+        href: `${window.location.origin}/music-part.html`,
+      },
       { title: 'Scene Cards', href: '/info/scene-cards' },
       { title: 'Events', href: '/info/events' },
     ],

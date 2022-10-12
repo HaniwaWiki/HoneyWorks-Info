@@ -23,7 +23,6 @@
         <!--   show character card as icon   -->
         <HwplIconImageCard
           v-if="!showImage"
-          ripple
           :img-src="getCardImage(card)"
           :title="parseCharacterCardName(card)[0]"
           :subtitle="parseCharacterCardName(card)[1]"
@@ -31,12 +30,11 @@
           :evolved="showEvolved"
           width="100px"
           text-height="72px"
-          @click="goto('Character Card Detail', { id: card.Id })"
+          :to="{ name: 'Character Card Detail', params: { id: card.Id } }"
         />
         <!--   show character card as image   -->
         <HwplCharacterImageCard
           v-else
-          ripple
           :img-src="getCardImage(card)"
           :title="parseCharacterCardName(card)[0]"
           :subtitle="parseCharacterCardName(card)[1]"
@@ -44,7 +42,7 @@
           :evolved="showEvolved"
           width="160px"
           text-height="64px"
-          @click="goto('Character Card Detail', { id: card.Id })"
+          :to="{ name: 'Character Card Detail', params: { id: card.Id } }"
         />
       </ScrollableSheetItem>
     </ScrollableSheet>

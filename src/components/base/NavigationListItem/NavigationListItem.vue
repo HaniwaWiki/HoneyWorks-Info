@@ -18,23 +18,23 @@
     :href="linkProp.href"
     :target="linkProp.target"
     :value="item.href"
-    ripple
+    :active="active"
     active-color="primary"
   />
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
+import { useRoute } from 'vue-router';
 import type { NavigationListItemProp } from './types';
 
 const props = defineProps<{ item: NavigationListItemProp }>();
-// const active = ref(true);
-// const active = computed(
-//   () =>
-//     window.location.pathname !== '/' &&
-//     props.item.href &&
-//     window.location.pathname.startsWith(props.item.href)
-// );
+
+const route = useRoute();
+
+const active = computed(
+  () => !!props.item.href && route.path.startsWith(props.item.href)
+);
 
 type LinkProp = {
   to?: string;

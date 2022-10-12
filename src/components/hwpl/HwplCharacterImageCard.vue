@@ -1,5 +1,5 @@
 <template>
-  <v-card ripple :width="width">
+  <v-card :width="width" :to="to">
     <HwplImageRarityWrapper :rarity="rarity" :evolved="evolved">
       <v-img
         :src="imgSrc"
@@ -24,11 +24,13 @@
 
 <script setup lang="ts">
 import HwplImageRarityWrapper from '@/components/hwpl/HwplImageRarityWrapper.vue';
+import { RouteLocationRaw } from 'vue-router';
 
 type Props = {
   imgSrc: string;
   title?: string;
   subtitle?: string;
+  to?: RouteLocationRaw;
   // set rarity to 0 to hide rarity stars
   rarity?: number;
   // evolved cards' stars are colorful
@@ -42,6 +44,7 @@ type Props = {
 withDefaults(defineProps<Props>(), {
   title: '',
   subtitle: '',
+  to: undefined,
   rarity: 0,
   evolved: false,
   width: undefined,
