@@ -4,7 +4,7 @@
       <div class="text-caption">Character Card Level</div>
       <v-slider
         v-model="selectedLevel"
-        prepend-icon="mdi-star-settings"
+        prepend-icon="mdi-star"
         thumb-label
         color="primary"
         :min="1"
@@ -25,7 +25,7 @@
         </thead>
         <tbody>
           <tr v-for="arr in tableData" :key="arr[0]">
-            <td v-for="item in arr" :key="item">{{ item }}</td>
+            <td v-for="(item, i) in arr" :key="i">{{ item }}</td>
           </tr>
         </tbody>
       </v-table>
@@ -101,6 +101,8 @@ const tableData = computed(() => {
     return [[]];
   }
 
+  const overflow1 = selectedLevel.value > maxLevel.value;
+  const overflow1Or = <T>(value: T) => (overflow1 ? '/' : value);
   const {
     rythm: rythm1,
     technic: technic1,
@@ -112,19 +114,17 @@ const tableData = computed(() => {
     technic: technic2,
     groove: groove2,
     requireExp: requireExp2,
-  } = rank2Stat.value[selectedLevel.value - 1] || {};
-  const total1 =
-    rythm1 && technic1 && groove1 ? rythm1 + technic1 + groove1 : 0;
-  const total2 =
-    rythm2 && technic2 && groove2 ? rythm2 + technic2 + groove2 : 0;
+  } = rank2Stat.value[selectedLevel.value - 1];
+  const total1 = overflow1Or(rythm1 + technic1 + groove1);
+  const total2 = rythm2 + technic2 + groove2;
   const requireExpTotal = requireExpTotalList.value[selectedLevel.value];
   return [
-    ['Total', total1 || '/', total2],
-    ['Rythm', rythm1 || '/', rythm2],
-    ['Technic', technic1 || '/', technic2],
-    ['Groove', groove1 || '/', groove2],
-    ['Require Exp', requireExp1 || '/', requireExp2],
-    ['Require Exp (total)', total1 ? requireExpTotal : '/', requireExpTotal],
+    ['Total', overflow1Or(total1), total2],
+    ['Rythm', overflow1Or(rythm1), rythm2],
+    ['Technic', overflow1Or(technic1), technic2],
+    ['Groove', overflow1Or(groove1), groove2],
+    ['Require Exp', overflow1Or(requireExp1), requireExp2],
+    ['Require Exp (total)', overflow1Or(requireExpTotal), requireExpTotal],
   ];
 });
 </script>
