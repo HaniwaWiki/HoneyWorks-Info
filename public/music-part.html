@@ -18,6 +18,7 @@
               ></v-text-field>
             </v-card-title>
             <v-data-table
+              :loading="loading"
               :headers="headers"
               :items="data"
               :search="search"
@@ -89,11 +90,13 @@
           3: 'HARD',
           4: 'EXPERT'
         },
+        search: '',
+        loading: false,
         data: [],
-        search: ''
       };
     },
     async created() {
+      this.loading = true;
       const songs = (await axios.get('/api/latest/Songs.json')).data;
       const musicParts = (await axios.get('/api/latest/MusicParts.json')).data;
       const musicalScores = (await axios.get('/api/latest/musicalScores.json')).data;
@@ -104,6 +107,7 @@
         s.MusicPartName = musicParts.find(p => p.Id === s.MusicPartId).Name;
       });
       this.data = musicalScores;
+      this.loading = false;
     }
   });
 </script>
