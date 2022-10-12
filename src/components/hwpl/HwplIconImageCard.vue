@@ -1,5 +1,5 @@
 <template>
-  <v-card ripple class="hwpl-icon">
+  <v-card class="hwpl-icon" :width="width" :to="to">
     <HwplImageRarityWrapper :rarity="rarity" :evolved="evolved">
       <v-img :src="imgSrc" :alt="title" class="ma-auto" :aspect-ratio="1" />
     </HwplImageRarityWrapper>
@@ -7,7 +7,7 @@
     <v-card-text
       v-if="title || subtitle"
       class="icon-card-textarea"
-      :style="{ height }"
+      :style="{ height: textHeight }"
     >
       <div class="icon-card-title">{{ title }}</div>
       <div class="text-grey icon-card-subtitle">
@@ -19,35 +19,31 @@
 
 <script setup lang="ts">
 import HwplImageRarityWrapper from '@/components/hwpl/HwplImageRarityWrapper.vue';
+import { RouteLocationRaw } from 'vue-router';
 
-defineProps({
-  imgSrc: {
-    type: String,
-    required: true,
-  },
-  title: {
-    type: String,
-    default: '',
-  },
-  subtitle: {
-    type: String,
-    default: '',
-  },
+type Props = {
+  imgSrc: string;
+  title?: string;
+  subtitle?: string;
+  to?: RouteLocationRaw;
   // set rarity to 0 to hide rarity stars
-  rarity: {
-    type: Number,
-    default: 0,
-  },
+  rarity?: number;
   // stars of evolved cards are colorful
-  evolved: {
-    type: Boolean,
-    default: false,
-  },
+  evolved?: boolean;
+  // since icon are always 1:1, iconHeight === width
+  width?: string;
   // if you want to align all cards, you can set all cards' height to the max possible one
-  height: {
-    type: String,
-    default: undefined,
-  },
+  textHeight?: string;
+};
+
+withDefaults(defineProps<Props>(), {
+  title: '',
+  subtitle: '',
+  to: undefined,
+  rarity: 0,
+  evolved: false,
+  width: '100px',
+  textHeight: undefined,
 });
 </script>
 
@@ -66,6 +62,7 @@ defineProps({
 
   &-title {
     font-size: 0.75rem;
+    line-height: 18px;
   }
 
   &-subtitle {

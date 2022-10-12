@@ -8,28 +8,21 @@ export const defaultMdCols = 8;
 // default cols:
 // 12, if screen < md
 // 8, if screen >= md
-export const vuetifyColProps: ComponentObjectPropsOptions = {
+// sm, lg and xl are for fine-grained control
+export type VuetifyColsProps = {
   // columns on common mobile (default)
-  cols: {
-    type: [Number, String],
-    default: defaultCols,
-  },
-  // sm, lg and xl are for fine-grained control
-  sm: {
-    type: [Number, String],
-    default: undefined,
-  },
+  cols?: number | string;
+  sm?: number | string;
   // columns on common desktop (>= md)
-  md: {
-    type: [Number, String],
-    default: defaultMdCols,
-  },
-  lg: {
-    type: [Number, String],
-    default: undefined,
-  },
-  xl: {
-    type: [Number, String],
-    default: undefined,
-  },
+  md?: number | string;
+  lg?: number | string;
+  xl?: number | string;
+};
+
+export const vuetifyColsDefault = {
+  cols: defaultCols,
+  sm: undefined,
+  md: defaultMdCols,
+  lg: undefined,
+  xl: undefined,
 };

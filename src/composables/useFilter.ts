@@ -1,5 +1,5 @@
 import { computed, unref } from 'vue';
-import { MaybeRef } from '@/types/ref';
+import { MaybeRef } from '@/types/vue/ref';
 
 // filter data by keyword
 // letter case is ignored

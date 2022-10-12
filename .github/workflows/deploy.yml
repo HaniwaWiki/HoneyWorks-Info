@@ -1,0 +1,36 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup SSH env
+        env:
+          ACTION_DEPLOY_KEY: ${{ secrets.ACTION_DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$ACTION_DEPLOY_KEY" | tr -d '\r' > ~/.ssh/id_rsa # config private key
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -p 5000 cdn-src.honeyworks.info >> ~/.ssh/known_hosts
+      - name: Set Target Folder (main)
+        id: set-target-folder-main
+        if: github.ref == 'refs/heads/main'
+        run: echo "::set-output name=TARGET_FOLDER::C:\project\HoneyWorks-Info"
+      - name: Set Target Folder (dev)
+        id: set-target-folder-dev
+        if: github.ref == 'refs/heads/dev'
+        run: echo "::set-output name=TARGET_FOLDER::C:\project\HoneyWorks-Info-dev"
+      - name: Deploy 🚀 To Server
+        run: |
+          ssh -p 5000 Administrator@cdn-src.honeyworks.info "\
+          cd ${{ steps.set-target-folder-main.outputs.TARGET_FOLDER }} ${{ steps.set-target-folder-dev.outputs.TARGET_FOLDER }} && \
+          git pull && \
+          pnpm i && \
+          pnpm run lint && \
+          pnpm run build"
+    

@@ -1,10 +1,10 @@
 import { MdiIcons } from '@/types/mdi';
 
-export type CascadeListItemProp = {
+export type NavigationListItemProp = {
   title: string;
   icon?: MdiIcons;
   // inner href will be handled by vue-router
   // outer href will be handled by browser
   href?: string;
-  subItems?: CascadeListItemProp[] | null;
+  subItems?: NavigationListItemProp[] | null;
 };

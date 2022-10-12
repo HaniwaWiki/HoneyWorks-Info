@@ -1,0 +1,109 @@
+<meta charset="UTF-8">
+
+<div id="app">
+  <v-app id="inspire">
+    <v-container>
+      <v-row>
+        <v-col>
+          <v-card title="音乐片段数据">
+            <v-card-title>
+              Music Part Data
+              <v-spacer></v-spacer>
+              <v-text-field
+                v-model="search"
+                append-icon="mdi-magnify"
+                label="Search"
+                single-line
+                hide-details
+              ></v-text-field>
+            </v-card-title>
+            <v-data-table
+              :headers="headers"
+              :items="data"
+              :search="search"
+              class="elevation-1"
+              :items-per-page="15"
+              multi-sort
+            >
+              <template v-slot:item.rank_text="{ item }">
+                <v-chip
+                  small
+                  :color="rankColor[item.Rank]"
+                  text-color="white"
+                >
+                  {{ item.rank_text }}
+                </v-chip>
+              </template>
+            </v-data-table>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-app>
+</div>
+
+<script src="https://unpkg.com/babel-polyfill/dist/polyfill.min.js"></script>
+<script src="https://unpkg.com/vue@2.x/dist/vue.js"></script>
+<script src="https://unpkg.com/vuetify@2.6.11/dist/vuetify.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.2/axios.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@mdi/font@6.x/css/materialdesignicons.min.css">
+<link rel="stylesheet" href="https://unpkg.com/vuetify@2.6.11/dist/vuetify.min.css">
+
+<script>
+
+  new Vue({
+    el: '#app',
+    vuetify: new Vuetify(),
+    data() {
+      return {
+        headers: [
+          { text: '片段 ID', value: 'MusicPartId', width: '10vw' },
+          {
+            text: '歌名',
+            align: 'start',
+            value: 'MusicName',
+            width: '20vw'
+          },
+          { text: '片段名', value: 'MusicPartName', width: '10vw' },
+          { text: '难度', value: 'rank_text', width: '10vw', sort: (a, b) => {
+            const textRankMap = {
+              EASY: 1,
+              NORMAL: 2,
+              HARD: 3,
+              EXPERT: 4,
+            }
+            return textRankMap[a] - textRankMap[b];
+            } },
+          { text: '等级', value: 'PlayLevel', width: '10vw' },
+          { text: '歌曲时间（秒）', value: 'MusicTime', width: '10vw' }
+        ],
+        rankColor: {
+          1: '#6ac9d9',
+          2: '#65cb59',
+          3: '#f7ca76',
+          4: '#ee5387'
+        },
+        rankTextMap: {
+          1: 'EASY',
+          2: 'NORMAL',
+          3: 'HARD',
+          4: 'EXPERT'
+        },
+        data: [],
+        search: ''
+      };
+    },
+    async created() {
+      const songs = (await axios.get('/api/latest/Songs.json')).data;
+      const musicParts = (await axios.get('/api/latest/MusicParts.json')).data;
+      const musicalScores = (await axios.get('/api/latest/musicalScores.json')).data;
+      musicalScores.forEach(s => {
+        // slot name of v-data-table only supports snake case
+        s.rank_text = this.rankTextMap[s.Rank];
+        s.MusicName = songs.find(song => song.Id === Math.floor(s.MusicPartId / 1000)).Name;
+        s.MusicPartName = musicParts.find(p => p.Id === s.MusicPartId).Name;
+      });
+      this.data = musicalScores;
+    }
+  });
+</script>

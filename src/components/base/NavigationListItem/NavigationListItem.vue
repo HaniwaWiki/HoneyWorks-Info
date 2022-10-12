@@ -1,9 +1,10 @@
+<!-- v-list-item used in navigation-drawer -->
 <template>
   <v-list-group v-if="item.subItems">
     <template #activator="{ props }">
-      <CascadeListItem v-bind="props" :item="{ ...item, subItems: null }" />
+      <NavigationListItem v-bind="props" :item="{ ...item, subItems: null }" />
     </template>
-    <CascadeListItem
+    <NavigationListItem
       v-for="subItem in item.subItems"
       :key="subItem.title"
       :item="subItem"
@@ -17,23 +18,23 @@
     :href="linkProp.href"
     :target="linkProp.target"
     :value="item.href"
-    ripple
+    :active="active"
     active-color="primary"
   />
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { CascadeListItemProp } from './types';
+import { computed, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import type { NavigationListItemProp } from './types';
 
-const props = defineProps<{ item: CascadeListItemProp }>();
-// const active = ref(true);
-// const active = computed(
-//   () =>
-//     window.location.pathname !== '/' &&
-//     props.item.href &&
-//     window.location.pathname.startsWith(props.item.href)
-// );
+const props = defineProps<{ item: NavigationListItemProp }>();
+
+const route = useRoute();
+
+const active = computed(
+  () => !!props.item.href && route.path.startsWith(props.item.href)
+);
 
 type LinkProp = {
   to?: string;

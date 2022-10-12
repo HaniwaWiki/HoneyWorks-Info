@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@mdi/font': 5.9.55
+  '@mdi/font': 7.0.96
   '@rushstack/eslint-patch': ^1.1.3
   '@types/lodash': ^4.14.186
   '@types/node': ^18.8.2
@@ -43,7 +43,7 @@ specifiers:
   webfontloader: ^1.0.0
 
 dependencies:
-  '@mdi/font': 5.9.55
+  '@mdi/font': 7.0.96
   axios: 0.27.2
   lodash: 4.17.21
   roboto-fontface: 0.10.0
@@ -220,8 +220,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
-  /@mdi/font/5.9.55:
-    resolution: {integrity: sha512-jswRF6q3eq8NWpWiqct6q+6Fg/I7nUhrxYJfiEM8JJpap0wVJLQdbKtyS65GdlK7S7Ytnx3TTi/bmw+tBhkGmg==}
+  /@mdi/font/7.0.96:
+    resolution: {integrity: sha512-rzlxTfR64hqY8yiBzDjmANfcd8rv+T5C0Yedv/TWk2QyAQYdc66e0kaN1ipmnYU3RukHRTRcBARHzzm+tIhL7w==}
     dev: false
 
   /@nodelib/fs.scandir/2.1.5:

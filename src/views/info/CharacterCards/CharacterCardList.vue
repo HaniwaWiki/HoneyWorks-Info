@@ -1,28 +1,35 @@
 <template>
-  <AppScaffold>
+  <AppScaffold placeholder-height="0">
     <v-row justify="center">
-      <v-col cols="12">
+      <v-col cols="12" class="d-flex align-center">
         <v-text-field
           v-model="keyword"
-          class="no-detail"
+          class="mr-4"
+          hide-details
           prepend-icon="mdi-magnify"
           required
         />
+        <v-btn
+          prepend-icon="mdi-filter-variant"
+          @click="keyword += ' &quot;Rarity&quot;:5'"
+        >
+          Rarity
+        </v-btn>
       </v-col>
-      <v-col cols="6" class="d-flex flex-column align-center">
+      <v-col cols="12" class="switch-group">
         <v-switch
           v-model="showImage"
-          class="no-detail"
+          hide-details
           label="Show Character Image"
           color="primary"
+          density="comfortable"
         />
-      </v-col>
-      <v-col cols="6" class="d-flex flex-column align-center">
         <v-switch
           v-model="showEvolved"
-          class="no-detail"
+          hide-details
           label="Show Evolved"
           color="primary"
+          density="comfortable"
         />
       </v-col>
     </v-row>
@@ -35,19 +42,19 @@
         <v-col
           v-for="card in paginatedCharacterCards"
           :key="card.Id"
-          :cols="4"
+          cols="4"
           md="2"
         >
-          <HwplIconCard
+          <HwplIconImageCard
             v-if="!showImage"
-            ripple
             :img-src="getCardImage(card)"
-            :title="card.cardName"
-            :subtitle="card.characterName"
+            :title="parseCharacterCardName(card)[0]"
+            :subtitle="parseCharacterCardName(card)[1]"
             :rarity="card.Rarity"
             :evolved="showEvolved"
-            height="64px"
-            @click="goto('Character Card Detail', { id: card.Id })"
+            width="auto"
+            text-height="72px"
+            :to="{ name: 'Character Card Detail', params: { id: card.Id } }"
           />
         </v-col>
       </template>
@@ -59,15 +66,14 @@
           cols="6"
           md="3"
         >
-          <HwplCharacterCard
-            ripple
+          <HwplCharacterImageCard
             :img-src="getCardImage(card)"
-            :title="card.cardName"
-            :subtitle="card.characterName"
+            :title="parseCharacterCardName(card)[0]"
+            :subtitle="parseCharacterCardName(card)[1]"
             :rarity="card.Rarity"
             :evolved="showEvolved"
-            height="96px"
-            @click="goto('Character Card Detail', { id: card.Id })"
+            text-height="96px"
+            :to="{ name: 'Character Card Detail', params: { id: card.Id } }"
           />
         </v-col>
       </template>
@@ -85,40 +91,33 @@
 </template>
 <script setup lang="ts">
 import AppScaffold from '@/components/app/AppScaffold.vue';
-import { computed, ref } from 'vue';
-import { getCharacterCardImageUrl } from '@/utils/assetUtils/url/characterCard';
+import { ref } from 'vue';
+import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 import { goto } from '@/router';
 import { CharacterCard } from '@/types/HWPL/CharacterCard';
 import { usePagination } from '@/composables/usePagination';
 import { useFilter } from '@/composables/useFilter';
-import HwplCharacterCard from '@/components/hwpl/HwplCharacterCard.vue';
-import HwplIconCard from '@/components/hwpl/HwplIconCard.vue';
+import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
+import HwplIconImageCard from '@/components/hwpl/HwplIconImageCard.vue';
 import { useCollection } from '@/composables/useCollection';
+import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
 
-const { loading, collection } = useCollection('CharacterCards');
-const characterCards = computed(() =>
-  collection.value.map((card) => {
-    const [, cardName, characterName] = /【(.*)】(.*)/.exec(card.Name) ?? [];
-    return {
-      ...card,
-      cardName,
-      characterName,
-    };
-  })
-);
+// options from user
 const keyword = ref('');
 const showImage = ref(false);
 const showEvolved = ref(false);
 
-// filter and pagination
+// fetch, filter and paginate data
+const { loading, collection: characterCards } = useCollection('CharacterCards');
 const filteredCharacterCards = useFilter(characterCards, keyword);
-const pageSize = computed(() => (showImage.value ? 20 : 24));
+const pageSize = 24;
 const {
   pageCount,
   page,
   paginatedData: paginatedCharacterCards,
 } = usePagination(filteredCharacterCards, pageSize);
 
+// parse function and parsed data
 function getCardImage(characterCard: CharacterCard) {
   return getCharacterCardImageUrl({
     Id: characterCard.Id,
