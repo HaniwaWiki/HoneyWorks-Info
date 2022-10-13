@@ -93,20 +93,24 @@
         search: '',
         loading: false,
         data: [],
+
+        songs: [],
+        musicParts:[],
+        musicalScores: [],
       };
     },
     async created() {
       this.loading = true;
-      const songs = (await axios.get('/api/latest/Songs.json')).data;
-      const musicParts = (await axios.get('/api/latest/MusicParts.json')).data;
-      const musicalScores = (await axios.get('/api/latest/musicalScores.json')).data;
-      musicalScores.forEach(s => {
+      this.songs = (await axios.get('/api/latest/Songs.json')).data;
+      this.musicParts = (await axios.get('/api/latest/MusicParts.json')).data;
+      this.musicalScores = (await axios.get('/api/latest/musicalScores.json')).data;
+      this.musicalScores.forEach(s => {
         // slot name of v-data-table only supports snake case
         s.rank_text = this.rankTextMap[s.Rank];
-        s.MusicName = songs.find(song => song.Id === Math.floor(s.MusicPartId / 1000)).Name;
-        s.MusicPartName = musicParts.find(p => p.Id === s.MusicPartId).Name;
+        s.MusicName = this.songs.find(song => song.Id === Math.floor(s.MusicPartId / 1000))?.Name;
+        s.MusicPartName = this.musicParts.find(p => p.Id === s.MusicPartId)?.Name;
       });
-      this.data = musicalScores;
+      this.data = this.musicalScores;
       this.loading = false;
     }
   });
