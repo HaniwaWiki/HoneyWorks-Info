@@ -17,6 +17,12 @@
         </v-btn>
       </v-col>
       <v-col cols="12" class="switch-group">
+        <v-radio-group v-model="sortBy" inline hide-details>
+          <div>Sort by:</div>
+          <v-radio label="Default" value="Default"></v-radio>
+          <v-radio label="Ability" value="Ability"></v-radio>
+          <v-radio label="Release Date" value="ReleaseTimestamp"></v-radio>
+        </v-radio-group>
         <v-switch
           v-model="showImage"
           hide-details
@@ -91,31 +97,47 @@
 </template>
 <script setup lang="ts">
 import AppScaffold from '@/components/app/AppScaffold.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
-import { goto } from '@/router';
 import { CharacterCard } from '@/types/HWPL/CharacterCard';
 import { usePagination } from '@/composables/usePagination';
-import { useFilter } from '@/composables/useFilter';
+import { useKeywordFilter } from '@/composables/useKeywordFilter';
 import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
 import HwplIconImageCard from '@/components/hwpl/HwplIconImageCard.vue';
 import { useCollection } from '@/composables/useCollection';
 import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
+import { useSort } from '@/composables/useSort';
+import asyncComputed from '@/utils/asyncComputed';
+import { getItemSourceAggregateInformation } from '@/api/itemSource';
 
 // options from user
 const keyword = ref('');
+const sortBy = ref<'Default' | 'Ability' | 'ReleaseTimestamp'>('Default');
 const showImage = ref(false);
 const showEvolved = ref(false);
 
 // fetch, filter and paginate data
 const { loading, collection: characterCards } = useCollection('CharacterCards');
-const filteredCharacterCards = useFilter(characterCards, keyword);
+const itemSources = asyncComputed(getItemSourceAggregateInformation, []);
+const filteredCharacterCards = useKeywordFilter(characterCards, keyword);
+const sortKeyMap = {
+  Default: (card: CharacterCard) => card.Id,
+  Ability: (card: CharacterCard) =>
+    -(card.MaxTapRank2 + card.MaxTechRank2 + card.MaxKyunKyunRank2),
+  ReleaseTimestamp: (card: CharacterCard) =>
+    -(
+      itemSources.value.find((itemSource) => itemSource.ItemId === card.Id)
+        ?.ReleaseTimestamp || 0
+    ),
+} as const;
+const sortFunction = computed(() => sortKeyMap[sortBy.value]);
+const sortedCharacterCards = useSort(filteredCharacterCards, sortFunction);
 const pageSize = 24;
 const {
   pageCount,
   page,
   paginatedData: paginatedCharacterCards,
-} = usePagination(filteredCharacterCards, pageSize);
+} = usePagination(sortedCharacterCards, pageSize);
 
 // parse function and parsed data
 function getCardImage(characterCard: CharacterCard) {
@@ -126,3 +148,10 @@ function getCardImage(characterCard: CharacterCard) {
   });
 }
 </script>
+
+<style lang="scss" scoped>
+.v-radio-group :deep(.v-selection-control-group--inline) {
+  align-items: center;
+  margin-left: 40px;
+}
+</style>

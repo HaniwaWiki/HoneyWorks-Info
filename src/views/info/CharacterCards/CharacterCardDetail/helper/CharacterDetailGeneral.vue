@@ -43,6 +43,9 @@
           />
         </template>
       </v-list-item>
+      <v-list-item prepend-icon="mdi-calendar" subtitle="Release Time">
+        <template #title> {{ releaseTime }} </template>
+      </v-list-item>
     </v-list>
   </v-card>
 </template>
@@ -53,8 +56,23 @@ import ButtonIconLink from '@/components/base/ButtonIconLink.vue';
 import star from '@/assets/rarity_star_1.png';
 import HwplTagGroup from '@/components/hwpl/HwplTag/HwplTagGroup.vue';
 import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
+import asyncComputed from '@/utils/asyncComputed';
+import { getItemSourceAggregateInformation } from '@/api/itemSource';
+import { computed } from 'vue';
 
 const props = defineProps<{
   characterCard: CharacterCard | null;
 }>();
+const itemSourceAggregateInformation = asyncComputed(
+  getItemSourceAggregateInformation,
+  []
+);
+const releaseTime = computed(() => {
+  const releaseTimestamp = itemSourceAggregateInformation.value.find(
+    (info) => info.ItemId === props.characterCard?.Id
+  )?.ReleaseTimestamp;
+  return releaseTimestamp
+    ? new Date(releaseTimestamp * 1000).toLocaleString()
+    : 'Unknown';
+});
 </script>
