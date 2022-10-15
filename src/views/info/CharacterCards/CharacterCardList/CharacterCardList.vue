@@ -17,7 +17,7 @@
         </v-btn>
       </v-col>
       <v-col cols="12" class="switch-group">
-        <v-radio-group v-model="sortBy" inline hide-details>
+        <v-radio-group v-model="sortBy" color="primary" inline hide-details>
           <div>Sort by:</div>
           <v-radio label="Default" value="Default"></v-radio>
           <v-radio label="Ability" value="Ability"></v-radio>
@@ -97,7 +97,7 @@
 </template>
 <script setup lang="ts">
 import AppScaffold from '@/components/app/AppScaffold.vue';
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 import { CharacterCard } from '@/types/HWPL/CharacterCard';
 import { usePagination } from '@/composables/usePagination';
@@ -106,32 +106,24 @@ import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue
 import HwplIconImageCard from '@/components/hwpl/HwplIconImageCard.vue';
 import { useCollection } from '@/composables/useCollection';
 import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
-import { useSort } from '@/composables/useSort';
-import asyncComputed from '@/utils/asyncComputed';
-import { getItemSourceAggregateInformation } from '@/api/itemSource';
+import {
+  SortBy,
+  useSortCharacterCards,
+} from '@/views/info/CharacterCards/CharacterCardList/helper/sortCharacterCard';
 
 // options from user
 const keyword = ref('');
-const sortBy = ref<'Default' | 'Ability' | 'ReleaseTimestamp'>('Default');
+const sortBy = ref<SortBy>('Default');
 const showImage = ref(false);
 const showEvolved = ref(false);
 
 // fetch, filter and paginate data
 const { loading, collection: characterCards } = useCollection('CharacterCards');
-const itemSources = asyncComputed(getItemSourceAggregateInformation, []);
 const filteredCharacterCards = useKeywordFilter(characterCards, keyword);
-const sortKeyMap = {
-  Default: (card: CharacterCard) => card.Id,
-  Ability: (card: CharacterCard) =>
-    -(card.MaxTapRank2 + card.MaxTechRank2 + card.MaxKyunKyunRank2),
-  ReleaseTimestamp: (card: CharacterCard) =>
-    -(
-      itemSources.value.find((itemSource) => itemSource.ItemId === card.Id)
-        ?.ReleaseTimestamp || 0
-    ),
-} as const;
-const sortFunction = computed(() => sortKeyMap[sortBy.value]);
-const sortedCharacterCards = useSort(filteredCharacterCards, sortFunction);
+const sortedCharacterCards = useSortCharacterCards(
+  filteredCharacterCards,
+  sortBy
+);
 const pageSize = 24;
 const {
   pageCount,

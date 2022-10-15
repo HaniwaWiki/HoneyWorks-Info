@@ -15,7 +15,9 @@ const infoRoutes: RouteRecordRaw[] = [
     name: 'Character Card List',
     path: '/info/character-cards',
     component: () =>
-      import('@/views/info/CharacterCards/CharacterCardList.vue'),
+      import(
+        '@/views/info/CharacterCards/CharacterCardList/CharacterCardList.vue'
+      ),
   },
   {
     name: 'Character Card Detail',
