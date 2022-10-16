@@ -20,7 +20,10 @@
         subtitle="Type"
       />
       <v-list-item prepend-icon="mdi-text" subtitle="Description">
-        <template #title> <div v-html="skillInfo?.description" /> </template>
+        <template #title>
+          <!-- eslint-disable-next-line -->
+          <div class="text-pre-wrap" v-html="skillInfo?.description" />
+        </template>
       </v-list-item>
     </v-list>
   </v-card>
