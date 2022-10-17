@@ -13,6 +13,9 @@ function filter<T>(items: MaybeRef<T[]>, keyword: MaybeRef<string>): T[] {
   );
 }
 
-export function useFilter<T>(items: MaybeRef<T[]>, keyword: MaybeRef<string>) {
+export function useKeywordFilter<T>(
+  items: MaybeRef<T[]>,
+  keyword: MaybeRef<string>
+) {
   return computed(() => filter(items, keyword));
 }

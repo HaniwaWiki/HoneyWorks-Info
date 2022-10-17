@@ -1,15 +1,15 @@
 // composable of getCollection
 import { getCollection } from '@/api/common';
-import { APITypeName } from '@/types/HWPL';
+import { CollectionTypeName } from '@/types/HWPL';
 import { Ref, ref, unref, watchEffect } from 'vue';
 import { MaybeRef } from '@/types/vue/ref';
 
-export function useCollection<Name extends keyof APITypeName>(
+export function useCollection<Name extends keyof CollectionTypeName>(
   collectionName: MaybeRef<Name>,
-  filter: MaybeRef<Partial<APITypeName[Name]>> = ref({}),
+  filter: MaybeRef<Partial<CollectionTypeName[Name]>> = ref({}),
   version: MaybeRef<string | number> = ref('latest')
 ) {
-  const collection = ref([]) as Ref<APITypeName[Name][]>;
+  const collection = ref([]) as Ref<CollectionTypeName[Name][]>;
   const loading = ref(true);
 
   // use a watch function to fetch data from backend
@@ -26,12 +26,12 @@ export function useCollection<Name extends keyof APITypeName>(
 }
 
 // composable of getCollection, but return only first item
-export function useFirstOfCollection<Name extends keyof APITypeName>(
+export function useFirstOfCollection<Name extends keyof CollectionTypeName>(
   collectionName: MaybeRef<Name>,
-  filter: MaybeRef<Partial<APITypeName[Name]>> = ref({}),
+  filter: MaybeRef<Partial<CollectionTypeName[Name]>> = ref({}),
   version: MaybeRef<string | number> = ref('latest')
 ) {
-  const item = ref(null) as Ref<APITypeName[Name] | null>;
+  const item = ref(null) as Ref<CollectionTypeName[Name] | null>;
   const loading = ref(true);
 
   // fetch data from backend
