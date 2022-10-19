@@ -1,2 +1,2 @@
 # set core.autocrlf=input and core.eol=lf in this repository
-* crlf=input eol=lf
+* text=auto crlf=input eol=lf
