@@ -1,34 +1,11 @@
-<template>
-  <!-- container, row and col can limit card's position -->
-  <AppScaffold>
-    <v-row
-      v-for="{ name, icon, links } in officialWebsiteContents"
-      :key="name"
-      class="justify-center"
-    >
-      <v-col>
-        <v-card :title="name">
-          <v-card-text>
-            <ButtonExternalLink
-              v-for="{ text, url } in links"
-              :key="text"
-              :inline="name !== 'Website'"
-              :icon="icon"
-              :text="text"
-              :url="url"
-            />
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </AppScaffold>
-</template>
+import {
+  OfficialWebsiteContent,
+  TwitterLink,
+  WebsiteLink,
+  YouTubeLink,
+} from '@/views/OfficalWebsites/types';
 
-<script setup lang="ts">
-import AppScaffold from '@/components/app/AppScaffold.vue';
-import ButtonExternalLink from '../components/base/ButtonExternalLink.vue';
-
-const officialWebsites = [
+export const officialWebsites: WebsiteLink[] = [
   {
     text: 'HoneyWorks Official Website',
     url: 'https://honeyworks.jp/',
@@ -49,13 +26,22 @@ const officialWebsites = [
     text: '【ハニプレ】HoneyWorks公式リズムゲーム｜好評配信中┗|∵|┓',
     url: 'https://honeyworks-game.com/',
   },
+  {
+    text: '可憐なアイボリー',
+    url: 'https://karennaivory.jp/',
+  },
+  {
+    text: '高嶺のなでしこ',
+    url: 'https://takanenonadeshiko.jp/',
+  },
 ];
-const officialTwitterIds = [
+
+export const officialTwitterIds: TwitterLink[] = [
   // HoneyWorks Official
   'HoneyWorks_828',
   'HoneyWorks_Game',
   'HoneyWorksMovie',
-  // creator
+  // founder
   '_Gom_',
   'shito_stereo',
   'yamako2626',
@@ -73,8 +59,12 @@ const officialTwitterIds = [
   'maedakun_sr',
   'vjpofficial',
   'dolce5_official',
+  // girl group
+  'Karennaivory',
+  'takanenofficial',
 ];
-const officialYoutubeChannels = [
+
+export const officialYoutubeChannels: YouTubeLink[] = [
   {
     text: 'HoneyWorks OFFICIAL',
     url: 'https://www.youtube.com/c/HoneyWorksOFFICIAL',
@@ -95,34 +85,8 @@ const officialYoutubeChannels = [
     text: '可憐なアイボリー Official',
     url: 'https://www.youtube.com/channel/UCrxb-1OHdCKq7mpxsJpz8ww',
   },
-];
-
-type OfficialWebsiteContent = {
-  name: string;
-  icon: string;
-  links: {
-    text: string;
-    url: string;
-  }[];
-};
-const officialWebsiteContents: OfficialWebsiteContent[] = [
   {
-    name: 'Website',
-    icon: 'mdi-web',
-    links: officialWebsites,
-  },
-  {
-    name: 'Twitter',
-    icon: 'mdi-twitter',
-    links: officialTwitterIds.map((id) => ({
-      text: `@${id}`,
-      url: `https://twitter.com/${id}`,
-    })),
-  },
-  {
-    name: 'Youtube',
-    icon: 'mdi-youtube',
-    links: officialYoutubeChannels,
+    text: '高嶺のなでしこ Official',
+    url: 'https://www.youtube.com/channel/UCoR4zZDvWvUIqgEWz4HS-sA',
   },
 ];
-</script>

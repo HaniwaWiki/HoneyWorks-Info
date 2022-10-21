@@ -3,18 +3,18 @@ import infoRoutes from './info';
 import toolsRoutes from './tools';
 
 const routes: RouteRecordRaw[] = [
-  { path: '/', redirect: '/hello-world' },
+  { path: '/', redirect: '/official-websites' },
   {
     name: 'HoneyWorks Official Links',
     path: '/official-websites',
-    component: () => import('@/views/OfficialWebsites.vue'),
+    component: () => import('@/views/OfficalWebsites/OfficialWebsites.vue'),
   },
   ...infoRoutes,
   ...toolsRoutes,
   {
     name: 'About Us',
     path: '/about',
-    component: () => import('@/views/OfficialWebsites.vue'),
+    component: () => import('@/views/OfficalWebsites/OfficialWebsites.vue'),
   },
   {
     name: 'Hello World',
