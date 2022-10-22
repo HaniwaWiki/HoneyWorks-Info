@@ -1,5 +1,5 @@
 <template>
-  <AppScaffold placeholder-height="0">
+  <AppScaffold md="12" lg="8" placeholder-height="0">
     <v-row justify="center">
       <v-col cols="12" class="d-flex align-center">
         <v-text-field
