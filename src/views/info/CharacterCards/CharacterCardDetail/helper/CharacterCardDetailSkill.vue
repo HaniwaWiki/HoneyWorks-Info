@@ -1,7 +1,14 @@
 <template>
-  <v-card :title="'Skill&nbsp;&nbsp;&nbsp;&nbsp;' + skillName">
+  <v-card>
+    <template #title>
+      <span v-t="'global.skill'" class="mr-10"></span>
+      <span>{{ skillName }}</span>
+    </template>
     <div class="px-4">
-      <div class="text-caption">Skill Level</div>
+      <div class="text-caption">
+        <span v-t="'skill.skill_level'" class="mr-2" />
+        <span>{{ selectedLevel }}</span>
+      </div>
       <v-slider
         v-model="selectedLevel"
         prepend-icon="mdi-star"
@@ -16,10 +23,10 @@
     <v-list class="icon-primary" color="primary" item-props lines="two">
       <v-list-item
         prepend-icon="mdi-shield-plus"
-        :title="skillInfo?.type"
-        subtitle="Type"
+        :title="skillInfo?.translated_type"
+        :subtitle="$t('skill.type')"
       />
-      <v-list-item prepend-icon="mdi-text" subtitle="Description">
+      <v-list-item prepend-icon="mdi-text" :subtitle="$t('skill.description')">
         <template #title>
           <!-- eslint-disable-next-line -->
           <div class="text-pre-wrap" v-html="skillInfo?.description" />
@@ -33,7 +40,7 @@
 import { CharacterCard } from '@/types/HWPL/CharacterCard';
 import { computed, ref } from 'vue';
 import { useCollection } from '@/composables/useCollection';
-import { getSkillInfo } from '@/utils/hwpl/Skill/common';
+import { getSkillInfo } from '@/utils/hwpl/Skill';
 
 const props = defineProps<{
   characterCard: CharacterCard | null;

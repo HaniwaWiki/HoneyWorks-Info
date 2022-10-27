@@ -32,16 +32,19 @@ import {
   officialWebsites,
   officialYoutubeChannels,
 } from '@/views/OfficalWebsites/websiteList';
+import { useI18n } from 'vue-i18n';
 import ButtonExternalLink from '../../components/base/ButtonExternalLink.vue';
+
+const { t } = useI18n();
 
 const officialWebsiteContents: OfficialWebsiteContent[] = [
   {
-    name: 'Website',
+    name: t('global.website'),
     icon: 'mdi-web',
     links: officialWebsites,
   },
   {
-    name: 'Twitter',
+    name: t('global.twitter'),
     icon: 'mdi-twitter',
     links: officialTwitterIds.map((id) => ({
       text: `@${id}`,
@@ -49,7 +52,7 @@ const officialWebsiteContents: OfficialWebsiteContent[] = [
     })),
   },
   {
-    name: 'Youtube',
+    name: t('global.youtube'),
     icon: 'mdi-youtube',
     links: officialYoutubeChannels,
   },

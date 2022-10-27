@@ -7,7 +7,7 @@
     <v-app-bar-title>{{ pageTitle }}</v-app-bar-title>
 
     <template #append>
-      <v-app-bar-nav-icon icon="mdi-translate" />
+      <AppBarChangeLanguage />
       <v-app-bar-nav-icon icon="mdi-cog" />
     </template>
   </v-app-bar>
@@ -15,15 +15,23 @@
 
 <script setup lang="ts">
 import { computed, watchEffect } from 'vue';
-import { getAppName } from '@/config';
 import { useRoute } from 'vue-router';
+import { useAppName } from '@/composables/useAppName';
+import AppBarChangeLanguage from '@/components/app/AppNavigationBar/AppBarChangeLanguage.vue';
+import { useI18n } from 'vue-i18n';
 
 defineProps<{ drawer: boolean }>();
 
 const route = useRoute();
-const title = computed(() => String(route.name ?? ''));
+const { t } = useI18n();
+const appName = useAppName();
+
+const title = computed(() => {
+  const routeName = String(route.name);
+  return route.name ? t(`route.${routeName}`) : '';
+});
 const pageTitle = computed(() =>
-  title.value ? `${title.value} | ${getAppName()}` : getAppName()
+  title.value ? `${title.value} | ${appName.value}` : appName.value
 );
 
 watchEffect(() => {

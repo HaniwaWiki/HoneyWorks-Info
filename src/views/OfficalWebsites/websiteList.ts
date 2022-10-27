@@ -51,7 +51,9 @@ export const officialTwitterIds: TwitterLink[] = [
   'Kotoha_ktnh',
   'HaKoniwalily',
   'hiina_ntn',
+  // illustrators
   'mogelatte',
+  'RS8ware',
   // characters
   'mona_4_24',
   'FT4_official',

@@ -9,14 +9,18 @@ import asyncComputed from '@/utils/asyncComputed';
 import { getSceneCardImageUrl } from '@/utils/hwpl/SceneCard/url';
 import { getMusicPartMVUrl, getMusicPartUrl } from '@/utils/hwpl/MusicPart/url';
 import { RouteLocationRaw } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 
 export function useCharacterCardRelatedResources(
   characterCard: Ref<CharacterCard | null>
 ): Ref<Resource[]> {
+  const { t } = useI18n();
+
   return asyncComputed<Resource[]>(async () => {
     if (characterCard.value === null) {
       return [];
     }
+
     const { FirstSceneCardId, RankUpSceneCardId, MusicPartId } =
       characterCard.value;
     const resources: Resource[] = [];
@@ -50,22 +54,22 @@ export function useCharacterCardRelatedResources(
     if (FirstSceneCardId !== null) {
       await pushSceneCardResources(
         FirstSceneCardId,
-        'Scene Card',
-        'Scene Card (Dynamic)'
+        t('character_card.scene_card'),
+        t('character_card.scene_card_dynamic')
       );
     }
 
     if (RankUpSceneCardId !== null) {
       await pushSceneCardResources(
         RankUpSceneCardId,
-        'Scene Card (Evolved)',
-        'Scene Card (Evolved, Dynamic)'
+        t('character_card.scene_card_evolved'),
+        t('character_card.scene_card_evolved_dynamic')
       );
     }
 
     if (MusicPartId !== null) {
       resources.push({
-        name: 'MV',
+        name: t('character_card.mv'),
         url: getMusicPartMVUrl(MusicPartId).default,
         to: {
           name: 'Music Part Detail',

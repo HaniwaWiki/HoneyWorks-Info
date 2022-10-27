@@ -38,7 +38,13 @@
           :autoplay="options?.autoplay"
         />
         <AudioPlayer v-else-if="isAudio(url)" :url="url" controls />
-        <div v-else>Unsupported Media type: {{ getExtension(url) }}</div>
+        <div v-else>
+          {{
+            $t('components.resource_tabs.unsupported_media_type', [
+              getExtension(url),
+            ])
+          }}
+        </div>
       </v-window-item>
     </v-window>
   </div>
@@ -48,7 +54,7 @@
       alt="puppet"
       width="48"
     />
-    <div>No Resource Available</div>
+    <div v-t="'components.resource_tabs.no_resource_available'" />
   </div>
 </template>
 
@@ -57,10 +63,10 @@ import { Resource } from '@/components/base/ResourceTabs/Resource';
 import { ref, watchEffect } from 'vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 import {
-  isImage,
-  isAudio,
-  isVideo,
   getExtension,
+  isAudio,
+  isImage,
+  isVideo,
 } from '@/utils/fileExtensions';
 import VideoPlayer from '@/components/base/VideoPlayer.vue';
 import AudioPlayer from '@/components/base/AudioPlayer.vue';

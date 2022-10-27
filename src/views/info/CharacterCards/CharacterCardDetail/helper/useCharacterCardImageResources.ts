@@ -2,10 +2,13 @@ import { CharacterCard } from '@/types/HWPL/CharacterCard';
 import { Resource } from '@/components/base/ResourceTabs/Resource';
 import { computed, Ref } from 'vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
+import { useI18n } from 'vue-i18n';
 
 export function useCharacterCardImageResources(
   characterCard: Ref<CharacterCard | null>
 ): Ref<Resource[]> {
+  const { t } = useI18n();
+
   return computed(() => {
     if (characterCard.value === null) {
       return [];
@@ -13,15 +16,15 @@ export function useCharacterCardImageResources(
     const { Id } = characterCard.value;
     return [
       {
-        name: 'Image',
+        name: t('character_card.image'),
         url: getCharacterCardImageUrl({ Id, evolved: false, icon: false }),
       },
       {
-        name: 'Image (Evolved)',
+        name: t('character_card.image_evolved'),
         url: getCharacterCardImageUrl({ Id, evolved: true, icon: false }),
       },
       {
-        name: 'Icon',
+        name: t('character_card.icon'),
         url: getCharacterCardImageUrl({ Id, evolved: false, icon: true }),
         options: {
           width: '20vh',
@@ -29,7 +32,7 @@ export function useCharacterCardImageResources(
         },
       },
       {
-        name: 'Icon (Evolved)',
+        name: t('character_card.icon_evolved'),
         url: getCharacterCardImageUrl({ Id, evolved: true, icon: true }),
         options: {
           width: '20vh',

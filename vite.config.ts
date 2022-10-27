@@ -24,6 +24,13 @@ export default defineConfig({
         target: 'https://honeyworks.info/',
         changeOrigin: true,
       },
+      '/locale': {
+        // use deployed i18n json files
+        // target: 'https://honeyworks.info/',
+        // if you prefer i18n json files from local, un-comment the following line, and run an http-server at root of HoneyWorks-Info-i18n
+        target: 'http://127.0.0.1:5000',
+        changeOrigin: true,
+      },
     },
   },
 });

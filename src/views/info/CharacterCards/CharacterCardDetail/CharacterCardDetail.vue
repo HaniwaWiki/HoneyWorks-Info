@@ -15,7 +15,7 @@
 
     <CharacterCardDetailSkill :character-card="characterCard" />
 
-    <v-card title="Related Resources">
+    <v-card :title="$t('global.related_resources')">
       <ResourceTabs :resources="relatedResources" />
     </v-card>
   </AppScaffold>
