@@ -1,3 +1,6 @@
 [submodule "src/types/HWPL"]
 	path = src/types/HWPL
 	url = https://github.com/HaniwaWiki/HWPL_api_types
+[submodule "i18n-json"]
+	path = i18n-json
+	url = https://github.com/HaniwaWiki/HoneyWorks-Info-i18n
