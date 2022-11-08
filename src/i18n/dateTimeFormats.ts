@@ -3,13 +3,27 @@ import { supportedLocaleMap } from '@/i18n/supportedLocales';
 
 type DateTimeFormats = Dictionary<Dictionary<Intl.DateTimeFormatOptions>>;
 
+const commonDateTimeFormats: Dictionary<Intl.DateTimeFormatOptions> = {
+  date: {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  },
+  time: {
+    hour: 'numeric',
+    minute: 'numeric',
+  },
+  short: {
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  },
+};
+
 export const datetimeFormats: DateTimeFormats = {
   en: {
-    short: {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    },
+    ...commonDateTimeFormats,
     long: {
       year: 'numeric',
       month: 'short',
@@ -20,11 +34,7 @@ export const datetimeFormats: DateTimeFormats = {
     },
   },
   ja: {
-    short: {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    },
+    ...commonDateTimeFormats,
     long: {
       year: 'numeric',
       month: 'short',
@@ -36,11 +46,7 @@ export const datetimeFormats: DateTimeFormats = {
     },
   },
   zh_Hans: {
-    short: {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    },
+    ...commonDateTimeFormats,
     long: {
       year: 'numeric',
       month: 'short',

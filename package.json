@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "concurrently --kill-others npm:dev:*",
     "dev:http-server": "http-server -p 35173 i18n-json",
-    "dev:vite": "vite",
+    "dev:vite": "vite --host",
     "tsc": "vue-tsc --noEmit",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",

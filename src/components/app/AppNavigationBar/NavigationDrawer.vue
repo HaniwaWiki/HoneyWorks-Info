@@ -51,7 +51,13 @@ const items: Ref<NavigationListItemProp[]> = computed(() => [
   {
     title: t('global.tools'),
     icon: 'mdi-hammer',
-    subItems: [{ title: t('global.hwpl_calendar'), href: '/tools/calendar' }],
+    subItems: [
+      { title: t('global.hwpl_calendar'), href: '/tools/calendar' },
+      {
+        title: t('global.gerira_live_query'),
+        href: '/tools/gerira-live-query',
+      },
+    ],
   },
   { title: t('global.about_us'), icon: 'mdi-account', href: '/about' },
 ]);
