@@ -38,9 +38,7 @@
                 </td>
                 <td>Lv{{ gerira.level }}</td>
                 <td>
-                  {{
-                    d(gerira.endTime, 'short')
-                  }}
+                  {{ d(gerira.endTime, 'short') }}
                 </td>
               </tr>
             </tbody>
