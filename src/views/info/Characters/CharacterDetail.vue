@@ -4,11 +4,13 @@
 
     <v-card>
       <ResourceTabs
-        :resources="[{ name: 'Default Card Image', url: characterImageUrl }]"
+        :resources="[
+          { name: $t('character.default_card_image'), url: characterImageUrl },
+        ]"
       />
     </v-card>
 
-    <v-card title="General">
+    <v-card :title="$t('character.general')">
       <v-list
         class="icon-primary"
         :items="listItems"
@@ -22,7 +24,11 @@
       </v-list>
     </v-card>
 
-    <v-card :title="`Character Cards (${characterCards.length} in total)`">
+    <v-card
+      :title="
+        $t('character.character_cards_num_in_total', [characterCards.length])
+      "
+    >
       <v-list>
         <CharacterCardScrollList :character-cards="characterCards" />
       </v-list>
@@ -44,6 +50,9 @@ import { MdiIcons } from '@/types/mdi';
 import { parseCharacterBirthday } from '@/utils/hwpl/Character/common';
 import CharacterCardScrollList from '@/components/assemble/CharacterCardScrollList.vue';
 import ResourceTabs from '@/components/base/ResourceTabs/ResourceTabs.vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 // page options
 const characterId = Number(useRoute().params.id);
@@ -68,49 +77,48 @@ const listItems = computed<VuetifyListItem[]>(() => [
   {
     prependIcon: 'mdi-music-accidental-sharp',
     title: character.value?.Id,
-    subtitle: 'ID',
+    subtitle: t('character.id'),
   },
   {
     prependIcon: 'mdi-account',
     title: character.value?.Name,
-    subtitle: 'Name',
+    subtitle: t('character.name'),
   },
   {
     prependIcon: 'mdi-place_holder' as MdiIcons,
     title: character.value?.HiraganaName,
-    subtitle: 'Hiragana Name',
+    subtitle: t('character.hiragana_name'),
   },
   {
     prependIcon: 'mdi-account-voice',
     title: character.value?.VoiceActor,
-    subtitle: 'Character Voice',
+    subtitle: t('character.character_voice'),
   },
   {
     prependIcon: 'mdi-human-male-height',
     title: character.value?.Height,
-    subtitle: 'Height',
+    subtitle: t('character.height'),
   },
   {
     prependIcon: 'mdi-cake-variant',
-    // todo use date-fns to parse date
     title: parseCharacterBirthday(character.value).join('/'),
-    subtitle: 'Birthday',
+    subtitle: t('character.birthday'),
   },
   {
     prependIcon: 'mdi-star-david',
     title: character.value?.Constellation,
-    subtitle: 'Constellation',
+    subtitle: t('character.constellation'),
   },
   {
     prependIcon: 'mdi-water',
     title: character.value?.BloodType,
-    subtitle: 'Blood Type',
+    subtitle: t('character.blood_type'),
   },
   { type: 'divider', inset: true },
   {
     prependIcon: 'mdi-text-long',
     title: character.value?.Description.replaceAll('<br>', '\n'),
-    subtitle: 'Description',
+    subtitle: t('character.description'),
   },
 ]);
 </script>

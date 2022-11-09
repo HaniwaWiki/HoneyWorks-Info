@@ -4,13 +4,13 @@
       <v-switch
         v-model="showImage"
         hide-details
-        label="Show Character Image"
+        :label="$t('character_card.show_character_image')"
         color="primary"
       />
       <v-switch
         v-model="showEvolved"
         hide-details
-        label="Show Evolved"
+        :label="$t('character_card.show_evolved')"
         color="primary"
       />
     </div>

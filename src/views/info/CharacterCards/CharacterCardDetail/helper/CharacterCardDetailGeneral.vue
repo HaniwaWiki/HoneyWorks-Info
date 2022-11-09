@@ -1,15 +1,24 @@
 <template>
   <v-card title="General">
     <v-list class="icon-primary" color="primary" item-props lines="two">
-      <v-list-item prepend-icon="mdi-music-accidental-sharp" subtitle="ID">
-        <template #title> {{ characterCard?.Id }} </template>
+      <v-list-item
+        prepend-icon="mdi-music-accidental-sharp"
+        :subtitle="$t('character_card.id')"
+      >
+        <template #title> {{ characterCard?.Id }}</template>
       </v-list-item>
-      <v-list-item prepend-icon="mdi-text-short" subtitle="Card Name">
-        <template #title> {{ characterCard?.Name }} </template>
+      <v-list-item
+        prepend-icon="mdi-text-short"
+        :subtitle="$t('character_card.card_name')"
+      >
+        <template #title> {{ characterCard?.Name }}</template>
       </v-list-item>
-      <v-list-item prepend-icon="mdi-account" subtitle="Character">
-        <template #title
-          >{{ parseCharacterCardName(characterCard)[1] }}
+      <v-list-item
+        prepend-icon="mdi-account"
+        :subtitle="$t('global.character')"
+      >
+        <template #title>
+          {{ parseCharacterCardName(characterCard)[1] }}
         </template>
         <template #append>
           <ButtonIconLink
@@ -22,7 +31,10 @@
           />
         </template>
       </v-list-item>
-      <v-list-item prepend-icon="mdi-star" subtitle="Rarity">
+      <v-list-item
+        prepend-icon="mdi-star"
+        :subtitle="$t('character_card.rarity')"
+      >
         <template #title>
           <template v-if="characterCard">
             <v-img
@@ -35,7 +47,7 @@
           </template>
         </template>
       </v-list-item>
-      <v-list-item prepend-icon="mdi-tag" subtitle="Tags">
+      <v-list-item prepend-icon="mdi-tag" :subtitle="$t('global.tags')">
         <template #title>
           <HwplTagGroup
             v-if="characterCard"
@@ -43,8 +55,11 @@
           />
         </template>
       </v-list-item>
-      <v-list-item prepend-icon="mdi-calendar" subtitle="Release Time">
-        <template #title> {{ releaseTime }} </template>
+      <v-list-item
+        prepend-icon="mdi-calendar"
+        :subtitle="$t('character_card.release_time')"
+      >
+        <template #title> {{ releaseTime }}</template>
       </v-list-item>
     </v-list>
   </v-card>
@@ -59,10 +74,14 @@ import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
 import asyncComputed from '@/utils/asyncComputed';
 import { getItemSourceAggregateInformation } from '@/api/itemSource';
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
   characterCard: CharacterCard | null;
 }>();
+
+const { d, t } = useI18n();
+
 const itemSourceAggregateInformation = asyncComputed(
   getItemSourceAggregateInformation,
   []
@@ -72,7 +91,7 @@ const releaseTime = computed(() => {
     (info) => info.ItemId === props.characterCard?.Id
   )?.ReleaseTimestamp;
   return releaseTimestamp
-    ? new Date(releaseTimestamp * 1000).toLocaleString()
-    : 'Unknown';
+    ? d(new Date(releaseTimestamp * 1000), 'long')
+    : t('global.unknown');
 });
 </script>

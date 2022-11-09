@@ -16,7 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, Ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { NavigationListItemProp } from '../../base/NavigationListItem/types';
 import NavigationListItem from '../../base/NavigationListItem/NavigationListItem.vue';
 
@@ -24,34 +25,42 @@ defineProps<{ drawer: boolean }>();
 
 defineEmits(['update:drawer']);
 
-const items: NavigationListItemProp[] = [
+const { t } = useI18n();
+
+const items: Ref<NavigationListItemProp[]> = computed(() => [
   {
-    title: 'HoneyWorks Official Links',
+    title: t('global.honeyworks_official_links'),
     icon: 'mdi-link',
     href: '/official-websites',
   },
   {
-    title: 'Information',
+    title: t('global.information'),
     icon: 'mdi-information-outline',
     subItems: [
-      { title: 'Characters', href: '/info/characters' },
-      { title: 'Character Cards', href: '/info/character-cards' },
-      { title: 'Music Parts', href: '/info/music-parts' },
+      { title: t('global.characters'), href: '/info/characters' },
+      { title: t('global.character_cards'), href: '/info/character-cards' },
+      { title: t('global.music_parts'), href: '/info/music-parts' },
       {
-        title: 'Music Parts Data',
+        title: t('global.music_part_data'),
         href: `${window.location.origin}/music-part.html`,
       },
-      { title: 'Scene Cards', href: '/info/scene-cards' },
-      { title: 'Events', href: '/info/events' },
+      { title: t('global.scene_cards'), href: '/info/scene-cards' },
+      { title: t('global.events'), href: '/info/events' },
     ],
   },
   {
-    title: 'Tools',
+    title: t('global.tools'),
     icon: 'mdi-hammer',
-    subItems: [{ title: 'HWPL Calendar', href: '/tools/calendar' }],
+    subItems: [
+      { title: t('global.hwpl_calendar'), href: '/tools/calendar' },
+      {
+        title: t('global.gerira_live_query'),
+        href: '/tools/gerira-live-query',
+      },
+    ],
   },
-  { title: 'About Us', icon: 'mdi-account', href: '/about' },
-];
+  { title: t('global.about_us'), icon: 'mdi-account', href: '/about' },
+]);
 </script>
 
 <style scoped></style>

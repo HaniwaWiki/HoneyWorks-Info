@@ -20,11 +20,11 @@ jobs:
       - name: Set Target Folder (main)
         id: set-target-folder-main
         if: github.ref == 'refs/heads/main'
-        run: echo "::set-output name=TARGET_FOLDER::C:\project\HoneyWorks-Info"
+        run: echo "TARGET_FOLDER=C:\project\HoneyWorks-Info" >> $GITHUB_OUTPUT
       - name: Set Target Folder (dev)
         id: set-target-folder-dev
         if: github.ref == 'refs/heads/dev'
-        run: echo "::set-output name=TARGET_FOLDER::C:\project\HoneyWorks-Info-dev"
+        run: echo "TARGET_FOLDER=C:\project\HoneyWorks-Info-dev" >> $GITHUB_OUTPUT
       - name: Deploy 🚀 To Server
         run: |
           ssh -p 5000 Administrator@cdn-src.honeyworks.info "\

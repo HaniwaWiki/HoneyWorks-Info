@@ -1,5 +1,5 @@
 <template>
-  <AppScaffold placeholder-height="0">
+  <AppScaffold md="12" lg="8" placeholder-height="0">
     <v-row justify="center">
       <v-col cols="12" class="d-flex align-center">
         <v-text-field
@@ -13,27 +13,36 @@
           prepend-icon="mdi-filter-variant"
           @click="keyword += ' &quot;Rarity&quot;:5'"
         >
-          Rarity
+          {{ $t('character_card.rarity') }}
         </v-btn>
       </v-col>
       <v-col cols="12" class="switch-group">
         <v-radio-group v-model="sortBy" color="primary" inline hide-details>
-          <div>Sort by:</div>
-          <v-radio label="Default" value="Default"></v-radio>
-          <v-radio label="Ability" value="Ability"></v-radio>
-          <v-radio label="Release Date" value="ReleaseTimestamp"></v-radio>
+          <div v-t="'character_card.sort_by_colon'" />
+          <v-radio
+            :label="$t('character_card.default')"
+            value="Default"
+          ></v-radio>
+          <v-radio
+            :label="$t('character_card.ability')"
+            value="Ability"
+          ></v-radio>
+          <v-radio
+            :label="$t('character_card.release_date')"
+            value="ReleaseTimestamp"
+          ></v-radio>
         </v-radio-group>
         <v-switch
           v-model="showImage"
           hide-details
-          label="Show Character Image"
+          :label="$t('character_card.show_character_image')"
           color="primary"
           density="comfortable"
         />
         <v-switch
           v-model="showEvolved"
           hide-details
-          label="Show Evolved"
+          :label="$t('character_card.show_evolved')"
           color="primary"
           density="comfortable"
         />

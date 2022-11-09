@@ -1,7 +1,10 @@
 <template>
-  <v-card title="Game Statistics">
+  <v-card :title="$t('character_card.game_statistics')">
     <v-card-text>
-      <div class="text-caption">Character Card Level</div>
+      <div class="text-caption">
+        <span v-t="'character_card.character_card_level'" class="mr-2" />
+        <span>{{ levelLabel }}</span>
+      </div>
       <v-slider
         v-model="selectedLevel"
         prepend-icon="mdi-star"
@@ -12,11 +15,7 @@
         show-ticks="always"
         :step="1"
         :ticks="ticks"
-      >
-        <template #thumb-label="{ modelValue }">
-          {{ getSliderLabel(modelValue) }}
-        </template>
-      </v-slider>
+      />
       <v-table>
         <thead>
           <tr>
@@ -43,10 +42,14 @@ import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
 import { computed, ref } from 'vue';
 import { useCollection } from '@/composables/useCollection';
 import { CharacterCardOneLevelStat } from '@/types/HWPL/extra/CharacterCardLevelStat';
+import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
   characterCard: CharacterCard | null;
 }>();
+
+const { t } = useI18n();
+
 const { collection: characterCardLevelStat } = useCollection(
   'CharacterCardLevelStats'
 );
@@ -66,16 +69,17 @@ const ticks = computed(() => ({
   [maxLevel.value]: maxLevel.value.toString(),
   [maxLevelAfterEvolution.value]: maxLevelAfterEvolution.value.toString(),
 }));
-function getSliderLabel(value: number) {
-  switch (value) {
+const levelLabel = computed(() => {
+  const level = selectedLevel.value;
+  switch (level) {
     case maxLevel.value:
-      return `${value}(Max)`;
+      return t('character_card.level_value_max', [level]);
     case maxLevelAfterEvolution.value:
-      return `${value}(Max+)`;
+      return t('character_card.level_value_max_evolved', [level]);
     default:
-      return value;
+      return t('character_card.level_value', [level]);
   }
-}
+});
 
 // compute data for v-table
 const rank1Stat = computed(() => {
@@ -95,7 +99,12 @@ const requireExpTotalList = computed(() => {
   }
   return total;
 });
-const tableHeaders = ['Name', 'Value', 'Value (Evolved)'];
+
+const tableHeaders = computed(() => [
+  t('character_card.statistics_name'),
+  t('character_card.statistics_value'),
+  t('character_card.statistics_value_evolved'),
+]);
 const tableData = computed(() => {
   if (!stats.value) {
     return [[]];
@@ -119,12 +128,20 @@ const tableData = computed(() => {
   const total2 = rythm2 + technic2 + groove2;
   const requireExpTotal = requireExpTotalList.value[selectedLevel.value];
   return [
-    ['Total', overflow1Or(total1), total2],
-    ['Rythm', overflow1Or(rythm1), rythm2],
-    ['Technic', overflow1Or(technic1), technic2],
-    ['Groove', overflow1Or(groove1), groove2],
-    ['Require Exp', overflow1Or(requireExp1), requireExp2],
-    ['Require Exp (total)', overflow1Or(requireExpTotal), requireExpTotal],
+    [t('character_card.statistics_total'), overflow1Or(total1), total2],
+    [t('character_card.statistics_rythm'), overflow1Or(rythm1), rythm2],
+    [t('character_card.statistics_technic'), overflow1Or(technic1), technic2],
+    [t('character_card.statistics_groove'), overflow1Or(groove1), groove2],
+    [
+      t('character_card.statistics_require_exp'),
+      overflow1Or(requireExp1),
+      requireExp2,
+    ],
+    [
+      t('character_card.statistics_require_exp_total'),
+      overflow1Or(requireExpTotal),
+      requireExpTotal,
+    ],
   ];
 });
 </script>
