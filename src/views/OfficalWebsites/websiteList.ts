@@ -27,6 +27,10 @@ export const officialWebsites: WebsiteLink[] = [
     url: 'https://honeyworks-game.com/',
   },
   {
+    text: 'ハコニワリリィ',
+    url: 'https://hakoniwalily.jp/',
+  },
+  {
     text: '可憐なアイボリー',
     url: 'https://karennaivory.jp/',
   },
