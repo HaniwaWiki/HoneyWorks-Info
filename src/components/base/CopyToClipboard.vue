@@ -1,17 +1,22 @@
 <template>
   <slot v-if="$slots.default" />
-  <span v-else class="mr-2">{{ content }}</span>
-  <v-icon
+  <span v-else class="mr-1">{{ props.content }}</span>
+  <v-btn
     icon="mdi-content-copy"
-    color="grey"
+    variant="text"
+    :size="props.size"
     @click="copyContentToClipboard"
   />
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
+type Props = {
   content: string;
-}>();
+  size?: string;
+};
+const props = withDefaults(defineProps<Props>(), {
+  size: 'small',
+});
 
 function copyContentToClipboard() {
   navigator.clipboard.writeText(props.content);
