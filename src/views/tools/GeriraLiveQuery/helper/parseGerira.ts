@@ -28,10 +28,11 @@ export function parseGerira({
   const now = new Date();
   const msg = removeHtmlTags(description);
 
-  // check tag and expired
+  // check gerira tag
   if (!msg.includes('#ゲリラライブ')) {
     return null;
   }
+  // check whether expired by (now - pubdate)
   if (now.getTime() - pubDate.getTime() > geriraExpireTime[1]) {
     return null;
   }

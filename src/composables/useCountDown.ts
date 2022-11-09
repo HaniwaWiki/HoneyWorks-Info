@@ -1,8 +1,10 @@
 import { onMounted, ref } from 'vue';
 
+// the resetCountDown in callback and the resetCountDown in return values are same function
+// so that you can use resetCountDown both inside and outside callback function
 export function useCountDown(
   seconds: number,
-  callback: (resetFn: (new_seconds: number) => void) => void
+  callback: (resetCountDown: (new_seconds: number) => void) => void
 ) {
   const count = ref(seconds);
   const timer = ref<NodeJS.Timeout | null>(null);
@@ -13,7 +15,7 @@ export function useCountDown(
     }
     if (count.value === 0) {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      callback(reset);
+      callback(resetCountDown);
       return;
     }
     count.value -= 1;
@@ -22,10 +24,10 @@ export function useCountDown(
 
   onMounted(start);
 
-  function reset(new_seconds: number) {
+  function resetCountDown(new_seconds: number) {
     count.value = new_seconds;
     start();
   }
 
-  return { count, reset };
+  return { count, resetCountDown };
 }

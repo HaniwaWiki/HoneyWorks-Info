@@ -32,7 +32,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="gerira in geriraInfo" :key="gerira.roomId">
+              <tr v-for="gerira in geriraList" :key="gerira.roomId">
                 <td>
                   <CopyToClipboard :content="gerira.roomId" />
                 </td>
@@ -51,7 +51,10 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import { useGeriraInfo } from './helper/useGeriraInfo';
+import {
+  useFetchGeriraList,
+  useGeriraFilter,
+} from './helper/useFetchGeriraList';
 import AppScaffold from '../../../components/app/AppScaffold.vue';
 import { useCountDown } from '../../../composables/useCountDown';
 import CopyToClipboard from '../../../components/base/CopyToClipboard.vue';
@@ -62,16 +65,21 @@ const countDown = 5 * 60;
 
 const { t, d } = useI18n();
 
-const { geriraInfo, loading, refresh } = useGeriraInfo();
-useNotificationOnNewGerira(geriraInfo, 3);
+const { geriraList, loading, refresh } = useFetchGeriraList();
+const aliveGeriraList = useGeriraFilter(geriraList);
 
-const { count, reset } = useCountDown(countDown, (resetFn) => {
+// use a count-down to auto refresh
+const { count, resetCountDown } = useCountDown(countDown, (_resetCountDown) => {
   refresh();
-  resetFn(countDown);
+  _resetCountDown(countDown);
 });
 
+// click button to manual fresh
 function refreshGeriraInfoAndCountDown() {
   refresh();
-  reset(countDown);
+  resetCountDown(countDown);
 }
+
+// send notification when new lv3 gerira is found
+useNotificationOnNewGerira(aliveGeriraList, 3);
 </script>
