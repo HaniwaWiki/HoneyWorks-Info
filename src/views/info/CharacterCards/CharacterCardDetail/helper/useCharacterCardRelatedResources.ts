@@ -1,34 +1,33 @@
-import { CharacterCard } from '@/types/HWPL/CharacterCard';
+import type { Ref } from 'vue';
+import type { RouteLocationRaw } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+import type { CharacterCard } from '@/types/HWPL/CharacterCard';
+import type { Resource } from '@/components/base/ResourceTabs/Resource';
 import {
   dynamicSceneCardResourceOption,
-  Resource,
   videoResourceOption,
 } from '@/components/base/ResourceTabs/Resource';
-import { Ref } from 'vue';
 import asyncComputed from '@/utils/asyncComputed';
 import { getSceneCardImageUrl } from '@/utils/hwpl/SceneCard/url';
-import { getMusicPartMVUrl, getMusicPartUrl } from '@/utils/hwpl/MusicPart/url';
-import { RouteLocationRaw } from 'vue-router';
-import { useI18n } from 'vue-i18n';
+import { getMusicPartMVUrl } from '@/utils/hwpl/MusicPart/url';
 
 export function useCharacterCardRelatedResources(
-  characterCard: Ref<CharacterCard | null>
+  characterCard: Ref<CharacterCard | null>,
 ): Ref<Resource[]> {
   const { t } = useI18n();
 
   return asyncComputed<Resource[]>(async () => {
-    if (characterCard.value === null) {
+    if (characterCard.value === null)
       return [];
-    }
 
-    const { FirstSceneCardId, RankUpSceneCardId, MusicPartId } =
-      characterCard.value;
+    const { FirstSceneCardId, RankUpSceneCardId, MusicPartId }
+      = characterCard.value;
     const resources: Resource[] = [];
 
     async function pushSceneCardResources(
       Id: number,
       cardName: string,
-      dynamicCardName: string
+      dynamicCardName: string,
     ) {
       const sceneCardUrl = await getSceneCardImageUrl(Id);
       const to: RouteLocationRaw = {
@@ -42,7 +41,8 @@ export function useCharacterCardRelatedResources(
           to,
           options: dynamicSceneCardResourceOption,
         });
-      } else {
+      }
+      else {
         resources.push({
           name: cardName,
           url: sceneCardUrl.static,
@@ -55,7 +55,7 @@ export function useCharacterCardRelatedResources(
       await pushSceneCardResources(
         FirstSceneCardId,
         t('character_card.scene_card'),
-        t('character_card.scene_card_dynamic')
+        t('character_card.scene_card_dynamic'),
       );
     }
 
@@ -63,7 +63,7 @@ export function useCharacterCardRelatedResources(
       await pushSceneCardResources(
         RankUpSceneCardId,
         t('character_card.scene_card_evolved'),
-        t('character_card.scene_card_evolved_dynamic')
+        t('character_card.scene_card_evolved_dynamic'),
       );
     }
 

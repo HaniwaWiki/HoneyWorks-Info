@@ -1,6 +1,6 @@
 import { getCollection } from '@/api/common';
 import { getBaseUrls } from '@/config';
-import { SceneCard } from '@/types/HWPL/SceneCard';
+import type { SceneCard } from '@/types/HWPL/SceneCard';
 import { hasDynamicImage } from '@/utils/hwpl/SceneCard/hasDynamicImage';
 
 // cached scene cards list
@@ -25,13 +25,13 @@ function getSceneCardDynamicImageUrl(imageId: string) {
 }
 
 export async function getSceneCardImageUrl(Id: number) {
-  if (sceneCards === undefined) {
+  if (sceneCards === undefined)
     sceneCards = await getCollection('SceneCards');
-  }
-  const sceneCard = sceneCards.find((c) => c.ItemId === Id);
-  if (!sceneCard) {
+
+  const sceneCard = sceneCards.find(c => c.ItemId === Id);
+  if (!sceneCard)
     throw new Error(`Scene Card with Id ${Id} not found`);
-  }
+
   const imageId = sceneCard.ImageIdentifier;
   return {
     static: getSceneCardStaticImageUrl(imageId),

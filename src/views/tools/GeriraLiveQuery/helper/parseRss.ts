@@ -1,4 +1,4 @@
-import { RssInfo } from '@/views/tools/GeriraLiveQuery/helper/type';
+import type { RssInfo } from '@/views/tools/GeriraLiveQuery/helper/type';
 
 export function parseRss(xmlStr: string): RssInfo[] {
   const parser = new DOMParser();

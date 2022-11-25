@@ -1,3 +1,38 @@
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+import ButtonExternalLink from '../../components/base/ButtonExternalLink.vue';
+import AppScaffold from '@/components/app/AppScaffold.vue';
+import type { OfficialWebsiteContent } from '@/views/OfficalWebsites/types';
+import {
+  officialTwitterIds,
+  officialWebsites,
+  officialYoutubeChannels,
+} from '@/views/OfficalWebsites/websiteList';
+
+const { t } = useI18n();
+
+const officialWebsiteContents: OfficialWebsiteContent[] = [
+  {
+    name: t('global.website'),
+    icon: 'mdi-web',
+    links: officialWebsites,
+  },
+  {
+    name: t('global.twitter'),
+    icon: 'mdi-twitter',
+    links: officialTwitterIds.map(id => ({
+      text: `@${id}`,
+      url: `https://twitter.com/${id}`,
+    })),
+  },
+  {
+    name: t('global.youtube'),
+    icon: 'mdi-youtube',
+    links: officialYoutubeChannels,
+  },
+];
+</script>
+
 <template>
   <!-- container, row and col can limit card's position -->
   <AppScaffold>
@@ -23,38 +58,3 @@
     </v-row>
   </AppScaffold>
 </template>
-
-<script setup lang="ts">
-import AppScaffold from '@/components/app/AppScaffold.vue';
-import { OfficialWebsiteContent } from '@/views/OfficalWebsites/types';
-import {
-  officialTwitterIds,
-  officialWebsites,
-  officialYoutubeChannels,
-} from '@/views/OfficalWebsites/websiteList';
-import { useI18n } from 'vue-i18n';
-import ButtonExternalLink from '../../components/base/ButtonExternalLink.vue';
-
-const { t } = useI18n();
-
-const officialWebsiteContents: OfficialWebsiteContent[] = [
-  {
-    name: t('global.website'),
-    icon: 'mdi-web',
-    links: officialWebsites,
-  },
-  {
-    name: t('global.twitter'),
-    icon: 'mdi-twitter',
-    links: officialTwitterIds.map((id) => ({
-      text: `@${id}`,
-      url: `https://twitter.com/${id}`,
-    })),
-  },
-  {
-    name: t('global.youtube'),
-    icon: 'mdi-youtube',
-    links: officialYoutubeChannels,
-  },
-];
-</script>

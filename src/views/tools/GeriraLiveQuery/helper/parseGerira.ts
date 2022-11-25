@@ -1,4 +1,4 @@
-import { GeriraInfo, RssInfo } from '@/views/tools/GeriraLiveQuery/helper/type';
+import type { GeriraInfo, RssInfo } from '@/views/tools/GeriraLiveQuery/helper/type';
 import { removeHtmlTags } from '@/utils/removeHtmlTags';
 
 /**
@@ -8,9 +8,9 @@ import { removeHtmlTags } from '@/utils/removeHtmlTags';
 function fixGeriraEndTimeZone(geriraEndTimeText: string, pubdate: Date): Date {
   const fixedPubDate = new Date(pubdate);
   const minute = Number(geriraEndTimeText.split(':')[1]);
-  if (minute <= fixedPubDate.getMinutes()) {
+  if (minute <= fixedPubDate.getMinutes())
     fixedPubDate.setHours(fixedPubDate.getHours() + 1);
-  }
+
   fixedPubDate.setMinutes(minute);
   return fixedPubDate;
 }
@@ -29,33 +29,32 @@ export function parseGerira({
   const msg = removeHtmlTags(description);
 
   // check gerira tag
-  if (!msg.includes('#ゲリラライブ')) {
+  if (!msg.includes('#ゲリラライブ'))
     return null;
-  }
+
   // check whether expired by (now - pubdate)
-  if (now.getTime() - pubDate.getTime() > geriraExpireTime[1]) {
+  if (now.getTime() - pubDate.getTime() > geriraExpireTime[1])
     return null;
-  }
 
   // get gerira level
   const geriraLvExecArray = /Lv(\d)/.exec(description);
-  if (!geriraLvExecArray) {
+  if (!geriraLvExecArray)
     return null;
-  }
+
   const level = Number(geriraLvExecArray[1]) as GeriraInfo['level'];
 
   // get gerira id
   const geriraIdExecArray = /ゲリラ招待ID:(\d+)/.exec(description);
-  if (!geriraIdExecArray) {
+  if (!geriraIdExecArray)
     return null;
-  }
+
   const roomId = geriraIdExecArray[1];
 
   // get gerira end time
   const geriraEndTimeExecArray = /期限:([\d :/]+)/.exec(description);
-  if (!geriraEndTimeExecArray) {
+  if (!geriraEndTimeExecArray)
     return null;
-  }
+
   const geriraEndTimeText = geriraEndTimeExecArray[1];
   const endTime = fixGeriraEndTimeZone(geriraEndTimeText, pubDate);
 

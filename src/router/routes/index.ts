@@ -1,4 +1,4 @@
-import { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
 import infoRoutes from './info';
 import toolsRoutes from './tools';
 

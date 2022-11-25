@@ -1,48 +1,14 @@
-<template>
-  <v-card :title="$t('character_card.game_statistics')">
-    <v-card-text>
-      <div class="text-caption">
-        <span v-t="'character_card.character_card_level'" class="mr-2" />
-        <span>{{ levelLabel }}</span>
-      </div>
-      <v-slider
-        v-model="selectedLevel"
-        prepend-icon="mdi-star"
-        thumb-label
-        color="primary"
-        :min="1"
-        :max="maxLevelAfterEvolution"
-        show-ticks="always"
-        :step="1"
-        :ticks="ticks"
-      />
-      <v-table>
-        <thead>
-          <tr>
-            <th v-for="header in tableHeaders" :key="header">{{ header }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="arr in tableData" :key="arr[0]">
-            <td v-for="(item, i) in arr" :key="i">{{ item }}</td>
-          </tr>
-        </tbody>
-      </v-table>
-    </v-card-text>
-  </v-card>
-</template>
-
 <script setup lang="ts">
+import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useCharacterCardName } from '@/composables/hwpl/useCharacterCardName';
-import { CharacterCard } from '@/types/HWPL/CharacterCard';
+import type { CharacterCard } from '@/types/HWPL/CharacterCard';
 import ButtonIconLink from '@/components/base/ButtonIconLink.vue';
 import star from '@/assets/rarity_star_1.png';
 import HwplTagGroup from '@/components/hwpl/HwplTag/HwplTagGroup.vue';
 import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
-import { computed, ref } from 'vue';
 import { useCollection } from '@/composables/useCollection';
 import { CharacterCardOneLevelStat } from '@/types/HWPL/extra/CharacterCardLevelStat';
-import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
   characterCard: CharacterCard | null;
@@ -51,12 +17,12 @@ const props = defineProps<{
 const { t } = useI18n();
 
 const { collection: characterCardLevelStat } = useCollection(
-  'CharacterCardLevelStats'
+  'CharacterCardLevelStats',
 );
 const stats = computed(() =>
   characterCardLevelStat.value.find(
-    (stat) => stat.CharacterCardId === props.characterCard?.Id
-  )
+    stat => stat.CharacterCardId === props.characterCard?.Id,
+  ),
 );
 
 const selectedLevel = ref(1);
@@ -94,9 +60,9 @@ const rank2Stat = computed(() => {
 });
 const requireExpTotalList = computed(() => {
   const total = [0];
-  for (const s of rank2Stat.value) {
+  for (const s of rank2Stat.value)
     total.push(total[total.length - 1] + s.requireExp);
-  }
+
   return total;
 });
 
@@ -106,12 +72,13 @@ const tableHeaders = computed(() => [
   t('character_card.statistics_value_evolved'),
 ]);
 const tableData = computed(() => {
-  if (!stats.value) {
+  if (!stats.value)
     return [[]];
-  }
 
   const overflow1 = selectedLevel.value > maxLevel.value;
-  const overflow1Or = <T>(value: T) => (overflow1 ? '/' : value);
+  function overflow1Or<T>(value: T) {
+    return overflow1 ? '/' : value;
+  }
   const {
     rythm: rythm1,
     technic: technic1,
@@ -145,3 +112,41 @@ const tableData = computed(() => {
   ];
 });
 </script>
+
+<template>
+  <v-card :title="$t('character_card.game_statistics')">
+    <v-card-text>
+      <div class="text-caption">
+        <span v-t="'character_card.character_card_level'" class="mr-2" />
+        <span>{{ levelLabel }}</span>
+      </div>
+      <v-slider
+        v-model="selectedLevel"
+        prepend-icon="mdi-star"
+        thumb-label
+        color="primary"
+        :min="1"
+        :max="maxLevelAfterEvolution"
+        show-ticks="always"
+        :step="1"
+        :ticks="ticks"
+      />
+      <v-table>
+        <thead>
+          <tr>
+            <th v-for="header in tableHeaders" :key="header">
+              {{ header }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="arr in tableData" :key="arr[0]">
+            <td v-for="(item, i) in arr" :key="i">
+              {{ item }}
+            </td>
+          </tr>
+        </tbody>
+      </v-table>
+    </v-card-text>
+  </v-card>
+</template>

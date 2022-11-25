@@ -1,3 +1,49 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+import AppScaffold from '@/components/app/AppScaffold.vue';
+import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
+import type { CharacterCard } from '@/types/HWPL/CharacterCard';
+import { usePagination } from '@/composables/usePagination';
+import { useKeywordFilter } from '@/composables/useKeywordFilter';
+import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
+import HwplIconImageCard from '@/components/hwpl/HwplIconImageCard.vue';
+import { useCollection } from '@/composables/useCollection';
+import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
+import type { SortBy } from '@/views/info/CharacterCards/CharacterCardList/helper/sortCharacterCard';
+import {
+  useSortCharacterCards,
+} from '@/views/info/CharacterCards/CharacterCardList/helper/sortCharacterCard';
+
+// options from user
+const keyword = ref('');
+const sortBy = ref<SortBy>('Default');
+const showImage = ref(false);
+const showEvolved = ref(false);
+
+// fetch, filter and paginate data
+const { loading, collection: characterCards } = useCollection('CharacterCards');
+const filteredCharacterCards = useKeywordFilter(characterCards, keyword);
+const sortedCharacterCards = useSortCharacterCards(
+  filteredCharacterCards,
+  sortBy,
+);
+const pageSize = 24;
+const {
+  pageCount,
+  page,
+  paginatedData: paginatedCharacterCards,
+} = usePagination(sortedCharacterCards, pageSize);
+
+// parse function and parsed data
+function getCardImage(characterCard: CharacterCard) {
+  return getCharacterCardImageUrl({
+    Id: characterCard.Id,
+    evolved: showEvolved.value,
+    icon: !showImage.value,
+  });
+}
+</script>
+
 <template>
   <AppScaffold md="12" lg="8" placeholder-height="0">
     <v-row justify="center">
@@ -22,15 +68,15 @@
           <v-radio
             :label="$t('character_card.default')"
             value="Default"
-          ></v-radio>
+          />
           <v-radio
             :label="$t('character_card.ability')"
             value="Ability"
-          ></v-radio>
+          />
           <v-radio
             :label="$t('character_card.release_date')"
             value="ReleaseTimestamp"
-          ></v-radio>
+          />
         </v-radio-group>
         <v-switch
           v-model="showImage"
@@ -104,51 +150,6 @@
     </v-row>
   </AppScaffold>
 </template>
-<script setup lang="ts">
-import AppScaffold from '@/components/app/AppScaffold.vue';
-import { ref } from 'vue';
-import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
-import { CharacterCard } from '@/types/HWPL/CharacterCard';
-import { usePagination } from '@/composables/usePagination';
-import { useKeywordFilter } from '@/composables/useKeywordFilter';
-import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
-import HwplIconImageCard from '@/components/hwpl/HwplIconImageCard.vue';
-import { useCollection } from '@/composables/useCollection';
-import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
-import {
-  SortBy,
-  useSortCharacterCards,
-} from '@/views/info/CharacterCards/CharacterCardList/helper/sortCharacterCard';
-
-// options from user
-const keyword = ref('');
-const sortBy = ref<SortBy>('Default');
-const showImage = ref(false);
-const showEvolved = ref(false);
-
-// fetch, filter and paginate data
-const { loading, collection: characterCards } = useCollection('CharacterCards');
-const filteredCharacterCards = useKeywordFilter(characterCards, keyword);
-const sortedCharacterCards = useSortCharacterCards(
-  filteredCharacterCards,
-  sortBy
-);
-const pageSize = 24;
-const {
-  pageCount,
-  page,
-  paginatedData: paginatedCharacterCards,
-} = usePagination(sortedCharacterCards, pageSize);
-
-// parse function and parsed data
-function getCardImage(characterCard: CharacterCard) {
-  return getCharacterCardImageUrl({
-    Id: characterCard.Id,
-    evolved: showEvolved.value,
-    icon: !showImage.value,
-  });
-}
-</script>
 
 <style lang="scss" scoped>
 .v-radio-group :deep(.v-selection-control-group--inline) {

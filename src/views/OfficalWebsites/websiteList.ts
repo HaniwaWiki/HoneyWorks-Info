@@ -1,5 +1,4 @@
-import {
-  OfficialWebsiteContent,
+import type {
   TwitterLink,
   WebsiteLink,
   YouTubeLink,

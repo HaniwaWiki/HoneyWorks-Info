@@ -1,10 +1,6 @@
-<template>
-  <v-btn v-bind="$props" variant="text" />
-</template>
-
 <script setup lang="ts">
-import { RouteLocationRaw } from 'vue-router';
-import { MdiIcons } from '@/types/mdi';
+import type { RouteLocationRaw } from 'vue-router';
+import type { MdiIcons } from '@/types/mdi';
 
 type Props = {
   to: RouteLocationRaw;
@@ -17,3 +13,7 @@ withDefaults(defineProps<Props>(), {
   size: 'default',
 });
 </script>
+
+<template>
+  <v-btn v-bind="$props" variant="text" />
+</template>

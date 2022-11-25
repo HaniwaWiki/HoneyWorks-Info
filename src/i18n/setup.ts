@@ -1,20 +1,21 @@
-import { createI18n, I18n, I18nOptions } from 'vue-i18n';
-import { WritableComputedRef } from 'vue';
+import type { I18n, I18nOptions } from 'vue-i18n';
+import { createI18n } from 'vue-i18n';
+import type { WritableComputedRef } from 'vue';
 import { loadLocaleMessages } from '@/i18n/loadLocaleMessages';
-import { isSupportedLocale, SupportedLocale } from '@/i18n/supportedLocales';
+import type { SupportedLocale } from '@/i18n/supportedLocales';
 
 export function getDefaultLocale(): SupportedLocale {
   return 'zh_Hans';
 }
 
 function setI18nLanguage(i18n: I18n, locale: SupportedLocale) {
-  if (i18n.mode === 'legacy') {
-    // eslint-disable-next-line no-param-reassign
+  if (i18n.mode === 'legacy')
+
     i18n.global.locale = locale;
-  } else {
-    // eslint-disable-next-line no-param-reassign
+  else
+
     (i18n.global.locale as WritableComputedRef<string>).value = locale;
-  }
+
   /**
    * NOTE:
    * If you need to specify the language setting for headers, such as the `fetch` API, set it here.

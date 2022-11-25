@@ -1,6 +1,7 @@
-import { CharacterCard } from '@/types/HWPL/CharacterCard';
-import { computed, Ref, unref } from 'vue';
-import { MaybeRef } from '@/types/vue/ref';
+import type { Ref } from 'vue';
+import { computed, unref } from 'vue';
+import type { CharacterCard } from '@/types/HWPL/CharacterCard';
+import type { MaybeRef } from '@/types/vue/ref';
 import asyncComputed from '@/utils/asyncComputed';
 import { getItemSourceAggregateInformation } from '@/api/itemSource';
 import { useSort } from '@/composables/useSort';
@@ -15,14 +16,14 @@ const sortKeyMap = {
     -(card.MaxTapRank2 + card.MaxTechRank2 + card.MaxKyunKyunRank2),
   ReleaseTimestamp: (card: CharacterCard) =>
     -(
-      itemSources.value.find((itemSource) => itemSource.ItemId === card.Id)
+      itemSources.value.find(itemSource => itemSource.ItemId === card.Id)
         ?.ReleaseTimestamp || 0
     ),
 } as const;
 
 export function useSortCharacterCards(
   characterCards: MaybeRef<CharacterCard[]>,
-  sortBy: MaybeRef<SortBy>
+  sortBy: MaybeRef<SortBy>,
 ): Ref<CharacterCard[]> {
   const sortFunction = computed(() => sortKeyMap[unref(sortBy)]);
   return useSort(characterCards, sortFunction);

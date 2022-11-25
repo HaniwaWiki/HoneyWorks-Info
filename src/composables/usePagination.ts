@@ -1,13 +1,13 @@
-import { computed, Ref, ref, unref, watch } from 'vue';
-import { MaybeRef } from '@/types/vue/ref';
+import { computed, ref, unref, watch } from 'vue';
+import type { MaybeRef } from '@/types/vue/ref';
 
 // paginate all data
 export function usePagination<T>(
   data: MaybeRef<T[]>,
-  pageSize: MaybeRef<number>
+  pageSize: MaybeRef<number>,
 ) {
   const pageCount = computed(() =>
-    Math.ceil(unref(data).length / unref(pageSize))
+    Math.ceil(unref(data).length / unref(pageSize)),
   );
   const page = ref(1);
   const paginatedData = computed(() => {
@@ -26,7 +26,7 @@ export function usePagination<T>(
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
-    })
+    }),
   );
   return { pageCount, page, paginatedData };
 }

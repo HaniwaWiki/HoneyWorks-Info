@@ -1,7 +1,30 @@
+<script setup lang="ts">
+import { computed, ref } from 'vue';
+import type { CharacterCard } from '@/types/HWPL/CharacterCard';
+import { useCollection } from '@/composables/useCollection';
+import { getSkillInfo } from '@/utils/hwpl/Skill';
+
+const props = defineProps<{
+  characterCard: CharacterCard | null;
+}>();
+
+const selectedLevel = ref(1);
+
+const skills = useCollection('Skills');
+const skill = computed(() =>
+  skills.collection.value.find(s => s.Id === props.characterCard?.SkillId),
+);
+
+const skillName = computed(() => skill.value?.Name);
+const skillInfo = computed(() =>
+  skill.value ? getSkillInfo(skill.value!, selectedLevel.value) : undefined,
+);
+</script>
+
 <template>
   <v-card>
     <template #title>
-      <span v-t="'global.skill'" class="mr-10"></span>
+      <span v-t="'global.skill'" class="mr-10" />
       <span>{{ skillName }}</span>
     </template>
     <div class="px-4">
@@ -35,26 +58,3 @@
     </v-list>
   </v-card>
 </template>
-
-<script setup lang="ts">
-import { CharacterCard } from '@/types/HWPL/CharacterCard';
-import { computed, ref } from 'vue';
-import { useCollection } from '@/composables/useCollection';
-import { getSkillInfo } from '@/utils/hwpl/Skill';
-
-const props = defineProps<{
-  characterCard: CharacterCard | null;
-}>();
-
-const selectedLevel = ref(1);
-
-const skills = useCollection('Skills');
-const skill = computed(() =>
-  skills.collection.value.find((s) => s.Id === props.characterCard?.SkillId)
-);
-
-const skillName = computed(() => skill.value?.Name);
-const skillInfo = computed(() =>
-  skill.value ? getSkillInfo(skill.value!, selectedLevel.value) : undefined
-);
-</script>

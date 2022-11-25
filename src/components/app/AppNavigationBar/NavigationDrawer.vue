@@ -1,22 +1,6 @@
-<template>
-  <v-navigation-drawer
-    :model-value="drawer"
-    @update:model-value="(val: boolean) => $emit('update:drawer', val)"
-  >
-    <v-list dense nav density="compact">
-      <v-item-group mandatory>
-        <NavigationListItem
-          v-for="item in items"
-          :key="item.title"
-          :item="item"
-        />
-      </v-item-group>
-    </v-list>
-  </v-navigation-drawer>
-</template>
-
 <script setup lang="ts">
-import { computed, Ref } from 'vue';
+import type { Ref } from 'vue';
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { NavigationListItemProp } from '../../base/NavigationListItem/types';
 import NavigationListItem from '../../base/NavigationListItem/NavigationListItem.vue';
@@ -62,5 +46,22 @@ const items: Ref<NavigationListItemProp[]> = computed(() => [
   { title: t('global.about_us'), icon: 'mdi-account', href: '/about' },
 ]);
 </script>
+
+<template>
+  <v-navigation-drawer
+    :model-value="drawer"
+    @update:model-value="(val: boolean) => $emit('update:drawer', val)"
+  >
+    <v-list dense nav density="compact">
+      <v-item-group mandatory>
+        <NavigationListItem
+          v-for="item in items"
+          :key="item.title"
+          :item="item"
+        />
+      </v-item-group>
+    </v-list>
+  </v-navigation-drawer>
+</template>
 
 <style scoped></style>

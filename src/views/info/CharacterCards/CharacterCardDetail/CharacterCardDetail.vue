@@ -1,30 +1,7 @@
-<template>
-  <AppScaffold>
-    <div>
-      <div class="text-h3 mb-4">{{ cardName }}</div>
-      <div class="text-h5 text-grey">{{ characterName }}</div>
-    </div>
-
-    <v-card>
-      <ResourceTabs :resources="characterCardResources" />
-    </v-card>
-
-    <CharacterCardDetailGeneral :character-card="characterCard" />
-
-    <CharacterCardDetailGameStat :character-card="characterCard" />
-
-    <CharacterCardDetailSkill :character-card="characterCard" />
-
-    <v-card :title="$t('global.related_resources')">
-      <ResourceTabs :resources="relatedResources" />
-    </v-card>
-  </AppScaffold>
-</template>
-
 <script setup lang="ts">
 import { ref } from 'vue';
-import AppScaffold from '@/components/app/AppScaffold.vue';
 import { useRoute } from 'vue-router';
+import AppScaffold from '@/components/app/AppScaffold.vue';
 import { useFirstOfCollection } from '@/composables/useCollection';
 import { useCharacterCardName } from '@/composables/hwpl/useCharacterCardName';
 import ResourceTabs from '@/components/base/ResourceTabs/ResourceTabs.vue';
@@ -47,3 +24,30 @@ const [cardName, characterName] = useCharacterCardName(characterCard);
 const characterCardResources = useCharacterCardImageResources(characterCard);
 const relatedResources = useCharacterCardRelatedResources(characterCard);
 </script>
+
+<template>
+  <AppScaffold>
+    <div>
+      <div class="text-h3 mb-4">
+        {{ cardName }}
+      </div>
+      <div class="text-h5 text-grey">
+        {{ characterName }}
+      </div>
+    </div>
+
+    <v-card>
+      <ResourceTabs :resources="characterCardResources" />
+    </v-card>
+
+    <CharacterCardDetailGeneral :character-card="characterCard" />
+
+    <CharacterCardDetailGameStat :character-card="characterCard" />
+
+    <CharacterCardDetailSkill :character-card="characterCard" />
+
+    <v-card :title="$t('global.related_resources')">
+      <ResourceTabs :resources="relatedResources" />
+    </v-card>
+  </AppScaffold>
+</template>

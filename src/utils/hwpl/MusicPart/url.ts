@@ -11,7 +11,7 @@ export function getMusicPartUrl(Id: number) {
 export function getMusicPartMVUrl(Id: number) {
   const { assetsBaseUrl } = getBaseUrls();
   return {
-    default: `${assetsBaseUrl}/CriwareCpks/MV/${Id}/${Id}.mp4`,
+    'default': `${assetsBaseUrl}/CriwareCpks/MV/${Id}/${Id}.mp4`,
     '2K': `${assetsBaseUrl}/CriwareCpks/MV/${Id}/${Id}.mp4`,
   };
 }

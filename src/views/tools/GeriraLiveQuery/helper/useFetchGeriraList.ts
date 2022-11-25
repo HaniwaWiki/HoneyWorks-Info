@@ -1,6 +1,7 @@
-import { computed, onMounted, Ref, ref } from 'vue';
+import type { Ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import axios from '@/utils/request';
-import { GeriraInfo } from '@/views/tools/GeriraLiveQuery/helper/type';
+import type { GeriraInfo } from '@/views/tools/GeriraLiveQuery/helper/type';
 import { parseRss } from '@/views/tools/GeriraLiveQuery/helper/parseRss';
 import { parseGerira } from '@/views/tools/GeriraLiveQuery/helper/parseGerira';
 import { getBaseUrls } from '@/config';
@@ -20,7 +21,7 @@ export function useFetchGeriraList() {
     const rss = parseRss(res.data);
     geriraList.value = rss
       .map(parseGerira)
-      .filter((r) => r !== null) as GeriraInfo[];
+      .filter(r => r !== null) as GeriraInfo[];
     loading.value = false;
   }
 
@@ -35,6 +36,6 @@ export function isExpired(gerira: GeriraInfo): boolean {
 
 export function useGeriraFilter(geriraList: Ref<GeriraInfo[]>) {
   return computed(() =>
-    geriraList.value.filter((gerira) => !isExpired(gerira))
+    geriraList.value.filter(gerira => !isExpired(gerira)),
   );
 }

@@ -1,3 +1,30 @@
+<script setup lang="ts">
+import { ref, watchEffect } from 'vue';
+import type { Resource } from '@/components/base/ResourceTabs/Resource';
+import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
+import {
+  getExtension,
+  isAudio,
+  isImage,
+  isVideo,
+} from '@/utils/fileExtensions';
+import VideoPlayer from '@/components/base/VideoPlayer.vue';
+import AudioPlayer from '@/components/base/AudioPlayer.vue';
+import ButtonIconLink from '@/components/base/ButtonIconLink.vue';
+
+// props definition
+const props = defineProps<{
+  resources: Resource[];
+}>();
+
+const tab = ref('');
+
+// when resource list update, reset tab to first item
+watchEffect(() => {
+  tab.value = props.resources[0]?.name;
+});
+</script>
+
 <template>
   <div v-if="resources.length">
     <v-tabs v-model="tab" color="primary" center-active>
@@ -53,37 +80,10 @@
       :src="getCharacterCardImageUrl({ Id: 1997003 })"
       alt="puppet"
       width="48"
-    />
+    >
     <div v-t="'components.resource_tabs.no_resource_available'" />
   </div>
 </template>
-
-<script setup lang="ts">
-import { Resource } from '@/components/base/ResourceTabs/Resource';
-import { ref, watchEffect } from 'vue';
-import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
-import {
-  getExtension,
-  isAudio,
-  isImage,
-  isVideo,
-} from '@/utils/fileExtensions';
-import VideoPlayer from '@/components/base/VideoPlayer.vue';
-import AudioPlayer from '@/components/base/AudioPlayer.vue';
-import ButtonIconLink from '@/components/base/ButtonIconLink.vue';
-
-// props definition
-const props = defineProps<{
-  resources: Resource[];
-}>();
-
-const tab = ref('');
-
-// when resource list update, reset tab to first item
-watchEffect(() => {
-  tab.value = props.resources[0]?.name;
-});
-</script>
 
 <style lang="scss" scoped>
 .resource-window {

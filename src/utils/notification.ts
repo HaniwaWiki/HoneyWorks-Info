@@ -6,8 +6,8 @@ export type NotificationOptions = globalThis.NotificationOptions;
 export function sendNotification(title: string, options: NotificationOptions) {
   try {
     return new Notification(title, options);
-  } catch (e) {
-    // eslint-disable-next-line no-console
+  }
+  catch (e) {
     console.error(e);
     return null;
   }

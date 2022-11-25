@@ -1,15 +1,3 @@
-<template>
-  <audio
-    v-if="url"
-    :autoplay="autoplay"
-    :loop="loop"
-    :muted="muted"
-    :controls="controls"
-  >
-    <source :src="url" />
-  </audio>
-</template>
-
 <script setup lang="ts">
 defineProps<{
   url: string;
@@ -19,6 +7,18 @@ defineProps<{
   controls?: boolean;
 }>();
 </script>
+
+<template>
+  <audio
+    v-if="url"
+    :autoplay="autoplay"
+    :loop="loop"
+    :muted="muted"
+    :controls="controls"
+  >
+    <source :src="url">
+  </audio>
+</template>
 
 <style lang="scss" scoped>
 audio {

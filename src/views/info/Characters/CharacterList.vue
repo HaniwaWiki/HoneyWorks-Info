@@ -1,3 +1,27 @@
+<script setup lang="ts">
+import { useDisplay } from 'vuetify';
+import AppScaffold from '@/components/app/AppScaffold.vue';
+import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
+import { goto } from '@/router';
+import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
+import { useCollection } from '@/composables/useCollection';
+import type { Character } from '@/types/HWPL/Character';
+
+// page options
+const { mobile } = useDisplay();
+
+// fetch data
+const { loading, collection: characters } = useCollection('Characters');
+
+// parse function and parsed data
+function getCharacterImage(character: Character) {
+  return getCharacterCardImageUrl({
+    Id: character.DefaultCharacterCardId,
+    evolved: false,
+  });
+}
+</script>
+
 <template>
   <AppScaffold>
     <v-row>
@@ -15,26 +39,3 @@
     </v-row>
   </AppScaffold>
 </template>
-<script setup lang="ts">
-import AppScaffold from '@/components/app/AppScaffold.vue';
-import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
-import { goto } from '@/router';
-import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
-import { useCollection } from '@/composables/useCollection';
-import { Character } from '@/types/HWPL/Character';
-import { useDisplay } from 'vuetify';
-
-// page options
-const { mobile } = useDisplay();
-
-// fetch data
-const { loading, collection: characters } = useCollection('Characters');
-
-// parse function and parsed data
-function getCharacterImage(character: Character) {
-  return getCharacterCardImageUrl({
-    Id: character.DefaultCharacterCardId,
-    evolved: false,
-  });
-}
-</script>

@@ -1,30 +1,6 @@
-<template>
-  <v-card :width="width" :to="to">
-    <HwplImageRarityWrapper :rarity="rarity" :evolved="evolved">
-      <v-img
-        :src="imgSrc"
-        :alt="title"
-        class="ma-auto"
-        :aspect-ratio="1 / 1.5"
-      />
-    </HwplImageRarityWrapper>
-
-    <v-card-text
-      v-if="title || subtitle"
-      class="character-card-textarea"
-      :style="{ height: textHeight }"
-    >
-      <div>{{ title }}</div>
-      <div class="text-grey character-card-subtitle">
-        {{ subtitle }}
-      </div>
-    </v-card-text>
-  </v-card>
-</template>
-
 <script setup lang="ts">
+import type { RouteLocationRaw } from 'vue-router';
 import HwplImageRarityWrapper from '@/components/hwpl/HwplImageRarityWrapper.vue';
-import { RouteLocationRaw } from 'vue-router';
 
 type Props = {
   imgSrc: string;
@@ -51,6 +27,30 @@ withDefaults(defineProps<Props>(), {
   textHeight: undefined,
 });
 </script>
+
+<template>
+  <v-card :width="width" :to="to">
+    <HwplImageRarityWrapper :rarity="rarity" :evolved="evolved">
+      <v-img
+        :src="imgSrc"
+        :alt="title"
+        class="ma-auto"
+        :aspect-ratio="1 / 1.5"
+      />
+    </HwplImageRarityWrapper>
+
+    <v-card-text
+      v-if="title || subtitle"
+      class="character-card-textarea"
+      :style="{ height: textHeight }"
+    >
+      <div>{{ title }}</div>
+      <div class="text-grey character-card-subtitle">
+        {{ subtitle }}
+      </div>
+    </v-card-text>
+  </v-card>
+</template>
 
 <style lang="scss" scoped>
 .character-card {

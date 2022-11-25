@@ -1,4 +1,13 @@
 <!--  link that displays like a button  -->
+<script setup lang="ts">
+defineProps<{
+  inline?: boolean;
+  icon: string;
+  text: string;
+  url: string;
+}>();
+</script>
+
 <template>
   <v-btn
     ripple
@@ -12,15 +21,6 @@
     {{ text }}
   </v-btn>
 </template>
-
-<script setup lang="ts">
-defineProps<{
-  inline?: boolean;
-  icon: string;
-  text: string;
-  url: string;
-}>();
-</script>
 
 <style lang="scss" scoped>
 .link {

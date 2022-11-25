@@ -1,56 +1,18 @@
-<template>
-  <AppScaffold>
-    <div class="text-h3">{{ character?.Name }}</div>
-
-    <v-card>
-      <ResourceTabs
-        :resources="[
-          { name: $t('character.default_card_image'), url: characterImageUrl },
-        ]"
-      />
-    </v-card>
-
-    <v-card :title="$t('character.general')">
-      <v-list
-        class="icon-primary"
-        :items="listItems"
-        color="primary"
-        item-props
-        lines="two"
-      >
-        <template #title="{ title }">
-          <div class="text-pre-wrap" v-text="title" />
-        </template>
-      </v-list>
-    </v-card>
-
-    <v-card
-      :title="
-        $t('character.character_cards_num_in_total', [characterCards.length])
-      "
-    >
-      <v-list>
-        <CharacterCardScrollList :character-cards="characterCards" />
-      </v-list>
-    </v-card>
-  </AppScaffold>
-</template>
-
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import AppScaffold from '@/components/app/AppScaffold.vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
-import { useRoute } from 'vue-router';
 import {
   useCollection,
   useFirstOfCollection,
 } from '@/composables/useCollection';
 import type { VuetifyListItem } from '@/types/vuetify/listItem';
-import { MdiIcons } from '@/types/mdi';
+import type { MdiIcons } from '@/types/mdi';
 import { parseCharacterBirthday } from '@/utils/hwpl/Character/common';
 import CharacterCardScrollList from '@/components/assemble/CharacterCardScrollList.vue';
 import ResourceTabs from '@/components/base/ResourceTabs/ResourceTabs.vue';
-import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 
@@ -68,9 +30,9 @@ const { collection: characterCards } = useCollection('CharacterCards', {
 const characterImageUrl = computed(() =>
   character.value
     ? getCharacterCardImageUrl({
-        Id: character.value.DefaultCharacterCardId,
-      })
-    : ''
+      Id: character.value.DefaultCharacterCardId,
+    })
+    : '',
 );
 
 const listItems = computed<VuetifyListItem[]>(() => [
@@ -122,3 +84,43 @@ const listItems = computed<VuetifyListItem[]>(() => [
   },
 ]);
 </script>
+
+<template>
+  <AppScaffold>
+    <div class="text-h3">
+      {{ character?.Name }}
+    </div>
+
+    <v-card>
+      <ResourceTabs
+        :resources="[
+          { name: $t('character.default_card_image'), url: characterImageUrl },
+        ]"
+      />
+    </v-card>
+
+    <v-card :title="$t('character.general')">
+      <v-list
+        class="icon-primary"
+        :items="listItems"
+        color="primary"
+        item-props
+        lines="two"
+      >
+        <template #title="{ title }">
+          <div class="text-pre-wrap" v-text="title" />
+        </template>
+      </v-list>
+    </v-card>
+
+    <v-card
+      :title="
+        $t('character.character_cards_num_in_total', [characterCards.length])
+      "
+    >
+      <v-list>
+        <CharacterCardScrollList :character-cards="characterCards" />
+      </v-list>
+    </v-card>
+  </AppScaffold>
+</template>

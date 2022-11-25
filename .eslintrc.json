@@ -1,60 +1,21 @@
 {
-  "settings": {
-    "import/resolver": {
-      "typescript": {}
-    }
-  },
-  "env": {
-    "browser": true,
-    "es2021": true,
-    "vue/setup-compiler-macros": true
-  },
-  "extends": [
-    "plugin:vue/vue3-recommended",
-    "@vue/eslint-config-typescript/recommended",
-    "airbnb-base",
-    "airbnb-typescript/base",
-    "@vue/eslint-config-prettier"
-  ],
-  "parser": "vue-eslint-parser",
-  "parserOptions": {
-    "ecmaVersion": "latest",
-    "parser": "@typescript-eslint/parser",
-    "sourceType": "module",
-    "project": "./tsconfig.json"
-  },
-  "plugins": ["vue", "@typescript-eslint", "prettier"],
+  "extends": "@antfu",
   "rules": {
-    "no-restricted-syntax": "off",
-    "prettier/prettier": "error",
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "ts": "never"
-      }
-    ],
-    "import/no-cycle": "off",
-    "import/prefer-default-export": "off",
-    "@typescript-eslint/explicit-member-accessibility": 0,
-    "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/no-non-null-assertion": 0,
-    "@typescript-eslint/no-parameter-properties": 0,
-    "@typescript-eslint/interface-name-prefix": 0,
-    "@typescript-eslint/explicit-module-boundary-types": 0,
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-unused-vars": "off",
-    "@typescript-eslint/ban-ts-comment": "off",
-    "@typescript-eslint/ban-types": "off",
-    "@typescript-eslint/no-var-requires": "off",
-    "prefer-destructuring": "off",
-    "vue/component-tags-order": [
-      "error",
-      {
-        "order": ["template",  "script[setup]","script:not([setup])", "style"]
-      }
-    ],
-    "vue/no-template-shadow": "off"
+    "semi": "off",
+    "@typescript-eslint/semi": ["error", "always", {
+        "omitLastInOneLineBlock": false
+    }],
+    "@typescript-eslint/member-delimiter-style": ["error", {
+      "multiline": {
+        "delimiter": "semi",
+        "requireLast": true
+      },
+      "singleline": {
+        "delimiter": "semi",
+        "requireLast": false
+      },
+      "multilineDetection": "brackets"
+    }],
+    "@typescript-eslint/consistent-type-definitions": ["warn", "type"]
   }
 }

@@ -1,3 +1,22 @@
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+import {
+  SupportedLocale,
+  isSupportedLocale,
+  supportedLocaleMap,
+} from '@/i18n/supportedLocales';
+import { loadLocaleMessages } from '@/i18n/loadLocaleMessages';
+
+const i18n = useI18n();
+
+async function updateLocale(locale: string) {
+  if (isSupportedLocale(locale)) {
+    await loadLocaleMessages(locale);
+    i18n.locale.value = locale;
+  }
+}
+</script>
+
 <template>
   <v-menu>
     <template #activator="{ props }">
@@ -23,22 +42,3 @@
     </v-list>
   </v-menu>
 </template>
-
-<script setup lang="ts">
-import {
-  isSupportedLocale,
-  SupportedLocale,
-  supportedLocaleMap,
-} from '@/i18n/supportedLocales';
-import { useI18n } from 'vue-i18n';
-import { loadLocaleMessages } from '@/i18n/loadLocaleMessages';
-
-const i18n = useI18n();
-
-async function updateLocale(locale: string) {
-  if (isSupportedLocale(locale)) {
-    await loadLocaleMessages(locale);
-    i18n.locale.value = locale;
-  }
-}
-</script>

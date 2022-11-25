@@ -1,17 +1,3 @@
-<template>
-  <video
-    v-if="url"
-    :autoplay="autoplay"
-    :loop="loop"
-    :muted="muted"
-    :controls="controls"
-    :width="width"
-    :height="height"
-  >
-    <source :src="url" />
-  </video>
-</template>
-
 <script setup lang="ts">
 defineProps<{
   url: string;
@@ -23,6 +9,20 @@ defineProps<{
   height?: string;
 }>();
 </script>
+
+<template>
+  <video
+    v-if="url"
+    :autoplay="autoplay"
+    :loop="loop"
+    :muted="muted"
+    :controls="controls"
+    :width="width"
+    :height="height"
+  >
+    <source :src="url">
+  </video>
+</template>
 
 <style lang="scss" scoped>
 video {

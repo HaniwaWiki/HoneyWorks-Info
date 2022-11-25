@@ -1,3 +1,38 @@
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+import AppScaffold from '../../../components/app/AppScaffold.vue';
+import { useCountDown } from '../../../composables/useCountDown';
+import CopyToClipboard from '../../../components/base/CopyToClipboard.vue';
+import {
+  useFetchGeriraList,
+  useGeriraFilter,
+} from './helper/useFetchGeriraList';
+import { useNotificationOnNewGerira } from './helper/useNotificationOnNewGerira';
+
+// default CACHE_EXPIRE of RSSHub is 5 min
+const countDown = 5 * 60;
+
+const { t, d } = useI18n();
+
+const { geriraList, loading, refresh } = useFetchGeriraList();
+const aliveGeriraList = useGeriraFilter(geriraList);
+
+// use a count-down to auto refresh
+const { count, resetCountDown } = useCountDown(countDown, (_resetCountDown) => {
+  refresh();
+  _resetCountDown(countDown);
+});
+
+// click button to manual fresh
+function refreshGeriraInfoAndCountDown() {
+  refresh();
+  resetCountDown(countDown);
+}
+
+// send notification when new lv3 gerira is found
+useNotificationOnNewGerira(aliveGeriraList, 3);
+</script>
+
 <template>
   <AppScaffold>
     <v-row>
@@ -48,38 +83,3 @@
     </v-row>
   </AppScaffold>
 </template>
-
-<script setup lang="ts">
-import { useI18n } from 'vue-i18n';
-import {
-  useFetchGeriraList,
-  useGeriraFilter,
-} from './helper/useFetchGeriraList';
-import AppScaffold from '../../../components/app/AppScaffold.vue';
-import { useCountDown } from '../../../composables/useCountDown';
-import CopyToClipboard from '../../../components/base/CopyToClipboard.vue';
-import { useNotificationOnNewGerira } from './helper/useNotificationOnNewGerira';
-
-// default CACHE_EXPIRE of RSSHub is 5 min
-const countDown = 5 * 60;
-
-const { t, d } = useI18n();
-
-const { geriraList, loading, refresh } = useFetchGeriraList();
-const aliveGeriraList = useGeriraFilter(geriraList);
-
-// use a count-down to auto refresh
-const { count, resetCountDown } = useCountDown(countDown, (_resetCountDown) => {
-  refresh();
-  _resetCountDown(countDown);
-});
-
-// click button to manual fresh
-function refreshGeriraInfoAndCountDown() {
-  refresh();
-  resetCountDown(countDown);
-}
-
-// send notification when new lv3 gerira is found
-useNotificationOnNewGerira(aliveGeriraList, 3);
-</script>

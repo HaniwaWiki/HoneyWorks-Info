@@ -1,25 +1,10 @@
-<template>
-  <v-container>
-    <v-row justify="center">
-      <v-col cols="6" md="4">
-        <v-img :src="getCharacterCardImageUrl(randomCharacterCardPair[0])" />
-      </v-col>
-      <NotFoundText v-if="mdAndUp" cols="4" />
-      <v-col cols="6" md="4">
-        <v-img :src="getCharacterCardImageUrl(randomCharacterCardPair[1])" />
-      </v-col>
-      <NotFoundText v-if="!mdAndUp" cols="12" />
-    </v-row>
-  </v-container>
-</template>
-
 <script setup lang="ts">
-import {
-  getCharacterCardImageUrl,
-  GetCharacterCardImageUrlParam,
-} from '@/utils/hwpl/CharacterCard/url';
 import { onMounted, ref } from 'vue';
 import { useDisplay } from 'vuetify';
+import type { GetCharacterCardImageUrlParam } from '@/utils/hwpl/CharacterCard/url';
+import {
+  getCharacterCardImageUrl,
+} from '@/utils/hwpl/CharacterCard/url';
 import NotFoundText from '@/views/NotFound/components/NotFoundText.vue';
 
 const { mdAndUp } = useDisplay();
@@ -43,3 +28,18 @@ onMounted(() => {
   randomCharacterCardPair.value = characterCardPairs[randomIndex];
 });
 </script>
+
+<template>
+  <v-container>
+    <v-row justify="center">
+      <v-col cols="6" md="4">
+        <v-img :src="getCharacterCardImageUrl(randomCharacterCardPair[0])" />
+      </v-col>
+      <NotFoundText v-if="mdAndUp" cols="4" />
+      <v-col cols="6" md="4">
+        <v-img :src="getCharacterCardImageUrl(randomCharacterCardPair[1])" />
+      </v-col>
+      <NotFoundText v-if="!mdAndUp" cols="12" />
+    </v-row>
+  </v-container>
+</template>

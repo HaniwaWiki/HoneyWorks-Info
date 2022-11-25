@@ -1,8 +1,42 @@
 <!-- v-list-item used in navigation-drawer -->
+<script setup lang="ts">
+import { computed, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import type { NavigationListItemProp } from './types';
+
+const props = defineProps<{ item: NavigationListItemProp }>();
+
+const route = useRoute();
+
+const active = computed(
+  () => !!props.item.href && route.path.startsWith(props.item.href),
+);
+
+type LinkProp = {
+  to?: string;
+  href?: string;
+  target?: string;
+};
+
+const linkProp = computed<LinkProp>(() => {
+  const href = props.item.href;
+  // is not a valid URL
+  if (!href)
+    return {};
+
+  // is external link, use href
+  if (href.startsWith('http'))
+    return { href, target: '_blank' };
+
+  // is internal link, use router-link
+  return { to: href };
+});
+</script>
+
 <template>
   <v-list-group v-if="item.subItems">
-    <template #activator="{ props }">
-      <NavigationListItem v-bind="props" :item="{ ...item, subItems: null }" />
+    <template #activator="{ slotProps }">
+      <NavigationListItem v-bind="slotProps" :item="{ ...item, subItems: null }" />
     </template>
     <NavigationListItem
       v-for="subItem in item.subItems"
@@ -22,37 +56,3 @@
     active-color="primary"
   />
 </template>
-
-<script setup lang="ts">
-import { computed, watch } from 'vue';
-import { useRoute } from 'vue-router';
-import type { NavigationListItemProp } from './types';
-
-const props = defineProps<{ item: NavigationListItemProp }>();
-
-const route = useRoute();
-
-const active = computed(
-  () => !!props.item.href && route.path.startsWith(props.item.href)
-);
-
-type LinkProp = {
-  to?: string;
-  href?: string;
-  target?: string;
-};
-
-const linkProp = computed<LinkProp>(() => {
-  const href = props.item.href;
-  // is not a valid URL
-  if (!href) {
-    return {};
-  }
-  // is external link, use href
-  if (href.startsWith('http')) {
-    return { href, target: '_blank' };
-  }
-  // is internal link, use router-link
-  return { to: href };
-});
-</script>
