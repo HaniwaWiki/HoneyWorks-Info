@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer
     :model-value="drawer"
-    @update:model-value="(val) => $emit('update:drawer', val)"
+    @update:model-value="(val: boolean) => $emit('update:drawer', val)"
   >
     <v-list dense nav density="compact">
       <v-item-group mandatory>
