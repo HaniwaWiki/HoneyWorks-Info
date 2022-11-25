@@ -1,15 +1,17 @@
-import { assetBaseUrl } from '@/config';
+import { getBaseUrls } from '@/config';
 
 export function getMusicPartUrl(Id: number) {
+  const { assetsBaseUrl } = getBaseUrls();
   return {
-    default: `${assetBaseUrl}/CriwareCpks/MV/${Id}/${Id}.cpk_unpacked/output/${Id}.wav`,
-    lossless: `${assetBaseUrl}/CriwareCpks/MV/${Id}/${Id}.cpk_unpacked/output/${Id}.wav`,
+    default: `${assetsBaseUrl}/CriwareCpks/MV/${Id}/${Id}.cpk_unpacked/output/${Id}.wav`,
+    lossless: `${assetsBaseUrl}/CriwareCpks/MV/${Id}/${Id}.cpk_unpacked/output/${Id}.wav`,
   };
 }
 
 export function getMusicPartMVUrl(Id: number) {
+  const { assetsBaseUrl } = getBaseUrls();
   return {
-    default: `${assetBaseUrl}/CriwareCpks/MV/${Id}/${Id}.mp4`,
-    '2K': `${assetBaseUrl}/CriwareCpks/MV/${Id}/${Id}.mp4`,
+    default: `${assetsBaseUrl}/CriwareCpks/MV/${Id}/${Id}.mp4`,
+    '2K': `${assetsBaseUrl}/CriwareCpks/MV/${Id}/${Id}.mp4`,
   };
 }

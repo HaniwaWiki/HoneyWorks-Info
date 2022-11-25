@@ -16,14 +16,6 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api': {
-        target: 'https://honeyworks.info/',
-        changeOrigin: true,
-      },
-      '/assets': {
-        target: 'https://honeyworks.info/',
-        changeOrigin: true,
-      },
       '/locale': {
         // use deployed i18n json files
         // target: 'https://honeyworks.info/',

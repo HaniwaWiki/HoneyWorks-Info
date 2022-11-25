@@ -1,43 +1,27 @@
 import { getCollection } from '@/api/common';
-import { assetBaseUrl } from '@/config';
-import { Resource } from '@/components/base/ResourceTabs/Resource';
+import { getBaseUrls } from '@/config';
 import { SceneCard } from '@/types/HWPL/SceneCard';
+import { hasDynamicImage } from '@/utils/hwpl/SceneCard/hasDynamicImage';
 
 // cached scene cards list
 let sceneCards: SceneCard[];
-// only 5-Rarity Character Cards have dynamic Scene Card images when cards are rank up
-let dynamicSceneCardIds: Set<number> | null = null;
 
 // generate static image url
 export function getSceneCardStaticImageUrl(imageId: string) {
-  return `${assetBaseUrl}/Assets/SceneCards/${imageId}.png`;
+  const { assetsBaseUrl } = getBaseUrls();
+  return `${assetsBaseUrl}/Assets/SceneCards/${imageId}.png`;
 }
 
 // generate static thumb image url
 export function getSceneCardStaticThumbImageUrl(imageId: string) {
-  return `${assetBaseUrl}/Assets/SceneCards_thumb/${imageId}_thumb.png`;
+  const { assetsBaseUrl } = getBaseUrls();
+  return `${assetsBaseUrl}/Assets/SceneCards_thumb/${imageId}_thumb.png`;
 }
 
 // generate dynamic image url
 function getSceneCardDynamicImageUrl(imageId: string) {
-  return `${assetBaseUrl}/CriwareCpks/SceneCard/${imageId}/${imageId}.mp4`;
-}
-
-async function getSceneCardWithDynamicImageIds(): Promise<Set<number>> {
-  if (dynamicSceneCardIds !== null) {
-    return dynamicSceneCardIds;
-  }
-  dynamicSceneCardIds = new Set<number>([1, 2, 3]);
-  const characterCards = await getCollection('CharacterCards', { Rarity: 5 });
-  const sceneCardIds = characterCards
-    .map((c) => c.RankUpSceneCardId)
-    .filter((c) => c) as number[];
-  dynamicSceneCardIds = new Set<number>(sceneCardIds);
-  return dynamicSceneCardIds;
-}
-
-async function hasDynamicImage(Id: number): Promise<boolean> {
-  return (await getSceneCardWithDynamicImageIds()).has(Id);
+  const { assetsBaseUrl } = getBaseUrls();
+  return `${assetsBaseUrl}/CriwareCpks/SceneCard/${imageId}/${imageId}.mp4`;
 }
 
 export async function getSceneCardImageUrl(Id: number) {
