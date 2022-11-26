@@ -5,11 +5,11 @@ import AppScaffold from '@/components/app/AppScaffold.vue';
 import { useFirstOfCollection } from '@/composables/useCollection';
 import { useCharacterCardName } from '@/composables/hwpl/useCharacterCardName';
 import ResourceTabs from '@/components/base/ResourceTabs/ResourceTabs.vue';
-import { useCharacterCardImageResources } from '@/views/info/CharacterCards/CharacterCardDetail/helper/useCharacterCardImageResources';
-import { useCharacterCardRelatedResources } from '@/views/info/CharacterCards/CharacterCardDetail/helper/useCharacterCardRelatedResources';
-import CharacterCardDetailGeneral from '@/views/info/CharacterCards/CharacterCardDetail/helper/CharacterCardDetailGeneral.vue';
-import CharacterCardDetailGameStat from '@/views/info/CharacterCards/CharacterCardDetail/helper/CharacterCardDetailGameStat.vue';
-import CharacterCardDetailSkill from '@/views/info/CharacterCards/CharacterCardDetail/helper/CharacterCardDetailSkill.vue';
+import { useCharacterCardImageResources } from '@/views/Info/CharacterCards/CharacterCardDetail/helper/useCharacterCardImageResources';
+import { useCharacterCardRelatedResources } from '@/views/Info/CharacterCards/CharacterCardDetail/helper/useCharacterCardRelatedResources';
+import CharacterCardDetailGeneral from '@/views/Info/CharacterCards/CharacterCardDetail/helper/CharacterCardDetailGeneral.vue';
+import CharacterCardDetailGameStat from '@/views/Info/CharacterCards/CharacterCardDetail/helper/CharacterCardDetailGameStat.vue';
+import CharacterCardDetailSkill from '@/views/Info/CharacterCards/CharacterCardDetail/helper/CharacterCardDetailSkill.vue';
 
 // page options
 const characterCardId = Number(useRoute().params.id);

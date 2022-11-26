@@ -9,10 +9,10 @@ import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue
 import HwplIconImageCard from '@/components/hwpl/HwplIconImageCard.vue';
 import { useCollection } from '@/composables/useCollection';
 import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
-import type { SortBy } from '@/views/info/CharacterCards/CharacterCardList/helper/sortCharacterCard';
+import type { SortBy } from '@/views/Info/CharacterCards/CharacterCardList/helper/sortCharacterCard';
 import {
   useSortCharacterCards,
-} from '@/views/info/CharacterCards/CharacterCardList/helper/sortCharacterCard';
+} from '@/views/Info/CharacterCards/CharacterCardList/helper/sortCharacterCard';
 
 // options from user
 const keyword = ref('');

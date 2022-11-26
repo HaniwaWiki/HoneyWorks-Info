@@ -4,19 +4,19 @@ const infoRoutes: RouteRecordRaw[] = [
   {
     name: 'Character List',
     path: '/info/characters',
-    component: () => import('@/views/info/Characters/CharacterList.vue'),
+    component: () => import('@/views/Info/Characters/CharacterList.vue'),
   },
   {
     name: 'Character Detail',
     path: '/info/characters/:id',
-    component: () => import('@/views/info/Characters/CharacterDetail.vue'),
+    component: () => import('@/views/Info/Characters/CharacterDetail.vue'),
   },
   {
     name: 'Character Card List',
     path: '/info/character-cards',
     component: () =>
       import(
-        '@/views/info/CharacterCards/CharacterCardList/CharacterCardList.vue'
+        '@/views/Info/CharacterCards/CharacterCardList/CharacterCardList.vue'
       ),
   },
   {
@@ -24,38 +24,38 @@ const infoRoutes: RouteRecordRaw[] = [
     path: '/info/character-cards/:id',
     component: () =>
       import(
-        '@/views/info/CharacterCards/CharacterCardDetail/CharacterCardDetail.vue'
+        '@/views/Info/CharacterCards/CharacterCardDetail/CharacterCardDetail.vue'
       ),
   },
   {
     name: 'Music Part List',
     path: '/info/music-parts',
-    component: () => import('@/views/info/MusicParts/MusicPartList.vue'),
+    component: () => import('@/views/Info/MusicParts/MusicPartList.vue'),
   },
   {
     name: 'Music Part Detail',
     path: '/info/music-parts/:id',
-    component: () => import('@/views/info/MusicParts/MusicPartDetail.vue'),
+    component: () => import('@/views/Info/MusicParts/MusicPartDetail.vue'),
   },
   {
     name: 'Scene Card List',
     path: '/info/scene-cards',
-    component: () => import('@/views/info/SceneCards/SceneCardList.vue'),
+    component: () => import('@/views/Info/SceneCards/SceneCardList.vue'),
   },
   {
     name: 'Scene Card Detail',
     path: '/info/scene-cards/:id',
-    component: () => import('@/views/info/SceneCards/SceneCardDetail.vue'),
+    component: () => import('@/views/Info/SceneCards/SceneCardDetail.vue'),
   },
   {
     name: 'Event List',
-    path: '/info/events',
-    component: () => import('@/views/info/events/EventList.vue'),
+    path: '/info/Events',
+    component: () => import('@/views/Info/Events/EventList.vue'),
   },
   {
     name: 'Event Detail',
-    path: '/info/events/:id',
-    component: () => import('@/views/info/events/EventDetail.vue'),
+    path: '/info/Events/:id',
+    component: () => import('@/views/Info/Events/EventDetail.vue'),
   },
 ];
 

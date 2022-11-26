@@ -1,4 +1,4 @@
-import type { GeriraInfo, RssInfo } from '@/views/tools/GeriraLiveQuery/helper/type';
+import type { GeriraInfo, RssInfo } from '@/views/Tools/GeriraLiveQuery/helper/type';
 import { removeHtmlTags } from '@/utils/removeHtmlTags';
 
 /**

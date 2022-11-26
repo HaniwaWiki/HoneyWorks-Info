@@ -2,7 +2,7 @@ import type { Ref } from 'vue';
 import { ref, unref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import _ from 'lodash';
-import type { GeriraInfo } from '@/views/tools/GeriraLiveQuery/helper/type';
+import type { GeriraInfo } from '@/views/Tools/GeriraLiveQuery/helper/type';
 import type { MaybeRef } from '@/types/vue/ref';
 import type { UseI18nResult } from '@/i18n/types';
 import { sendNotification } from '@/utils/notification';
