@@ -17,12 +17,13 @@ const title = computed(() => {
   const routeName = String(route.name);
   return route.name ? t(`route.${routeName}`) : '';
 });
-const pageTitle = computed(() =>
+const appBarTitle = computed(() =>
   title.value ? `${title.value} | ${appName.value}` : appName.value,
 );
 
+// sync app-bar title to website title
 watchEffect(() => {
-  document.title = pageTitle.value;
+  document.title = appBarTitle.value;
 });
 </script>
 
@@ -32,7 +33,7 @@ watchEffect(() => {
       <v-app-bar-nav-icon @click="$emit('update:drawer', !drawer)" />
     </template>
 
-    <v-app-bar-title>{{ pageTitle }}</v-app-bar-title>
+    <v-app-bar-title>{{ appBarTitle }}</v-app-bar-title>
 
     <template #append>
       <AppBarChangeLanguage />

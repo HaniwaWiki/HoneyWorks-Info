@@ -4,16 +4,10 @@ import type { WritableComputedRef } from 'vue';
 import { loadLocaleMessages } from '@/i18n/loadLocaleMessages';
 import type { SupportedLocale } from '@/i18n/supportedLocales';
 
-export function getDefaultLocale(): SupportedLocale {
-  return 'zh_Hans';
-}
-
 function setI18nLanguage(i18n: I18n, locale: SupportedLocale) {
   if (i18n.mode === 'legacy')
-
     i18n.global.locale = locale;
   else
-
     (i18n.global.locale as WritableComputedRef<string>).value = locale;
 
   /**

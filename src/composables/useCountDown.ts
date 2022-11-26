@@ -1,6 +1,9 @@
 import { onMounted, ref } from 'vue';
 
-// the resetCountDown in callback and the resetCountDown in return values are same function
+// this is a count-down timer, which decrease the value of `count` every second
+// when `count` is 0, the timer stops, and `callback` function is called
+//
+// note that the resetCountDown in callback and the resetCountDown in return values are same function
 // so that you can use resetCountDown both inside and outside callback function
 export function useCountDown(
   seconds: number,

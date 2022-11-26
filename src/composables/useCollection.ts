@@ -1,10 +1,10 @@
-// composable of getCollection
 import type { Ref } from 'vue';
 import { ref, unref, watchEffect } from 'vue';
 import { getCollection } from '@/api/common';
 import type { CollectionTypeName } from '@/types/HWPL';
 import type { MaybeRef } from '@/types/vue/ref';
 
+// composable of getCollection
 export function useCollection<Name extends keyof CollectionTypeName>(
   collectionName: MaybeRef<Name>,
   filter: MaybeRef<Partial<CollectionTypeName[Name]>> = ref({}),

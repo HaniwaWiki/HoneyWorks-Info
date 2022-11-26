@@ -1,20 +1,8 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
-import {
-  SupportedLocale,
-  isSupportedLocale,
-  supportedLocaleMap,
-} from '@/i18n/supportedLocales';
-import { loadLocaleMessages } from '@/i18n/loadLocaleMessages';
+import { useSettingsStore } from '../../../stores/settings';
+import { supportedLocaleMap } from '@/i18n/supportedLocales';
 
-const i18n = useI18n();
-
-async function updateLocale(locale: string) {
-  if (isSupportedLocale(locale)) {
-    await loadLocaleMessages(locale);
-    i18n.locale.value = locale;
-  }
-}
+const settingsStore = useSettingsStore();
 </script>
 
 <template>
@@ -27,14 +15,14 @@ async function updateLocale(locale: string) {
       fixme: show user current choice.
         current version is not working, since Vuetify docs are unclear on v-item-group
       -->
-      <v-item-group v-model="i18n.locale" selected-class="text-primary">
+      <v-item-group v-model="settingsStore.locale" selected-class="text-primary">
         <v-list-item
           v-for="[code, lang] in Object.entries(supportedLocaleMap)"
           :key="code"
           :value="code"
           density="comfortable"
         >
-          <v-list-item-title @click="updateLocale(code)">
+          <v-list-item-title @click="settingsStore.setLocale(code)">
             {{ lang }}
           </v-list-item-title>
         </v-list-item>
