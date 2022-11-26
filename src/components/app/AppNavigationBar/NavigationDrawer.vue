@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n';
 import type { NavigationListItemProp } from '../../base/NavigationListItem/types';
 import NavigationListItem from '../../base/NavigationListItem/NavigationListItem.vue';
 
-defineProps<{ drawer: boolean }>();
+defineProps<{ drawer: boolean; }>();
 
 defineEmits(['update:drawer']);
 

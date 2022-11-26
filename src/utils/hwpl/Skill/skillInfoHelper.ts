@@ -3,7 +3,7 @@ import { calculateValuesAtLevel, replaceValuesInTemplate } from '@/utils/hwpl/Sk
 import type { SkillInfoHelper } from '@/utils/hwpl/Skill/types';
 import { useTranslation } from '@/composables/useTranslation';
 
-const skillInfoHelperMap: { [skillClass: number]: SkillInfoHelper } = {
+const skillInfoHelperMap: { [skillClass: number]: SkillInfoHelper; } = {
   1: {
     substituteDescriptionArgs: (description, skill, level) =>
       replaceValuesInTemplate(

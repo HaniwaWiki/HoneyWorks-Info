@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n';
 import { useAppName } from '@/composables/useAppName';
 import AppBarChangeLanguage from '@/components/app/AppNavigationBar/AppBarChangeLanguage.vue';
 
-defineProps<{ drawer: boolean }>();
+defineProps<{ drawer: boolean; }>();
 
 defineEmits(['update:drawer']);
 

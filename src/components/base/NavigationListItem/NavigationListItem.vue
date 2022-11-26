@@ -4,7 +4,7 @@ import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import type { NavigationListItemProp } from './types';
 
-const props = defineProps<{ item: NavigationListItemProp }>();
+const props = defineProps<{ item: NavigationListItemProp; }>();
 
 const route = useRoute();
 

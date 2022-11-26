@@ -4,7 +4,7 @@ import { computed } from 'vue';
 import star from '@/assets/rarity_star_1.png';
 import starEvolved from '@/assets/rarity_star_2.png';
 
-type Props = { rarity?: number; evolved?: boolean };
+type Props = { rarity?: number; evolved?: boolean; };
 
 const props = withDefaults(defineProps<Props>(), {
   rarity: 0,
