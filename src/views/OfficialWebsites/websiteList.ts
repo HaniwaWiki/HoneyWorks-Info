@@ -2,7 +2,7 @@ import type {
   TwitterLink,
   WebsiteLink,
   YouTubeLink,
-} from '@/views/OfficalWebsites/types';
+} from '@/views/OfficialWebsites/types';
 
 export const officialWebsites: WebsiteLink[] = [
   {

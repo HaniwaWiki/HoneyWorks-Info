@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
+import type { Ref } from 'vue';
+import { computed } from 'vue';
 import ButtonExternalLink from '../../components/base/ButtonExternalLink.vue';
 import AppScaffold from '@/components/app/AppScaffold.vue';
-import type { OfficialWebsiteContent } from '@/views/OfficalWebsites/types';
+import type { OfficialWebsiteContent } from '@/views/OfficialWebsites/types';
 import {
   officialTwitterIds,
   officialWebsites,
   officialYoutubeChannels,
-} from '@/views/OfficalWebsites/websiteList';
+} from '@/views/OfficialWebsites/websiteList';
 
 const { t } = useI18n();
 
-const officialWebsiteContents: OfficialWebsiteContent[] = [
+const officialWebsiteContents: Ref<OfficialWebsiteContent[]> = computed(() => [
   {
     name: t('global.website'),
     icon: 'mdi-web',
@@ -30,7 +32,7 @@ const officialWebsiteContents: OfficialWebsiteContent[] = [
     icon: 'mdi-youtube',
     links: officialYoutubeChannels,
   },
-];
+]);
 </script>
 
 <template>

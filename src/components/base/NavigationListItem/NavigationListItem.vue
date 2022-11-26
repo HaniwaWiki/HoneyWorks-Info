@@ -34,9 +34,13 @@ const linkProp = computed<LinkProp>(() => {
 </script>
 
 <template>
+  <!-- is a group with recursive items -->
   <v-list-group v-if="item.subItems">
-    <template #activator="{ slotProps }">
-      <NavigationListItem v-bind="slotProps" :item="{ ...item, subItems: null }" />
+    <template #activator="{ props: slotProps }">
+      <NavigationListItem
+        v-bind="{ ...$attrs, ...slotProps }"
+        :item="{ ...item, subItems: null }"
+      />
     </template>
     <NavigationListItem
       v-for="subItem in item.subItems"
@@ -44,8 +48,10 @@ const linkProp = computed<LinkProp>(() => {
       :item="subItem"
     />
   </v-list-group>
+  <!-- otherwise is a simple item -->
   <v-list-item
     v-else
+    v-bind="$attrs"
     :prepend-icon="item.icon"
     :title="item.title"
     :to="linkProp.to"

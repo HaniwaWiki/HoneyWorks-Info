@@ -7,14 +7,14 @@ const routes: RouteRecordRaw[] = [
   {
     name: 'HoneyWorks Official Links',
     path: '/official-websites',
-    component: () => import('@/views/OfficalWebsites/OfficialWebsites.vue'),
+    component: () => import('@/views/OfficialWebsites/OfficialWebsites.vue'),
   },
   ...infoRoutes,
   ...toolsRoutes,
   {
     name: 'About Us',
     path: '/about',
-    component: () => import('@/views/OfficalWebsites/OfficialWebsites.vue'),
+    component: () => import('@/views/AboutUs/AboutUs.vue'),
   },
   {
     name: 'Hello World',
