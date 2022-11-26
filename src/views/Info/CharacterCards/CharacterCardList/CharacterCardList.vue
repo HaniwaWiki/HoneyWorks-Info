@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import type { SortBy } from './helper/useSortCharacterCards';
+import {
+  useSortCharacterCards,
+} from './helper/useSortCharacterCards';
 import AppScaffold from '@/components/app/AppScaffold.vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 import type { CharacterCard } from '@/types/HWPL/CharacterCard';
@@ -9,10 +13,6 @@ import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue
 import HwplIconImageCard from '@/components/hwpl/HwplIconImageCard.vue';
 import { useCollection } from '@/composables/useCollection';
 import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
-import type { SortBy } from '@/views/Info/CharacterCards/CharacterCardList/helper/sortCharacterCard';
-import {
-  useSortCharacterCards,
-} from '@/views/Info/CharacterCards/CharacterCardList/helper/sortCharacterCard';
 
 // options from user
 const keyword = ref('');

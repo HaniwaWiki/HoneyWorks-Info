@@ -23,9 +23,9 @@ const items: Ref<NavigationListItemProp[]> = computed(() => [
     subItems: [
       { title: t('global.characters'), href: '/info/characters' },
       { title: t('global.character_cards'), href: '/info/character-cards' },
-      { title: t('global.music_parts'), href: '/info/music-parts' },
+      { title: t('global.musics'), href: '/info/musics' },
       {
-        title: t('global.music_part_data'),
+        title: t('global.music_parts'),
         href: `${window.location.origin}/music-part.html`,
       },
       { title: t('global.scene_cards'), href: '/info/scene-cards' },

@@ -28,14 +28,14 @@ const infoRoutes: RouteRecordRaw[] = [
       ),
   },
   {
-    name: 'Music Part List',
-    path: '/info/music-parts',
-    component: () => import('@/views/Info/MusicParts/MusicPartList.vue'),
+    name: 'Music List',
+    path: '/info/musics',
+    component: () => import('@/views/Info/Musics/MusicList/MusicList.vue'),
   },
   {
     name: 'Music Part Detail',
     path: '/info/music-parts/:id',
-    component: () => import('@/views/Info/MusicParts/MusicPartDetail.vue'),
+    component: () => import('@/views/Info/Musics/MusicPartDetail.vue'),
   },
   {
     name: 'Scene Card List',

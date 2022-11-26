@@ -8,6 +8,21 @@ export function getMusicPartUrl(Id: number) {
   };
 }
 
+export function getMusicPartTitleImageUrl({ Id, thumb = false }: {
+  Id: number;
+  thumb?: boolean;
+}) {
+  const { assetsBaseUrl } = getBaseUrls();
+  return thumb
+    ? `${assetsBaseUrl}/Assets/Music/MVTitleImages_thumb/${Id}_thumb.png`
+    : `${assetsBaseUrl}/Assets/Music/MVTitleImages/${Id}.png`;
+}
+
+export function getMusicLogoUrl(Id: number) {
+  const { assetsBaseUrl } = getBaseUrls();
+  return `${assetsBaseUrl}/Assets/Music/MusicLogo/${Id}_logo.png`;
+}
+
 export function getMusicPartMVUrl(Id: number) {
   const { assetsBaseUrl } = getBaseUrls();
   return {
