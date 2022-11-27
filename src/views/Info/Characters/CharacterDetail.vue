@@ -86,11 +86,7 @@ const listItems = computed<VuetifyListItem[]>(() => [
 </script>
 
 <template>
-  <AppScaffold>
-    <div class="text-h3">
-      {{ character?.Name }}
-    </div>
-
+  <AppScaffold :title="character?.Name">
     <v-card>
       <ResourceTabs
         :resources="[

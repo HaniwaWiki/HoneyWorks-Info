@@ -1,6 +1,6 @@
 import axios from '../utils/request';
 import type { CollectionTypeName } from '@/types/HWPL';
-import { getBaseUrls } from '@/config';
+import { getBaseUrls } from '@/utils/baseUrlList';
 
 // fetch data collection from backend, with optional filter
 export async function getCollection<Name extends keyof CollectionTypeName>(

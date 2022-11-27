@@ -12,14 +12,14 @@ const routes: RouteRecordRaw[] = [
   ...infoRoutes,
   ...toolsRoutes,
   {
+    name: 'Settings',
+    path: '/settings',
+    component: () => import('@/views/Settings/Settings.vue'),
+  },
+  {
     name: 'About Us',
     path: '/about',
     component: () => import('@/views/AboutUs/AboutUs.vue'),
-  },
-  {
-    name: 'Hello World',
-    path: '/hello-world',
-    component: () => import('@/views/HelloWorld.vue'),
   },
   {
     name: '404',

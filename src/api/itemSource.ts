@@ -3,7 +3,7 @@ import type {
   ItemSource,
   ItemSourceAggregateInformation,
 } from '@/types/HWPL/extra/ItemSource';
-import { getBaseUrls } from '@/config';
+import { getBaseUrls } from '@/utils/baseUrlList';
 
 export async function getItemSource(itemId: number): Promise<ItemSource> {
   const { staticApiBaseUrl } = getBaseUrls();

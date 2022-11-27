@@ -28,19 +28,7 @@ const relatedResources = useMusicPartRelatedResources(musicPartInfo);
 </script>
 
 <template>
-  <AppScaffold>
-    <div>
-      <div class="text-h3 mb-2 text-overflow-ellipsis-on-two-lines">
-        {{ song?.Name }}
-      </div>
-      <div class="text-h4 mb-2">
-        {{ musicPart?.Name }}
-      </div>
-      <div class="text-h5 text-grey text-overflow-ellipsis-on-two-lines">
-        {{ singer?.Name }}
-      </div>
-    </div>
-
+  <AppScaffold :title="song?.Name" :subtitle="musicPart?.Name">
     <v-card>
       <ResourceTabs :resources="musicPartResources" />
     </v-card>

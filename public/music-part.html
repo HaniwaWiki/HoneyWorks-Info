@@ -115,9 +115,10 @@
     },
     async created() {
       this.loading = true;
-      this.songs = (await axios.get('https://api-jp.honeyworks.info/api/latest/Songs.json')).data;
-      this.musicParts = (await axios.get('https://api-jp.honeyworks.info/api/latest/MusicParts.json')).data;
-      this.musicalScores = (await axios.get('https://api-jp.honeyworks.info/api/latest/musicalScores.json')).data;
+      const baseUrl = 'https://honeyworks-info-cn.lyh543.cn/api';
+      this.songs = (await axios.get(`${baseUrl}/latest/Songs.json`)).data;
+      this.musicParts = (await axios.get(`${baseUrl}/latest/MusicParts.json`)).data;
+      this.musicalScores = (await axios.get(`${baseUrl}/latest/MusicalScores.json`)).data;
       this.musicalScores.forEach(s => {
         // slot name of v-data-table only supports snake case
         s.rank_text = this.rankTextMap[s.Rank];

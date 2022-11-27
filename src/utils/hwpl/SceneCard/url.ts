@@ -1,7 +1,7 @@
 import { getCollection } from '@/api/common';
-import { getBaseUrls } from '@/config';
 import type { SceneCard } from '@/types/HWPL/SceneCard';
 import { hasDynamicImage } from '@/utils/hwpl/SceneCard/hasDynamicImage';
+import { getBaseUrls } from '@/utils/baseUrlList';
 
 // cached scene cards list
 let sceneCards: SceneCard[];

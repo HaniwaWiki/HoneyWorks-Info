@@ -15,6 +15,9 @@ type Props = {
   lg?: number | string;
   xl?: number | string;
 
+  title?: string;
+  subtitle?: string;
+
   // height of white space at page bottom
   // so that user scroll bottom content of the page to near center of the screen
   placeholderHeight?: string;
@@ -31,6 +34,12 @@ withDefaults(defineProps<Props>(), {
   <v-container>
     <v-row justify="center">
       <v-col v-bind="$props" class="app-scaffold">
+        <div v-if="title" class="text-h3 mb-2 text-overflow-ellipsis-on-two-lines">
+          {{ title }}
+        </div>
+        <div v-if="subtitle" class="text-h5 text-grey text-overflow-ellipsis-on-two-lines">
+          {{ subtitle }}
+        </div>
         <slot />
       </v-col>
     </v-row>

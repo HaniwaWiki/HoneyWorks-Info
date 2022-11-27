@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSettingsStore } from '../../../stores/settings';
-import { supportedLocaleMap } from '@/i18n/supportedLocales';
+import { supportedLocaleMap, supportedLocales } from '@/i18n/supportedLocales';
 
 const settingsStore = useSettingsStore();
 </script>
@@ -17,13 +17,13 @@ const settingsStore = useSettingsStore();
       -->
       <v-item-group v-model="settingsStore.locale" selected-class="text-primary">
         <v-list-item
-          v-for="[code, lang] in Object.entries(supportedLocaleMap)"
-          :key="code"
-          :value="code"
+          v-for="locale in supportedLocales"
+          :key="locale"
+          :value="locale"
           density="comfortable"
         >
-          <v-list-item-title @click="settingsStore.setLocale(code)">
-            {{ lang }}
+          <v-list-item-title @click="settingsStore.setLocale(locale)">
+            {{ supportedLocaleMap[locale] }}
           </v-list-item-title>
         </v-list-item>
       </v-item-group>

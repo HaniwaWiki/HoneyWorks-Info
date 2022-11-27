@@ -32,16 +32,7 @@ const relatedResources = useCharacterCardRelatedResources(characterCard);
 </script>
 
 <template>
-  <AppScaffold>
-    <div>
-      <div class="text-h3 mb-4">
-        {{ cardName }}
-      </div>
-      <div class="text-h5 text-grey">
-        {{ characterName }}
-      </div>
-    </div>
-
+  <AppScaffold :title="cardName" :subtitle="characterName">
     <v-card>
       <ResourceTabs :resources="characterCardResources" />
     </v-card>

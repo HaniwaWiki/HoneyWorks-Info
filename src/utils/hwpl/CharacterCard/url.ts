@@ -1,4 +1,4 @@
-import { getBaseUrls } from '@/config';
+import { getBaseUrls } from '@/utils/baseUrlList';
 
 export type GetCharacterCardImageUrlParam = {
   Id: number;

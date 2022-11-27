@@ -6,7 +6,7 @@ export function useLocalStorage<T>(key: string, defaultValue?: T): [(() => typeo
 export function useLocalStorage<T>(key: string, defaultValue?: T) {
   const getValue = () => {
     const value = localStorage.getItem(key);
-    return value ? JSON.parse(value) as T : defaultValue;
+    return { ...defaultValue, ...JSON.parse(value || '{}') };
   };
   const setValue = (newValue: T) => localStorage.setItem(key, JSON.stringify(newValue));
   return [getValue, setValue];

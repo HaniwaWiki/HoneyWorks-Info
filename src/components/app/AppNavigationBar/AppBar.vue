@@ -2,6 +2,7 @@
 import { computed, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { goto } from '../../../router';
 import { useAppName } from '@/composables/useAppName';
 import AppBarChangeLanguage from '@/components/app/AppNavigationBar/AppBarChangeLanguage.vue';
 
@@ -37,7 +38,7 @@ watchEffect(() => {
 
     <template #append>
       <AppBarChangeLanguage />
-      <v-app-bar-nav-icon icon="mdi-cog" />
+      <v-app-bar-nav-icon icon="mdi-cog" @click="goto('Settings')" />
     </template>
   </v-app-bar>
 </template>
