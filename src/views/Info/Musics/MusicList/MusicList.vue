@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
 import type { SortBy } from '../../CharacterCards/CharacterCardList/helper/useSortCharacterCards';
 import { getMusicPartTitleImageUrl } from '../../../../utils/hwpl/MusicPart/url';
 import type { MusicInfo } from '../helper/useMusicInfo';
 import { useMusicInfo } from '../helper/useMusicInfo';
+import { useMusicListViewStore } from '../../../../stores/views/musicList';
 import AppScaffold from '@/components/app/AppScaffold.vue';
 import { usePagination } from '@/composables/usePagination';
 import { useKeywordFilter } from '@/composables/useKeywordFilter';
 
 // options from user
-const keyword = ref('');
-const sortBy = ref<SortBy>('Default');
+const { keyword } = storeToRefs(useMusicListViewStore());
 const selectedMusicInfo = ref<MusicInfo | undefined>(undefined);
-// use selectedMusicInfo to compute showDialog will cause UI bug
+// bind selectedMusicInfo and showDialog will cause minor UI bug
 const showDialog = ref(false);
 
 // fetch, filter and paginate data
@@ -73,9 +74,8 @@ function getMusicPartImage(Id: number) {
       </v-col>
     </v-row>
 
-    <v-dialog
-      v-model="showDialog"
-    >
+    <v-dialog v-model="showDialog">
+      <!-- FIXME(CSS): remove white margin-left and margin-right of the .v-card.v-container -->
       <v-card>
         <v-container>
           <v-row justify="center">

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useCharacterCardListViewStore } from '../../../../stores/views/characterCardList';
 import type { SortBy } from './helper/useSortCharacterCards';
 import {
   useSortCharacterCards,
@@ -15,10 +17,7 @@ import { useCollection } from '@/composables/useCollection';
 import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
 
 // options from user
-const keyword = ref('');
-const sortBy = ref<SortBy>('Default');
-const showImage = ref(false);
-const showEvolved = ref(false);
+const { keyword, sortBy, showImage, showEvolved } = storeToRefs(useCharacterCardListViewStore());
 
 // fetch, filter and paginate data
 const { loading, collection: characterCards } = useCollection('CharacterCards');
