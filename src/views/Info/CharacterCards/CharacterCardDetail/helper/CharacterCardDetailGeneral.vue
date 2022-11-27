@@ -30,7 +30,7 @@ const releaseTime = computed(() => {
 </script>
 
 <template>
-  <v-card title="General">
+  <v-card :title="$t('character_card.general')">
     <v-list class="icon-primary" color="primary" item-props lines="two">
       <v-list-item
         prepend-icon="mdi-music-accidental-sharp"

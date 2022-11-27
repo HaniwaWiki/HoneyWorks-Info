@@ -35,7 +35,7 @@ const infoRoutes: RouteRecordRaw[] = [
   {
     name: 'Music Part Detail',
     path: '/info/music-parts/:id',
-    component: () => import('@/views/Info/Musics/MusicPartDetail.vue'),
+    component: () => import('@/views/Info/Musics/MusicPartDetail/MusicPartDetail.vue'),
   },
   {
     name: 'Scene Card List',

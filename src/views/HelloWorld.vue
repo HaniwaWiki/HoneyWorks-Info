@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import _ from 'lodash';
 import logo from '../assets/rarity_star_1.png';
-import sleep from '../utils/sleep';
+import sleep from '../utils/time';
 import type { Character } from '@/types/HWPL/Character';
 import { getCollection } from '@/api/common';
 

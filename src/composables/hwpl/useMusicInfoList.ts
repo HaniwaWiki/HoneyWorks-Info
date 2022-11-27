@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import type { Ref } from 'vue';
 import { computed } from 'vue';
 import { useCollection } from '@/composables/useCollection';
 import type { Music } from '@/types/HWPL/Music';
@@ -12,7 +13,7 @@ export type MusicInfo = Music & {
   MusicParts: MusicPart[];
 };
 
-export function useMusicInfo() {
+export function useMusicInfoList() {
   const { loading: loadingSongs, collection: songs } = useCollection('Songs');
   const { loading: loadingSingers, collection: singers } = useCollection('Singers');
   const { loading: loadingMusics, collection: musics } = useCollection('Musics');
@@ -23,7 +24,7 @@ export function useMusicInfo() {
   const musicPartMap = computed(() => _.groupBy(musicParts.value, 'MusicId'));
 
   const loading = computed(() => loadingSongs.value || loadingSingers.value || loadingMusics.value || loadingMusicParts.value);
-  const musicInfo = computed(() => loading.value
+  const musicInfoList: Ref<MusicInfo[]> = computed(() => loading.value
     ? []
     : musics.value.map(music => ({
       ...music,
@@ -32,5 +33,5 @@ export function useMusicInfo() {
       MusicParts: musicPartMap.value[music.Id],
     })));
 
-  return { loading, musicInfo };
+  return { loading, musicInfoList };
 }

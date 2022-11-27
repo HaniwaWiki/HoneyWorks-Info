@@ -5,7 +5,7 @@ import type { CharacterCard } from '@/types/HWPL/CharacterCard';
 import type { Resource } from '@/components/base/ResourceTabs/Resource';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 
-export function useCharacterCardImageResources(
+export function useCharacterCardResources(
   characterCard: Ref<CharacterCard | null>,
 ): Ref<Resource[]> {
   const { t } = useI18n();

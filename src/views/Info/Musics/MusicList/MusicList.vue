@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
-import type { SortBy } from '../../CharacterCards/CharacterCardList/helper/useSortCharacterCards';
-import { getMusicPartTitleImageUrl } from '../../../../utils/hwpl/MusicPart/url';
-import type { MusicInfo } from '../helper/useMusicInfo';
-import { useMusicInfo } from '../helper/useMusicInfo';
 import { useMusicListViewStore } from '../../../../stores/views/musicList';
+import HwplMusicPartImageWithLogo from '../../../../components/hwpl/HwplMusicPartImageWithLogo.vue';
+import type { MusicInfo } from '../../../../composables/hwpl/useMusicInfoList';
+import { useMusicInfoList } from '../../../../composables/hwpl/useMusicInfoList';
 import AppScaffold from '@/components/app/AppScaffold.vue';
 import { usePagination } from '@/composables/usePagination';
 import { useKeywordFilter } from '@/composables/useKeywordFilter';
@@ -17,8 +16,8 @@ const selectedMusicInfo = ref<MusicInfo | undefined>(undefined);
 const showDialog = ref(false);
 
 // fetch, filter and paginate data
-const { loading, musicInfo } = useMusicInfo();
-const filteredMusicInfo = useKeywordFilter(musicInfo, keyword);
+const { loading, musicInfoList } = useMusicInfoList();
+const filteredMusicInfo = useKeywordFilter(musicInfoList, keyword);
 
 const pageSize = 12;
 const {
@@ -26,10 +25,6 @@ const {
   page,
   paginatedData: paginatedMusicInfo,
 } = usePagination(filteredMusicInfo, pageSize);
-
-function getMusicPartImage(Id: number) {
-  return getMusicPartTitleImageUrl({ Id, thumb: false });
-}
 </script>
 
 <template>
@@ -54,7 +49,10 @@ function getMusicPartImage(Id: number) {
         md="4"
       >
         <v-card @click.stop="selectedMusicInfo = music; showDialog = true">
-          <v-img :src="getMusicPartImage(music.MusicParts[0].Id)" :aspect-ratio="16 / 9" />
+          <HwplMusicPartImageWithLogo
+            :music-id="music.Id"
+            :music-part-id="music.MusicParts[0].Id"
+          />
           <v-card-title>
             {{ music.Song.Name }}
           </v-card-title>
@@ -88,7 +86,10 @@ function getMusicPartImage(Id: number) {
               <v-card
                 :to="{ name: 'Music Part Detail', params: { id: musicPart.Id } }"
               >
-                <v-img :src="getMusicPartImage(musicPart.Id)" :aspect-ratio="16 / 9" />
+                <HwplMusicPartImageWithLogo
+                  :music-id="musicPart.MusicId"
+                  :music-part-id="musicPart.Id"
+                />
                 <v-card-title>
                   {{ musicPart.Name }}
                 </v-card-title>
