@@ -7,6 +7,7 @@ const SETTINGS_KEY = 'settings';
 
 const [getSettingsInLocalStorage, setSettingsInLocalStorage] = useLocalStorage(SETTINGS_KEY, {
   locale: 'en' as SupportedLocale,
+  hideDisclaimer: false,
 });
 
 export const useSettingsStore = defineStore(SETTINGS_KEY, {
@@ -17,6 +18,10 @@ export const useSettingsStore = defineStore(SETTINGS_KEY, {
         return;
       // set pinia and local storage
       this.locale = locale;
+      setSettingsInLocalStorage(this.$state);
+    },
+    setHideDisclaimer(hideDisclaimer: boolean) {
+      this.hideDisclaimer = hideDisclaimer;
       setSettingsInLocalStorage(this.$state);
     },
   },

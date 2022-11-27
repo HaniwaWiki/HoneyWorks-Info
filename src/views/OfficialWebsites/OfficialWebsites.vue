@@ -3,6 +3,8 @@ import { useI18n } from 'vue-i18n';
 import type { Ref } from 'vue';
 import { computed } from 'vue';
 import ButtonExternalLink from '../../components/base/ButtonExternalLink.vue';
+import Disclaimer from '../../components/app/HoneyWorksInfoDisclaimer.vue';
+import HoneyWorksInfoDisclaimer from '../../components/app/HoneyWorksInfoDisclaimer.vue';
 import AppScaffold from '@/components/app/AppScaffold.vue';
 import type { OfficialWebsiteContent } from '@/views/OfficialWebsites/types';
 import {
@@ -38,6 +40,11 @@ const officialWebsiteContents: Ref<OfficialWebsiteContent[]> = computed(() => [
 <template>
   <!-- container, row and col can limit card's position -->
   <AppScaffold>
+    <v-row>
+      <v-col>
+        <HoneyWorksInfoDisclaimer />
+      </v-col>
+    </v-row>
     <v-row
       v-for="{ name, icon, links } in officialWebsiteContents"
       :key="name"
