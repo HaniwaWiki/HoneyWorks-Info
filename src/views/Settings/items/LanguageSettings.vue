@@ -5,7 +5,10 @@ const settingsStore = useSettingsStore();
 </script>
 
 <template>
-  <span v-t="'settings.language'" class="subheading" />
+  <span>
+    <v-icon size="small" icon="mdi-translate" class="mr-1" />
+    <span v-t="'settings.language'" />
+  </span>
 
   <v-chip-group
     :model-value="settingsStore.locale"

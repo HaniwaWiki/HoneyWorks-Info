@@ -12,6 +12,7 @@ const [getSettingsInLocalStorage, setSettingsInLocalStorage] = useLocalStorage(S
   server: 'jp' as SupportedServer,
 });
 
+// initial backend by value from localStorage
 setBackendByServer(getSettingsInLocalStorage().server);
 
 export const useSettingsStore = defineStore(SETTINGS_KEY, {

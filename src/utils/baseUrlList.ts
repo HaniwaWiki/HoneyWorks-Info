@@ -29,7 +29,7 @@ const baseUrlLists: Record<SupportedServer, BaseUrlList> = {
     staticApiBaseUrl: 'https://honeyworks-info-cn.lyh543.cn/api',
     apiBaseUrl: 'https://api-jp.honeyworks.info/api',
     assetsBaseUrl: 'https://honeyworks-info-cn.lyh543.cn/assets',
-    localeBaseUrl: isDevelopment ? '/locale' : 'https://i18n-jp.honeyworks.info/locale',
+    localeBaseUrl: isDevelopment ? '/locale' : 'https://honeyworks-info-cn.lyh543.cn/locale',
     rssHubBaseUrl: 'https://rsshub-jp.honeyworks.info',
   },
 };

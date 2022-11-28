@@ -44,7 +44,7 @@ const listItems = computed<VuetifyListItem[]>(() => [
     subtitle: t('music_part.part_name'),
   },
   {
-    prependIcon: 'mdi-account',
+    prependIcon: 'mdi-microphone-variant',
     title: singer.value?.Name,
     subtitle: t('music_part.singer_name'),
   },

@@ -6,7 +6,10 @@ const settingsStore = useSettingsStore();
 </script>
 
 <template>
-  <span v-t="'settings.server'" class="subheading" />
+  <span>
+    <v-icon size="small" icon="mdi-server" class="mr-1" />
+    <span v-t="'settings.server'" />
+  </span>
 
   <v-chip-group
     :model-value="settingsStore.server"
