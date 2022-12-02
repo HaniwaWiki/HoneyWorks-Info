@@ -3,10 +3,8 @@ import { ref } from 'vue';
 import AppScaffold from '../../components/app/AppScaffold.vue';
 import LanguageSettings from './items/LanguageSettings.vue';
 import ServerSettings from './items/ServerSettings.vue';
+import ColorSettings from './items/ColorSettings.vue';
 
-const sizes = [
-  '04', '06', '08', '10', '12', '14',
-];
 const selection = ref();
 </script>
 
@@ -19,6 +17,10 @@ const selection = ref();
       <v-divider class="mx-4" />
       <v-card-text>
         <ServerSettings />
+      </v-card-text>
+      <v-divider class="mx-4" />
+      <v-card-text>
+        <ColorSettings />
       </v-card-text>
     </v-card>
   </AppScaffold>

@@ -12,7 +12,7 @@ const settingsStore = useSettingsStore();
 
   <v-chip-group
     :model-value="settingsStore.locale"
-    selected-class="text-deep-purple-accent-4"
+    :color="settingsStore.primaryColor"
     mandatory
     @update:model-value="(val:SupportedLocale) => settingsStore.setLocale(val)"
   >

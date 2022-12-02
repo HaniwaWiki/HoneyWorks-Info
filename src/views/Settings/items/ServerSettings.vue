@@ -13,7 +13,7 @@ const settingsStore = useSettingsStore();
 
   <v-chip-group
     :model-value="settingsStore.server"
-    selected-class="text-deep-purple-accent-4"
+    :color="settingsStore.primaryColor"
     mandatory
     @update:model-value="(val: SupportedServer) => settingsStore.setServer(val)"
   >

@@ -4,6 +4,9 @@
 import AppSnackbar from './components/app/AppSnackbar.vue';
 import AppFooter from './components/app/AppFooter.vue';
 import AppNavigationBar from './components/app/AppNavigationBar/AppNavigationBar.vue';
+import { useThemeColor } from './composables/useThemeColor';
+
+useThemeColor();
 </script>
 
 <template>

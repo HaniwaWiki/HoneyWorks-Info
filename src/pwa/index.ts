@@ -1,4 +1,5 @@
 import type { VitePWAOptions } from 'vite-plugin-pwa';
+import { defaultPrimaryColor } from '../palette';
 
 export const vitePWAOptions: Partial<VitePWAOptions> = {
   registerType: 'autoUpdate',
@@ -12,7 +13,7 @@ export const vitePWAOptions: Partial<VitePWAOptions> = {
     name: 'HoneyWorks Info',
     short_name: 'HoneyWorks Info',
     description: 'Get Information Of HoneyWorks and HoneyWorks Premium Live',
-    theme_color: '#6200ee',
+    theme_color: defaultPrimaryColor,
     icons: [
       {
         src: 'favicon_192x192.png',

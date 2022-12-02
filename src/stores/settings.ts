@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { defaultPrimaryColor } from '../palette';
 import type { SupportedLocale } from '@/i18n/supportedLocales';
 import { useLocalStorage } from '@/composables/useLocalStorage';
 import type { SupportedServer } from '@/utils/baseUrlList';
@@ -10,9 +11,10 @@ const [getSettingsInLocalStorage, setSettingsInLocalStorage] = useLocalStorage(S
   locale: 'en' as SupportedLocale,
   hideDisclaimer: false,
   server: 'jp' as SupportedServer,
+  primaryColor: defaultPrimaryColor as string,
 });
 
-// initial backend by value from localStorage
+// initial by value from localStorage
 setBackendByServer(getSettingsInLocalStorage().server);
 
 export const useSettingsStore = defineStore(SETTINGS_KEY, {
@@ -31,6 +33,11 @@ export const useSettingsStore = defineStore(SETTINGS_KEY, {
       setSettingsInLocalStorage(this.$state);
 
       setBackendByServer(server);
+    },
+    // update primary color will trigger useThemeColor
+    setPrimaryColor(color: string) {
+      this.primaryColor = color;
+      setSettingsInLocalStorage(this.$state);
     },
   },
 });
