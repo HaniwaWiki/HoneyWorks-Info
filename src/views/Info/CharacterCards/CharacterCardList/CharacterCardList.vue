@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useCharacterCardListViewStore } from '../../../../stores/views/characterCardList';
-import type { SortBy } from './helper/useSortCharacterCards';
-import {
-  useSortCharacterCards,
-} from './helper/useSortCharacterCards';
+import { useSortCharacterCards } from './helper/useSortCharacterCards';
 import AppScaffold from '@/components/app/AppScaffold.vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 import type { CharacterCard } from '@/types/HWPL/CharacterCard';

@@ -48,13 +48,23 @@ const infoRoutes: RouteRecordRaw[] = [
     component: () => import('@/views/Info/SceneCards/SceneCardDetail.vue'),
   },
   {
+    name: 'Gacha List',
+    path: '/info/gachas',
+    component: () => import('@/views/Info/Gachas/GachaList/GachaList.vue'),
+  },
+  {
+    name: 'Gacha Detail',
+    path: '/info/gachas/:id',
+    component: () => import('@/views/Info/Gachas/GachaDetail/GachaDetail.vue'),
+  },
+  {
     name: 'Event List',
-    path: '/info/Events',
+    path: '/info/events',
     component: () => import('@/views/Info/Events/EventList.vue'),
   },
   {
     name: 'Event Detail',
-    path: '/info/Events/:id',
+    path: '/info/events/:id',
     component: () => import('@/views/Info/Events/EventDetail.vue'),
   },
 ];

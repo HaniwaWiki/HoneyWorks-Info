@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import type { SortBy } from '@/views/Info/CharacterCards/CharacterCardList/helper/useSortCharacterCards';
+import type { CharacterCardSortBy } from '@/views/Info/CharacterCards/CharacterCardList/helper/useSortCharacterCards';
 
 export const useCharacterCardListViewStore = defineStore('characterCardListView', () => {
   const keyword = ref('');
-  const sortBy = ref<SortBy>('Default');
+  const sortBy = ref<CharacterCardSortBy>('Default');
   const showImage = ref(false);
   const showEvolved = ref(false);
 

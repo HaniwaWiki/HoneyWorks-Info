@@ -13,6 +13,7 @@ defineProps<{
 <template>
   <video
     v-if="url"
+    :key="url"
     :autoplay="autoplay"
     :loop="loop"
     :muted="muted"

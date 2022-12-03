@@ -3,18 +3,19 @@ import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { Resource } from '@/components/base/ResourceTabs/Resource';
 import { videoResourceOption } from '@/components/base/ResourceTabs/Resource';
-import type { MusicPartInfo } from '@/composables/hwpl/useMusicPartInfo';
 import {
   getMusicLogoUrl,
   getMusicPartMVUrl,
   getMusicPartTitleImageUrl,
   getMusicPartUrl,
 } from '@/utils/hwpl/MusicPart/url';
+import type { MusicPart } from '@/types/HWPL/MusicPart';
+import type { Music } from '@/types/HWPL/Music';
 
-export function useMusicPartResources({
-  musicPart,
-  music,
-}: MusicPartInfo): Ref<Resource[]> {
+export function useMusicPartResources(
+  musicPart: Ref<MusicPart | null>,
+  music: Ref<Music | null>,
+): Ref<Resource[]> {
   const { t } = useI18n();
 
   return computed(() => {

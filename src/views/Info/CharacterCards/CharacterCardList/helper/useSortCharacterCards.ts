@@ -6,7 +6,7 @@ import asyncComputed from '@/utils/asyncComputed';
 import { getItemSourceAggregateInformation } from '@/api/itemSource';
 import { useSort } from '@/composables/useSort';
 
-export type SortBy = 'Default' | 'Ability' | 'ReleaseTimestamp';
+export type CharacterCardSortBy = 'Default' | 'Ability' | 'ReleaseTimestamp';
 
 const itemSources = asyncComputed(getItemSourceAggregateInformation, []);
 
@@ -23,7 +23,7 @@ const sortKeyMap = {
 
 export function useSortCharacterCards(
   characterCards: MaybeRef<CharacterCard[]>,
-  sortBy: MaybeRef<SortBy>,
+  sortBy: MaybeRef<CharacterCardSortBy>,
 ): Ref<CharacterCard[]> {
   const sortFunction = computed(() => sortKeyMap[unref(sortBy)]);
   return useSort(characterCards, sortFunction);

@@ -8,7 +8,7 @@ import {
   videoResourceOption,
 } from '@/components/base/ResourceTabs/Resource';
 import asyncComputed from '@/utils/asyncComputed';
-import { getSceneCardImageUrl } from '@/utils/hwpl/SceneCard/url';
+import { getSceneCardImageUrls } from '@/utils/hwpl/SceneCard/url';
 import { getMusicPartMVUrl } from '@/utils/hwpl/MusicPart/url';
 
 export function useCharacterCardRelatedResources(
@@ -29,7 +29,7 @@ export function useCharacterCardRelatedResources(
       cardName: string,
       dynamicCardName: string,
     ) {
-      const sceneCardUrl = await getSceneCardImageUrl(Id);
+      const sceneCardUrl = await getSceneCardImageUrls(Id);
       const to: RouteLocationRaw = {
         name: 'Scene Card Detail',
         params: { id: Id },

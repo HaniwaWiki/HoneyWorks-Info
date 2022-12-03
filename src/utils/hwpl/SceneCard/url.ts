@@ -24,7 +24,7 @@ function getSceneCardDynamicImageUrl(imageId: string) {
   return `${assetsBaseUrl}/CriwareCpks/SceneCard/${imageId}/${imageId}.mp4`;
 }
 
-export async function getSceneCardImageUrl(Id: number) {
+export async function getSceneCardImageUrls(Id: number) {
   if (sceneCards === undefined)
     sceneCards = await getCollection('SceneCards');
 

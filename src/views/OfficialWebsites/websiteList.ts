@@ -49,6 +49,7 @@ export const officialTwitterIds: TwitterLink[] = [
   'shito_stereo',
   'yamako2626',
   // singer
+  'CwHW_official',
   'CHiCOxxx_tweet',
   'Hanon_moco',
   'Kotoha_ktnh',

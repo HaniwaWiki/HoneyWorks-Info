@@ -7,7 +7,6 @@ async function getSceneCardWithDynamicImageIds(): Promise<Set<number>> {
   if (dynamicSceneCardIds !== null)
     return dynamicSceneCardIds;
 
-  dynamicSceneCardIds = new Set<number>([1, 2, 3]);
   const characterCards = await getCollection('CharacterCards', { Rarity: 5 });
   const sceneCardIds = characterCards
     .map(c => c.RankUpSceneCardId)
