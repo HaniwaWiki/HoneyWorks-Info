@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useMusicListViewStore } from '../../../../stores/views/musicList';
 import HwplMusicPartImageWithLogo from '../../../../components/hwpl/HwplMusicPartImageWithLogo.vue';
 import type { MusicInfo } from '../../../../composables/hwpl/useMusicInfoList';
 import { useMusicInfoList } from '../../../../composables/hwpl/useMusicInfoList';
+import { useMusicListViewStore } from './store';
 import AppScaffold from '@/components/app/AppScaffold.vue';
 import { usePagination } from '@/composables/usePagination';
 import { useKeywordFilter } from '@/composables/useKeywordFilter';
 
 // options from user
-const { keyword } = storeToRefs(useMusicListViewStore());
+const { keyword, page } = storeToRefs(useMusicListViewStore());
 const selectedMusicInfo = ref<MusicInfo | undefined>(undefined);
 // bind selectedMusicInfo and showDialog will cause minor UI bug
 const showDialog = ref(false);
@@ -22,9 +22,13 @@ const filteredMusicInfo = useKeywordFilter(musicInfoList, keyword);
 const pageSize = 12;
 const {
   pageCount,
-  page,
   paginatedData: paginatedMusicInfo,
-} = usePagination(filteredMusicInfo, pageSize);
+} = usePagination({
+  data: filteredMusicInfo,
+  pageSize,
+  page,
+  deps: [keyword],
+});
 </script>
 
 <template>

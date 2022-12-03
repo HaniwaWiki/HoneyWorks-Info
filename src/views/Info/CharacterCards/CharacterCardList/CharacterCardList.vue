@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { useCharacterCardListViewStore } from '../../../../stores/views/characterCardList';
+import { useCharacterCardListViewStore } from './store';
 import { useSortCharacterCards } from './helper/useSortCharacterCards';
 import AppScaffold from '@/components/app/AppScaffold.vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
@@ -13,7 +13,7 @@ import { useCollection } from '@/composables/useCollection';
 import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
 
 // options from user
-const { keyword, sortBy, showImage, showEvolved } = storeToRefs(useCharacterCardListViewStore());
+const { keyword, sortBy, page, showImage, showEvolved } = storeToRefs(useCharacterCardListViewStore());
 
 // fetch, filter and paginate data
 const { loading, collection: characterCards } = useCollection('CharacterCards');
@@ -25,9 +25,13 @@ const sortedCharacterCards = useSortCharacterCards(
 const pageSize = 24;
 const {
   pageCount,
-  page,
   paginatedData: paginatedCharacterCards,
-} = usePagination(sortedCharacterCards, pageSize);
+} = usePagination({
+  data: sortedCharacterCards,
+  pageSize,
+  page,
+  deps: [keyword, sortBy],
+});
 
 // parse function and parsed data
 function getCardImage(characterCard: CharacterCard) {

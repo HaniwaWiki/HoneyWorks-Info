@@ -5,8 +5,9 @@ import type { CharacterCardSortBy } from '@/views/Info/CharacterCards/CharacterC
 export const useCharacterCardListViewStore = defineStore('characterCardListView', () => {
   const keyword = ref('');
   const sortBy = ref<CharacterCardSortBy>('Default');
+  const page = ref(1);
   const showImage = ref(false);
   const showEvolved = ref(false);
 
-  return { keyword, sortBy, showImage, showEvolved };
+  return { keyword, sortBy, page, showImage, showEvolved };
 });

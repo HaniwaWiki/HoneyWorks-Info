@@ -3,5 +3,6 @@ import { ref } from 'vue';
 
 export const useMusicListViewStore = defineStore('musicListView', () => {
   const keyword = ref('');
-  return { keyword };
+  const page = ref(1);
+  return { keyword, page };
 });

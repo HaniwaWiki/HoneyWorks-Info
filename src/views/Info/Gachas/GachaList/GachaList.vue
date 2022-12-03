@@ -1,14 +1,14 @@
 <script setup lang='ts'>
 import { storeToRefs } from 'pinia';
-import { useGachaListViewStore } from '../../../../stores/views/gachaList';
 import { useKeywordFilter } from '../../../../composables/useKeywordFilter';
 import { usePagination } from '../../../../composables/usePagination';
 import HwplGachaBoxCard from '../../../../components/hwpl/HwplGachaBoxCard.vue';
 import AppScaffold from '../../../../components/app/AppScaffold.vue';
 import { useGachaBoxInfoList } from '../../../../composables/hwpl/useGachaBoxInfoList';
+import { useGachaListViewStore } from './store';
 import { useSortGachaBoxInfoList } from './helper/useSortGachaBoxInfoList';
 
-const { keyword, sortBy } = storeToRefs(useGachaListViewStore());
+const { keyword, sortBy, page } = storeToRefs(useGachaListViewStore());
 
 const { loading, gachaBoxInfoList } = useGachaBoxInfoList();
 const filteredGachaBoxInfoList = useKeywordFilter(gachaBoxInfoList, keyword);
@@ -20,9 +20,13 @@ const sortGachaBoxInfoList = useSortGachaBoxInfoList(
 const pageSize = 12;
 const {
   pageCount,
-  page,
   paginatedData: paginatedGachaBoxInfo,
-} = usePagination(sortGachaBoxInfoList, pageSize);
+} = usePagination({
+  data: sortGachaBoxInfoList,
+  pageSize,
+  page,
+  deps: [keyword, sortBy],
+});
 </script>
 
 <template>

@@ -5,5 +5,6 @@ import type { GachaInfoSortBy } from '@/views/Info/Gachas/GachaList/helper/useSo
 export const useGachaListViewStore = defineStore('gachaListView', () => {
   const keyword = ref('');
   const sortBy = ref<GachaInfoSortBy>('StartAt');
-  return { keyword, sortBy };
+  const page = ref(1);
+  return { keyword, sortBy, page };
 });
