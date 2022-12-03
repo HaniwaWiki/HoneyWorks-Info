@@ -18,7 +18,9 @@ const selection = ref();
       <v-card-text>
         <ServerSettings />
       </v-card-text>
-      <v-divider class="mx-4" />
+    </v-card>
+
+    <v-card :title="$t('settings.style')">
       <v-card-text>
         <ColorSettings />
       </v-card-text>

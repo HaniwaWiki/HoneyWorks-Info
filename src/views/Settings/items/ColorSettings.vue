@@ -1,11 +1,10 @@
 <script setup lang='ts'>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useSettingsStore } from '../../../stores/settings';
 import { colors } from '../../../palette';
 
 const settingsStore = useSettingsStore();
 const inputColor = ref(settingsStore.primaryColor);
-const inputColorValid = ref(true);
 
 const inputColorRules = [
   (v: string) => {
@@ -13,6 +12,7 @@ const inputColorRules = [
     return isValid || 'Invalid color value';
   },
 ];
+const inputColorIsValid = computed(() => inputColorRules.every(rule => rule(inputColor.value) === true));
 
 function setPrimaryColor(val: string) {
   inputColor.value = val;
@@ -32,33 +32,26 @@ function setPrimaryColor(val: string) {
     mandatory
     @update:model-value="(val: string) => setPrimaryColor(val)"
   >
-    <v-container>
-      <v-row>
-        <v-col
-          v-for="color in colors"
-          :key="color"
-          :cols="1"
-        >
-          <v-item
-            v-slot="{ selectedClass, toggle }"
-            :value="color"
-          >
-            <div
-              v-ripple
-              class="preview-color elevation-2"
-              :class="selectedClass"
-              :style="{ backgroundColor: color }"
-              @click="toggle"
-            />
-          </v-item>
-        </v-col>
-      </v-row>
-    </v-container>
+    <div class="mt-2 d-flex justify-start flex-wrap">
+      <v-item
+        v-for="color in colors"
+        :key="color"
+        v-slot="{ selectedClass, toggle }"
+        :value="color"
+      >
+        <div
+          class="preview-color ma-1 elevation-2 flex-shrink-0"
+          :class="selectedClass"
+          :style="{ backgroundColor: color }"
+          @click="toggle"
+        />
+      </v-item>
+    </div>
   </v-item-group>
 
   <div
     id="custom-color-input"
-    class="d-flex align-center pt-2"
+    class="d-flex align-center mt-4"
   >
     <v-text-field
       v-model="inputColor"
@@ -71,16 +64,16 @@ function setPrimaryColor(val: string) {
       <template #append-inner>
         <div
           class="preview-color"
-          :style="{ backgroundColor: inputColorValid ? inputColor : 'transparent' }"
+          :style="{ backgroundColor: inputColorIsValid ? inputColor : 'transparent' }"
         />
       </template>
-      <template #append="{ isValid }">
+      <template #append>
         <v-btn
-          :disabled="!isValid"
+          :disabled="!inputColorIsValid"
           color="primary"
           @click="setPrimaryColor(inputColor)"
         >
-          Apply
+          {{ $t('settings.apply_color') }}
         </v-btn>
       </template>
     </v-text-field>
@@ -91,8 +84,7 @@ function setPrimaryColor(val: string) {
 .preview-color {
   height: 24px;
   width: 24px;
-  margin: auto;
-  padding: 0 8px;
+  padding: 0;
 
   &-selected {
     border: 2px solid #fff;
