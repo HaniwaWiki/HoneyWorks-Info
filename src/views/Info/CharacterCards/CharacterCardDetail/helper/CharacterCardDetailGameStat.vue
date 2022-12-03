@@ -1,14 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useCharacterCardName } from '@/composables/hwpl/useCharacterCardName';
 import type { CharacterCard } from '@/types/HWPL/CharacterCard';
-import ButtonIconLink from '@/components/base/ButtonIconLink.vue';
-import star from '@/assets/rarity_star_1.png';
-import HwplTagGroup from '@/components/hwpl/HwplTag/HwplTagGroup.vue';
-import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
 import { useCollection } from '@/composables/useCollection';
-import { CharacterCardOneLevelStat } from '@/types/HWPL/extra/CharacterCardLevelStat';
 
 const props = defineProps<{
   characterCard: CharacterCard | null;

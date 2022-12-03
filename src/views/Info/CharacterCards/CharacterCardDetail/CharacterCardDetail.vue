@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
-import {
-  useCharacterCardResources,
-} from './helper/useCharacterCardResources';
+import HwplItemSourceCard from '../../../../components/hwpl/HwplItemSource/HwplItemSourceCard.vue';
+import { useCharacterCardResources } from './helper/useCharacterCardResources';
 import AppScaffold from '@/components/app/AppScaffold.vue';
 import { useFirstOfCollection } from '@/composables/useCollection';
 import { useCharacterCardName } from '@/composables/hwpl/useCharacterCardName';
@@ -46,5 +45,7 @@ const relatedResources = useCharacterCardRelatedResources(characterCard);
     <v-card :title="$t('global.related_resources')">
       <ResourceTabs :resources="relatedResources" />
     </v-card>
+
+    <HwplItemSourceCard :item-id="characterCardId" />
   </AppScaffold>
 </template>
