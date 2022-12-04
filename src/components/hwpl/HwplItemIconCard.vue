@@ -3,11 +3,14 @@ import type { RouteLocationRaw } from 'vue-router';
 import HwplImageRarityWrapper from '@/components/hwpl/HwplImageRarityWrapper.vue';
 
 type Props = {
+  // items of different kind put their icons in different directories
+  // so we have to pass in the full imgSrc instead of itemId
   imgSrc: string;
   title?: string;
   subtitle?: string;
   to?: RouteLocationRaw;
-  // set rarity to 0 to hide rarity stars
+  // character cards have rarity
+  // to hide rarity stars, set rarity to 0
   rarity?: number;
   // stars of evolved cards are colorful
   evolved?: boolean;

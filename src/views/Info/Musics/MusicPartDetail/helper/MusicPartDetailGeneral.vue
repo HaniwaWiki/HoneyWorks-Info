@@ -34,7 +34,7 @@ const listItems = computed<VuetifyListItem[]>(() => [
     subtitle: t('music_part.song_name'),
   },
   {
-    prependIcon: 'mdi-place_holder' as MdiIcons,
+    prependIcon: 'placeholder',
     title: song.value?.HiraganaName,
     subtitle: t('music_part.song_hiragana_name'),
   },
@@ -49,12 +49,12 @@ const listItems = computed<VuetifyListItem[]>(() => [
     subtitle: t('music_part.singer_name'),
   },
   {
-    prependIcon: 'mdi-place_holder' as MdiIcons,
+    prependIcon: 'placeholder',
     title: song.value?.Composer,
     subtitle: t('music_part.composer'),
   },
   {
-    prependIcon: 'mdi-place_holder' as MdiIcons,
+    prependIcon: 'placeholder',
     title: song.value?.Songwriter,
     subtitle: t('music_part.songwriter'),
   },

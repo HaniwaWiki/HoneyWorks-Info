@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { getSceneCardImageUrls } from '../../utils/hwpl/SceneCard/url';
 import VideoPlayer from '../base/VideoPlayer.vue';
 import { dynamicSceneCardResourceOption } from '../base/ResourceTabs/Resource';
@@ -7,6 +7,7 @@ import { getGachaImageUrls } from '../../utils/hwpl/Gacha/url';
 import type { GachaBoxInfo } from '../../composables/hwpl/useGachaBoxInfoList';
 import { getCharacterCardImageUrl } from '../../utils/hwpl/CharacterCard/url';
 import type { CharacterCard } from '../../types/HWPL/CharacterCard';
+import asyncComputed from '../../utils/asyncComputed';
 
 type Props = {
   gachaBoxInfo: GachaBoxInfo;
@@ -18,23 +19,35 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const backgroundUrl = ref('');
-const backgroundIsDynamic = computed(() => backgroundUrl.value.endsWith('.mp4'));
+const backgroundIsDynamic = ref(false);
 
-async function setBackgroundByCharacterCard(characterCard?: CharacterCard) {
-  // use gacha image as fallback
-  // currently, only the first gacha doesn't have character card
-  if (characterCard === undefined) {
-    backgroundUrl.value = (await getGachaImageUrls(props.gachaBoxInfo.Id)).background || '';
-  }
-  else {
-    const sceneCardImages = await getSceneCardImageUrls(characterCard.RankUpSceneCardId!);
-    backgroundUrl.value = props.preferDynamicImage && sceneCardImages.dynamic
-      ? sceneCardImages.dynamic
-      : sceneCardImages.static;
-  }
+const logoUrl = asyncComputed(async () => {
+  const { logo } = await getGachaImageUrls(props.gachaBoxInfo.Id);
+  return logo ?? '';
+}, '');
+
+async function updateBackgroundByCharacterCard(characterCard?: CharacterCard) {
+  // if character or scene card doesn't exist, don't update
+  if (!characterCard?.RankUpSceneCardId)
+    return '';
+
+  const sceneCardImages = await getSceneCardImageUrls(characterCard.RankUpSceneCardId);
+  backgroundIsDynamic.value = !!(props.preferDynamicImage && sceneCardImages.dynamic);
+  backgroundUrl.value = backgroundIsDynamic.value
+    ? sceneCardImages.dynamic!
+    : sceneCardImages.static;
+  return backgroundUrl.value;
 }
+
 // show background of the first character card
-onMounted(() => setBackgroundByCharacterCard(props.gachaBoxInfo.CharacterCards[0]));
+// use gacha image as fallback (only the earliest gacha doesn't have character card)
+onMounted(async () => {
+  const url = await updateBackgroundByCharacterCard(props.gachaBoxInfo.CharacterCards[0]);
+  if (!url) {
+    backgroundUrl.value = (await getGachaImageUrls(props.gachaBoxInfo.Id)).background || '';
+    backgroundIsDynamic.value = false;
+  }
+});
 </script>
 
 <template>
@@ -50,15 +63,21 @@ onMounted(() => setBackgroundByCharacterCard(props.gachaBoxInfo.CharacterCards[0
       :aspect-ratio="16 / 9"
       cover
     />
+    <img
+      v-if="logoUrl"
+      :src="logoUrl"
+      alt="logo"
+      class="logo"
+    >
     <div class="icons-wrapper">
       <img
         v-for="characterCard in props.gachaBoxInfo.CharacterCards"
         :key="characterCard.Id"
         v-ripple.prevent
         class="hwpl-icon elevation-4"
-        :src=" getCharacterCardImageUrl({ Id: characterCard.Id, icon: true })"
+        :src="getCharacterCardImageUrl({ Id: characterCard.Id, icon: true })"
         :alt="characterCard.Name"
-        @click.prevent="setBackgroundByCharacterCard(characterCard)"
+        @click.prevent="updateBackgroundByCharacterCard(characterCard)"
       >
     </div>
   </div>
@@ -69,15 +88,22 @@ onMounted(() => setBackgroundByCharacterCard(props.gachaBoxInfo.CharacterCards[0
   position: absolute;
   bottom: 0;
   right: 0;
+  width: 100%;
   display: flex;
   justify-content: flex-end;
+}
+
+.logo {
+  position: absolute;
+  width: 40%;
+  bottom: 0;
+  left: 0;
 }
 
 .hwpl-icon {
   position: relative;
   margin-right: 1%;
   margin-bottom: 1%;
-  width: 20%;
-  height: 20%;
+  width: 16%;
 }
 </style>

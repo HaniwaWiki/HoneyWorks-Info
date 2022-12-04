@@ -47,7 +47,7 @@ const listItems = computed<VuetifyListItem[]>(() => [
     subtitle: t('character.name'),
   },
   {
-    prependIcon: 'mdi-place_holder' as MdiIcons,
+    prependIcon: 'placeholder',
     title: character.value?.HiraganaName,
     subtitle: t('character.hiragana_name'),
   },
@@ -89,9 +89,11 @@ const listItems = computed<VuetifyListItem[]>(() => [
   <AppScaffold :title="character?.Name">
     <v-card>
       <ResourceTabs
-        :resources="[
-          { name: $t('character.default_card_image'), url: characterImageUrl },
-        ]"
+        :resources="[{
+          name: $t('character.default_card_image'),
+          key: 'image',
+          url: characterImageUrl,
+        }]"
       />
     </v-card>
 

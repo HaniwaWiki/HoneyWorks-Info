@@ -11,6 +11,36 @@ import asyncComputed from '@/utils/asyncComputed';
 import { getSceneCardImageUrls } from '@/utils/hwpl/SceneCard/url';
 import { getMusicPartMVUrl } from '@/utils/hwpl/MusicPart/url';
 
+export async function appendSceneCardToResources(
+  resources: Resource[],
+  Id: number,
+  cardName: string,
+  dynamicCardName: string,
+) {
+  const sceneCardUrl = await getSceneCardImageUrls(Id);
+  const to: RouteLocationRaw = {
+    name: 'Scene Card Detail',
+    params: { id: Id },
+  };
+  if (sceneCardUrl.dynamic !== null) {
+    resources.push({
+      name: dynamicCardName,
+      key: `scene_card_${Id}_dynamic`,
+      url: sceneCardUrl.dynamic,
+      to,
+      options: dynamicSceneCardResourceOption,
+    });
+  }
+  else {
+    resources.push({
+      name: cardName,
+      key: `scene_card_${Id}`,
+      url: sceneCardUrl.static,
+      to,
+    });
+  }
+}
+
 export function useCharacterCardRelatedResources(
   characterCard: Ref<CharacterCard | null>,
 ): Ref<Resource[]> {
@@ -24,35 +54,9 @@ export function useCharacterCardRelatedResources(
       = characterCard.value;
     const resources: Resource[] = [];
 
-    async function pushSceneCardResources(
-      Id: number,
-      cardName: string,
-      dynamicCardName: string,
-    ) {
-      const sceneCardUrl = await getSceneCardImageUrls(Id);
-      const to: RouteLocationRaw = {
-        name: 'Scene Card Detail',
-        params: { id: Id },
-      };
-      if (sceneCardUrl.dynamic !== null) {
-        resources.push({
-          name: dynamicCardName,
-          url: sceneCardUrl.dynamic,
-          to,
-          options: dynamicSceneCardResourceOption,
-        });
-      }
-      else {
-        resources.push({
-          name: cardName,
-          url: sceneCardUrl.static,
-          to,
-        });
-      }
-    }
-
     if (FirstSceneCardId !== null) {
-      await pushSceneCardResources(
+      await appendSceneCardToResources(
+        resources,
         FirstSceneCardId,
         t('character_card.scene_card'),
         t('character_card.scene_card_dynamic'),
@@ -60,7 +64,8 @@ export function useCharacterCardRelatedResources(
     }
 
     if (RankUpSceneCardId !== null) {
-      await pushSceneCardResources(
+      await appendSceneCardToResources(
+        resources,
         RankUpSceneCardId,
         t('character_card.scene_card_evolved'),
         t('character_card.scene_card_evolved_dynamic'),
@@ -70,6 +75,7 @@ export function useCharacterCardRelatedResources(
     if (MusicPartId !== null) {
       resources.push({
         name: t('character_card.mv'),
+        key: 'mv',
         url: getMusicPartMVUrl(MusicPartId).default,
         to: {
           name: 'Music Part Detail',

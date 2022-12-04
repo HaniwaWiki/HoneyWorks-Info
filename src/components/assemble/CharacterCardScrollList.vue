@@ -5,7 +5,7 @@ import type { CharacterCard } from '@/types/HWPL/CharacterCard';
 import ScrollableSheet from '@/components/base/ScrollableSheet/ScrollableSheet.vue';
 import ScrollableSheetItem from '@/components/base/ScrollableSheet/ScrollableSheetItem.vue';
 import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
-import HwplIconImageCard from '@/components/hwpl/HwplIconImageCard.vue';
+import HwplItemIconCard from '@/components/hwpl/HwplItemIconCard.vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 import { goto } from '@/router';
 import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
@@ -58,7 +58,7 @@ function getCardImage(characterCard: CharacterCard) {
         class="mx-2"
       >
         <!--   show character card as icon   -->
-        <HwplIconImageCard
+        <HwplItemIconCard
           v-if="!showImage"
           :img-src="getCardImage(card)"
           :title="parseCharacterCardName(card)[0]"

@@ -18,14 +18,17 @@ export function useCharacterCardResources(
     return [
       {
         name: t('character_card.image'),
+        key: 'image',
         url: getCharacterCardImageUrl({ Id, evolved: false, icon: false }),
       },
       {
         name: t('character_card.image_evolved'),
+        key: 'image_evolved',
         url: getCharacterCardImageUrl({ Id, evolved: true, icon: false }),
       },
       {
         name: t('character_card.icon'),
+        key: 'icon',
         url: getCharacterCardImageUrl({ Id, evolved: false, icon: true }),
         options: {
           width: '20vh',
@@ -34,6 +37,7 @@ export function useCharacterCardResources(
       },
       {
         name: t('character_card.icon_evolved'),
+        key: 'icon_evolved',
         url: getCharacterCardImageUrl({ Id, evolved: true, icon: true }),
         options: {
           width: '20vh',

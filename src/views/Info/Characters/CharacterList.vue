@@ -2,7 +2,6 @@
 import { useDisplay } from 'vuetify';
 import AppScaffold from '@/components/app/AppScaffold.vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
-import { goto } from '@/router';
 import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
 import { useCollection } from '@/composables/useCollection';
 import type { Character } from '@/types/HWPL/Character';

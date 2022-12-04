@@ -21,30 +21,34 @@ const tab = ref('');
 
 // when resource list update, reset tab to first item
 watchEffect(() => {
-  tab.value = props.resources[0]?.name;
+  tab.value = props.resources[0]?.key;
 });
 </script>
 
 <template>
   <div v-if="resources.length">
     <v-tabs v-model="tab" color="primary" center-active>
-      <v-tab v-for="{ name, to } in resources" :key="name" :value="name">
+      <v-tab
+        v-for="{ name, key, to } in resources"
+        :key="key"
+        :value="key"
+      >
         {{ name }}
         <!--  only link of active tab is enable, preventing user from mis-touch -->
         <ButtonIconLink
           v-if="to"
           class="mr-n3"
           :to="to"
-          :disabled="tab !== name"
+          :disabled="tab !== key"
         />
       </v-tab>
     </v-tabs>
 
     <v-window v-model="tab">
       <v-window-item
-        v-for="{ name, url, options } in resources"
-        :key="name"
-        :value="name"
+        v-for="{ key, url, options } in resources"
+        :key="key"
+        :value="key"
       >
         <!-- todo: support width option -->
         <!-- todo: gallery viewer -->

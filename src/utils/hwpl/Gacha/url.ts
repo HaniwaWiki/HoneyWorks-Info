@@ -22,7 +22,7 @@ export async function getGachaImageUrls(Id: number): Promise<GachaImageUrls> {
       gachaImageUrls.banner = `${gachaBaseUrl}/${filename}`;
     else if (new RegExp(`${Id}_back`).test(filename))
       gachaImageUrls.background = `${gachaBaseUrl}/${filename}`;
-    else if (new RegExp(`${Id}_back_card`).test(filename))
+    else if (new RegExp(`${Id}_\\d{6}_back`).test(filename))
       gachaImageUrls.backgroundWithCard.push(`${gachaBaseUrl}/${filename}`);
     else
       console.warn(`Unmatched gacha image file: ${filename}`);

@@ -26,19 +26,23 @@ export function useMusicPartResources(
     return [
       {
         name: t('music_part.title_image'),
+        key: 'title_image',
         url: getMusicPartTitleImageUrl({ Id }),
       },
       {
         name: t('music_part.music_logo'),
+        key: 'music_logo',
         url: music.value ? getMusicLogoUrl(music.value.Id) : '',
       },
       {
         name: t('music_part.mv'),
+        key: 'mv',
         url: getMusicPartMVUrl(Id).default,
         options: videoResourceOption,
       },
       {
         name: t('music_part.music'),
+        key: 'music',
         url: getMusicPartUrl(Id).default,
       },
     ];

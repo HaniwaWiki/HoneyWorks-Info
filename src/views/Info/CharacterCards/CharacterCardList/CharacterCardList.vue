@@ -8,7 +8,7 @@ import type { CharacterCard } from '@/types/HWPL/CharacterCard';
 import { usePagination } from '@/composables/usePagination';
 import { useKeywordFilter } from '@/composables/useKeywordFilter';
 import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
-import HwplIconImageCard from '@/components/hwpl/HwplIconImageCard.vue';
+import HwplItemIconCard from '@/components/hwpl/HwplItemIconCard.vue';
 import { useCollection } from '@/composables/useCollection';
 import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
 
@@ -105,7 +105,7 @@ function getCardImage(characterCard: CharacterCard) {
           cols="4"
           md="2"
         >
-          <HwplIconImageCard
+          <HwplItemIconCard
             v-if="!showImage"
             :img-src="getCardImage(card)"
             :title="parseCharacterCardName(card)[0]"
