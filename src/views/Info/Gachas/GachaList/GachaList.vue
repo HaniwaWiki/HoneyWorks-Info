@@ -43,7 +43,7 @@ const {
       </v-col>
       <v-col cols="12" class="switch-group">
         <v-radio-group v-model="sortBy" color="primary" inline hide-details>
-          <div v-t="'gacha.sort_by_colon'" />
+          <div v-t="'global.sort_by_colon'" />
           <v-radio
             :label="$t('gacha.start_at')"
             value="StartAt"

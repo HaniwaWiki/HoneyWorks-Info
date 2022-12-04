@@ -5,26 +5,28 @@ import HwplMusicPartImageWithLogo from '../../../../components/hwpl/HwplMusicPar
 import type { MusicInfo } from '../../../../composables/hwpl/useMusicInfoList';
 import { useMusicInfoList } from '../../../../composables/hwpl/useMusicInfoList';
 import { useMusicListViewStore } from './store';
+import { useSortMusicInfoList } from './helper/useSortMusicList';
 import AppScaffold from '@/components/app/AppScaffold.vue';
 import { usePagination } from '@/composables/usePagination';
 import { useKeywordFilter } from '@/composables/useKeywordFilter';
 
 // options from user
-const { keyword, page } = storeToRefs(useMusicListViewStore());
+const { keyword, sortBy, page } = storeToRefs(useMusicListViewStore());
 const selectedMusicInfo = ref<MusicInfo | undefined>(undefined);
 // bind selectedMusicInfo and showDialog will cause minor UI bug
 const showDialog = ref(false);
 
-// fetch, filter and paginate data
+// fetch, filter, sort and paginate data
 const { loading, musicInfoList } = useMusicInfoList();
 const filteredMusicInfo = useKeywordFilter(musicInfoList, keyword);
+const sortedMusicInfo = useSortMusicInfoList(filteredMusicInfo, sortBy);
 
 const pageSize = 12;
 const {
   pageCount,
   paginatedData: paginatedMusicInfo,
 } = usePagination({
-  data: filteredMusicInfo,
+  data: sortedMusicInfo,
   pageSize,
   page,
   deps: [keyword],
@@ -42,6 +44,19 @@ const {
           prepend-icon="mdi-magnify"
           required
         />
+      </v-col>
+      <v-col cols="12" class="switch-group">
+        <v-radio-group v-model="sortBy" color="primary" inline hide-details>
+          <div v-t="'global.sort_by_colon'" />
+          <v-radio
+            :label="$t('music.id')"
+            value="Id"
+          />
+          <v-radio
+            :label="$t('music_part.updated_at')"
+            value="UpdatedAt"
+          />
+        </v-radio-group>
       </v-col>
       <v-col v-if="loading" class="text-center">
         <v-progress-circular indeterminate color="primary" />

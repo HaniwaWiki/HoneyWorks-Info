@@ -6,8 +6,8 @@ import type { GachaBoxInfo } from '@/composables/hwpl/useGachaBoxInfoList';
 
 export type GachaInfoSortBy = 'Id' | 'StartAt';
 const sortKeyMap = {
-  StartAt: (card: GachaBoxInfo) => (-card.Term.StartAt),
-  Id: (card: GachaBoxInfo) => card.Id,
+  StartAt: (gachaBox: GachaBoxInfo) => (-gachaBox.Term.StartAt),
+  Id: (gachaBox: GachaBoxInfo) => gachaBox.Id,
 } as const;
 
 export function useSortGachaBoxInfoList(
