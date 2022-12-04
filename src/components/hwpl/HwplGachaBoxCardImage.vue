@@ -8,6 +8,7 @@ import type { GachaBoxInfo } from '../../composables/hwpl/useGachaBoxInfoList';
 import { getCharacterCardImageUrl } from '../../utils/hwpl/CharacterCard/url';
 import type { CharacterCard } from '../../types/HWPL/CharacterCard';
 import asyncComputed from '../../utils/asyncComputed';
+import ButtonEventStatus from '../base/ButtonEventStatus.vue';
 
 type Props = {
   gachaBoxInfo: GachaBoxInfo;
@@ -63,12 +64,19 @@ onMounted(async () => {
       :aspect-ratio="16 / 9"
       cover
     />
-    <img
-      v-if="logoUrl"
-      :src="logoUrl"
-      alt="logo"
-      class="logo"
-    >
+    <div class="logo-status-wrapper">
+      <img
+        v-if="logoUrl"
+        :src="logoUrl"
+        alt="logo"
+        class="logo"
+      >
+      <ButtonEventStatus
+        size="small"
+        :start-at="gachaBoxInfo.Term.StartAt"
+        :end-at="gachaBoxInfo.Term.EndedAt"
+      />
+    </div>
     <div class="icons-wrapper">
       <img
         v-for="characterCard in props.gachaBoxInfo.CharacterCards"
@@ -84,6 +92,20 @@ onMounted(async () => {
 </template>
 
 <style lang='scss' scoped>
+.logo-status-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logo {
+  width: 40%;
+  margin-bottom: 4px;
+}
+
 .icons-wrapper {
   position: absolute;
   bottom: 0;
@@ -91,13 +113,6 @@ onMounted(async () => {
   width: 100%;
   display: flex;
   justify-content: flex-end;
-}
-
-.logo {
-  position: absolute;
-  width: 40%;
-  bottom: 0;
-  left: 0;
 }
 
 .hwpl-icon {

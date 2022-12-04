@@ -2,7 +2,7 @@
 import { useI18n } from 'vue-i18n';
 import AppScaffold from '../../../components/app/AppScaffold.vue';
 import { useCountDown } from '../../../composables/useCountDown';
-import CopyToClipboard from '../../../components/base/CopyToClipboard.vue';
+import ButtonCopyToClipboard from '../../../components/base/ButtonCopyToClipboard.vue';
 import {
   useFetchGeriraList,
   useGeriraFilter,
@@ -69,7 +69,7 @@ useNotificationOnNewGerira(aliveGeriraList, 3);
             <tbody>
               <tr v-for="gerira in geriraList" :key="gerira.roomId">
                 <td>
-                  <CopyToClipboard :content="gerira.roomId" />
+                  <ButtonCopyToClipboard :content="gerira.roomId" />
                 </td>
                 <td>Lv{{ gerira.level }}</td>
                 <td>

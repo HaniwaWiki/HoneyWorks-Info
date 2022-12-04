@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import type { RouteLocationRaw } from 'vue-router';
 import type { GachaBoxInfo } from '../../composables/hwpl/useGachaBoxInfoList';
+import ButtonEventStatus from '../base/ButtonEventStatus.vue';
 import HwplGachaBoxCardImageWithLogo from './HwplGachaBoxCardImage.vue';
 
 type Props = {
