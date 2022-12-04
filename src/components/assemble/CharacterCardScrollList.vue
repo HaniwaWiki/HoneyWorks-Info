@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useDisplay } from 'vuetify';
 import type { CharacterCard } from '@/types/HWPL/CharacterCard';
 import ScrollableSheet from '@/components/base/ScrollableSheet/ScrollableSheet.vue';
 import ScrollableSheetItem from '@/components/base/ScrollableSheet/ScrollableSheetItem.vue';
 import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
 import HwplItemIconCard from '@/components/hwpl/HwplItemIconCard.vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
-import { goto } from '@/router';
 import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
 
 // props definition
@@ -17,9 +15,6 @@ type Props = {
 withDefaults(defineProps<Props>(), {
   characterCards: () => [],
 });
-
-// page options
-const { mobile } = useDisplay();
 
 // options from user
 const showImage = ref(false);

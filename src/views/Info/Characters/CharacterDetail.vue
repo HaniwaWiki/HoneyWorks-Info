@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import CharacterCardLazyLoadList from '../../../components/assemble/CharacterCardLazyLoadList.vue';
 import AppScaffold from '@/components/app/AppScaffold.vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 import {
@@ -112,12 +113,10 @@ const listItems = computed<VuetifyListItem[]>(() => [
     </v-card>
 
     <v-card
-      :title="
-        $t('character.character_cards_num_in_total', [characterCards.length])
-      "
+      :title="$t('character.character_cards_num_in_total', [characterCards.length])"
     >
       <v-list>
-        <CharacterCardScrollList :character-cards="characterCards" />
+        <CharacterCardLazyLoadList :character-cards="characterCards" />
       </v-list>
     </v-card>
   </AppScaffold>

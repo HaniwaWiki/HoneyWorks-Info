@@ -6,6 +6,7 @@ import asyncComputed from '../../../../../utils/asyncComputed';
 import type { GachaProbabilityPack } from '../../../../../types/HWPL/extra/GachaProbabilityPack';
 import { useCollection } from '../../../../../composables/useCollection';
 import HwplItemIconCard from '../../../../../components/hwpl/HwplItemIconCard.vue';
+import LazyLoadList from '../../../../../components/assemble/LazyLoadList.vue';
 import star from '@/assets/rarity_star_1.png';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 
@@ -51,10 +52,10 @@ const rarityProbabilities = computed(() => {
 
 const characterCardMap = computed(() => _.keyBy(characterCards.value, 'Id'));
 const sortedProbabilities = computed(() => _.sortBy(probabilities.value, 'Probability').reverse());
-const rarityToCharacterCards = computed(() =>
+const rarityToGachaProbabilities = computed(() =>
   _.groupBy(sortedProbabilities.value, ({ ItemId }) => characterCardMap.value[ItemId]?.Rarity),
 );
-const rarityList = computed(() => Object.keys(rarityToCharacterCards.value)
+const rarityList = computed(() => Object.keys(rarityToGachaProbabilities.value)
   .map(Number)
   .filter(value => !!value)
   .reverse(),
@@ -102,21 +103,24 @@ const rarityList = computed(() => Object.keys(rarityToCharacterCards.value)
       </v-expansion-panel-title>
       <v-expansion-panel-text>
         <v-row>
-          <v-col
-            v-for="{ ItemId, Probability } in rarityToCharacterCards[rarity]"
-            :key="ItemId"
-            :cols="4"
-            :md="3"
+          <LazyLoadList
+            :page-size="12"
+            :items="rarityToGachaProbabilities[rarity]"
+            :item-key="probability => probability.ItemId"
           >
-            <HwplItemIconCard
-              :img-src="getCharacterCardImageUrl({ Id: ItemId, icon: true })"
-              :rarity="characterCardMap[ItemId]?.Rarity"
-              :to="{ name: 'Character Card Detail', params: { id: ItemId } }"
-              :title="`${Probability}%`"
-              text-height="16px"
-              class="mx-auto"
-            />
-          </v-col>
+            <template #default="{ item: probability }">
+              <v-col :cols="4" :md="3">
+                <HwplItemIconCard
+                  class="mx-auto"
+                  :img-src="getCharacterCardImageUrl({ Id: probability.ItemId, icon: true })"
+                  :rarity="characterCardMap[probability.ItemId]?.Rarity"
+                  :to="{ name: 'Character Card Detail', params: { id: probability.ItemId } }"
+                  :title="`${probability.Probability}%`"
+                  text-height="16px"
+                />
+              </v-col>
+            </template>
+          </LazyLoadList>
         </v-row>
       </v-expansion-panel-text>
     </v-expansion-panel>
