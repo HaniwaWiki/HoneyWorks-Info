@@ -18,7 +18,7 @@ const sortedGachaBoxInfoList = useSortGachaBoxInfoList(filteredGachaBoxInfoList,
 
 <template>
   <v-expansion-panel
-    :title="$t('components.item_source.gacha_boxes', { count: filteredGachaBoxInfoList.length })"
+    :title="$t('components.item_source.in_gacha_boxes_total', [gachaBoxes.length])"
   >
     <v-expansion-panel-text>
       <v-container>

@@ -62,7 +62,13 @@ function getCardImage(characterCard: CharacterCard) {
         </v-btn>
       </v-col>
       <v-col cols="12" class="switch-group">
-        <v-radio-group v-model="sortBy" color="primary" inline hide-details>
+        <v-radio-group
+          v-model="sortBy"
+          class="ml-10"
+          color="primary"
+          inline
+          hide-details
+        >
           <div v-t="'global.sort_by_colon'" />
           <v-radio
             :label="$t('character_card.default')"
@@ -149,10 +155,3 @@ function getCardImage(characterCard: CharacterCard) {
     </v-row>
   </AppScaffold>
 </template>
-
-<style lang="scss" scoped>
-.v-radio-group :deep(.v-selection-control-group--inline) {
-  align-items: center;
-  margin-left: 40px;
-}
-</style>

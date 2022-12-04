@@ -42,6 +42,10 @@ $md: 960px;
   }
 }
 
+.v-radio-group .v-selection-control-group--inline {
+  align-items: center;
+}
+
 // wrapper of hwpl-icon
 .hwpl-icon {
   // icons of HWPL have 12px radius

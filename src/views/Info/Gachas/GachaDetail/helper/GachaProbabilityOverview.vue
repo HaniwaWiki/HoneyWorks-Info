@@ -85,7 +85,7 @@ const rarityList = computed(() => Object.keys(rarityToGachaProbabilities.value)
     <v-expansion-panel v-for="rarity in rarityList" :key="rarity">
       <v-expansion-panel-title>
         <v-row no-gutters>
-          <v-col cols="4">
+          <v-col cols="6">
             <v-img
               v-for="i in Array(rarity)"
               :key="i"
@@ -94,7 +94,7 @@ const rarityList = computed(() => Object.keys(rarityToGachaProbabilities.value)
               width="20px"
             />
           </v-col>
-          <v-col cols="8" class="text-grey d-flex align-center  justify-end">
+          <v-col cols="6" class="text-grey d-flex align-center justify-end">
             <div>
               {{ rarityProbabilities.find(r => r.Rarity === rarity)?.Probability }}%
             </div>

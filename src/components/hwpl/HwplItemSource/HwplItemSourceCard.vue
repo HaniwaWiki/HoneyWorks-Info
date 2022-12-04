@@ -5,6 +5,6 @@ const props = defineProps<{ itemId: number; }>();
 </script>
 
 <template>
-  <div v-t="'components.item_source.item_source'" class="v-card-title" />
+  <div v-t="'components.item_source.item_sources'" class="v-card-title" />
   <HwplItemSourceExpansionPanels :item-id="itemId" />
 </template>
