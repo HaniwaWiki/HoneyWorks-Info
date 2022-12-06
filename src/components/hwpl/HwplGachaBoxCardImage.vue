@@ -72,6 +72,7 @@ onMounted(async () => {
         class="logo"
       >
       <ButtonEventStatus
+        class="status"
         size="small"
         :start-at="gachaBoxInfo.Term.StartAt"
         :end-at="gachaBoxInfo.Term.EndedAt"
@@ -96,6 +97,7 @@ onMounted(async () => {
   position: absolute;
   bottom: 0;
   left: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -104,6 +106,10 @@ onMounted(async () => {
 .logo {
   width: 40%;
   margin-bottom: 4px;
+}
+
+.status {
+  min-width: 20%;
 }
 
 .icons-wrapper {
