@@ -1,43 +1,53 @@
 import { defineStore } from 'pinia';
 import { defaultPrimaryColor } from '@/palette';
 import type { SupportedLocale } from '@/i18n/supportedLocales';
-import { useLocalStorage } from '@/utils/localStorage/useLocalStorage';
 import type { SupportedServer } from '@/utils/baseUrlList';
 import { setBackendByServer } from '@/utils/baseUrlList';
-import { SETTINGS_KEY } from '@/utils/localStorage/common';
+import { SETTINGS_KEY } from '@/utils/storage/prefixes';
+import { createStorageVariable } from '@/utils/storage';
 
-const [getSettingsInLocalStorage, setSettingsInLocalStorage] = useLocalStorage(SETTINGS_KEY, {
+const defaultSettings = {
   locale: 'en' as SupportedLocale,
   hideDisclaimer: false,
   server: 'jp' as SupportedServer,
   primaryColor: defaultPrimaryColor as string,
-});
+};
+const [getSettingsInLocalStorage, setSettingsInLocalStorage] = createStorageVariable(SETTINGS_KEY, defaultSettings);
 
-// initial by value from localStorage
-setBackendByServer(getSettingsInLocalStorage().server);
+getSettingsInLocalStorage()
+  .then((settings) => {
+    setBackendByServer(settings.server);
+  });
 
-export const useSettingsStore = defineStore(SETTINGS_KEY, {
-  state: () => getSettingsInLocalStorage(),
-  actions: {
-    async setLocale(locale: SupportedLocale) {
-      this.locale = locale;
-      setSettingsInLocalStorage(this.$state);
-    },
-    setHideDisclaimer(hideDisclaimer: boolean) {
-      this.hideDisclaimer = hideDisclaimer;
-      setSettingsInLocalStorage(this.$state);
-    },
-    setServer(server: SupportedServer) {
-      this.server = server;
-      setSettingsInLocalStorage(this.$state);
+// to asynchronously initialize state, we have to create an innerStore
+// see https://github.com/vuejs/pinia/discussions/1176
+export const useSettingsStore = () => {
+  const innerStore = defineStore(SETTINGS_KEY, {
+    state: () => defaultSettings,
+    actions: {
+      async setLocale(locale: SupportedLocale) {
+        this.locale = locale;
+        await setSettingsInLocalStorage(this.$state);
+      },
+      async setHideDisclaimer(hideDisclaimer: boolean) {
+        this.hideDisclaimer = hideDisclaimer;
+        await setSettingsInLocalStorage(this.$state);
+      },
+      async setServer(server: SupportedServer) {
+        this.server = server;
+        await setSettingsInLocalStorage(this.$state);
 
-      setBackendByServer(server);
+        setBackendByServer(server);
+      },
+      // update primary color will trigger useThemeColor in src/composables/useThemeColor.ts
+      async setPrimaryColor(color: string) {
+        this.primaryColor = color;
+        await setSettingsInLocalStorage(this.$state);
+      },
     },
-    // update primary color will trigger useThemeColor
-    setPrimaryColor(color: string) {
-      this.primaryColor = color;
-      setSettingsInLocalStorage(this.$state);
-    },
-  },
-});
+  });
 
+  const s = innerStore();
+  getSettingsInLocalStorage().then(res => s.$patch(res));
+  return s;
+};

@@ -1,29 +1,19 @@
 import _ from 'lodash';
-import { REQUEST_CACHE_PREFIX } from '@/utils/localStorage/common';
+import { REQUEST_CACHE_PREFIX } from '@/utils/storage/prefixes';
+import { storage } from '@/utils/storage';
 
-const REQUEST_CACHE_CONTENT_PREFIX = `${REQUEST_CACHE_PREFIX}content/`;
-
-export function getRequestCache(url: string): string | null {
-  const cacheKey = `${REQUEST_CACHE_CONTENT_PREFIX}${url}`;
-  return localStorage.getItem(cacheKey);
-}
-
-export function setRequestCache(url: string, content: string) {
-  const cacheKey = `${REQUEST_CACHE_CONTENT_PREFIX}${url}`;
-  localStorage.setItem(cacheKey, content);
-}
-
-export function queryRequestCacheSize() {
-  const sizes = Object.keys(localStorage)
+export async function queryRequestCacheSize() {
+  const keys = await storage.keys();
+  const itemsPromises = keys
     .filter(key => key.startsWith(REQUEST_CACHE_PREFIX))
-    .map(key => localStorage.getItem(key)?.length || 0);
-  return _.sum(sizes);
+    .map(key => storage.getItem(key));
+  const contents = await Promise.all(itemsPromises);
+  return _.sum(contents.map(content => content?.length || 0));
 }
 
-export function clearRequestCache() {
-  Object.keys(localStorage)
-    .filter(key => key.startsWith(REQUEST_CACHE_PREFIX))
-    .forEach(key => localStorage.removeItem(key));
+export async function clearRequestCache() {
+  const keys = await storage.keys();
+  const clearPromises = keys.filter(key => key.startsWith(REQUEST_CACHE_PREFIX))
+    .map(key => storage.removeItem(key));
+  await Promise.all(clearPromises);
 }
-
-// TODO: automatically clear cache if version is updated

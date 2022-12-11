@@ -17,7 +17,7 @@ export function useFetchGeriraList() {
     const random = Math.random();
     // use different url to avoid browser cache
     const randomizedUrl = `${url}?random=${random}`;
-    const res = await axios.get(randomizedUrl);
+    const res = await axios.get(randomizedUrl, { cache: false });
     const rss = parseRss(res.data);
     geriraList.value = rss
       .map(parseGerira)

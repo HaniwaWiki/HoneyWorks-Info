@@ -1,21 +1,24 @@
 <script setup lang='ts'>
 import { onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useSettingsStore } from '../../../stores/settings';
 import { SupportedServer, supportedServers } from '../../../utils/baseUrlList';
 import { formatSize } from '../../../utils/files';
 import { clearRequestCache, queryRequestCacheSize } from '../../../utils/request/cache';
 import ButtonAction from '../../../components/base/ButtonAction.vue';
 
+const { t } = useI18n();
 const settingsStore = useSettingsStore();
-const requestCacheSize = ref('');
+const requestCacheSize = ref(t('...'));
 
-function updateRequestCacheSize() {
-  requestCacheSize.value = formatSize(queryRequestCacheSize());
+async function updateRequestCacheSize() {
+  requestCacheSize.value = formatSize(await queryRequestCacheSize());
 }
 
-function clearRequestCacheAndRefresh() {
-  clearRequestCache();
-  updateRequestCacheSize();
+async function clearRequestCacheAndRefresh() {
+  requestCacheSize.value = '...';
+  await clearRequestCache();
+  await updateRequestCacheSize();
 }
 
 onMounted(updateRequestCacheSize);
