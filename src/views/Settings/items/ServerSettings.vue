@@ -1,8 +1,24 @@
 <script setup lang='ts'>
+import { onMounted, ref } from 'vue';
 import { useSettingsStore } from '../../../stores/settings';
 import { SupportedServer, supportedServers } from '../../../utils/baseUrlList';
+import { formatSize } from '../../../utils/files';
+import { clearRequestCache, queryRequestCacheSize } from '../../../utils/request/cache';
+import ButtonAction from '../../../components/base/ButtonAction.vue';
 
 const settingsStore = useSettingsStore();
+const requestCacheSize = ref('');
+
+function updateRequestCacheSize() {
+  requestCacheSize.value = formatSize(queryRequestCacheSize());
+}
+
+function clearRequestCacheAndRefresh() {
+  clearRequestCache();
+  updateRequestCacheSize();
+}
+
+onMounted(updateRequestCacheSize);
 </script>
 
 <template>
@@ -25,4 +41,11 @@ const settingsStore = useSettingsStore();
       {{ $t(`settings.server_list.${server}`) }}
     </v-chip>
   </v-chip-group>
+
+  <ButtonAction
+    class="mt-1"
+    :on-click="clearRequestCacheAndRefresh"
+  >
+    {{ $t('settings.clear_server_cache') }} ({{ requestCacheSize }})
+  </ButtonAction>
 </template>

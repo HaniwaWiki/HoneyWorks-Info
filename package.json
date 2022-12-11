@@ -15,7 +15,9 @@
   },
   "dependencies": {
     "@mdi/font": "7.0.96",
+    "@vueuse/core": "^9.6.0",
     "axios": "^1.2.0",
+    "axios-cache-interceptor": "^0.10.7",
     "lodash": "^4.17.21",
     "pinia": "^2.0.26",
     "roboto-fontface": "*",

@@ -7,7 +7,7 @@ import {
   isAudio,
   isImage,
   isVideo,
-} from '@/utils/fileExtensions';
+} from '@/utils/files';
 import VideoPlayer from '@/components/base/VideoPlayer.vue';
 import AudioPlayer from '@/components/base/AudioPlayer.vue';
 import ButtonIconLink from '@/components/base/ButtonIconLink.vue';

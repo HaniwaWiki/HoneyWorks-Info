@@ -1,6 +1,7 @@
 <script setup lang='ts'>
 import { computed } from 'vue';
 import type { MdiIcons } from '../../types/mdi';
+import type { ButtonSize } from '../../types/vuetify/button';
 
 export type EventStatus = 'coming' | 'in_progress' | 'finished';
 
@@ -9,7 +10,7 @@ const props = defineProps<{
   startAt?: number;
   endAt?: number;
   clickable?: false;
-  size?: 'x-small' | 'small' | 'large' | 'x-large';
+  size?: ButtonSize;
 }>();
 
 const iconMap: Record<EventStatus, MdiIcons> = {

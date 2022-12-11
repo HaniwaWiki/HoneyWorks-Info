@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import type { ButtonSize } from '../../types/vuetify/button';
+
 type Props = {
   content: string;
-  size?: string;
+  size?: ButtonSize;
 };
 const props = withDefaults(defineProps<Props>(), {
   size: 'small',

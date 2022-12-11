@@ -1,11 +1,10 @@
 import { defineStore } from 'pinia';
-import { defaultPrimaryColor } from '../palette';
+import { defaultPrimaryColor } from '@/palette';
 import type { SupportedLocale } from '@/i18n/supportedLocales';
-import { useLocalStorage } from '@/composables/useLocalStorage';
+import { useLocalStorage } from '@/utils/localStorage/useLocalStorage';
 import type { SupportedServer } from '@/utils/baseUrlList';
 import { setBackendByServer } from '@/utils/baseUrlList';
-
-const SETTINGS_KEY = 'settings';
+import { SETTINGS_KEY } from '@/utils/localStorage/common';
 
 const [getSettingsInLocalStorage, setSettingsInLocalStorage] = useLocalStorage(SETTINGS_KEY, {
   locale: 'en' as SupportedLocale,
