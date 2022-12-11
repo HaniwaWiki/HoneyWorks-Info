@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia';
 import HwplMusicPartImageWithLogo from '../../../../components/hwpl/HwplMusicPartImageWithLogo.vue';
 import type { MusicInfo } from '../../../../composables/hwpl/useMusicInfoList';
 import { useMusicInfoList } from '../../../../composables/hwpl/useMusicInfoList';
+import LoadingCircle from '../../../../components/base/LoadingCircle.vue';
 import { useMusicListViewStore } from './store';
 import { useSortMusicInfoList } from './helper/useSortMusicList';
 import AppScaffold from '@/components/app/AppScaffold.vue';
@@ -64,8 +65,8 @@ const {
           />
         </v-radio-group>
       </v-col>
-      <v-col v-if="loading" class="text-center">
-        <v-progress-circular indeterminate color="primary" />
+      <v-col v-if="loading">
+        <LoadingCircle />
       </v-col>
       <v-col
         v-for="music in paginatedMusicInfo"

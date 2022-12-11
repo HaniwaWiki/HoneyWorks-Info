@@ -5,6 +5,7 @@ import { usePagination } from '../../../../composables/usePagination';
 import HwplGachaBoxCard from '../../../../components/hwpl/HwplGachaBoxCard.vue';
 import AppScaffold from '../../../../components/app/AppScaffold.vue';
 import { useGachaBoxInfoList } from '../../../../composables/hwpl/useGachaBoxInfoList';
+import LoadingCircle from '../../../../components/base/LoadingCircle.vue';
 import { useGachaListViewStore } from './store';
 import { useSortGachaBoxInfoList } from './helper/useSortGachaBoxInfoList';
 
@@ -60,8 +61,10 @@ const {
           />
         </v-radio-group>
       </v-col>
-      <v-col v-if="loading" class="text-center">
-        <v-progress-circular indeterminate color="primary" />
+    </v-row>
+    <v-row>
+      <v-col v-if="loading">
+        <LoadingCircle />
       </v-col>
       <v-col
         v-for="gachaBoxInfo in paginatedGachaBoxInfo"

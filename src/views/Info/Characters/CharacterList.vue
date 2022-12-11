@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useDisplay } from 'vuetify';
+import LoadingCircle from '../../../components/base/LoadingCircle.vue';
 import AppScaffold from '@/components/app/AppScaffold.vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
@@ -24,8 +25,8 @@ function getCharacterImage(character: Character) {
 <template>
   <AppScaffold>
     <v-row>
-      <v-col v-if="loading" class="text-center">
-        <v-progress-circular indeterminate color="primary" />
+      <v-col v-if="loading">
+        <LoadingCircle />
       </v-col>
       <v-col v-for="character in characters" :key="character.Id" cols="3">
         <HwplCharacterImageCard

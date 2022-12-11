@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
+import LoadingCircle from '../../../../components/base/LoadingCircle.vue';
 import { useCharacterCardListViewStore } from './store';
 import { useSortCharacterCards } from './helper/useSortCharacterCards';
 import AppScaffold from '@/components/app/AppScaffold.vue';
@@ -99,9 +100,7 @@ function getCardImage(characterCard: CharacterCard) {
         />
       </v-col>
     </v-row>
-    <v-col v-if="loading" class="text-center">
-      <v-progress-circular indeterminate color="primary" />
-    </v-col>
+    <LoadingCircle v-if="loading" />
     <v-row>
       <!--   show character card as icon   -->
       <template v-if="!showImage">

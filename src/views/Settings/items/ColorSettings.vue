@@ -1,15 +1,17 @@
 <script setup lang='ts'>
 import { computed, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useSettingsStore } from '../../../stores/settings';
 import { colors } from '../../../palette';
 
 const settingsStore = useSettingsStore();
 const inputColor = ref(settingsStore.primaryColor);
+const { t } = useI18n();
 
 const inputColorRules = [
   (v: string) => {
     const isValid = /^#[A-Fa-f0-9]{6}$/.test(v);
-    return isValid || 'Invalid color value';
+    return isValid || t('settings.invalid_color_value');
   },
 ];
 const inputColorIsValid = computed(() => inputColorRules.every(rule => rule(inputColor.value) === true));
