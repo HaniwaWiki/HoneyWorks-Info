@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { computed, ref } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import _ from 'lodash';
 import { getGachaProbability } from '../../../../../api/extra';
 import asyncComputed from '../../../../../utils/asyncComputed';
@@ -57,9 +57,18 @@ const sortedProbabilities = computed(() => {
   return _.sortBy(probabilities.value, p => -p.Probability);
 });
 const rarityToGachaProbabilities = computed(() =>
-  _.groupBy(sortedProbabilities.value, ({ ItemId }) => characterCardMap.value[ItemId]?.Rarity),
+  _.groupBy(
+    sortedProbabilities.value,
+    probability => characterCardMap.value[probability.ItemId]?.Rarity,
+  ),
 );
-const rarityList = computed(() => []);
+const rarityList = computed(() =>
+  Object.keys(rarityToGachaProbabilities.value)
+    .filter(v => v !== 'undefined')
+    .map(Number)
+    .sort()
+    .reverse(),
+);
 </script>
 
 <template>
