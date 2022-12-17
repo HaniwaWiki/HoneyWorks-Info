@@ -6,7 +6,7 @@ const settingsStore = useSettingsStore();
 
 <template>
   <v-alert
-    :model-value="!settingsStore.hideDisclaimer"
+    :model-value="!settingsStore.settings.hideDisclaimer"
     :text="$t('disclaimer.content')"
     type="warning"
     closable

@@ -31,7 +31,7 @@ onMounted(updateRequestCacheSize);
   </span>
 
   <v-chip-group
-    :model-value="settingsStore.server"
+    :model-value="settingsStore.settings.server"
     :color="settingsStore.primaryColor"
     mandatory
     @update:model-value="(val: SupportedServer) => settingsStore.setServer(val)"

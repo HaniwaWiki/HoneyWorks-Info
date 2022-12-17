@@ -15,7 +15,7 @@ const settingsStore = useSettingsStore();
       fixme: show user current choice.
         current version is not working, since Vuetify docs are unclear on v-item-group
       -->
-      <v-item-group v-model="settingsStore.locale" selected-class="text-primary">
+      <v-item-group v-model="settingsStore.settings.locale" selected-class="text-primary">
         <v-list-item
           v-for="locale in supportedLocales"
           :key="locale"

@@ -11,7 +11,7 @@ const settingsStore = useSettingsStore();
   </span>
 
   <v-chip-group
-    :model-value="settingsStore.locale"
+    :model-value="settingsStore.settings.locale"
     :color="settingsStore.primaryColor"
     mandatory
     @update:model-value="(val:SupportedLocale) => settingsStore.setLocale(val)"

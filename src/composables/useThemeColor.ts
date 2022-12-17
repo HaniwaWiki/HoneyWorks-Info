@@ -1,11 +1,11 @@
-import { watchEffect } from 'vue';
+import { computed, watchEffect } from 'vue';
 import { useTheme } from 'vuetify';
-import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '../stores/settings';
 
 // set theme color from user settings
 export function useThemeColor() {
-  const { primaryColor } = storeToRefs(useSettingsStore());
+  const settingsStore = useSettingsStore();
+  const primaryColor = computed(() => settingsStore.primaryColor);
   const theme = useTheme();
 
   // update theme color when user settings changed

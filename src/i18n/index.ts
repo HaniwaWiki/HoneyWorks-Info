@@ -1,7 +1,6 @@
 import type Vue from 'vue';
 import type { Ref } from 'vue';
-import { watch } from 'vue';
-import { storeToRefs } from 'pinia';
+import { computed, watch } from 'vue';
 import { useSettingsStore } from '@/stores/settings';
 import { setupI18n } from '@/i18n/setup';
 import { datetimeFormats } from '@/i18n/dateTimeFormats';
@@ -13,7 +12,7 @@ const i18nWrapper = {
   install(app: Vue.App<Element>) {
     // read user's locale from store
     const settingsStore = useSettingsStore();
-    const { locale } = storeToRefs(settingsStore);
+    const locale = computed(() => settingsStore.settings.locale);
 
     const i18n = setupI18n({
       legacy: false,
