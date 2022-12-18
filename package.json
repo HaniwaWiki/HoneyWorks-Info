@@ -8,8 +8,8 @@
     "tsc": "vue-tsc --noEmit",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite build && http-server-spa dist index.html 4173",
-    "lint": "eslint src --ext .ts,.js,.vue",
-    "lint:fix": "eslint src --ext .ts,.js,.vue --fix",
+    "lint": "eslint src --max-warnings=0 --ext .ts,.js,.vue",
+    "lint:fix": "eslint src --max-warnings=0 --ext .ts,.js,.vue --fix",
     "lint-staged": "lint-staged",
     "prepare": "git submodule init && git submodule update && husky install"
   },

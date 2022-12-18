@@ -3,7 +3,6 @@ import { useI18n } from 'vue-i18n';
 import type { Ref } from 'vue';
 import { computed } from 'vue';
 import ButtonExternalLink from '../../components/base/ButtonExternalLink.vue';
-import Disclaimer from '../../components/app/HoneyWorksInfoDisclaimer.vue';
 import HoneyWorksInfoDisclaimer from '../../components/app/HoneyWorksInfoDisclaimer.vue';
 import AppScaffold from '@/components/app/AppScaffold.vue';
 import type { OfficialWebsiteContent } from '@/views/OfficialWebsites/types';
