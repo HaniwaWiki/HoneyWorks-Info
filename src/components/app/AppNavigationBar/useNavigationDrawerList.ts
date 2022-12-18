@@ -36,4 +36,3 @@ export function useNavigationDrawerList(): Ref<NavigationListItemProp[]> {
     { title: t('global.about_us'), icon: 'mdi-account', href: '/about' },
   ]);
 }
-

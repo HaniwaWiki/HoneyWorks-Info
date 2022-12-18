@@ -7,4 +7,3 @@
 export const SETTINGS_KEY = 'settings';
 export const REQUEST_CACHE_PREFIX = 'cache/request/';
 export const VERSION_PREFIX = 'version/';
-
