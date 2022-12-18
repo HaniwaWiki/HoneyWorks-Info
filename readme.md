@@ -1,5 +1,9 @@
 # HoneyWorks Info
 
+This is frontend repository of [HoneyWorks Info](https://honeyworks.info/).
+
+Made with ❤️ by HoneyWorks fans.
+
 ## Develop
 
 ### Vue 3 Composition API Conventions
