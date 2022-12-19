@@ -1,5 +1,10 @@
 lockfileVersion: 5.4
 
+patchedDependencies:
+  '@mdi/font@7.1.96':
+    hash: fhpd6dsmkfvlg6dozad6o3ethy
+    path: patches/@mdi__font@7.1.96.patch
+
 specifiers:
   '@antfu/eslint-config': ^0.34.0
   '@mdi/font': 7.1.96
@@ -37,7 +42,7 @@ specifiers:
   webfontloader: ^1.6.28
 
 dependencies:
-  '@mdi/font': 7.1.96
+  '@mdi/font': 7.1.96_fhpd6dsmkfvlg6dozad6o3ethy
   '@vueuse/core': 9.7.0_vue@3.2.45
   axios: 1.2.1
   axios-cache-interceptor: 0.10.7
@@ -1687,9 +1692,10 @@ packages:
       type-detect: 4.0.8
     dev: true
 
-  /@mdi/font/7.1.96:
+  /@mdi/font/7.1.96_fhpd6dsmkfvlg6dozad6o3ethy:
     resolution: {integrity: sha512-Imag6npmfkBDi2Ze2jiZVAPTDIKLxhz2Sx82xJ2zctyAU5LYJejLI5ChnDwiD9bMkQfVuzEsI98Q8toHyC+HCg==}
     dev: false
+    patched: true
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}

@@ -56,5 +56,10 @@
     "*.{js,ts,vue}": [
       "eslint --fix"
     ]
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@mdi/font@7.1.96": "patches/@mdi__font@7.1.96.patch"
+    }
   }
 }
