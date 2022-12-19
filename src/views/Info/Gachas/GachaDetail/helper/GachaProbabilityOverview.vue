@@ -8,7 +8,7 @@ import { useCollection } from '../../../../../composables/useCollection';
 import HwplItemIconCard from '../../../../../components/hwpl/HwplItemIconCard.vue';
 import LazyLoadList from '../../../../../components/assemble/LazyLoadList.vue';
 import LoadingCircle from '../../../../../components/base/LoadingCircle.vue';
-import star from '@/assets/rarity_star_1.png';
+import RarityStar from '../../../../../assets/rarity_star/RarityStar.vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 
 const props = defineProps<{ gachaBoxId: number; }>();
@@ -114,11 +114,10 @@ const rarityList = computed(() =>
             <v-expansion-panel-title>
               <v-row no-gutters>
                 <v-col cols="6">
-                  <v-img
+                  <RarityStar
                     v-for="i in Array(rarity)"
                     :key="i"
                     class="d-inline-block"
-                    :src="star"
                     width="20px"
                   />
                 </v-col>
