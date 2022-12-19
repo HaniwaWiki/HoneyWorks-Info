@@ -7,9 +7,9 @@ type Props = { evolved?: boolean; };
 
 const props = withDefaults(defineProps<Props>(), { evolved: false });
 
-const src = computed(() => props.evolved ? star_2 : star_1);
+const imgSrc = computed(() => props.evolved ? star_2 : star_1);
 </script>
 
 <template>
-  <v-img :src="src" />
+  <v-img :src="imgSrc" :aspect-ratio="1" />
 </template>
