@@ -4,6 +4,9 @@ import { defaultPrimaryColor } from '../palette';
 export const vitePWAOptions: Partial<VitePWAOptions> = {
   registerType: 'autoUpdate',
   workbox: {
+    // cache all files from dist
+    globPatterns: ['**/*.{html,css,js,png,jpg}'],
+    // cache fonts and css files from remote (gstatic, googleapis)
     runtimeCaching: [
       {
         urlPattern: /^.*\.(ttf|woff2|eot)/i,
