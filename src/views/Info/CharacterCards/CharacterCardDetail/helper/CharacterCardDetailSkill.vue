@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import HwplSkilTypelIcon from '../../../../../assets/skill_icon/HwplSkillTypeIcon.vue';
 import type { CharacterCard } from '@/types/HWPL/CharacterCard';
 import { useCollection } from '@/composables/useCollection';
 import { getSkillInfo } from '@/utils/hwpl/Skill';
@@ -46,9 +47,19 @@ const skillInfo = computed(() =>
     <v-list class="icon-primary" color="primary" item-props lines="two">
       <v-list-item
         prepend-icon="mdi-shield-plus"
-        :title="skillInfo?.translated_type"
         :subtitle="$t('skill.type')"
-      />
+      >
+        <template #title>
+          <div class="d-flex">
+            <span>
+              {{ skillInfo?.translated_type }}
+            </span>
+            <div class="d-flex mx-1">
+              <HwplSkilTypelIcon v-if="skillInfo" class="d-inline" :skill-type="skillInfo.type" />
+            </div>
+          </div>
+        </template>
+      </v-list-item>
       <v-list-item prepend-icon="mdi-text" :subtitle="$t('skill.description')">
         <template #title>
           <!-- eslint-disable-next-line -->
