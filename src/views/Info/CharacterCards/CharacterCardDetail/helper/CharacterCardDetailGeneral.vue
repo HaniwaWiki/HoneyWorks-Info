@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import RarityStar from '../../../../../assets/rarity_star/RarityStar.vue';
 import type { CharacterCard } from '@/types/HWPL/CharacterCard';
 import ButtonIconLink from '@/components/base/ButtonIconLink.vue';
-import star from '@/assets/rarity_star_1.png';
 import HwplTagGroup from '@/components/hwpl/HwplTag/HwplTagGroup.vue';
 import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
 import asyncComputed from '@/utils/asyncComputed';
@@ -72,11 +72,10 @@ const releaseTime = computed(() => {
       >
         <template #title>
           <template v-if="characterCard">
-            <v-img
+            <RarityStar
               v-for="i in Array(characterCard.Rarity)"
               :key="i"
               class="d-inline-block"
-              :src="star"
               width="20px"
             />
           </template>
