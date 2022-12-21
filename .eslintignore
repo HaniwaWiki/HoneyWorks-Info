@@ -1,3 +1,2 @@
-vite.config.ts
-tailwind.config.js
-postcss.config.js
+# external modules
+src/types/HWPL

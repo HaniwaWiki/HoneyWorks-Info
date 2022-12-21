@@ -1,5 +1,4 @@
-import { Ref } from 'vue';
-import { Skill } from '@/types/HWPL/Skill';
+import type { Skill } from '@/types/HWPL/Skill';
 
 // skill information passed to page
 export type SkillInfo = {

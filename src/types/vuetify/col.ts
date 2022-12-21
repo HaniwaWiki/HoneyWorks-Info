@@ -1,5 +1,3 @@
-import { ComponentObjectPropsOptions } from 'vue';
-
 // v-col default columns on mobile
 export const defaultCols = 12;
 // v-col default columns on desktop

@@ -1,3 +1,3 @@
-import { icons } from '@/types/mdi/icons';
+import type { icons } from '@/types/mdi/icons';
 
 export type MdiIcons = typeof icons[number];

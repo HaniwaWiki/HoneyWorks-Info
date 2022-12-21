@@ -1,11 +1,11 @@
-import { Character } from '@/types/HWPL/Character';
+import type { Character } from '@/types/HWPL/Character';
 
 export function parseCharacterBirthday(
-  character: Character | null | undefined
+  character: Character | null | undefined,
 ): [number, number] {
-  if (!character) {
+  if (!character)
     return [0, 0];
-  }
+
   const birthday = character.Birthday;
   const [, month, day] = /(\d+)月(\d+)日/.exec(birthday) ?? [];
   return [Number(month), Number(day)];

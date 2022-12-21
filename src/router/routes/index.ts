@@ -1,4 +1,4 @@
-import { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
 import infoRoutes from './info';
 import toolsRoutes from './tools';
 
@@ -7,19 +7,19 @@ const routes: RouteRecordRaw[] = [
   {
     name: 'HoneyWorks Official Links',
     path: '/official-websites',
-    component: () => import('@/views/OfficalWebsites/OfficialWebsites.vue'),
+    component: () => import('@/views/OfficialWebsites/OfficialWebsites.vue'),
   },
   ...infoRoutes,
   ...toolsRoutes,
   {
-    name: 'About Us',
-    path: '/about',
-    component: () => import('@/views/OfficalWebsites/OfficialWebsites.vue'),
+    name: 'Settings',
+    path: '/settings',
+    component: () => import('@/views/Settings/Settings.vue'),
   },
   {
-    name: 'Hello World',
-    path: '/hello-world',
-    component: () => import('@/views/HelloWorld.vue'),
+    name: 'About Us',
+    path: '/about',
+    component: () => import('@/views/AboutUs/AboutUs.vue'),
   },
   {
     name: '404',

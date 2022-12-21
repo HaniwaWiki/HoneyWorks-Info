@@ -1,5 +1,4 @@
-import { Dictionary } from '@/types/common';
-import { supportedLocaleMap } from '@/i18n/supportedLocales';
+import type { Dictionary } from '@/types/common';
 
 type DateTimeFormats = Dictionary<Dictionary<Intl.DateTimeFormatOptions>>;
 
@@ -19,8 +18,20 @@ const commonDateTimeFormats: Dictionary<Intl.DateTimeFormatOptions> = {
     hour: 'numeric',
     minute: 'numeric',
   },
+  normal: {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  },
 };
 
+// date: show date
+// time: show time
+// short: show datetime shortly, without year
+// datetime: show datetime with year
+// long: show detailed datetime (use local words, and including weekday)
 export const datetimeFormats: DateTimeFormats = {
   en: {
     ...commonDateTimeFormats,
@@ -68,13 +79,12 @@ const correctMap: Dictionary<string> = {
 };
 
 const oldDateTimeFormat = Intl.DateTimeFormat;
-// @ts-ignore
-// eslint-disable-next-line func-names
+
+// @ts-expect-error see comments before correctMap
 Intl.DateTimeFormat = function (locale: string, ...args: any[]) {
-  if (locale in correctMap) {
-    // eslint-disable-next-line no-param-reassign
+  if (locale in correctMap)
     locale = correctMap[locale];
-  }
+
   return oldDateTimeFormat(locale, ...args);
 };
 Intl.DateTimeFormat.supportedLocalesOf = oldDateTimeFormat.supportedLocalesOf;

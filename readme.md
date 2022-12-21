@@ -1,5 +1,9 @@
 # HoneyWorks Info
 
+This is frontend repository of [HoneyWorks Info](https://honeyworks.info/).
+
+Made with ❤️ by HoneyWorks fans.
+
 ## Develop
 
 ### Vue 3 Composition API Conventions
@@ -19,5 +23,5 @@
 2. Also, if one part of a file work separately with other parts, or with little data to share, it's also recommend to split into multiple files.
 3. When considering splitting a part of code,
   a. if the code is re-usable for other pages, it's recommend to put the code into upper code folder ([`components`](/src/components), [`composables`](/src/composables), [`utils`](/src/utils)).
-  b. if the code is only needed in current page, it's recommend to put the code to internal folder, [CharacterCardDetail.vue](/src/views/info/CharacterCards/CharacterCardDetail/CharacterCardDetail.vue)
+  b. if the code is only needed in current page, it's recommend to put the code to internal folder, [CharacterCardDetail.vue](/src/views/Info/CharacterCards/CharacterCardDetail/CharacterCardDetail.vue)
     is an example.

@@ -1,3 +1,35 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+import type { CharacterCard } from '@/types/HWPL/CharacterCard';
+import ScrollableSheet from '@/components/base/ScrollableSheet/ScrollableSheet.vue';
+import ScrollableSheetItem from '@/components/base/ScrollableSheet/ScrollableSheetItem.vue';
+import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
+import HwplItemIconCard from '@/components/hwpl/HwplItemIconCard.vue';
+import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
+import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
+
+// props definition
+type Props = {
+  characterCards: CharacterCard[];
+};
+withDefaults(defineProps<Props>(), {
+  characterCards: () => [],
+});
+
+// options from user
+const showImage = ref(false);
+const showEvolved = ref(false);
+
+// utility functions for rendering
+function getCardImage(characterCard: CharacterCard) {
+  return getCharacterCardImageUrl({
+    Id: characterCard.Id,
+    evolved: showEvolved.value,
+    icon: !showImage.value,
+  });
+}
+</script>
+
 <template>
   <div>
     <div class="switch-group">
@@ -21,7 +53,7 @@
         class="mx-2"
       >
         <!--   show character card as icon   -->
-        <HwplIconImageCard
+        <HwplItemIconCard
           v-if="!showImage"
           :img-src="getCardImage(card)"
           :title="parseCharacterCardName(card)[0]"
@@ -48,43 +80,6 @@
     </ScrollableSheet>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue';
-import { CharacterCard } from '@/types/HWPL/CharacterCard';
-import ScrollableSheet from '@/components/base/ScrollableSheet/ScrollableSheet.vue';
-import ScrollableSheetItem from '@/components/base/ScrollableSheet/ScrollableSheetItem.vue';
-import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
-import HwplIconImageCard from '@/components/hwpl/HwplIconImageCard.vue';
-import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
-import { goto } from '@/router';
-import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
-import { useDisplay } from 'vuetify';
-
-// props definition
-type Props = {
-  characterCards: CharacterCard[];
-};
-withDefaults(defineProps<Props>(), {
-  characterCards: () => [],
-});
-
-// page options
-const { mobile } = useDisplay();
-
-// options from user
-const showImage = ref(false);
-const showEvolved = ref(false);
-
-// utility functions for rendering
-function getCardImage(characterCard: CharacterCard) {
-  return getCharacterCardImageUrl({
-    Id: characterCard.Id,
-    evolved: showEvolved.value,
-    icon: !showImage.value,
-  });
-}
-</script>
 
 <style lang="scss" scoped>
 :deep(.scrollable-container) {

@@ -1,5 +1,6 @@
 import { useI18n } from 'vue-i18n';
-import { computed, Ref } from 'vue';
+import type { Ref } from 'vue';
+import { computed } from 'vue';
 
 // translate a key
 export function useTranslation(key: string): Ref<string> {

@@ -1,17 +1,17 @@
-import { I18n } from 'vue-i18n';
-import axios from '@/utils/request';
-import { localeBaseUrl } from '@/config';
+import type { I18n } from 'vue-i18n';
 import { nextTick } from 'vue';
-import { i18n as globalI18n } from '@/i18n/index';
-import { SupportedLocale } from '@/i18n/supportedLocales';
+import axios from '@/utils/request';
+import type { SupportedLocale } from '@/i18n/supportedLocales';
+import { getBaseUrls } from '@/utils/baseUrlList';
 
 // load locale messages dynamically to given i18n or global i18n
 export async function loadLocaleMessages(locale: SupportedLocale, i18n?: I18n) {
+  const { localeBaseUrl } = getBaseUrls();
   const messages = (await axios(`${localeBaseUrl}/${locale}/frontend.json`))
     .data;
 
   // update locale message
-  (i18n || globalI18n).global.setLocaleMessage(locale, messages);
+  i18n!.global.setLocaleMessage(locale, messages);
 
   return nextTick();
 }

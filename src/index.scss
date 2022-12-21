@@ -1,9 +1,0 @@
-@import 'tailwind-loves-sass';
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-.center-y {
-  @include apply('flex flex-col items-center justify-center');
-}

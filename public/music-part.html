@@ -26,6 +26,20 @@
               :items-per-page="15"
               multi-sort
             >
+              <template v-slot:item.music_part_name="{ item }">
+                {{item.MusicPartName}}
+                <v-btn
+                  :href="'/info/music-parts/' + item.MusicPartId"
+                  icon
+                  x-small
+                  color="primary"
+                  text
+                >
+                  <v-icon>
+                    mdi-open-in-new
+                  </v-icon>
+                </v-btn>
+              </template>
               <template v-slot:item.rank_text="{ item }">
                 <v-chip
                   small
@@ -65,7 +79,7 @@
             value: 'MusicName',
             width: '20vw'
           },
-          { text: '片段名', value: 'MusicPartName', width: '10vw' },
+          { text: '片段名', value: 'music_part_name', width: '10vw' },
           { text: '难度', value: 'rank_text', width: '10vw', sort: (a, b) => {
             const textRankMap = {
               EASY: 1,
@@ -76,7 +90,7 @@
             return textRankMap[a] - textRankMap[b];
             } },
           { text: '等级', value: 'PlayLevel', width: '10vw' },
-          { text: '歌曲时间（秒）', value: 'MusicTime', width: '10vw' }
+          { text: '歌曲时间（秒）', value: 'MusicTime', width: '10vw' },
         ],
         rankColor: {
           1: '#6ac9d9',
@@ -101,12 +115,14 @@
     },
     async created() {
       this.loading = true;
-      this.songs = (await axios.get('/api/latest/Songs.json')).data;
-      this.musicParts = (await axios.get('/api/latest/MusicParts.json')).data;
-      this.musicalScores = (await axios.get('/api/latest/musicalScores.json')).data;
+      const baseUrl = 'https://honeyworks-info-cn.lyh543.cn/api';
+      this.songs = (await axios.get(`${baseUrl}/latest/Songs.json`)).data;
+      this.musicParts = (await axios.get(`${baseUrl}/latest/MusicParts.json`)).data;
+      this.musicalScores = (await axios.get(`${baseUrl}/latest/MusicalScores.json`)).data;
       this.musicalScores.forEach(s => {
         // slot name of v-data-table only supports snake case
         s.rank_text = this.rankTextMap[s.Rank];
+        s.music_part_name = s.MusicPartName;
         s.MusicName = this.songs.find(song => song.Id === Math.floor(s.MusicPartId / 1000))?.Name;
         s.MusicPartName = this.musicParts.find(p => p.Id === s.MusicPartId)?.Name;
       });

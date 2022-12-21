@@ -11,6 +11,15 @@
 // }
 $md: 960px;
 
+// https://stackoverflow.com/questions/15909489/text-overflow-ellipsis-on-two-lines
+.text-overflow-ellipsis-on-two-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 // make v-switch group displays as flex & wrap on desktop,
 // while displays as multiline on mobile
 .switch-group {
@@ -31,6 +40,10 @@ $md: 960px;
       margin-left: 32px;
     }
   }
+}
+
+.v-radio-group .v-selection-control-group--inline {
+  align-items: center;
 }
 
 // wrapper of hwpl-icon

@@ -1,6 +1,6 @@
-import { Skill } from '@/types/HWPL/Skill';
+import type { Skill } from '@/types/HWPL/Skill';
 import { getSkillInfoHelper } from '@/utils/hwpl/Skill/skillInfoHelper';
-import { SkillInfo } from '@/utils/hwpl/Skill/types';
+import type { SkillInfo } from '@/utils/hwpl/Skill/types';
 import {
   translateSkillDescription,
   translateSkillType,
@@ -15,12 +15,12 @@ export function getSkillInfo(skill: Skill, level: number): SkillInfo {
     description: helper.substituteDescriptionArgs(
       skill.Description,
       skill,
-      level
+      level,
     ),
     translated_description: helper.substituteDescriptionArgs(
       translateSkillDescription(skill.Id).value,
       skill,
-      level
+      level,
     ),
     tagIds: helper.getTagIds(skill),
   };

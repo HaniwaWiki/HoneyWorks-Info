@@ -1,4 +1,4 @@
-import { Ref } from 'vue';
+import type { Ref } from 'vue';
 import { useTranslation } from '@/composables/useTranslation';
 
 // get localized app name

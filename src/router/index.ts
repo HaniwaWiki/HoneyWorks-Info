@@ -1,6 +1,6 @@
 import * as VueRouter from 'vue-router';
-import { dev } from '@/utils/env';
 import routes from './routes';
+import { dev } from '@/utils/env';
 
 const router = VueRouter.createRouter({
   history: VueRouter.createWebHistory(),
@@ -15,12 +15,12 @@ export function goBack(step = 1) {
 
 export function goto(
   name: typeof routes[number]['name'],
-  params?: Record<string, string | number>
+  params?: Record<string, string | number>,
 ) {
   router.push({ name, params });
 }
 
 if (dev) {
-  // @ts-ignore
+  // @ts-expect-error expose router only in developing
   window.router = router;
 }

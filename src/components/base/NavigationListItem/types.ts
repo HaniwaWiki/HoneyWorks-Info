@@ -1,4 +1,4 @@
-import { MdiIcons } from '@/types/mdi';
+import type { MdiIcons } from '@/types/mdi';
 
 export type NavigationListItemProp = {
   title: string;

@@ -1,22 +1,22 @@
-import { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
 
 const infoRoutes: RouteRecordRaw[] = [
   {
     name: 'Character List',
     path: '/info/characters',
-    component: () => import('@/views/info/Characters/CharacterList.vue'),
+    component: () => import('@/views/Info/Characters/CharacterList.vue'),
   },
   {
     name: 'Character Detail',
     path: '/info/characters/:id',
-    component: () => import('@/views/info/Characters/CharacterDetail.vue'),
+    component: () => import('@/views/Info/Characters/CharacterDetail.vue'),
   },
   {
     name: 'Character Card List',
     path: '/info/character-cards',
     component: () =>
       import(
-        '@/views/info/CharacterCards/CharacterCardList/CharacterCardList.vue'
+        '@/views/Info/CharacterCards/CharacterCardList/CharacterCardList.vue'
       ),
   },
   {
@@ -24,38 +24,48 @@ const infoRoutes: RouteRecordRaw[] = [
     path: '/info/character-cards/:id',
     component: () =>
       import(
-        '@/views/info/CharacterCards/CharacterCardDetail/CharacterCardDetail.vue'
+        '@/views/Info/CharacterCards/CharacterCardDetail/CharacterCardDetail.vue'
       ),
   },
   {
-    name: 'Music Part List',
-    path: '/info/music-parts',
-    component: () => import('@/views/info/MusicParts/MusicPartList.vue'),
+    name: 'Music List',
+    path: '/info/musics',
+    component: () => import('@/views/Info/Musics/MusicList/MusicList.vue'),
   },
   {
     name: 'Music Part Detail',
     path: '/info/music-parts/:id',
-    component: () => import('@/views/info/MusicParts/MusicPartDetail.vue'),
+    component: () => import('@/views/Info/Musics/MusicPartDetail/MusicPartDetail.vue'),
   },
   {
     name: 'Scene Card List',
     path: '/info/scene-cards',
-    component: () => import('@/views/info/SceneCards/SceneCardList.vue'),
+    component: () => import('@/views/Info/SceneCards/SceneCardList.vue'),
   },
   {
     name: 'Scene Card Detail',
     path: '/info/scene-cards/:id',
-    component: () => import('@/views/info/SceneCards/SceneCardDetail.vue'),
+    component: () => import('@/views/Info/SceneCards/SceneCardDetail.vue'),
+  },
+  {
+    name: 'Gacha List',
+    path: '/info/gachas',
+    component: () => import('@/views/Info/Gachas/GachaList/GachaList.vue'),
+  },
+  {
+    name: 'Gacha Detail',
+    path: '/info/gachas/:id',
+    component: () => import('@/views/Info/Gachas/GachaDetail/GachaDetail.vue'),
   },
   {
     name: 'Event List',
     path: '/info/events',
-    component: () => import('@/views/info/events/EventList.vue'),
+    component: () => import('@/views/Info/Events/EventList.vue'),
   },
   {
     name: 'Event Detail',
     path: '/info/events/:id',
-    component: () => import('@/views/info/events/EventDetail.vue'),
+    component: () => import('@/views/Info/Events/EventDetail.vue'),
   },
 ];
 

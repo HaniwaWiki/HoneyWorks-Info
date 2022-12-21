@@ -1,4 +1,5 @@
-import { ref, Ref } from 'vue';
+import type { Ref } from 'vue';
+import { ref } from 'vue';
 import { useTranslation } from '@/composables/useTranslation';
 
 export function translateSkillType(type: number): Ref<string> {
