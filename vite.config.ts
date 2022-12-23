@@ -17,7 +17,9 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: () => 'index',
+        manualChunks: (id) => {
+          return id.includes('node_modules') ? 'vendor' : 'index';
+        },
       },
     },
   },
