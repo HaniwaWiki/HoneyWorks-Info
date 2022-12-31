@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import { computed, ref, watchEffect } from 'vue';
 import _ from 'lodash';
-import { getGachaProbability } from '../../../../../api/extra';
+import { getGachaProbability } from '../../../../../api/getExtraApi';
 import asyncComputed from '../../../../../utils/asyncComputed';
 import type { GachaProbabilityPack } from '../../../../../types/HWPL/extra/GachaProbabilityPack';
 import { useCollection } from '../../../../../composables/useCollection';
