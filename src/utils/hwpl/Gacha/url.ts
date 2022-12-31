@@ -1,5 +1,5 @@
 import { getGachaImageList } from '@/utils/hwpl/Gacha/checkFileList';
-import { getBaseUrls } from '@/utils/baseUrlList';
+import { getBaseUrls } from '@/api/baseUrls';
 
 export type GachaImageUrls = {
   background?: string;

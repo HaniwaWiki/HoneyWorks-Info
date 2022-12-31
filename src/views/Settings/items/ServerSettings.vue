@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useSettingsStore } from '../../../stores/settings';
-import { SupportedServer, supportedServers } from '../../../utils/baseUrlList';
+import { SupportedServer, supportedServers } from '../../../api/baseUrls';
 import { formatSize } from '../../../utils/files';
 import { clearRequestCache, queryRequestCacheSize } from '../../../utils/request/cache';
 import ButtonAction from '../../../components/base/ButtonAction.vue';
@@ -16,7 +16,7 @@ async function updateRequestCacheSize() {
 }
 
 async function clearRequestCacheAndRefresh() {
-  requestCacheSize.value = '...';
+  requestCacheSize.value = t('...');
   await clearRequestCache();
   await updateRequestCacheSize();
 }

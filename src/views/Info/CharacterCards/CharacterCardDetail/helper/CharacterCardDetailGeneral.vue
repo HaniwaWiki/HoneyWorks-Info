@@ -7,7 +7,7 @@ import ButtonIconLink from '@/components/base/ButtonIconLink.vue';
 import HwplTagGroup from '@/components/hwpl/HwplTag/HwplTagGroup.vue';
 import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
 import asyncComputed from '@/utils/asyncComputed';
-import { getItemSourceAggregateInformation } from '@/api/itemSource';
+import { getItemSourceAggregateInformation } from '@/api/getItemSource';
 
 const props = defineProps<{
   characterCard: CharacterCard | null;
