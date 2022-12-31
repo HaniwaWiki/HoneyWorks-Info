@@ -1,8 +1,8 @@
 import type { Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { asyncComputed } from '@vueuse/core';
 import type { Resource } from '@/components/base/ResourceTabs/Resource';
 import type { GachaBoxInfo } from '@/composables/hwpl/useGachaBoxInfoList';
-import asyncComputed from '@/utils/asyncComputed';
 import { getGachaImageUrls } from '@/utils/hwpl/Gacha/url';
 import {
   appendSceneCardToResources,

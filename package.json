@@ -8,6 +8,7 @@
     "tsc": "vue-tsc --noEmit",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite build && http-server-spa dist index.html 4173",
+    "test": "vitest",
     "lint": "eslint src --max-warnings=0 --ext .ts,.js,.vue",
     "lint:fix": "eslint src --max-warnings=0 --ext .ts,.js,.vue --fix",
     "lint-staged": "lint-staged",
@@ -49,6 +50,7 @@
     "vite-plugin-md": "^0.21.5",
     "vite-plugin-pwa": "^0.14.0",
     "vite-plugin-vuetify": "^1.0.1",
+    "vitest": "^0.26.2",
     "vue-tsc": "^1.0.14"
   },
   "license": "MIT",

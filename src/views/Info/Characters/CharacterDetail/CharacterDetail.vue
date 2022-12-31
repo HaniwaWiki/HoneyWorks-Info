@@ -1,19 +1,14 @@
 <script setup lang="ts">
-import { computed, ref, watchEffect } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useNearbyPage } from './useNearbyPage';
 import CharacterCardLazyLoadList from '@/components/assemble/CharacterCardLazyLoadList.vue';
 import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
-import {
-  useCollection,
-  useFirstOfCollection,
-} from '@/composables/useCollection';
+import { useCollection, useFirstOfCollection } from '@/composables/useCollection';
 import type { VuetifyListItem } from '@/types/vuetify/listItem';
-import type { MdiIcons } from '@/types/mdi';
 import { parseCharacterBirthday } from '@/utils/hwpl/Character/common';
-import CharacterCardScrollList from '@/components/assemble/CharacterCardScrollList.vue';
 import ResourceTabs from '@/components/base/ResourceTabs/ResourceTabs.vue';
 
 const { t } = useI18n();

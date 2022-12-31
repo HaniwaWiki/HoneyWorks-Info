@@ -1,5 +1,6 @@
 <script setup lang='ts'>
 import { onMounted, ref } from 'vue';
+import { asyncComputed } from '@vueuse/core';
 import VideoPlayer from '../base/VideoPlayer.vue';
 import { dynamicSceneCardResourceOption } from '../base/ResourceTabs/Resource';
 import ButtonEventStatus from '../base/ButtonEventStatus.vue';
@@ -8,7 +9,6 @@ import { getSceneCardImageUrls } from '@/utils/hwpl/SceneCard/url';
 import { getGachaImageUrls } from '@/utils/hwpl/Gacha/url';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 import type { CharacterCard } from '@/types/HWPL/CharacterCard';
-import asyncComputed from '@/utils/asyncComputed';
 
 type Props = {
   gachaBoxInfo: GachaBoxInfo;

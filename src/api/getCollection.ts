@@ -3,15 +3,18 @@ import type { CollectionTypeName } from '@/types/HWPL';
 import { getBaseUrls } from '@/api/baseUrls';
 
 // fetch data collection from backend, with optional filter
-export async function getCollection<Name extends keyof CollectionTypeName>(
+export async function getCollection<
+  Name extends keyof CollectionTypeName,
+  Collection extends CollectionTypeName[Name],
+>(
   collectionName: Name,
-  filter?: Partial<CollectionTypeName[Name]>,
+  filter?: Partial<Collection>,
   version: string | number = 'latest',
-): Promise<CollectionTypeName[Name][]> {
+): Promise<Collection[]> {
   const { staticApiBaseUrl } = getBaseUrls();
   const url = `${staticApiBaseUrl}/${version}/${collectionName}.json`;
   const response = await axios.get(url);
-  const collection = response.data as CollectionTypeName[Name][];
+  const collection = response.data as Collection[];
   if (filter) {
     return collection.filter(c =>
       Object.keys(filter).every(k => filter[k] === c[k]),
@@ -25,85 +28,11 @@ export async function getCollection<Name extends keyof CollectionTypeName>(
 // so that we will get exact result whose types are match with the arguments users pass in
 export async function getCollectionsConcurrently<
   Name1 extends keyof CollectionTypeName,
->(
-  names: [Name1],
-  version: string | number
-): Promise<[CollectionTypeName[Name1][]]>;
-export async function getCollectionsConcurrently<
-  Name1 extends keyof CollectionTypeName,
   Name2 extends keyof CollectionTypeName,
 >(
   names: [Name1, Name2],
   version: string | number
 ): Promise<[CollectionTypeName[Name1][], CollectionTypeName[Name2][]]>;
-export async function getCollectionsConcurrently<
-  Name1 extends keyof CollectionTypeName,
-  Name2 extends keyof CollectionTypeName,
-  Name3 extends keyof CollectionTypeName,
->(
-  names: [Name1, Name2, Name3],
-  version: string | number
-): Promise<
-  [
-    CollectionTypeName[Name1][],
-    CollectionTypeName[Name2][],
-    CollectionTypeName[Name3][],
-  ]
->;
-export async function getCollectionsConcurrently<
-  Name1 extends keyof CollectionTypeName,
-  Name2 extends keyof CollectionTypeName,
-  Name3 extends keyof CollectionTypeName,
-  Name4 extends keyof CollectionTypeName,
->(
-  names: [Name1, Name2, Name3, Name4],
-  version: string | number
-): Promise<
-  [
-    CollectionTypeName[Name1][],
-    CollectionTypeName[Name2][],
-    CollectionTypeName[Name3][],
-    CollectionTypeName[Name4][],
-  ]
->;
-export async function getCollectionsConcurrently<
-  Name1 extends keyof CollectionTypeName,
-  Name2 extends keyof CollectionTypeName,
-  Name3 extends keyof CollectionTypeName,
-  Name4 extends keyof CollectionTypeName,
-  Name5 extends keyof CollectionTypeName,
->(
-  names: [Name1, Name2, Name3, Name4, Name5],
-  version: string | number
-): Promise<
-  [
-    CollectionTypeName[Name1][],
-    CollectionTypeName[Name2][],
-    CollectionTypeName[Name3][],
-    CollectionTypeName[Name4][],
-    CollectionTypeName[Name5][],
-  ]
->;
-export async function getCollectionsConcurrently<
-  Name1 extends keyof CollectionTypeName,
-  Name2 extends keyof CollectionTypeName,
-  Name3 extends keyof CollectionTypeName,
-  Name4 extends keyof CollectionTypeName,
-  Name5 extends keyof CollectionTypeName,
-  Name6 extends keyof CollectionTypeName,
->(
-  names: [Name1, Name2, Name3, Name4, Name5, Name6],
-  version: string | number
-): Promise<
-  [
-    CollectionTypeName[Name1][],
-    CollectionTypeName[Name2][],
-    CollectionTypeName[Name3][],
-    CollectionTypeName[Name4][],
-    CollectionTypeName[Name5][],
-    CollectionTypeName[Name6][],
-  ]
->;
 
 export async function getCollectionsConcurrently(
   names: any[],

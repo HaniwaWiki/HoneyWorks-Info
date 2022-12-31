@@ -1,8 +1,8 @@
 import type { Ref } from 'vue';
 import { computed, unref } from 'vue';
+import { asyncComputed } from '@vueuse/core';
 import type { CharacterCard } from '@/types/HWPL/CharacterCard';
 import type { MaybeRef } from '@/types/vue/ref';
-import asyncComputed from '@/utils/asyncComputed';
 import { getItemSourceAggregateInformation } from '@/api/getItemSource';
 import { useSort } from '@/composables/useSort';
 
