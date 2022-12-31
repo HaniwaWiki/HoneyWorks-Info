@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
+import { computed } from 'vue';
 import { useCharacterCardResources } from './helper/useCharacterCardResources';
+import { useNearbyPage } from './helper/useNearbyPage';
 import HwplItemSourceCard from '@/components/hwpl/HwplItemSource/HwplItemSourceCard.vue';
 import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 import { useFirstOfCollection } from '@/composables/useCollection';
@@ -17,21 +19,27 @@ import CharacterCardDetailSkill
   from '@/views/Info/CharacterCards/CharacterCardDetail/helper/CharacterCardDetailSkill.vue';
 
 // page options
-const characterCardId = Number(useRoute().params.id);
+const route = useRoute();
+const characterCardId = computed(() => Number(route.params.id));
 
 // fetch data
 const { item: characterCard } = useFirstOfCollection('CharacterCards', {
-  Id: characterCardId,
+  Id: characterCardId.value,
 });
 
 // parse function and parsed data
 const [cardName, characterName] = useCharacterCardName(characterCard);
 const characterCardResources = useCharacterCardResources(characterCard);
 const relatedResources = useCharacterCardRelatedResources(characterCard);
+const nearbyPage = useNearbyPage(characterCardId);
 </script>
 
 <template>
-  <AppScaffold :title="cardName" :subtitle="characterName">
+  <AppScaffold
+    :title="cardName"
+    :subtitle="characterName"
+    :nearby-page="nearbyPage"
+  >
     <v-card>
       <ResourceTabs :resources="characterCardResources" />
     </v-card>

@@ -21,6 +21,13 @@ export function useGachaResources(
     const gachaId = gachaBoxInfo.value.Id;
     const gachaImageUrls = await getGachaImageUrls(gachaId);
     const resources: Resource[] = [];
+
+    resources.push({
+      name: t('gacha.banner'),
+      key: 'banner',
+      url: gachaImageUrls.banner,
+    });
+
     if (gachaImageUrls.logo) {
       resources.push({
         name: t('gacha.logo'),
@@ -28,11 +35,7 @@ export function useGachaResources(
         url: gachaImageUrls.logo,
       });
     }
-    resources.push({
-      name: t('gacha.banner'),
-      key: 'banner',
-      url: gachaImageUrls.banner,
-    });
+
     if (gachaImageUrls.background) {
       resources.push({
         name: t('gacha.background'),
