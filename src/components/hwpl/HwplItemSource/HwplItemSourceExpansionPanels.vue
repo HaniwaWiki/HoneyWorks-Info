@@ -1,9 +1,9 @@
 <script setup lang='ts'>
-import type { ItemSource } from '../../../types/HWPL/extra/ItemSource';
-import { getItemSource } from '../../../api/getItemSource';
-import asyncComputed from '../../../utils/asyncComputed';
 import HwplItemSourceGachaBoxes from './sources/HwplItemSourceGachaBoxes.vue';
 import HwplItemSourceEventAchievementRewards from './sources/HwplItemSourceEventAchievementRewards.vue';
+import type { ItemSource } from '@/types/HWPL/extra/ItemSource';
+import { getItemSource } from '@/api/getItemSource';
+import asyncComputed from '@/utils/asyncComputed';
 
 const props = defineProps<{ itemId: number; }>();
 

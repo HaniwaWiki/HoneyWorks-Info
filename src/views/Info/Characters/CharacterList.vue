@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useDisplay } from 'vuetify';
-import LoadingCircle from '../../../components/base/LoadingCircle.vue';
-import AppScaffold from '@/components/app/AppScaffold.vue';
+import LoadingCircle from '@/components/base/LoadingCircle.vue';
+import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 import HwplCharacterImageCard from '@/components/hwpl/HwplCharacterImageCard.vue';
 import { useCollection } from '@/composables/useCollection';

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed, ref, toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
-import type { MusicPart } from '../../../../../types/HWPL/MusicPart';
-import type { Music } from '../../../../../types/HWPL/Music';
-import type { Song } from '../../../../../types/HWPL/Song';
-import type { Singer } from '../../../../../types/HWPL/Singer';
-import type { MusicalScore } from '../../../../../types/HWPL/MusicalScore';
-import HwplMusicPartRankChip from '../../../../../components/hwpl/HwplMusicPartRankChip.vue';
+import type { MusicPart } from '@/types/HWPL/MusicPart';
+import type { Music } from '@/types/HWPL/Music';
+import type { Song } from '@/types/HWPL/Song';
+import type { Singer } from '@/types/HWPL/Singer';
+import type { MusicalScore } from '@/types/HWPL/MusicalScore';
+import HwplMusicPartRankChip from '@/components/hwpl/HwplMusicPartRankChip.vue';
 import { useCharacterCardName } from '@/composables/hwpl/useCharacterCardName';
 import type { CharacterCard } from '@/types/HWPL/CharacterCard';
 import ButtonIconLink from '@/components/base/ButtonIconLink.vue';

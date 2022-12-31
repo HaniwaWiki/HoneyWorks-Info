@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { VuetifyColsProps, vuetifyColsDefault } from '@/types/vuetify/col';
+import { vuetifyColsDefault } from '@/types/vuetify/col';
 
 // Vue 3.2 currently doesn't support complex type in defineProps
 // so the following is a workaround

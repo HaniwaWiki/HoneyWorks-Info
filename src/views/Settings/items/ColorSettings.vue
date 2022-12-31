@@ -1,9 +1,9 @@
 <script setup lang='ts'>
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useSettingsStore } from '../../../stores/settings';
-import { colors } from '../../../palette';
-import ButtonAction from '../../../components/base/ButtonAction.vue';
+import { useSettingsStore } from '@/stores/settings';
+import { colors } from '@/palette';
+import ButtonAction from '@/components/base/ButtonAction.vue';
 
 const settingsStore = useSettingsStore();
 const inputColor = ref(settingsStore.primaryColor);

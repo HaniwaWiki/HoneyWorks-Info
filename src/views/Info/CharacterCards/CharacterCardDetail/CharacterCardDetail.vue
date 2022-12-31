@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
-import HwplItemSourceCard from '../../../../components/hwpl/HwplItemSource/HwplItemSourceCard.vue';
 import { useCharacterCardResources } from './helper/useCharacterCardResources';
-import AppScaffold from '@/components/app/AppScaffold.vue';
+import HwplItemSourceCard from '@/components/hwpl/HwplItemSource/HwplItemSourceCard.vue';
+import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 import { useFirstOfCollection } from '@/composables/useCollection';
 import { useCharacterCardName } from '@/composables/hwpl/useCharacterCardName';
 import ResourceTabs from '@/components/base/ResourceTabs/ResourceTabs.vue';

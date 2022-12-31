@@ -1,9 +1,9 @@
 <script setup lang='ts'>
 import { ref } from 'vue';
-import AppScaffold from '../../components/app/AppScaffold.vue';
 import LanguageSettings from './items/LanguageSettings.vue';
 import ServerSettings from './items/ServerSettings.vue';
 import ColorSettings from './items/ColorSettings.vue';
+import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 
 const selection = ref();
 </script>

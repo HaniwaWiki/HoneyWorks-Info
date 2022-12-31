@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ButtonSize } from '../../types/vuetify/button';
+import type { ButtonSize } from '@/types/vuetify/button';
 
 type Props = {
   content: string;

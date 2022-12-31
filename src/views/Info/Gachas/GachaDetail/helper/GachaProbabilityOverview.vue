@@ -1,14 +1,14 @@
 <script setup lang='ts'>
-import { computed, ref, watchEffect } from 'vue';
+import { computed, ref } from 'vue';
 import _ from 'lodash';
-import { getGachaProbability } from '../../../../../api/getExtraApi';
-import asyncComputed from '../../../../../utils/asyncComputed';
-import type { GachaProbabilityPack } from '../../../../../types/HWPL/extra/GachaProbabilityPack';
-import { useCollection } from '../../../../../composables/useCollection';
-import HwplItemIconCard from '../../../../../components/hwpl/HwplItemIconCard.vue';
-import LazyLoadList from '../../../../../components/assemble/LazyLoadList.vue';
-import LoadingCircle from '../../../../../components/base/LoadingCircle.vue';
-import RarityStar from '../../../../../assets/rarity_star/RarityStar.vue';
+import RarityStar from '@/assets/rarity_star/RarityStar.vue';
+import { useCollection } from '@/composables/useCollection';
+import { getGachaProbability } from '@/api/getExtraApi';
+import type { GachaProbabilityPack } from '@/types/HWPL/extra/GachaProbabilityPack';
+import HwplItemIconCard from '@/components/hwpl/HwplItemIconCard.vue';
+import LazyLoadList from '@/components/assemble/LazyLoadList.vue';
+import LoadingCircle from '@/components/base/LoadingCircle.vue';
+import asyncComputed from '@/utils/asyncComputed';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 
 const props = defineProps<{ gachaBoxId: number; }>();

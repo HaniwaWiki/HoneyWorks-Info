@@ -2,8 +2,8 @@
 import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import CharacterCardLazyLoadList from '../../../components/assemble/CharacterCardLazyLoadList.vue';
-import AppScaffold from '@/components/app/AppScaffold.vue';
+import CharacterCardLazyLoadList from '@/components/assemble/CharacterCardLazyLoadList.vue';
+import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 import {
   useCollection,

@@ -1,13 +1,13 @@
 <script setup lang='ts'>
 import { useRoute } from 'vue-router';
 import { computed } from 'vue';
-import { useCollection, useFirstOfCollection } from '../../../../composables/useCollection';
-import AppScaffold from '../../../../components/app/AppScaffold.vue';
-import ResourceTabs from '../../../../components/base/ResourceTabs/ResourceTabs.vue';
 import { useMusicPartResources } from './helper/useMusicPartResources';
 import { useMusicPartRelatedResources } from './helper/useMusicPartRelatedResources';
 import MusicPartDetailGeneral from './helper/MusicPartDetailGeneral.vue';
 import MusicPartDetailGameStat from './helper/MusicPartDetailGameStat.vue';
+import { useCollection, useFirstOfCollection } from '@/composables/useCollection';
+import ResourceTabs from '@/components/base/ResourceTabs/ResourceTabs.vue';
+import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 
 const musicPartId = Number(useRoute().params.id);
 
