@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { useNearbyPage } from './useNearbyPage';
 import CharacterCardLazyLoadList from '@/components/assemble/CharacterCardLazyLoadList.vue';
 import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
@@ -18,15 +19,16 @@ import ResourceTabs from '@/components/base/ResourceTabs/ResourceTabs.vue';
 const { t } = useI18n();
 
 // page options
-const characterId = Number(useRoute().params.id);
+const route = useRoute();
+const characterId = computed(() => Number(route.params.id));
 
 // fetch data
-const { item: character } = useFirstOfCollection(ref('Characters'), {
-  Id: characterId,
-});
-const { collection: characterCards } = useCollection('CharacterCards', {
-  CharacterId: characterId,
-});
+const { item: character } = useFirstOfCollection(ref('Characters'), computed(() => ({
+  Id: characterId.value,
+})));
+const { collection: characterCards } = useCollection('CharacterCards', computed(() => ({
+  CharacterId: characterId.value,
+})));
 
 const characterImageUrl = computed(() =>
   character.value
@@ -35,6 +37,8 @@ const characterImageUrl = computed(() =>
     })
     : '',
 );
+
+const nearbyPage = useNearbyPage(characterId);
 
 const listItems = computed<VuetifyListItem[]>(() => [
   {
@@ -87,7 +91,7 @@ const listItems = computed<VuetifyListItem[]>(() => [
 </script>
 
 <template>
-  <AppScaffold :title="character?.Name">
+  <AppScaffold :title="character?.Name" :nearby-page="nearbyPage">
     <v-card>
       <ResourceTabs
         :resources="[{

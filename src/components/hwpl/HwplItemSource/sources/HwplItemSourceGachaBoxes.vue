@@ -2,8 +2,8 @@
 import { computed } from 'vue';
 import { useSortGachaBoxInfoList } from '@/views/Info/Gachas/GachaList/helper/useSortGachaBoxInfoList';
 import type { GachaBoxInfo } from '@/composables/hwpl/useGachaBoxInfoList';
-import LazyLoadList from '@/assemble/LazyLoadList.vue';
-import HwplGachaBoxCard from '@/HwplGachaBoxCard.vue';
+import LazyLoadList from '@/components/assemble/LazyLoadList.vue';
+import HwplGachaBoxCard from '@/components/hwpl/HwplGachaBoxCard.vue';
 import { useGachaBoxInfoList } from '@/composables/hwpl/useGachaBoxInfoList';
 import type { GachaBox } from '@/types/HWPL/GachaBox';
 
