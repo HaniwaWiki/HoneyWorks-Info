@@ -1,4 +1,4 @@
-import { getBaseUrls } from '@/utils/baseUrlList';
+import { getBaseUrls } from '@/api/baseUrls';
 
 export function getMusicPartUrl(Id: number) {
   const { assetsBaseUrl } = getBaseUrls();

@@ -1,4 +1,4 @@
-import { getCollection } from './common';
+import { getCollection } from './getCollection';
 import type { CollectionTypeName } from '@/types/HWPL';
 
 // `getCollectionsConcurrently` is for us to fetch multiple collections concurrently

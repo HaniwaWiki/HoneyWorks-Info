@@ -3,22 +3,29 @@ import { useLocalStorage } from '@vueuse/core';
 import { computed } from 'vue';
 import { defaultPrimaryColor } from '@/palette';
 import type { SupportedLocale } from '@/i18n/supportedLocales';
-import type { SupportedServer } from '@/utils/baseUrlList';
-import { setBackendByServer } from '@/utils/baseUrlList';
+import type { SupportedServer } from '@/api/baseUrls';
+import { defaultServer, setBaseUrlsByServer } from '@/api/baseUrls';
 import { SETTINGS_KEY } from '@/utils/storage/prefixes';
+import type { Settings } from '@/stores/settings/types';
+import { initializeSettings } from '@/stores/settings/initializer';
+import { defaultLocale } from '@/i18n/supportedLocales';
 
 // settings are stored in localStorage instead of async storage,
 // so that settings should be read synchronously,
 // and we can change backend server before XHRs are emitted to wrong backend.
-const settingsInLocalStorage = useLocalStorage(SETTINGS_KEY, {
-  locale: 'en' as SupportedLocale,
+const settingsInLocalStorage = useLocalStorage<Settings>(SETTINGS_KEY, {
+  locale: defaultLocale,
+  server: defaultServer,
+  primaryColor: defaultPrimaryColor,
   hideDisclaimer: false,
-  server: 'jp' as SupportedServer,
-  primaryColor: defaultPrimaryColor as string,
+  initialized: false,
 });
 
-// initial by value from localStorage
-setBackendByServer(settingsInLocalStorage.value.server);
+if (!settingsInLocalStorage.value.initialized)
+  initializeSettings(settingsInLocalStorage);
+
+// initial baseUrl by value from localStorage
+setBaseUrlsByServer(settingsInLocalStorage.value.server);
 
 export const useSettingsStore = defineStore(SETTINGS_KEY, () => ({
   // ref()s become state properties
@@ -36,7 +43,7 @@ export const useSettingsStore = defineStore(SETTINGS_KEY, () => ({
   },
   setServer(server: SupportedServer) {
     settingsInLocalStorage.value.server = server;
-    setBackendByServer(server);
+    setBaseUrlsByServer(server);
   },
   setPrimaryColor(color: string) {
     // update primary color will trigger useThemeColor

@@ -1,6 +1,6 @@
 import type { Ref } from 'vue';
 import { ref, unref, watchEffect } from 'vue';
-import { getCollection } from '@/api/common';
+import { getCollection } from '@/api/getCollection';
 import type { CollectionTypeName } from '@/types/HWPL';
 import type { MaybeRef } from '@/types/vue/ref';
 

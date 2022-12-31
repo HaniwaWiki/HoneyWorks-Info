@@ -1,4 +1,4 @@
-import { getBaseUrls } from '@/utils/baseUrlList';
+import { getBaseUrls } from '@/api/baseUrls';
 import { storage } from '@/utils/storage';
 import { VERSION_PREFIX } from '@/utils/storage/prefixes';
 import axios from '@/utils/request';

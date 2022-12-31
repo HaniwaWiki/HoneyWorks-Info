@@ -7,7 +7,7 @@ import { getGachaImageUrls } from '@/utils/hwpl/Gacha/url';
 import {
   appendSceneCardToResources,
 } from '@/views/Info/CharacterCards/CharacterCardDetail/helper/useCharacterCardRelatedResources';
-import { getCollection } from '@/api/common';
+import { getCollection } from '@/api/getCollection';
 
 export function useGachaResources(
   gachaBoxInfo: Ref<GachaBoxInfo | null>,

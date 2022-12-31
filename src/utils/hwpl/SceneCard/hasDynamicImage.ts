@@ -1,4 +1,4 @@
-import { getCollection } from '@/api/common';
+import { getCollection } from '@/api/getCollection';
 
 // only 5-Rarity Character Cards have dynamic Scene Card images when cards are rank up
 let dynamicSceneCardIds: Set<number> | null = null;
