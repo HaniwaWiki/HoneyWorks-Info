@@ -33,8 +33,6 @@ const characterImageUrl = computed(() =>
     : '',
 );
 
-const nearbyPage = useNearbyPage(characterId);
-
 const listItems = computed<VuetifyListItem[]>(() => [
   {
     prependIcon: 'mdi-music-accidental-sharp',
@@ -83,6 +81,8 @@ const listItems = computed<VuetifyListItem[]>(() => [
     subtitle: t('character.description'),
   },
 ]);
+
+const nearbyPage = useNearbyPage(characterId);
 </script>
 
 <template>

@@ -15,11 +15,11 @@ const itemSource = asyncComputed(() =>
 <template>
   <v-expansion-panels>
     <HwplItemSourceGachaBoxes
-      v-if="itemSource.GachaBoxes"
+      v-if="itemSource.GachaBoxes.length > 0"
       :gacha-boxes="itemSource.GachaBoxes"
     />
     <HwplItemSourceEventAchievementRewards
-      v-if="itemSource.EventAchievementRewards"
+      v-if="itemSource.EventAchievementRewards.length > 0"
       :events="itemSource.EventAchievementRewards"
     />
   </v-expansion-panels>

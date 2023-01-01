@@ -76,10 +76,10 @@ function getCardImage(characterCard: CharacterCard) {
             <v-col
               v-else
               cols="6"
-              md="3"
+              md="4"
             >
               <HwplCharacterImageCard
-                clas="mx-auto"
+                class="mx-auto"
                 :img-src="getCardImage(card)"
                 :title="parseCharacterCardName(card)[0]"
                 :subtitle="parseCharacterCardName(card)[1]"
