@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { computed, nextTick, onUpdated, watch, watchEffect } from 'vue';
 import type { NearbyPage } from './types';
-import { scrollToTop } from '@/utils/scrollTo';
+import ButtonNearby from './ButtonNearby.vue';
 import { vuetifyColsDefault } from '@/types/vuetify/col';
 
 // Vue 3.2 currently doesn't support complex type in defineProps
@@ -33,10 +32,6 @@ const props = withDefaults(defineProps<Props>(), {
   ...vuetifyColsDefault,
   placeholderHeight: '10vh',
 });
-
-function scrollToTopInNewPage() {
-  setTimeout(scrollToTop, 100);
-}
 </script>
 
 <template>
@@ -51,43 +46,34 @@ function scrollToTopInNewPage() {
           {{ subtitle }}
         </div>
         <slot />
-        <v-row justify="space-between">
+        <v-row justify="space-between" align="center">
           <v-col cols="4">
-            <v-btn
+            <ButtonNearby
               v-if="nearbyPage?.prevTo"
-              class="overflow-hidden"
-              block
+              type="prev"
+              :title="nearbyPage?.prevTitle"
               :to="nearbyPage?.prevTo"
-              prepend-icon="mdi-arrow-left"
-              @click="scrollToTopInNewPage"
-            >
-              {{ nearbyPage?.prevTitle }}
-            </v-btn>
+            />
           </v-col>
           <v-col cols="4">
-            <v-btn
+            <ButtonNearby
               v-if="nearbyPage?.nextTo"
-              class="overflow-hidden"
-              block
+              type="next"
+              :title="nearbyPage?.nextTitle"
               :to="nearbyPage?.nextTo"
-              append-icon="mdi-arrow-right"
-              @click="scrollToTopInNewPage"
-            >
-              {{ nearbyPage?.nextTitle }}
-            </v-btn>
+            />
           </v-col>
         </v-row>
       </v-col>
     </v-row>
   </v-container>
-
   <div :style="{ height: placeholderHeight }" />
 </template>
 
 <style lang="scss" scoped>
 // cards in app scaffold will have a 40px margin on y axis ("my-8")
 .app-scaffold {
-  & > :deep(.v-card) {
+  & > :deep(.v-card), & > :deep(.card) {
     margin-top: 64px;
     margin-bottom: 64px;
   }

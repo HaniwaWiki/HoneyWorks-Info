@@ -23,9 +23,9 @@ const route = useRoute();
 const characterCardId = computed(() => Number(route.params.id));
 
 // fetch data
-const { item: characterCard } = useFirstOfCollection('CharacterCards', {
+const { item: characterCard } = useFirstOfCollection('CharacterCards', computed(() => ({
   Id: characterCardId.value,
-});
+})));
 
 // parse function and parsed data
 const [cardName, characterName] = useCharacterCardName(characterCard);
