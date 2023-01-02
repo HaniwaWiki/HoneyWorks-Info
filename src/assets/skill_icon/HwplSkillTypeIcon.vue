@@ -1,11 +1,11 @@
 <script setup lang='ts'>
 import { computed } from 'vue';
-import type { Skill } from '../../types/HWPL/Skill';
 import skill_icon_11 from './icons/11.png';
 import skill_icon_21 from './icons/21.png';
 import skill_icon_31 from './icons/31.png';
 import skill_icon_41 from './icons/41.png';
 import skill_icon_42 from './icons/42.png';
+import type { Skill } from '@/types/HWPL/Skill';
 
 type Props = {
   skillType: Skill['Class'];

@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { getMusicLogoUrl, getMusicPartTitleImageUrl } from '../../utils/hwpl/MusicPart/url';
+import { getMusicLogoUrl, getMusicPartTitleImageUrl } from '@/utils/hwpl/MusicPart/url';
 
 const props = defineProps<{
   musicId: number;

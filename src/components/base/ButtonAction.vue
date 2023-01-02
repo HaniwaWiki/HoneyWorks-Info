@@ -7,8 +7,8 @@
  */
 import { reactive, ref, watchEffect } from 'vue';
 import { useElementSize } from '@vueuse/core';
-import sleep from '../../utils/time';
-import type { ButtonSize } from '../../types/vuetify/button';
+import sleep from '@/utils/time';
+import type { ButtonSize } from '@/types/vuetify/button';
 
 type Props = {
   disabled?: boolean;

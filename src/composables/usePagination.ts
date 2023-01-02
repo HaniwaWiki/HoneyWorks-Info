@@ -1,6 +1,7 @@
 import type { Ref } from 'vue';
 import { computed, ref, unref, watch } from 'vue';
 import type { MaybeRef } from '@/types/vue/ref';
+import { scrollToTop } from '@/utils/scrollTo';
 
 type UsePaginationParam<T> = {
   data: MaybeRef<T[]>;
@@ -35,11 +36,7 @@ export function usePagination<T>({
   watch(deps, () => page.value = 1);
 
   // after page changes, scroll to top
-  watch(page, () =>
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    }),
-  );
+  watch(page, scrollToTop);
+
   return { pageCount, page, paginatedData };
 }

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import LoadingCircle from '../../../../components/base/LoadingCircle.vue';
 import { useCharacterCardListViewStore } from './store';
 import { useSortCharacterCards } from './helper/useSortCharacterCards';
-import AppScaffold from '@/components/app/AppScaffold.vue';
+import LoadingCircle from '@/components/base/LoadingCircle.vue';
+import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
 import type { CharacterCard } from '@/types/HWPL/CharacterCard';
 import { usePagination } from '@/composables/usePagination';

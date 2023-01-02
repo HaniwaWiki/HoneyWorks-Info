@@ -1,7 +1,7 @@
 <!-- wrapper of character cards image, and add rarity star onto the image  -->
 <script setup lang="ts">
 import { computed } from 'vue';
-import RarityStar from '../../assets/rarity_star/RarityStar.vue';
+import RarityStar from '@/assets/rarity_star/RarityStar.vue';
 
 type Props = { rarity?: number; evolved?: boolean; };
 

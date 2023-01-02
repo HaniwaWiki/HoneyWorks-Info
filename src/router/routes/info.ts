@@ -4,12 +4,12 @@ const infoRoutes: RouteRecordRaw[] = [
   {
     name: 'Character List',
     path: '/info/characters',
-    component: () => import('@/views/Info/Characters/CharacterList.vue'),
+    component: () => import('@/views/Info/Characters/CharacterList/CharacterList.vue'),
   },
   {
     name: 'Character Detail',
     path: '/info/characters/:id',
-    component: () => import('@/views/Info/Characters/CharacterDetail.vue'),
+    component: () => import('@/views/Info/Characters/CharacterDetail/CharacterDetail.vue'),
   },
   {
     name: 'Character Card List',
@@ -40,12 +40,12 @@ const infoRoutes: RouteRecordRaw[] = [
   {
     name: 'Scene Card List',
     path: '/info/scene-cards',
-    component: () => import('@/views/Info/SceneCards/SceneCardList.vue'),
+    component: () => import('@/views/Info/SceneCards/SceneCardList/SceneCardList.vue'),
   },
   {
     name: 'Scene Card Detail',
     path: '/info/scene-cards/:id',
-    component: () => import('@/views/Info/SceneCards/SceneCardDetail.vue'),
+    component: () => import('@/views/Info/SceneCards/SceneCardDetail/SceneCardDetail.vue'),
   },
   {
     name: 'Gacha List',
@@ -60,12 +60,12 @@ const infoRoutes: RouteRecordRaw[] = [
   {
     name: 'Event List',
     path: '/info/events',
-    component: () => import('@/views/Info/Events/EventList.vue'),
+    component: () => import('@/views/Info/Events/EventList/EventList.vue'),
   },
   {
     name: 'Event Detail',
     path: '/info/events/:id',
-    component: () => import('@/views/Info/Events/EventDetail.vue'),
+    component: () => import('@/views/Info/Events/EventDetail/EventDetail.vue'),
   },
 ];
 

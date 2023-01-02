@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { computed, toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
-import type { VuetifyListItem } from '../../../../../types/vuetify/listItem';
-import type { MdiIcons } from '../../../../../types/mdi';
-import type { MusicPart } from '../../../../../types/HWPL/MusicPart';
-import type { Song } from '../../../../../types/HWPL/Song';
-import type { Singer } from '../../../../../types/HWPL/Singer';
-import type { Music } from '../../../../../types/HWPL/Music';
-import type { MusicalScore } from '../../../../../types/HWPL/MusicalScore';
-import { formatSeconds } from '../../../../../utils/time';
+import type { VuetifyListItem } from '@/types/vuetify/listItem';
+import type { MdiIcons } from '@/types/mdi';
+import type { MusicPart } from '@/types/HWPL/MusicPart';
+import type { Song } from '@/types/HWPL/Song';
+import type { Singer } from '@/types/HWPL/Singer';
+import type { Music } from '@/types/HWPL/Music';
+import type { MusicalScore } from '@/types/HWPL/MusicalScore';
+import { formatSeconds } from '@/utils/time';
 
 const props = defineProps<{
   musicPart: MusicPart | null;

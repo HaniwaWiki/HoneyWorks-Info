@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
-import HwplMusicPartImageWithLogo from '../../../../components/hwpl/HwplMusicPartImageWithLogo.vue';
-import type { MusicInfo } from '../../../../composables/hwpl/useMusicInfoList';
-import { useMusicInfoList } from '../../../../composables/hwpl/useMusicInfoList';
-import LoadingCircle from '../../../../components/base/LoadingCircle.vue';
 import { useMusicListViewStore } from './store';
 import { useSortMusicInfoList } from './helper/useSortMusicList';
-import AppScaffold from '@/components/app/AppScaffold.vue';
+import type { MusicInfo } from '@/composables/hwpl/useMusicInfoList';
+import { useMusicInfoList } from '@/composables/hwpl/useMusicInfoList';
+import LoadingCircle from '@/components/base/LoadingCircle.vue';
+import HwplMusicPartImageWithLogo from '@/components/hwpl/HwplMusicPartImageWithLogo.vue';
+import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 import { usePagination } from '@/composables/usePagination';
 import { useKeywordFilter } from '@/composables/useKeywordFilter';
 

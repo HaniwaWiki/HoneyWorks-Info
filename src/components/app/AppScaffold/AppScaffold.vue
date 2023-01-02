@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { VuetifyColsProps, vuetifyColsDefault } from '@/types/vuetify/col';
+import type { NearbyPage } from './types';
+import ButtonNearby from './ButtonNearby.vue';
+import { vuetifyColsDefault } from '@/types/vuetify/col';
 
 // Vue 3.2 currently doesn't support complex type in defineProps
 // so the following is a workaround
@@ -18,12 +20,15 @@ type Props = {
   title?: string;
   subtitle?: string;
 
+  // you can add a prev link and a link button to nearby page
+  nearbyPage?: NearbyPage;
+
   // height of white space at page bottom
   // so that user scroll bottom content of the page to near center of the screen
   placeholderHeight?: string;
 };
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   ...vuetifyColsDefault,
   placeholderHeight: '10vh',
 });
@@ -41,6 +46,24 @@ withDefaults(defineProps<Props>(), {
           {{ subtitle }}
         </div>
         <slot />
+        <v-row justify="space-between" align="center">
+          <v-col cols="4">
+            <ButtonNearby
+              v-if="nearbyPage?.prevTo"
+              type="prev"
+              :title="nearbyPage?.prevTitle"
+              :to="nearbyPage?.prevTo"
+            />
+          </v-col>
+          <v-col cols="4">
+            <ButtonNearby
+              v-if="nearbyPage?.nextTo"
+              type="next"
+              :title="nearbyPage?.nextTitle"
+              :to="nearbyPage?.nextTo"
+            />
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
@@ -50,7 +73,7 @@ withDefaults(defineProps<Props>(), {
 <style lang="scss" scoped>
 // cards in app scaffold will have a 40px margin on y axis ("my-8")
 .app-scaffold {
-  & > :deep(.v-card) {
+  & > :deep(.v-card), & > :deep(.card) {
     margin-top: 64px;
     margin-bottom: 64px;
   }

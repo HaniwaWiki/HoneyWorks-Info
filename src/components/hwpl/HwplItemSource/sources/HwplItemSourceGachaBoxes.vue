@@ -1,10 +1,11 @@
 <script setup lang='ts'>
 import { computed } from 'vue';
-import type { GachaBox } from '../../../../types/HWPL/GachaBox';
-import { useGachaBoxInfoList } from '../../../../composables/hwpl/useGachaBoxInfoList';
-import HwplGachaBoxCard from '../../HwplGachaBoxCard.vue';
-import { useSortGachaBoxInfoList } from '../../../../views/Info/Gachas/GachaList/helper/useSortGachaBoxInfoList';
-import LazyLoadList from '../../../assemble/LazyLoadList.vue';
+import { useSortGachaBoxInfoList } from '@/views/Info/Gachas/GachaList/helper/useSortGachaBoxInfoList';
+import type { GachaBoxInfo } from '@/composables/hwpl/useGachaBoxInfoList';
+import LazyLoadList from '@/components/assemble/LazyLoadList.vue';
+import HwplGachaBoxCard from '@/components/hwpl/HwplGachaBoxCard.vue';
+import { useGachaBoxInfoList } from '@/composables/hwpl/useGachaBoxInfoList';
+import type { GachaBox } from '@/types/HWPL/GachaBox';
 
 const props = defineProps<{ gachaBoxes: GachaBox[]; }>();
 
@@ -26,7 +27,7 @@ const sortedGachaBoxInfoList = useSortGachaBoxInfoList(filteredGachaBoxInfoList,
           <LazyLoadList
             :page-size="6"
             :items="sortedGachaBoxInfoList"
-            :item-key="(gachaBoxInfo) => gachaBoxInfo.Id"
+            :item-key="(gachaBoxInfo: GachaBoxInfo) => gachaBoxInfo.Id"
           >
             <template #default="{ item: gachaBoxInfo }">
               <v-col :cols="12" :md="6">
