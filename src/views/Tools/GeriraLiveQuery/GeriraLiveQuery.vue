@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import AppScaffold from '../../../components/app/AppScaffold.vue';
-import { useCountDown } from '../../../composables/useCountDown';
-import ButtonCopyToClipboard from '../../../components/base/ButtonCopyToClipboard.vue';
 import {
   useFetchGeriraList,
   useGeriraFilter,
 } from './helper/useFetchGeriraList';
 import { useNotificationOnNewGerira } from './helper/useNotificationOnNewGerira';
+import { useCountDown } from '@/composables/useCountDown';
+import ButtonCopyToClipboard from '@/components/base/ButtonCopyToClipboard.vue';
+import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 
 // default CACHE_EXPIRE of RSSHub is 5 min
 const countDown = 5 * 60;

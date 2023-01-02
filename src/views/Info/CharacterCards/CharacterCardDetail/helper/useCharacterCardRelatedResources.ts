@@ -1,13 +1,13 @@
 import type { Ref } from 'vue';
 import type { RouteLocationRaw } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { asyncComputed } from '@vueuse/core';
 import type { CharacterCard } from '@/types/HWPL/CharacterCard';
 import type { Resource } from '@/components/base/ResourceTabs/Resource';
 import {
   dynamicSceneCardResourceOption,
   videoResourceOption,
 } from '@/components/base/ResourceTabs/Resource';
-import asyncComputed from '@/utils/asyncComputed';
 import { getSceneCardImageUrls } from '@/utils/hwpl/SceneCard/url';
 import { getMusicPartMVUrl } from '@/utils/hwpl/MusicPart/url';
 

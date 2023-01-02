@@ -1,9 +1,9 @@
-import axios from '../utils/request';
+import axios from '@/utils/request';
 import type {
   ItemSource,
   ItemSourceAggregateInformation,
 } from '@/types/HWPL/extra/ItemSource';
-import { getBaseUrls } from '@/utils/baseUrlList';
+import { getBaseUrls } from '@/api/baseUrls';
 
 export async function getItemSource(itemId: number): Promise<ItemSource> {
   const { staticApiBaseUrl } = getBaseUrls();

@@ -4,7 +4,7 @@ import axios from '@/utils/request';
 import type { GeriraInfo } from '@/views/Tools/GeriraLiveQuery/helper/type';
 import { parseRss } from '@/views/Tools/GeriraLiveQuery/helper/parseRss';
 import { parseGerira } from '@/views/Tools/GeriraLiveQuery/helper/parseGerira';
-import { getBaseUrls } from '@/utils/baseUrlList';
+import { getBaseUrls } from '@/api/baseUrls';
 
 export function useFetchGeriraList() {
   const { rssHubBaseUrl } = getBaseUrls();

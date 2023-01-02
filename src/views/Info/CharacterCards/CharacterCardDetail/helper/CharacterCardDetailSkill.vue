@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import HwplSkilTypelIcon from '../../../../../assets/skill_icon/HwplSkillTypeIcon.vue';
+import HwplSkillTypeIcon from '@/assets/skill_icon/HwplSkillTypeIcon.vue';
 import type { CharacterCard } from '@/types/HWPL/CharacterCard';
 import { useCollection } from '@/composables/useCollection';
 import { getSkillInfo } from '@/utils/hwpl/Skill';
@@ -55,7 +55,7 @@ const skillInfo = computed(() =>
               {{ skillInfo?.translated_type }}
             </span>
             <div class="d-flex mx-1">
-              <HwplSkilTypelIcon v-if="skillInfo" class="d-inline" :skill-type="skillInfo.type" />
+              <HwplSkillTypeIcon v-if="skillInfo" class="d-inline" :skill-type="skillInfo.type" />
             </div>
           </div>
         </template>

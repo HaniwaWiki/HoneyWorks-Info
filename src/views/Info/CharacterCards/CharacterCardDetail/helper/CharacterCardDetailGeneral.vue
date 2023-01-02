@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import RarityStar from '../../../../../assets/rarity_star/RarityStar.vue';
+import { asyncComputed } from '@vueuse/core';
+import RarityStar from '@/assets/rarity_star/RarityStar.vue';
 import type { CharacterCard } from '@/types/HWPL/CharacterCard';
 import ButtonIconLink from '@/components/base/ButtonIconLink.vue';
 import HwplTagGroup from '@/components/hwpl/HwplTag/HwplTagGroup.vue';
 import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
-import asyncComputed from '@/utils/asyncComputed';
-import { getItemSourceAggregateInformation } from '@/api/itemSource';
+import { getItemSourceAggregateInformation } from '@/api/getItemSource';
 
 const props = defineProps<{
   characterCard: CharacterCard | null;

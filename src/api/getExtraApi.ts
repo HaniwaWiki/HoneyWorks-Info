@@ -1,4 +1,4 @@
-import { getBaseUrls } from '@/utils/baseUrlList';
+import { getBaseUrls } from '@/api/baseUrls';
 import axios from '@/utils/request';
 import type { GachaProbabilityPack } from '@/types/HWPL/extra/GachaProbabilityPack';
 

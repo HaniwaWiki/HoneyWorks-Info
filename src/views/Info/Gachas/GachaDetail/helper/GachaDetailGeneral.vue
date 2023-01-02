@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, toRefs } from 'vue';
 import { useI18n } from 'vue-i18n';
-import type { VuetifyListItem } from '../../../../../types/vuetify/listItem';
-import type { GachaBoxInfo } from '../../../../../composables/hwpl/useGachaBoxInfoList';
+import type { GachaBoxInfo } from '@/composables/hwpl/useGachaBoxInfoList';
+import type { VuetifyListItem } from '@/types/vuetify/listItem';
 
 const props = defineProps<{
   gachaBoxInfo: GachaBoxInfo | null;

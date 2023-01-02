@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import NavigationListItem from '../../base/NavigationListItem/NavigationListItem.vue';
 import { useNavigationDrawerList } from './useNavigationDrawerList';
+import NavigationListItem from '@/components/base/NavigationListItem/NavigationListItem.vue';
 
 defineProps<{ drawer: boolean; }>();
 

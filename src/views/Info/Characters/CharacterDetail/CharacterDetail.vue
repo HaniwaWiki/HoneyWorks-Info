@@ -2,31 +2,28 @@
 import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import CharacterCardLazyLoadList from '../../../components/assemble/CharacterCardLazyLoadList.vue';
-import AppScaffold from '@/components/app/AppScaffold.vue';
+import { useNearbyPage } from './useNearbyPage';
+import CharacterCardLazyLoadList from '@/components/assemble/CharacterCardLazyLoadList.vue';
+import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 import { getCharacterCardImageUrl } from '@/utils/hwpl/CharacterCard/url';
-import {
-  useCollection,
-  useFirstOfCollection,
-} from '@/composables/useCollection';
+import { useCollection, useFirstOfCollection } from '@/composables/useCollection';
 import type { VuetifyListItem } from '@/types/vuetify/listItem';
-import type { MdiIcons } from '@/types/mdi';
 import { parseCharacterBirthday } from '@/utils/hwpl/Character/common';
-import CharacterCardScrollList from '@/components/assemble/CharacterCardScrollList.vue';
 import ResourceTabs from '@/components/base/ResourceTabs/ResourceTabs.vue';
 
 const { t } = useI18n();
 
 // page options
-const characterId = Number(useRoute().params.id);
+const route = useRoute();
+const characterId = computed(() => Number(route.params.id));
 
 // fetch data
-const { item: character } = useFirstOfCollection(ref('Characters'), {
-  Id: characterId,
-});
-const { collection: characterCards } = useCollection('CharacterCards', {
-  CharacterId: characterId,
-});
+const { item: character } = useFirstOfCollection(ref('Characters'), computed(() => ({
+  Id: characterId.value,
+})));
+const { collection: characterCards } = useCollection('CharacterCards', computed(() => ({
+  CharacterId: characterId.value,
+})));
 
 const characterImageUrl = computed(() =>
   character.value
@@ -84,10 +81,12 @@ const listItems = computed<VuetifyListItem[]>(() => [
     subtitle: t('character.description'),
   },
 ]);
+
+const nearbyPage = useNearbyPage(characterId);
 </script>
 
 <template>
-  <AppScaffold :title="character?.Name">
+  <AppScaffold :title="character?.Name" :nearby-page="nearbyPage">
     <v-card>
       <ResourceTabs
         :resources="[{

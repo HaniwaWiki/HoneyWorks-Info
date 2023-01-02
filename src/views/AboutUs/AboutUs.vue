@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppScaffold from '@/components/app/AppScaffold.vue';
+import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 </script>
 
 <template>

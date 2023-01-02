@@ -1,6 +1,6 @@
 <script setup lang='ts'>
-import { useSettingsStore } from '../../../stores/settings';
-import { SupportedLocale, supportedLocaleMap, supportedLocales } from '../../../i18n/supportedLocales';
+import { useSettingsStore } from '@/stores/settings';
+import { SupportedLocale, supportedLocaleMap, supportedLocales } from '@/i18n/supportedLocales';
 const settingsStore = useSettingsStore();
 </script>
 

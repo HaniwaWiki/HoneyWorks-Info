@@ -6,6 +6,7 @@ export const supportedLocaleMap = {
 
 export type SupportedLocale = keyof typeof supportedLocaleMap;
 export const supportedLocales = Object.keys(supportedLocaleMap) as SupportedLocale[];
+export const defaultLocale = 'en';
 
 export function isSupportedLocale(locale: string): locale is SupportedLocale {
   return locale in supportedLocaleMap;

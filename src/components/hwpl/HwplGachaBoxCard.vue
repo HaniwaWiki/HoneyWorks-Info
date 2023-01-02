@@ -1,8 +1,8 @@
 <script setup lang='ts'>
 import { computed } from 'vue';
 import type { RouteLocationRaw } from 'vue-router';
-import type { GachaBoxInfo } from '../../composables/hwpl/useGachaBoxInfoList';
 import HwplGachaBoxCardImageWithLogo from './HwplGachaBoxCardImage.vue';
+import type { GachaBoxInfo } from '@/composables/hwpl/useGachaBoxInfoList';
 
 type Props = {
   gachaBoxInfo: GachaBoxInfo;

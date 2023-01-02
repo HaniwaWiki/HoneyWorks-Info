@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import { computed } from 'vue';
-import type { MdiIcons } from '../../types/mdi';
-import type { ButtonSize } from '../../types/vuetify/button';
+import type { MdiIcons } from '@/types/mdi';
+import type { ButtonSize } from '@/types/vuetify/button';
 
 export type EventStatus = 'coming' | 'in_progress' | 'finished';
 

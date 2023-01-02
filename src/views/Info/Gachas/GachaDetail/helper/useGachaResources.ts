@@ -1,13 +1,13 @@
 import type { Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { asyncComputed } from '@vueuse/core';
 import type { Resource } from '@/components/base/ResourceTabs/Resource';
 import type { GachaBoxInfo } from '@/composables/hwpl/useGachaBoxInfoList';
-import asyncComputed from '@/utils/asyncComputed';
 import { getGachaImageUrls } from '@/utils/hwpl/Gacha/url';
 import {
   appendSceneCardToResources,
 } from '@/views/Info/CharacterCards/CharacterCardDetail/helper/useCharacterCardRelatedResources';
-import { getCollection } from '@/api/common';
+import { getCollection } from '@/api/getCollection';
 
 export function useGachaResources(
   gachaBoxInfo: Ref<GachaBoxInfo | null>,
@@ -21,6 +21,13 @@ export function useGachaResources(
     const gachaId = gachaBoxInfo.value.Id;
     const gachaImageUrls = await getGachaImageUrls(gachaId);
     const resources: Resource[] = [];
+
+    resources.push({
+      name: t('gacha.banner'),
+      key: 'banner',
+      url: gachaImageUrls.banner,
+    });
+
     if (gachaImageUrls.logo) {
       resources.push({
         name: t('gacha.logo'),
@@ -28,11 +35,7 @@ export function useGachaResources(
         url: gachaImageUrls.logo,
       });
     }
-    resources.push({
-      name: t('gacha.banner'),
-      key: 'banner',
-      url: gachaImageUrls.banner,
-    });
+
     if (gachaImageUrls.background) {
       resources.push({
         name: t('gacha.background'),

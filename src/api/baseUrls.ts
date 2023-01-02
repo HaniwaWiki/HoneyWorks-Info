@@ -5,11 +5,11 @@ export type SupportedServer = typeof supportedServers[number];
 export const defaultServer = 'jp';
 
 let _server: SupportedServer = defaultServer;
-export function setBackendByServer(newServer: SupportedServer) {
+export function setBaseUrlsByServer(newServer: SupportedServer) {
   _server = newServer;
 }
 
-type BaseUrlList = {
+type BaseUrlCollection = {
   staticApiBaseUrl: string;
   apiBaseUrl: string;
   assetsBaseUrl: string;
@@ -17,7 +17,7 @@ type BaseUrlList = {
   rssHubBaseUrl: string;
 };
 
-const baseUrlLists: Record<SupportedServer, BaseUrlList> = {
+const baseUrlCollections: Record<SupportedServer, BaseUrlCollection> = {
   jp: {
     staticApiBaseUrl: 'https://static-api-jp.honeyworks.info/api',
     apiBaseUrl: 'https://api-jp.honeyworks.info/api',
@@ -35,5 +35,5 @@ const baseUrlLists: Record<SupportedServer, BaseUrlList> = {
 };
 
 export function getBaseUrls() {
-  return baseUrlLists[_server];
+  return baseUrlCollections[_server];
 }

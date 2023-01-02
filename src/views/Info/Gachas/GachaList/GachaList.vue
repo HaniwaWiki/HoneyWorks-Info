@@ -1,13 +1,13 @@
 <script setup lang='ts'>
 import { storeToRefs } from 'pinia';
-import { useKeywordFilter } from '../../../../composables/useKeywordFilter';
-import { usePagination } from '../../../../composables/usePagination';
-import HwplGachaBoxCard from '../../../../components/hwpl/HwplGachaBoxCard.vue';
-import AppScaffold from '../../../../components/app/AppScaffold.vue';
-import { useGachaBoxInfoList } from '../../../../composables/hwpl/useGachaBoxInfoList';
-import LoadingCircle from '../../../../components/base/LoadingCircle.vue';
 import { useGachaListViewStore } from './store';
 import { useSortGachaBoxInfoList } from './helper/useSortGachaBoxInfoList';
+import { useKeywordFilter } from '@/composables/useKeywordFilter';
+import { usePagination } from '@/composables/usePagination';
+import { useGachaBoxInfoList } from '@/composables/hwpl/useGachaBoxInfoList';
+import HwplGachaBoxCard from '@/components/hwpl/HwplGachaBoxCard.vue';
+import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
+import LoadingCircle from '@/components/base/LoadingCircle.vue';
 
 const { keyword, sortBy, page } = storeToRefs(useGachaListViewStore());
 
