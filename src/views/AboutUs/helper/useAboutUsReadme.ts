@@ -4,7 +4,7 @@ import readme_zh from '../text/zh_Hans.md';
 import { useSettingsStore } from '@/stores/settings';
 import type { SupportedLocale } from '@/i18n/supportedLocales';
 
-function getReadme(locale: SupportedLocale) {
+function getAboutUsMarkdown(locale: SupportedLocale) {
   switch (locale) {
     case 'zh_Hans':
       return readme_zh;
@@ -13,7 +13,7 @@ function getReadme(locale: SupportedLocale) {
   }
 }
 
-export function useAboutUsReadme() {
+export function useAboutUsMarkdown() {
   const settingsStore = useSettingsStore();
-  return computed(() => getReadme(settingsStore.settings.locale));
+  return computed(() => getAboutUsMarkdown(settingsStore.settings.locale));
 }

@@ -1,6 +1,6 @@
 import axios from '../utils/request';
-import type { CollectionTypeName } from '@/types/HWPL';
 import { getBaseUrls } from '@/api/baseUrls';
+import type { CollectionTypeName } from '@/types/HWPL';
 
 // fetch data collection from backend, with optional filter
 export async function getCollection<
@@ -23,21 +23,17 @@ export async function getCollection<
   return collection;
 }
 
-// `getCollectionsConcurrently` is for us to fetch multiple collections concurrently
-// we define multiple signatures of this function,
-// so that we will get exact result whose types are match with the arguments users pass in
-export async function getCollectionsConcurrently<
-  Name1 extends keyof CollectionTypeName,
-  Name2 extends keyof CollectionTypeName,
->(
-  names: [Name1, Name2],
-  version: string | number
-): Promise<[CollectionTypeName[Name1][], CollectionTypeName[Name2][]]>;
+// type definition of getCollectionsConcurrently
+export function getCollectionsConcurrently<Names extends (keyof CollectionTypeName)[] | []>(
+  names: Names,
+  version?: string | number,
+): Promise<{ [Index in keyof Names]: CollectionTypeName[Names[Index]][] }>;
 
+// implementation of getCollectionsConcurrently
 export async function getCollectionsConcurrently(
-  names: any[],
+  names: (keyof CollectionTypeName)[],
   version: string | number = 'latest',
-): Promise<any[][]> {
+) {
   const promises = names.map(name => getCollection(name, {}, version));
   return Promise.all(promises);
 }

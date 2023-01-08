@@ -1,11 +1,10 @@
 import _ from 'lodash';
-import type { Ref } from 'vue';
-import { computed } from 'vue';
-import { useCollection } from '@/composables/useCollection';
+import { ref, watchEffect } from 'vue';
+import { getCollectionsConcurrently } from '@/api/getCollection';
 import type { Music } from '@/types/HWPL/Music';
+import type { MusicPart } from '@/types/HWPL/MusicPart';
 import type { Singer } from '@/types/HWPL/Singer';
 import type { Song } from '@/types/HWPL/Song';
-import type { MusicPart } from '@/types/HWPL/MusicPart';
 
 export type MusicInfo = Music & {
   Singer: Singer;
@@ -14,24 +13,26 @@ export type MusicInfo = Music & {
 };
 
 export function useMusicInfoList() {
-  const { loading: loadingSongs, collection: songs } = useCollection('Songs');
-  const { loading: loadingSingers, collection: singers } = useCollection('Singers');
-  const { loading: loadingMusics, collection: musics } = useCollection('Musics');
-  const { loading: loadingMusicParts, collection: musicParts } = useCollection('MusicParts');
+  const loading = ref(true);
+  const musicInfoList = ref<MusicInfo[]>([]);
 
-  const songMap = computed(() => _.keyBy(songs.value, 'Id'));
-  const singerMap = computed(() => _.keyBy(singers.value, 'Id'));
-  const musicPartMap = computed(() => _.groupBy(musicParts.value, 'MusicId'));
+  watchEffect(async () => {
+    const [songs, singers, musics, musicParts] = await getCollectionsConcurrently(
+      ['Songs', 'Singers', 'Musics', 'MusicParts'],
+    );
 
-  const loading = computed(() => loadingSongs.value || loadingSingers.value || loadingMusics.value || loadingMusicParts.value);
-  const musicInfoList: Ref<MusicInfo[]> = computed(() => loading.value
-    ? []
-    : musics.value.map(music => ({
+    const songMap = _.keyBy(songs, 'Id');
+    const singerMap = _.keyBy(singers, 'Id');
+    const musicPartMap = _.groupBy(musicParts, 'MusicId');
+
+    musicInfoList.value = musics.map(music => ({
       ...music,
-      Singer: singerMap.value[music.SingerId],
-      Song: songMap.value[music.SongId],
-      MusicParts: musicPartMap.value[music.Id],
-    })));
+      Singer: singerMap[music.SingerId],
+      Song: songMap[music.SongId],
+      MusicParts: musicPartMap[music.Id],
+    }));
+    loading.value = false;
+  });
 
   return { loading, musicInfoList };
 }
