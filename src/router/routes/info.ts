@@ -33,6 +33,11 @@ const infoRoutes: RouteRecordRaw[] = [
     component: () => import('@/views/Info/Musics/MusicList/MusicList.vue'),
   },
   {
+    name: 'Music Meta',
+    path: '/info/musics-meta',
+    component: () => import('@/views/Info/Musics/MusicMeta/MusicMeta.vue'),
+  },
+  {
     name: 'Music Part Detail',
     path: '/info/music-parts/:id',
     component: () => import('@/views/Info/Musics/MusicPartDetail/MusicPartDetail.vue'),

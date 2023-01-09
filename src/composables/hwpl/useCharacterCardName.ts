@@ -1,9 +1,9 @@
-// composable version of parseCharacterCardName
 import type { Ref } from 'vue';
 import { computed } from 'vue';
 import type { CharacterCard } from '@/types/HWPL/CharacterCard';
 import { parseCharacterCardName } from '@/utils/hwpl/CharacterCard/common';
 
+// composable version of parseCharacterCardName
 export function useCharacterCardName(
   characterCard: Ref<CharacterCard | undefined | null>,
 ): [Ref<string>, Ref<string>] {

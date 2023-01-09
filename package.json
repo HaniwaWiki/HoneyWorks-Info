@@ -1,6 +1,7 @@
 {
   "name": "honeyworks-info",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "concurrently --kill-others npm:dev:*",
     "dev:http-server": "http-server -p 35173 i18n-json",
@@ -26,7 +27,7 @@
     "vue": "^3.2.45",
     "vue-i18n": "9",
     "vue-router": "^4.1.6",
-    "vuetify": "3",
+    "vuetify": "^3.1.0",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
@@ -47,7 +48,7 @@
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4",
     "vite": "^4.0.1",
-    "vite-plugin-md": "^0.21.5",
+    "vite-plugin-md": "^0.22.5",
     "vite-plugin-pwa": "^0.14.0",
     "vite-plugin-vuetify": "^1.0.1",
     "vitest": "^0.26.2",
