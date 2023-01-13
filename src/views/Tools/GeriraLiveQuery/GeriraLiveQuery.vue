@@ -1,13 +1,17 @@
 <script setup lang="ts">
+import type { Ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import type { GeriraInfo } from './helper/type';
 import {
   useFetchGeriraList,
   useGeriraFilter,
 } from './helper/useFetchGeriraList';
 import { useNotificationOnNewGerira } from './helper/useNotificationOnNewGerira';
+import type { DataTableHeader, DataTableSortBy } from '@/types/vuetify/v-data-table';
 import { useCountDown } from '@/composables/useCountDown';
-import ButtonCopyToClipboard from '@/components/base/ButtonCopyToClipboard.vue';
 import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
+import ButtonCopyToClipboard from '@/components/base/ButtonCopyToClipboard.vue';
 
 // default CACHE_EXPIRE of RSSHub is 5 min
 const countDown = 5 * 60;
@@ -16,6 +20,25 @@ const { t, d } = useI18n();
 
 const { geriraList, loading, refresh } = useFetchGeriraList();
 const aliveGeriraList = useGeriraFilter(geriraList);
+
+const headers: Ref<DataTableHeader<GeriraInfo>[]> = computed(() => [
+  {
+    title: t('gerira_live_query.gerira_room_id'),
+    key: 'roomId',
+  },
+  {
+    title: t('gerira_live_query.gerira_level'),
+    key: 'level',
+  },
+  {
+    title: t('gerira_live_query.gerira_end_time'),
+    key: 'endTime',
+  },
+]);
+const sortBy = ref<DataTableSortBy<GeriraInfo>[]>([
+  { key: 'level', order: 'desc' },
+  { key: 'endTime', order: 'asc' },
+]);
 
 // use a count-down to auto refresh
 const { count, resetCountDown } = useCountDown(countDown, (_resetCountDown) => {
@@ -51,33 +74,22 @@ useNotificationOnNewGerira(aliveGeriraList, 3);
     <v-row>
       <v-col>
         <v-card>
-          <!--   todo: refactor with v-data-table   -->
-          <v-table>
-            <thead>
-              <tr>
-                <th
-                  v-t="'gerira_live_query.gerira_room_id'"
-                  class="text-left"
-                />
-                <th v-t="'gerira_live_query.gerira_level'" class="text-left" />
-                <th
-                  v-t="'gerira_live_query.gerira_end_time'"
-                  class="text-left"
-                />
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="gerira in geriraList" :key="gerira.roomId">
-                <td>
-                  <ButtonCopyToClipboard :content="gerira.roomId" />
-                </td>
-                <td>Lv{{ gerira.level }}</td>
-                <td>
-                  {{ d(gerira.endTime, 'short') }}
-                </td>
-              </tr>
-            </tbody>
-          </v-table>
+          <VDataTable
+            v-model:sortBy="sortBy"
+            :headers="headers"
+            :items="aliveGeriraList"
+            :items-per-page="15"
+            multi-sort
+          >
+            <!-- eslint-disable-next-line vue/valid-v-slot -->
+            <template #item.roomId="{ item }">
+              <ButtonCopyToClipboard :content="item.value.roomId" />
+            </template>
+            <!-- eslint-disable-next-line vue/valid-v-slot -->
+            <template #item.endTime="{ item }">
+              {{ d(item.value.endTime, 'short') }}
+            </template>
+          </VDataTable>
         </v-card>
       </v-col>
     </v-row>
