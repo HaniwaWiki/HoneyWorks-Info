@@ -88,6 +88,10 @@ export const officialYoutubeChannels: YouTubeLink[] = [
     url: 'https://www.youtube.com/channel/UC3ql_EU4JnaE3Rh3cqbHu6g',
   },
   {
+    text: 'ハコニワリリィ Official',
+    url: 'https://www.youtube.com/@HaKoniwalily',
+  },
+  {
     text: '可憐なアイボリー Official',
     url: 'https://www.youtube.com/channel/UCrxb-1OHdCKq7mpxsJpz8ww',
   },

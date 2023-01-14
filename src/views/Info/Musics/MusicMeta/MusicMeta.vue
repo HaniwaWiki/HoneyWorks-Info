@@ -1,16 +1,14 @@
 <script setup lang="ts">
-import type { ElementOf } from '@vueuse/core';
-import type { Ref } from 'vue';
+import type { Ref, UnwrapRef } from 'vue';
 import { computed, ref } from 'vue';
 import { VDataTable } from 'vuetify/lib/labs/VDataTable/index';
 import { useI18n } from 'vue-i18n';
+import type { ElementOf } from '@vueuse/core';
 import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 import ButtonIconLink from '@/components/base/ButtonIconLink.vue';
 import HwplMusicPartRankChip from '@/components/hwpl/HwplMusicPartRankChip.vue';
 import { useMusicalScoreInfoList } from '@/composables/hwpl/useMusicalScoreInfoList';
-
-type VDataTableProps = InstanceType<typeof VDataTable>['$props'];
-type DataTableHeader = ElementOf<Exclude<VDataTableProps['headers'], undefined | any[][]>>;
+import type { DataTableHeader } from '@/types/vuetify/v-data-table';
 
 const { t } = useI18n();
 
@@ -18,7 +16,26 @@ const search = ref('');
 
 const { loading, musicalScoreInfoList } = useMusicalScoreInfoList();
 
-const headers: Ref<DataTableHeader[]> = computed(() => [
+const rankTextMap: Record<number, string> = {
+  1: 'EASY',
+  2: 'NORMAL',
+  3: 'HARD',
+  4: 'EXPERT',
+};
+
+const musicalScoreData = computed(() => musicalScoreInfoList.value.map(({ Music, Singer, Song, MusicPart, ...MusicalScore }) => ({
+  musicName: Song.Name,
+  musicPartId: MusicPart.Id,
+  musicPartName: MusicPart.Name,
+  rank: MusicalScore.Rank,
+  rankText: rankTextMap[MusicalScore.Rank],
+  playLevel: MusicalScore.PlayLevel,
+  musicTime: MusicalScore.MusicTime,
+})));
+
+type MusicalScoreData = ElementOf<UnwrapRef<typeof musicalScoreData>>;
+
+const headers: Ref<DataTableHeader<MusicalScoreData>[]> = computed(() => [
   {
     title: t('music_meta.music_name'),
     key: 'musicName',
@@ -54,23 +71,6 @@ const headers: Ref<DataTableHeader[]> = computed(() => [
     width: '10%' as unknown as number,
   },
 ]);
-
-const rankTextMap: Record<number, string> = {
-  1: 'EASY',
-  2: 'NORMAL',
-  3: 'HARD',
-  4: 'EXPERT',
-};
-
-const musicalScoreData = computed(() => musicalScoreInfoList.value.map(({ Music, Singer, Song, MusicPart, ...MusicalScore }) => ({
-  musicName: Song.Name,
-  musicPartId: MusicPart.Id,
-  musicPartName: MusicPart.Name,
-  rank: MusicalScore.Rank,
-  rankText: rankTextMap[MusicalScore.Rank],
-  playLevel: MusicalScore.PlayLevel,
-  musicTime: MusicalScore.MusicTime,
-})));
 </script>
 
 <template>
