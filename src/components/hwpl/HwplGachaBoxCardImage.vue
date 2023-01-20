@@ -36,7 +36,7 @@ async function updateBackgroundByCharacterCard(characterCard?: CharacterCard) {
   backgroundIsDynamic.value = !!(props.preferDynamicImage && sceneCardImages.dynamic);
   backgroundUrl.value = backgroundIsDynamic.value
     ? sceneCardImages.dynamic!
-    : sceneCardImages.static;
+    : sceneCardImages.static_full;
   return backgroundUrl.value;
 }
 

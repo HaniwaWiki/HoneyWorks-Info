@@ -34,7 +34,7 @@ export async function getSceneCardImageUrls(Id: number) {
 
   const imageId = sceneCard.ImageIdentifier;
   return {
-    static: getSceneCardStaticImageUrl(imageId),
+    static_full: getSceneCardStaticImageUrl(imageId),
     static_thumb: getSceneCardStaticThumbImageUrl(imageId),
     // now only provide one dynamic scene card for test purposes
     dynamic: (await hasDynamicImage(Id))
