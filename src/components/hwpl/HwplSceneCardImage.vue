@@ -8,9 +8,13 @@ const props = defineProps<{
   name: string;
 }>();
 const titleFontSize = '15px';
+
 const cardUrl = asyncComputed(async () => {
-  const { static_full } = await getSceneCardImageUrls(props.sceneId);
-  return static_full;
+  if (props.sceneId) {
+    const cardUrl = await getSceneCardImageUrls(props.sceneId);
+    return cardUrl.static;
+  }
+  return undefined;
 });
 
 const cardName = props.name;

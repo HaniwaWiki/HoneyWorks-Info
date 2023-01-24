@@ -4,12 +4,14 @@ const infoRoutes: RouteRecordRaw[] = [
   {
     name: 'Character List',
     path: '/info/characters',
-    component: () => import('@/views/Info/Characters/CharacterList/CharacterList.vue'),
+    component: () =>
+      import('@/views/Info/Characters/CharacterList/CharacterList.vue'),
   },
   {
     name: 'Character Detail',
     path: '/info/characters/:id',
-    component: () => import('@/views/Info/Characters/CharacterDetail/CharacterDetail.vue'),
+    component: () =>
+      import('@/views/Info/Characters/CharacterDetail/CharacterDetail.vue'),
   },
   {
     name: 'Character Card List',
@@ -40,17 +42,30 @@ const infoRoutes: RouteRecordRaw[] = [
   {
     name: 'Music Part Detail',
     path: '/info/music-parts/:id',
-    component: () => import('@/views/Info/Musics/MusicPartDetail/MusicPartDetail.vue'),
+    component: () =>
+      import('@/views/Info/Musics/MusicPartDetail/MusicPartDetail.vue'),
   },
   {
     name: 'Scene Card List',
     path: '/info/scene-cards',
-    component: () => import('@/views/Info/SceneCards/SceneCardList/SceneCardList.vue'),
+    component: () =>
+      import('@/views/Info/SceneCards/SceneCardList/SceneCardList.vue'),
   },
   {
     name: 'Scene Card Detail',
     path: '/info/scene-cards/:id',
-    component: () => import('@/views/Info/SceneCards/SceneCardDetail/SceneCardDetail.vue'),
+    component: () =>
+      import('@/views/Info/SceneCards/SceneCardDetail/SceneCardDetail.vue'),
+  },
+  {
+    name: 'Album List',
+    path: '/info/album',
+    component: () => import('@/views/Info/Albums/AlbumList/AlbumsList.vue'),
+  },
+  {
+    name: 'Album Detail',
+    path: '/info/album/:id',
+    component: () => import('@/views/Info/Albums/AlbumDetail/AlbumDetail.vue'),
   },
   {
     name: 'Gacha List',

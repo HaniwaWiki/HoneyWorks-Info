@@ -5,13 +5,14 @@ import type { SceneCard } from '@/types/HWPL/SceneCard';
 import type { SceneCardRouteDetail } from '@/types/HWPL/SceneCardRouteDetail';
 import type { SceneCardAcquisitionRoute } from '@/types/HWPL/SceneCardAcquisitionRoute';
 import { useFirstOfCollection } from '@/composables/useCollection';
+import type { VuetifyListItem } from '@/types/vuetify/listItem';
 // import { getItemSourceAggregateInformation } from "@/api/getItemSource";
 const props = defineProps<{
   sceneCard: SceneCard | null;
   sceneCardRouteDetail: SceneCardRouteDetail | null;
   sceneCardAcquisitionRoute: SceneCardAcquisitionRoute | null;
 }>();
-const { d, t } = useI18n();
+const { t } = useI18n();
 
 const { item: albums } = useFirstOfCollection(
   'Albums',
