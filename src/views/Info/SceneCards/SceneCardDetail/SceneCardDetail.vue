@@ -36,10 +36,8 @@ const nearbyPage = useNearbyPage(sceneCardId);
 
 const cardUrl = asyncComputed(async () => {
   if (sceneCard.value?.ItemId) {
-    const { static_full } = await getSceneCardImageUrls(
-      sceneCard.value?.ItemId,
-    );
-    return static_full;
+    const cardUrl = await getSceneCardImageUrls(sceneCard.value?.ItemId);
+    return cardUrl.static;
   }
   return undefined;
 });

@@ -8,12 +8,10 @@ const props = defineProps<{ item: NavigationListItemProp; }>();
 
 const route = useRoute();
 
-const active = computed(
-  () => {
-    const href = props.item.href;
-    return !!href && (route.path === href || route.path.startsWith(`${href}/`));
-  },
-);
+const active = computed(() => {
+  const href = props.item.href;
+  return !!href && (route.path === href || route.path.startsWith(`${href}/`));
+});
 
 type LinkProp = {
   to?: string;

@@ -5,7 +5,7 @@ import type { SceneCardAcquisitionRoute } from '@/types/HWPL/SceneCardAcquisitio
 import type { SceneCardRouteDetail } from '@/types/HWPL/SceneCardRouteDetail';
 import { getCollectionsConcurrently } from '@/api/getCollection';
 
-export type AlbumInfo = SceneCard & {
+export type SceneCardInfo = SceneCard & {
   SceneCardAcquisitionRoute: SceneCardAcquisitionRoute;
   SceneCardRouteDetail: SceneCardRouteDetail;
 };
@@ -13,7 +13,7 @@ export type AlbumInfo = SceneCard & {
 export function useScenCardInforList() {
   const loading = ref(true);
 
-  const sceneCardsList = ref<AlbumInfo[]>([]);
+  const sceneCardsList = ref<SceneCardInfo[]>([]);
   watchEffect(async () => {
     const [sceneCards, sceneCardAcquisitionRoutes, sceneCardRouteDetails]
       = await getCollectionsConcurrently([

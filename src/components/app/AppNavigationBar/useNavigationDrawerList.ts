@@ -16,6 +16,7 @@ export function useNavigationDrawerList(): Ref<NavigationListItemProp[]> {
         { title: t('global.character_cards'), href: '/info/character-cards' },
         { title: t('global.musics'), href: '/info/musics' },
         { title: t('global.music_meta'), href: '/info/musics-meta' },
+        { title: t('global.album'), href: '/info/album' },
         { title: t('global.scene_cards'), href: '/info/scene-cards' },
         { title: t('global.gachas'), href: '/info/gachas' },
         { title: t('global.events'), href: '/info/events' },
