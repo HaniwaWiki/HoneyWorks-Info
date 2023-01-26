@@ -2,14 +2,15 @@
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useSceneCardListViewStore } from './store';
-import { useScenCardInforList } from '@/composables/hwpl/useSceneCardInfoList';
+import { useSceneCardInfoList } from '@/composables/hwpl/useSceneCardInfoList';
 import LoadingCircle from '@/components/base/LoadingCircle.vue';
 import { usePagination } from '@/composables/usePagination';
 import HwplSceneCardImage from '@/components/hwpl/HwplSceneCardImage.vue';
 import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 import { useKeywordFilter } from '@/composables/useKeywordFilter';
 
-const { loading, sceneCardsList } = useScenCardInforList();
+const { loading, sceneCardsList } = useSceneCardInfoList();
+
 const { keyword, page } = storeToRefs(useSceneCardListViewStore());
 const filteredSceneCardList = useKeywordFilter(sceneCardsList, keyword);
 const pageSize = 28;

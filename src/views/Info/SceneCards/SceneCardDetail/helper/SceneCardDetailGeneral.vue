@@ -8,7 +8,8 @@ import { useFirstOfCollection } from '@/composables/useCollection';
 import type { VuetifyListItem } from '@/types/vuetify/listItem';
 // import { getItemSourceAggregateInformation } from "@/api/getItemSource";
 const props = defineProps<{
-  sceneCard: SceneCard | null;
+  sceneCardAlbumId: number | undefined;
+  sceneCardItemId: number | undefined;
   sceneCardRouteDetail: SceneCardRouteDetail | null;
   sceneCardAcquisitionRoute: SceneCardAcquisitionRoute | null;
 }>();
@@ -17,7 +18,7 @@ const { t } = useI18n();
 const { item: albums } = useFirstOfCollection(
   'Albums',
   computed(() => ({
-    Id: props.sceneCard?.AlbumId,
+    Id: props.sceneCardAlbumId,
   })),
 );
 
@@ -40,10 +41,10 @@ const { item: albums } = useFirstOfCollection(
 // });
 
 const itemInList = computed(() => {
-  if (props.sceneCard && props.sceneCardRouteDetail && albums.value) {
+  if (props.sceneCardRouteDetail && albums.value) {
     return [
       {
-        text: props.sceneCard?.ItemId,
+        text: props.sceneCardItemId,
         subtitle: t('scene_cards.scene_card_Id'),
       },
       {

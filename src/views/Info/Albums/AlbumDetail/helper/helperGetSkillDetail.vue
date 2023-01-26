@@ -5,8 +5,11 @@ import { getSkillInfo } from '@/utils/hwpl/Skill';
 import HwplTagGroup from '@/components/hwpl/HwplTag/HwplTagGroup.vue';
 import type { Tag } from '@/types/HWPL/Tag';
 import { useFirstOfCollection } from '@/composables/useCollection';
+import HwplSkillTypeIcon from '@/assets/skill_icon/HwplSkillTypeIcon.vue';
+
 const props = defineProps<{
   skillDetail: Skill | undefined;
+  sceneCount: number | undefined;
 }>();
 
 const selectedLevel = ref(1);
@@ -43,12 +46,13 @@ const result = computed(() =>
       <span>{{ selectedLevel }}</span>
     </div>
     <v-slider
+      v-if="skillInfo?.type !== 90"
       v-model="selectedLevel"
       prepend-icon="mdi-star"
       thumb-label
       color="primary"
       :min="1"
-      :max="5"
+      :max="sceneCount"
       :step="1"
     />
   </div>

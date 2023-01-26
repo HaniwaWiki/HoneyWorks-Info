@@ -4,9 +4,10 @@ import helperGetSkillDetail from './helperGetSkillDetail.vue';
 import { useCollection } from '@/composables/useCollection';
 
 const props = defineProps<{
-  skill1: number | undefined;
-  skill2: number | undefined;
-  skill3: number | undefined;
+  skill1?: number;
+  skill2?: number;
+  skill3?: number;
+  sceneCount?: number;
 }>();
 
 const skills = useCollection('Skills');
@@ -31,15 +32,24 @@ const skill3Detail = computed(() =>
 <template>
   <v-card :title="$t('album.skill_info')">
     <v-container v-if="skill1Detail">
-      <helperGetSkillDetail :skill-detail="skill1Detail" />
+      <helperGetSkillDetail
+        :skill-detail="skill1Detail"
+        :scene-count="props.sceneCount"
+      />
     </v-container>
     <v-divider />
     <v-container v-if="skill2Detail">
-      <helperGetSkillDetail :skill-detail="skill2Detail" />
+      <helperGetSkillDetail
+        :skill-detail="skill2Detail"
+        :scene-count="props.sceneCount"
+      />
     </v-container>
     <v-divider />
     <v-container v-if="skill3Detail">
-      <helperGetSkillDetail :skill-detail="skill3Detail" />
+      <helperGetSkillDetail
+        :skill-detail="skill3Detail"
+        :scene-count="props.sceneCount"
+      />
     </v-container>
   </v-card>
 </template>

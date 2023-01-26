@@ -10,7 +10,7 @@ export type SceneCardInfo = SceneCard & {
   SceneCardRouteDetail: SceneCardRouteDetail;
 };
 
-export function useScenCardInforList() {
+export function useSceneCardInfoList() {
   const loading = ref(true);
 
   const sceneCardsList = ref<SceneCardInfo[]>([]);
@@ -22,27 +22,22 @@ export function useScenCardInforList() {
         'SceneCardRouteDetails',
       ]);
 
-    const sceneCardMap = _.sortBy(sceneCards, 'ItemId');
-    const sceneCardAcquisitionRouteMap = _.sortBy(
+    // const sceneCardMap = _.keyBy(sceneCards, 'ItemId');
+    const sceneCardAcquisitionRouteMap = _.keyBy(
       sceneCardAcquisitionRoutes,
       'SceneCardId',
     );
 
-    const sceneCardRouteDetailMap = _.sortBy(
+    const sceneCardRouteDetailMap = _.keyBy(
       sceneCardRouteDetails,
       'SceneCardId',
     );
 
-    sceneCardsList.value = sceneCardMap.map((sceneCard) => {
-      const sceneCardAcquisitionRoute
-        = sceneCardAcquisitionRouteMap[sceneCard.ItemId];
-      const sceneCardRouteDetail = sceneCardRouteDetailMap[sceneCard.ItemId];
-      return {
-        ...sceneCard,
-        SceneCardAcquisitionRoute: sceneCardAcquisitionRoute,
-        SceneCardRouteDetail: sceneCardRouteDetail,
-      };
-    });
+    sceneCardsList.value = sceneCards.map(sceneCard => ({
+      ...sceneCard,
+      SceneCardAcquisitionRoute: sceneCardAcquisitionRouteMap[sceneCard.ItemId],
+      SceneCardRouteDetail: sceneCardRouteDetailMap[sceneCard.ItemId],
+    }));
 
     loading.value = false;
   });
