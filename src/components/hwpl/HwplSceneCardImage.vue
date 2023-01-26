@@ -14,8 +14,7 @@ const cardUrl = asyncComputed(async () => {
     const cardUrl = await getSceneCardImageUrls(props.sceneId);
     return cardUrl.static;
   }
-  return undefined;
-});
+}, '');
 
 const cardName = props.name;
 const cardId = props.sceneId;

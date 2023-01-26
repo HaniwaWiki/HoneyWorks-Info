@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import { computed, onMounted, unref, watchEffect } from 'vue';
+import { computed, onMounted, onUpdated, unref, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import { useNearbyPage } from './useNearbyPage';
 import AlbumDetailSkill from './helper/AlbumDetailSkill.vue';
-import { useAlbumInforList } from '@/composables/hwpl/useAlbumInfoList';
+import helperGetSceneCardList from './helper/helperGetSceneCardList.vue';
+import { useAlbumInfoList } from '@/composables/hwpl/useAlbumInfoList';
 import { getAlbumUrl } from '@/utils/hwpl/Album/url';
 import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 const route = useRoute();
 const albumCardId = computed(() => Number(route.params.id));
 const { t } = useI18n();
 
-const { loading, albumInfoList } = useAlbumInforList();
+const { loading, albumInfoList } = useAlbumInfoList();
 
 const album = computed(() =>
   albumInfoList.value.find(album => album.Id === albumCardId.value),
@@ -29,10 +30,16 @@ const inforList = computed(() => {
   }
   return [];
 });
+
+const nearbyPage = useNearbyPage(albumCardId);
 </script>
 
 <template>
-  <AppScaffold :title="album?.Name" :subtitle="album?.HiraganaName">
+  <AppScaffold
+    :title="album?.Name"
+    :subtitle="album?.HiraganaName"
+    :nearby-page="nearbyPage"
+  >
     <v-card>
       <v-img
         :src="getAlbumUrl(album?.ThumbnailImageIdentifier ?? 0)"
@@ -64,6 +71,9 @@ const inforList = computed(() => {
       :skill1="album?.Skill1Id"
       :skill2="album?.Skill2Id"
       :skill3="album?.Skill3Id"
+      :scene-count="album?.SceneCount"
     />
+
+    <helperGetSceneCardList :scene-list="album?.SceneCardInfo" />
   </AppScaffold>
 </template>

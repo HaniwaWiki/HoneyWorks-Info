@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { watch } from 'fs';
 import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { asyncComputed } from '@vueuse/core';
-import { useI18n } from 'vue-i18n';
 import { useNearbyPage } from './helper/useNearbyPage';
 import SceneCardDetailGeneral from './helper/SceneCardDetailGeneral.vue';
 import { getSceneCardImageUrls } from '@/utils/hwpl/SceneCard/url';
@@ -50,7 +48,8 @@ const cardUrl = asyncComputed(async () => {
         <v-img :src="cardUrl" :aspect-ratio="16 / 9" />
       </div>
       <SceneCardDetailGeneral
-        :scene-card="sceneCard"
+        :scene-card-album-id="sceneCard?.AlbumId"
+        :scene-card-item-id="sceneCard?.ItemId"
         :scene-card-route-detail="sceneCardRouteDetail"
         :scene-card-acquisition-route="SceneCardAcquisitionRoute"
       />
