@@ -53,8 +53,7 @@ async function renderSongChart() {
       continue;
 
     containerElement.innerHTML = '';
-    for (const canvas of songChart)
-      containerElement.appendChild(canvas);
+    for (const canvas of songChart) containerElement.appendChild(canvas);
   }
 }
 
@@ -64,11 +63,19 @@ function changeSpeed() {
   songChartList = useGenerateSongChart(tableData);
 }
 
-const line = ref<boolean>(true);
+const line = ref<boolean>(false);
 function changeLine() {
   helperChangeLine(line.value);
   songChartList = useGenerateSongChart(tableData);
 }
+
+const rankTextMap: { [rank: number]: string; } = {
+  1: 'EASY',
+  2: 'NORMAL',
+  3: 'HARD',
+  4: 'EXPERT',
+};
+
 watch(values, changeSpeed);
 watch(line, changeLine);
 onMounted(renderSongChart);
@@ -78,44 +85,57 @@ const showsSetting = ref<boolean>(false);
 </script>
 
 <template>
-  <v-card :title="$t('music_part.song_note')">
+  <v-card :title="$t('music_part.song_chart')">
     <v-btn
       class="ma-2"
       outlined
-      color="indigo"
+      color="primary"
       @click="showsSetting = !showsSetting"
     >
-      <v-icon>mdi-cog-outline </v-icon>
+      <v-icon> mdi-cog-outline </v-icon>
     </v-btn>
 
     <v-card v-if="showsSetting">
       <v-list lines="three" subheader>
-        <v-list-item title="Note Size">
-          <v-slider v-model="values" step="20" max="300" min="100" />
+        <v-list-item :title="$t('music_part.speed')" :subtitle="values">
+          <v-container>
+            <v-slider
+              v-model="values"
+              color="primary"
+              step="20"
+              max="400"
+              min="100"
+            />
+          </v-container>
         </v-list-item>
 
-        <v-list-item title="Dual Line">
-          <v-btn-toggle v-model="line">
-            <v-btn depressed value="left" @click="line = true">
-              Show Line
-            </v-btn>
-
-            <v-btn value="center" @click="line = false">
-              Not Show Line
-            </v-btn>
-          </v-btn-toggle>
+        <v-list-item :title="$t('music_part.dual_line')">
+          <v-container>
+            <v-switch
+              v-model="line"
+              hide-details
+              color="primary"
+              :label="$t(`music_part.show_line`)"
+            />
+          </v-container>
         </v-list-item>
       </v-list>
     </v-card>
     <div />
-    <v-tabs v-model="tab" color="primary" center-active>
-      <v-tab v-for="(rank, index) in ranks" :key="index">
-        <HwplMusicPartRankChip :rank="rank" />
-      </v-tab>
-    </v-tabs>
 
-    <v-window v-model="tab">
-      <v-window-item v-for="(rank) in ranks" :key="rank">
+    <v-chip-group
+      v-model="tab"
+      color="primary"
+      center-active="true"
+      scrollable="false"
+    >
+      <v-chip v-for="(rank, index) in ranks" :key="index">
+        {{ rankTextMap[rank] }}
+      </v-chip>
+    </v-chip-group>
+
+    <v-window v-model="tab" scrollable="true">
+      <v-window-item v-for="rank in ranks" :key="rank">
         <v-container>
           <div :id="`song-chart-rank-${rank}`" class="d-flex overflow-auto" />
         </v-container>
@@ -125,9 +145,3 @@ const showsSetting = ref<boolean>(false);
     <!-- setting -->
   </v-card>
 </template>
-
-<style>
-.my-custom-class {
-  background-color: black;
-}
-</style>

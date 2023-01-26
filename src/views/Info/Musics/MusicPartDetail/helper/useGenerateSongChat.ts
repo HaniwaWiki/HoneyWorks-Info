@@ -10,7 +10,7 @@ import notes_relay from '@/assets/note_icon/notes_relay.png';
 // Ref<HTMLCanvasElement[]>
 const endNoteId: number[] = [12, 13, 23, 24];
 let speed = 350;
-let showLine = true;
+let showLine = false;
 
 function chart(musicTime: number, encodeNote: string): HTMLCanvasElement[] {
   const canvasList: HTMLCanvasElement[] = [];
@@ -24,7 +24,9 @@ function chart(musicTime: number, encodeNote: string): HTMLCanvasElement[] {
     // split note
     const encodeNoteList: number[][] = JSON.parse(encodeNote);
 
-    const numberOfCanvas: number = Math.ceil((musicTime * speed) / height);
+    const numberOfCanvas: number = Math.ceil(
+      (encodeNoteList[encodeNoteList.length - 1][1] * speed) / height,
+    );
 
     // split encodenot into n canvas
     const organizeEncodeNote: number[][][] = [];
@@ -100,7 +102,6 @@ function chart(musicTime: number, encodeNote: string): HTMLCanvasElement[] {
         // green
         if (ele[0] === 1)
           drawNoteNormal(ctx, stepWidth, noteRow, heightForNote);
-
         // pink
         else if (ele[0] === 2 || ele[0] === 13 || ele[0] === 24)
           drawNoteFlick(ctx, stepWidth, noteRow, heightForNote);
@@ -314,7 +315,7 @@ function drawMultiLineNote(
   ctx!.beginPath();
   ctx!.moveTo(xPosition, yPosition - temp);
   ctx!.lineTo(xPosition + noteSize, yPosition - temp); // (x,y)
-  ctx!.lineWidth = noteSize / 2;
+  ctx!.lineWidth = 1;
   ctx!.strokeStyle = 'white';
   ctx!.stroke();
 }
