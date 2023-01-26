@@ -5,7 +5,7 @@ import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { groupBy } from 'lodash';
 import { useAlbumListViewStore } from './store';
-import HelpGetAlbumImage from './helper/helpGetAlbumImage.vue';
+import HelpGetAlbumImage from './helper/HelpGetAlbumImage.vue';
 import { useAlbumInfoList } from '@/composables/hwpl/useAlbumInfoList';
 import { usePagination } from '@/composables/usePagination';
 import { useKeywordFilter } from '@/composables/useKeywordFilter';
