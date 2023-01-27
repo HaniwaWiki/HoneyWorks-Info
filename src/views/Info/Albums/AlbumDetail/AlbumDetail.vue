@@ -10,7 +10,7 @@ import { getAlbumUrl } from '@/utils/hwpl/Album/url';
 import AppScaffold from '@/components/app/AppScaffold/AppScaffold.vue';
 const route = useRoute();
 const albumCardId = computed(() => Number(route.params.id));
-const { t } = useI18n();
+const { t, d } = useI18n();
 
 const { loading, albumInfoList } = useAlbumInfoList();
 
@@ -21,11 +21,31 @@ const album = computed(() =>
 const inforList = computed(() => {
   if (album.value?.Type) {
     return [
-      { text: album.value?.Id, subtitle: t('album.id') },
-      { text: album.value?.Name, subtitle: t('album.name') },
-      { text: album.value?.HiraganaName, subtitle: t('album.hiragana_name') },
-      { text: album.value?.VersionId, subtitle: t('album.version_id') },
-      { text: t(album.value?.Type), subtitle: t('album.type') },
+      {
+        prependIcon: 'mdi-music-accidental-sharp',
+        text: album.value?.Id,
+        subtitle: t('album.id'),
+      },
+      {
+        prependIcon: 'mdi-text-short',
+        text: album.value?.Name,
+        subtitle: t('album.name'),
+      },
+      {
+        prependIcon: 'mdi-syllabary-hiragana',
+        text: album.value?.HiraganaName,
+        subtitle: t('album.hiragana_name'),
+      },
+      {
+        prependIcon: 'mdi-calendar',
+        text: d(new Date(album.value.VersionId * 1000), 'long'),
+        subtitle: t('album.version_id'),
+      },
+      {
+        prependIcon: 'mdi-image-area',
+        text: t(`album.type_${album.value?.Type}`),
+        subtitle: t('album.type'),
+      },
     ];
   }
   return [];
@@ -56,6 +76,7 @@ const nearbyPage = useNearbyPage(albumCardId);
           color="primary"
           item-props
           lines="two"
+          :prepend-icon="item.prependIcon"
         >
           <v-list-item-title>
             {{ item.text }}

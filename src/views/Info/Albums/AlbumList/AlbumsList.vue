@@ -4,6 +4,8 @@ import { watch } from 'fs';
 import { storeToRefs } from 'pinia';
 import { useI18n } from 'vue-i18n';
 import { groupBy } from 'lodash';
+import type { Ref } from 'vue';
+import { ref } from 'vue';
 import { useAlbumListViewStore } from './store';
 import HelpGetAlbumImage from './helper/HelpGetAlbumImage.vue';
 import { useAlbumInfoList } from '@/composables/hwpl/useAlbumInfoList';
@@ -25,6 +27,8 @@ const { pageCount, paginatedData: paginatedAlbumInfo } = usePagination({
   page,
   deps: [keyword],
 });
+
+const selectType: Ref<string> = ref('');
 </script>
 
 <template>
@@ -41,28 +45,23 @@ const { pageCount, paginatedData: paginatedAlbumInfo } = usePagination({
     <v-col v-if="loading">
       <LoadingCircle />
     </v-col>
+
     <v-col>
-      <v-btn prepend-icon="mdi-filter-variant" @click="keyword = ''">
-        {{ $t("album.all") }}
-      </v-btn>
-      <v-btn
-        prepend-icon="mdi-filter-variant"
-        @click="keyword = ' &quot;Type&quot;:1'"
-      >
-        {{ $t("album.type_1") }}
-      </v-btn>
-      <v-btn
-        prepend-icon="mdi-filter-variant"
-        @click="keyword = ' &quot;Type&quot;:2'"
-      >
-        {{ $t("album.type_2") }}
-      </v-btn>
-      <v-btn
-        prepend-icon="mdi-filter-variant"
-        @click="keyword = ' &quot;Type&quot;:3'"
-      >
-        {{ $t("album.type_3") }}
-      </v-btn>
+      <span>{{ $t("album.group_by") }}</span>
+      <v-btn-toggle color="primary">
+        <v-btn color="primary" @click="keyword = ''">
+          {{ $t("album.all") }}
+        </v-btn>
+        <v-btn color="primary" @click="keyword = ' &quot;Type&quot;:1'">
+          {{ $t("album.type_1") }}
+        </v-btn>
+        <v-btn color="primary" @click="keyword = ' &quot;Type&quot;:2'">
+          {{ $t("album.type_2") }}
+        </v-btn>
+        <v-btn color="primary" @click="keyword = ' &quot;Type&quot;:3'">
+          {{ $t("album.type_3") }}
+        </v-btn>
+      </v-btn-toggle>
     </v-col>
     <v-row justify="center">
       <v-col
