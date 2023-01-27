@@ -13,7 +13,7 @@ const { loading, sceneCardsList } = useSceneCardInfoList();
 
 const { keyword, page } = storeToRefs(useSceneCardListViewStore());
 const filteredSceneCardList = useKeywordFilter(sceneCardsList, keyword);
-const pageSize = 28;
+const pageSize = 12;
 const { pageCount, paginatedData: paginatedSceneCardInfo } = usePagination({
   data: filteredSceneCardList,
   pageSize,
@@ -45,8 +45,8 @@ const { pageCount, paginatedData: paginatedSceneCardInfo } = usePagination({
       <v-col
         v-for="sceneCard in paginatedSceneCardInfo"
         :key="sceneCard.ItemId"
-        cols="3"
-        md="3"
+        cols="6"
+        md="4"
       >
         <HwplSceneCardImage
           :scene-id="sceneCard.ItemId"

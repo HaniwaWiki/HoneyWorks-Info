@@ -48,6 +48,7 @@ const cardUrl = asyncComputed(async () => {
         <v-img :src="cardUrl" :aspect-ratio="16 / 9" />
       </div>
       <SceneCardDetailGeneral
+        :scene-card-start-at="sceneCard?.StartAt"
         :scene-card-album-id="sceneCard?.AlbumId"
         :scene-card-item-id="sceneCard?.ItemId"
         :scene-card-route-detail="sceneCardRouteDetail"
