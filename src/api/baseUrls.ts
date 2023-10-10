@@ -36,7 +36,7 @@ const baseUrlCollections: Record<SupportedServer, BaseUrlCollection> = {
     staticApiBaseUrl: 'https://honeyworks-info-cn-nas.lyh543.cn/api',
     apiBaseUrl: 'https://api-jp.honeyworks.info/api',
     assetsBaseUrl: 'https://honeyworks-info-cn-nas.lyh543.cn/assets',
-    localeBaseUrl: isDevelopment ? '/locale' : 'https://https://honeyworks-info-cn-nas.lyh543.cn/locale',
+    localeBaseUrl: isDevelopment ? '/locale' : 'https://honeyworks-info-cn-nas.lyh543.cn/locale',
     rssHubBaseUrl: 'https://rsshub-jp.honeyworks.info',
   },
 };
