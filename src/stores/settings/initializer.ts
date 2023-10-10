@@ -23,7 +23,7 @@ export function initializeLocale(): SupportedLocale {
 export function initializeServer(): SupportedServer {
   // use local timezone to guess whether user is in China
   if (Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Shanghai')
-    return 'cn';
+    return 'cn-nas';
 
   return 'jp';
 }
