@@ -1,5 +1,8 @@
 import type { Skill } from '@/types/HWPL/Skill';
-import { calculateValuesAtLevel, replaceValuesInTemplate } from '@/utils/hwpl/Skill/helper';
+import {
+  calculateValuesAtLevel,
+  replaceValuesInTemplate,
+} from '@/utils/hwpl/Skill/helper';
 import type { SkillInfoHelper } from '@/utils/hwpl/Skill/types';
 import { useTranslation } from '@/composables/useTranslation';
 
@@ -91,7 +94,11 @@ const skillInfoHelperMap: { [skillClass: number]: SkillInfoHelper; } = {
   90: {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     substituteDescriptionArgs: (description, skill, level) =>
-      replaceValuesInTemplate(description, [skill.Arg1, skill.Arg2, skill.Arg3]),
+      replaceValuesInTemplate(description, [
+        skill.Arg1,
+        skill.Arg2,
+        skill.Arg3,
+      ]),
     getTagIds: () => [],
   },
 };
