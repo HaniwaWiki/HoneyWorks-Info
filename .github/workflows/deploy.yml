@@ -18,22 +18,19 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -p 5000 cdn-src.honeyworks.info >> ~/.ssh/known_hosts
           ssh-keyscan -p 222 lyh543.cn >> ~/.ssh/known_hosts
-      - name: Set Target Folder 
-        id: set-target-folder-main
-        if: github.ref == 'refs/heads/main'
-        run: echo "TARGET_FOLDER=C:\project\HoneyWorks-Info" >> $GITHUB_OUTPUT
       - name: Deploy 🚀 To Server (https://honeyworks.info)
         run: |
           ssh -p 5000 Administrator@cdn-src.honeyworks.info "\
-          cd ${{ steps.set-target-folder-main.outputs.TARGET_FOLDER }} ${{ steps.set-target-folder-dev.outputs.TARGET_FOLDER }} && \
+          cd C:\project\HoneyWorks-Info && \
+          git checkout main && \
           git pull && \
           pnpm i && \
-          pnpm run lint && \
           pnpm run build"
       - name: Deploy 🚀 To Server (https://hw.lyh543.cn)
         run: |
           ssh -p 222 liu@lyh543.cn "\
           cd /home/liu/git/github/honeyworks/HoneyWorks-Info && \
+          git checkout main && \
           git pull && \
           pnpm i && \
           pnpm run build"
