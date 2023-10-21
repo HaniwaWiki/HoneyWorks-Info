@@ -29,6 +29,7 @@ jobs:
       - name: Deploy 🚀 To Server (https://hw.lyh543.cn)
         run: |
           ssh -p 222 liu@lyh543.cn "\
+          source ~/.profile && \
           cd /home/liu/git/github/honeyworks/HoneyWorks-Info && \
           git checkout main && \
           git pull && \
