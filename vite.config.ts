@@ -30,7 +30,13 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          return id.includes('node_modules') ? 'vendor' : 'index';
+          if (id.includes('vuetify'))
+            return 'vuetify';
+
+          if (id.includes('node_modules'))
+            return 'vendor';
+
+          return 'index';
         },
       },
     },

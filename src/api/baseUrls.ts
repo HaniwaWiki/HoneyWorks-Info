@@ -1,4 +1,4 @@
-export const supportedServers = ['jp', 'cn', 'cn-nas'] as const;
+export const supportedServers = ['jp', 'cn', 'cn-2'] as const;
 export type SupportedServer = typeof supportedServers[number];
 export const defaultServer = 'jp';
 
@@ -24,7 +24,7 @@ const baseUrlCollections: Record<SupportedServer, BaseUrlCollection> = {
     assetsBaseUrl: 'https://honeyworks-info-cn.lyh543.cn/assets',
     rssHubBaseUrl: 'https://rsshub-jp.honeyworks.info',
   },
-  'cn-nas': {
+  'cn-2': {
     staticApiBaseUrl: 'https://honeyworks-info-cn-nas.lyh543.cn/api',
     assetsBaseUrl: 'https://honeyworks-info-cn-nas.lyh543.cn/assets',
     rssHubBaseUrl: 'https://rsshub-jp.honeyworks.info',

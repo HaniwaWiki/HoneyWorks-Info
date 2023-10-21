@@ -24,7 +24,7 @@ jobs:
           cd C:\project\HoneyWorks-Info && \
           git checkout main && \
           git pull && \
-          pnpm i && \
+          pnpm i --frozen-lock && \
           pnpm run build"
       - name: Deploy 🚀 To Server (https://hw.lyh543.cn)
         run: |
@@ -33,6 +33,6 @@ jobs:
           cd /home/liu/git/github/honeyworks/HoneyWorks-Info && \
           git checkout main && \
           git pull && \
-          pnpm i && \
+          pnpm i  --frozen-lock && \
           pnpm run build"
     

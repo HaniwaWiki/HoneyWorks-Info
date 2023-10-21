@@ -190,8 +190,9 @@
         "custom_color": "カスタム色",
         "apply_color": "申し込み",
         "server_list": {
-            "cn": "china mainland",
-            "jp": "日本（メインサーバ）"
+            "jp": "日本（メインサーバ）",
+            "cn": "中国",
+            "cn-2": "中国2"
         },
         "invalid_color_value": "カラー値が無効です",
         "clear_server_cache": "サーバキャッシュのクリア"
