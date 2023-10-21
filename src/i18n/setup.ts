@@ -1,8 +1,8 @@
 import type { I18n, I18nOptions } from 'vue-i18n';
 import { createI18n } from 'vue-i18n';
 import type { WritableComputedRef } from 'vue';
-import { loadLocaleMessages } from '@/i18n/loadLocaleMessages';
-import type { SupportedLocale } from '@/i18n/supportedLocales';
+import { loadLocaleMessages } from '@/i18n/utils';
+import type { SupportedLocale } from '@/types/i18n';
 
 function setI18nLanguage(i18n: I18n, locale: SupportedLocale) {
   if (i18n.mode === 'legacy')

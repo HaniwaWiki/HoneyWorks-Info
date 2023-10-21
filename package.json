@@ -4,9 +4,7 @@
   "type": "module",
   "packageManager": "pnpm@7.14.0",
   "scripts": {
-    "dev": "concurrently --kill-others npm:dev:*",
-    "dev:http-server": "http-server -p 35173 i18n-json",
-    "dev:vite": "vite --host",
+    "dev": "vite --host",
     "tsc": "vue-tsc --noEmit",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite build && http-server-spa dist index.html 4173",
@@ -39,7 +37,6 @@
     "@vitejs/plugin-vue": "^4.0.0",
     "@volar/vue-language-service": "^1.0.14",
     "autoprefixer": "^10.4.13",
-    "concurrently": "^7.6.0",
     "eslint": "^8.30.0",
     "http-server-spa": "^1.3.0",
     "husky": "^8.0.2",

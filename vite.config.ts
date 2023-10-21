@@ -1,4 +1,3 @@
-import * as path from 'path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
@@ -17,6 +16,10 @@ export default defineConfig({
     VitePWA(vitePWAOptions),
     Markdown(),
   ],
+  optimizeDeps: {
+    // https://stackoverflow.com/questions/75469067/vite-cypress-how-to-prevent-reloading-due-to-optimized-dependencies-causin
+    exclude: ['vuetify'],
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
@@ -28,17 +31,6 @@ export default defineConfig({
         manualChunks: (id) => {
           return id.includes('node_modules') ? 'vendor' : 'index';
         },
-      },
-    },
-  },
-  server: {
-    proxy: {
-      '/locale': {
-        // use deployed i18n json files
-        // target: 'https://honeyworks.info/',
-        // use local i18n json files
-        target: 'http://127.0.0.1:35173',
-        changeOrigin: true,
       },
     },
   },

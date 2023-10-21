@@ -1,7 +1,7 @@
 import type { Ref } from 'vue';
 import type { Settings } from '@/stores/settings/types';
-import type { SupportedLocale } from '@/i18n/supportedLocales';
-import { defaultLocale } from '@/i18n/supportedLocales';
+import type { SupportedLocale } from '@/types/i18n';
+import { defaultLocale } from '@/i18n/config';
 import type { SupportedServer } from '@/api/baseUrls';
 
 export function initializeLocale(): SupportedLocale {
