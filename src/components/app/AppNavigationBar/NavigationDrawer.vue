@@ -27,4 +27,3 @@ const navigationDrawerList = useNavigationDrawerList();
 </template>
 
 <style scoped></style>
-./config
