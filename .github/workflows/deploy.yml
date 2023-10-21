@@ -33,4 +33,11 @@ jobs:
           pnpm i && \
           pnpm run lint && \
           pnpm run build"
+      - name: Deploy 🚀 To Server (CN NAS)
+        run: |
+          ssh -p 222 liu@lyh543.cn "\
+          cd /home/liu/git/github/honeyworks/HoneyWorks-Info && \
+          git pull && \
+          pnpm i && \
+          pnpm run build"
     
