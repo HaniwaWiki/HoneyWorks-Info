@@ -35,7 +35,7 @@ export async function appendSceneCardToResources(
     resources.push({
       name: cardName,
       key: `scene_card_${Id}`,
-      url: sceneCardUrl.static_full,
+      url: sceneCardUrl.static,
       to,
     });
   }
