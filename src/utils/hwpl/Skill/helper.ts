@@ -6,8 +6,10 @@ export function calculateValuesAtLevel(
   additionValue: (string | number)[],
   level: number,
 ): number[] {
-  return baseValue.map(
-    (value, index) => Number(value) + Number(additionValue[index]) * (level - 1),
+  return baseValue.map((value, index) =>
+    parseFloat(
+      (Number(value) + Number(additionValue[index]) * (level - 1)).toFixed(1),
+    ),
   );
 }
 
