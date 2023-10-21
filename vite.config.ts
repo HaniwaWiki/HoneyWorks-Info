@@ -29,7 +29,15 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: () => 'index',
+        manualChunks: (id) => {
+          if (id.includes('vuetify'))
+            return 'vuetify';
+
+          if (id.includes('node_modules'))
+            return 'vendor';
+
+          return 'index';
+        },
       },
     },
   },
