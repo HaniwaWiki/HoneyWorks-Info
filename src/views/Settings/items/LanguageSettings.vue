@@ -1,6 +1,8 @@
 <script setup lang='ts'>
+import { localeConfigs } from '@/i18n/config';
 import { useSettingsStore } from '@/stores/settings';
-import { SupportedLocale, supportedLocaleMap, supportedLocales } from '@/i18n/supportedLocales';
+import { SupportedLocale } from '@/types/i18n';
+
 const settingsStore = useSettingsStore();
 </script>
 
@@ -14,14 +16,15 @@ const settingsStore = useSettingsStore();
     :model-value="settingsStore.settings.locale"
     :color="settingsStore.primaryColor"
     mandatory
-    @update:model-value="(val:SupportedLocale) => settingsStore.setLocale(val)"
+    @update:model-value="(locale: string) => settingsStore.setLocale(locale)"
   >
     <v-chip
-      v-for="locale in supportedLocales"
-      :key="locale"
-      :value="locale"
+      v-for="localeConfig in localeConfigs"
+      :key="localeConfig.id"
+      :value="localeConfig.id"
     >
-      {{ supportedLocaleMap[locale] }}
+      {{ localeConfig.name }}
     </v-chip>
   </v-chip-group>
 </template>
+@/i18n/config

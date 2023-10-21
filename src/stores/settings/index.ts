@@ -2,13 +2,13 @@ import { defineStore } from 'pinia';
 import { useLocalStorage } from '@vueuse/core';
 import { computed } from 'vue';
 import { defaultPrimaryColor } from '@/palette';
-import type { SupportedLocale } from '@/i18n/supportedLocales';
+import type { SupportedLocale } from '@/types/i18n';
 import type { SupportedServer } from '@/api/baseUrls';
 import { defaultServer, setBaseUrlsByServer } from '@/api/baseUrls';
 import { SETTINGS_KEY } from '@/utils/storage/prefixes';
 import type { Settings } from '@/stores/settings/types';
 import { initializeSettings } from '@/stores/settings/initializer';
-import { defaultLocale } from '@/i18n/supportedLocales';
+import { defaultLocale } from '@/i18n/config';
 
 // settings are stored in localStorage instead of async storage,
 // so that settings should be read synchronously,

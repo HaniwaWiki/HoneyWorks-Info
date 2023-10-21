@@ -2,7 +2,7 @@ import { computed } from 'vue';
 import readme_en from '../text/en.md';
 import readme_zh from '../text/zh_Hans.md';
 import { useSettingsStore } from '@/stores/settings';
-import type { SupportedLocale } from '@/i18n/supportedLocales';
+import type { SupportedLocale } from '@/types/i18n';
 
 function getAboutUsMarkdown(locale: SupportedLocale) {
   switch (locale) {

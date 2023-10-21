@@ -1,5 +1,5 @@
-import type { SupportedLocale } from '@/i18n/supportedLocales';
 import type { SupportedServer } from '@/api/baseUrls';
+import type { SupportedLocale } from '@/types/i18n';
 
 export type Settings = {
   locale: SupportedLocale;

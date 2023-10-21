@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n';
 import _ from 'lodash';
 import type { GeriraInfo } from '@/views/Tools/GeriraLiveQuery/helper/type';
 import type { MaybeRef } from '@/types/vue/ref';
-import type { UseI18nResult } from '@/i18n/types';
+import type { UseI18nResult } from '@/types/i18n';
 import { sendNotification } from '@/utils/notification';
 
 function notifyNewGerira(geriraInfo: GeriraInfo, { t, d }: UseI18nResult) {
