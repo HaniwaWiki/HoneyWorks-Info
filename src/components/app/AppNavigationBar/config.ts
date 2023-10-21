@@ -27,10 +27,10 @@ export function useNavigationDrawerList(): Ref<NavigationListItemProp[]> {
       icon: 'mdi-hammer',
       subItems: [
         { title: t('global.hwpl_calendar'), href: '/tools/calendar' },
-        {
-          title: t('global.gerira_live_query'),
-          href: '/tools/gerira-live-query',
-        },
+        // {
+        //   title: t('global.gerira_live_query'),
+        //   href: '/tools/gerira-live-query',
+        // },
       ],
     },
     { title: t('global.settings'), icon: 'mdi-cog', href: '/settings' },

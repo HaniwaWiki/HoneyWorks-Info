@@ -190,7 +190,8 @@
         "apply_color": "应用",
         "server_list": {
             "jp": "日本（主服务器）",
-            "cn": "中国大陆"
+            "cn": "中国大陆",
+            "cn-2": "中国大陆2"
         },
         "custom_color": "自定义颜色",
         "invalid_color_value": "无效的颜色值",

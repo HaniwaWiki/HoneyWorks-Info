@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useNavigationDrawerList } from './useNavigationDrawerList';
+import { useNavigationDrawerList } from './config';
 import NavigationListItem from '@/components/base/NavigationListItem/NavigationListItem.vue';
 
 defineProps<{ drawer: boolean; }>();
@@ -27,3 +27,4 @@ const navigationDrawerList = useNavigationDrawerList();
 </template>
 
 <style scoped></style>
+./config

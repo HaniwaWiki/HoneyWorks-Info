@@ -214,7 +214,8 @@
         "invalid_color_value": "Invalid color value",
         "server_list": {
             "jp": "Japan (Main Server)",
-            "cn": "China Mainland"
+            "cn": "China Mainland",
+            "cn-2": "China Mainland 2"
         }
     },
     "disclaimer": {
